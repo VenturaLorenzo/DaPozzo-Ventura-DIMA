@@ -1,10 +1,10 @@
 class MarketPlace {
- final List<String> vendorList;
+ List<String> vendorsList=["negozio 1"," negozio 2", "negozio 3", "negozio 4"];
 
- List get getVendors => vendorList;
+ List get getVendors => vendorsList;
 
 
- MarketPlace(this.vendorList);
+ MarketPlace(this.vendorsList);
 
  factory MarketPlace.getVendors(){
 

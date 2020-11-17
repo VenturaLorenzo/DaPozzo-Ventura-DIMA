@@ -12,7 +12,7 @@ class MarketPlaceBloc extends Bloc<MarketPlaceEvent, MarketPlaceState> {
     // cerco nel DB quello che devo cercare: lista negozi, immagini ecc
     //e lo ritorno alla ui
     final MarketPlace initialResult=MarketPlace.getVendors();
-    print(MarketPlace.getVendors().vendorList.toString());
+   print("sono passato in marketplaceInitial");
     return MarketPlaceInitial(initialResult);
   }
 
@@ -20,9 +20,9 @@ class MarketPlaceBloc extends Bloc<MarketPlaceEvent, MarketPlaceState> {
   Stream<MarketPlaceState> mapEventToState(MarketPlaceEvent event) async* {
     if (event is MarketPlaceSearch) {
       //qui cerco nel database i dati e creo un oggetto marketplace che li contenga
-
+      print("sono passato in marketplace ");
       final MarketPlace result = new MarketPlace(
-          []); // per ora creo un market place vuoto e lo passo come risultato
+          ["a","v"]); // per ora creo un market place vuoto e lo passo come risultato
 
       yield MarketPlaceSearched(result);
     } else {

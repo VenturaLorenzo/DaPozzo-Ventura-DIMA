@@ -14,33 +14,55 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    //final MarketPlace marketPlace =ModalRoute.of(context).settings.arguments;
 
-    final MarketPlaceBloc _marketPlaceBloc = MarketPlaceBloc();
-    print(_marketPlaceBloc);
+    final _marketPlaceBloc = MarketPlaceBloc();
+
     return Scaffold(
       appBar: AppBar(
         title: Text("name"),
       ),
       body: BlocProvider(
-        builder: (BuildContext context) => MarketPlaceBloc(),
-        child: BlocBuilder<MarketPlaceBloc, MarketPlaceState>(
-          builder: (BuildContext context, MarketPlaceState state) {
-            if (state is MarketPlaceInitial) {
-              return Text(state.initialResult.vendorList.toString());
-            } else {
-              if (state is MarketPlaceSearched) {
-                return Text(state.result.vendorList.toString());
-              } else {
-                if (state is MarketPlaceGeneralError) {
-                  return Text(state.error.toString());
-                }
-              }
-            }
-            return Text("ciao");
-          },),
-      ),
+        builder: (BuildContext context) => _marketPlaceBloc,
+        child: Column(children: [RaisedButton(onPressed: (){
+          _marketPlaceBloc.add(MarketPlaceSearch("ciao"));}
+        ,),
 
+          TextField(
+            onSubmitted: (typedText) {
+              _marketPlaceBloc.add(MarketPlaceSearch(typedText));
+            },
+            decoration: InputDecoration(labelText: "Search"),
+          ),
+          Expanded(
+            child: BlocBuilder<MarketPlaceBloc, MarketPlaceState>(
+              builder: (context, state) {
+                if (state is MarketPlaceInitial) {
+                  print("sto costruendo markeplaceInitial");
+
+                  List<String> vendors = state.initialResult.vendorsList;
+                  return ListView.builder(
+                    itemCount: vendors.length,
+                    itemBuilder: (context, index) => Card(
+                      child: Text(vendors[index]),
+                    ),
+                  );
+                } else {
+                  if (state is MarketPlaceSearched) {
+                    print("sto costruendo markeplaceSearched");
+
+                    return Text(state.result.vendorsList.toString());
+                  } else {
+                    if (state is MarketPlaceGeneralError) {
+                      return Text(state.error.toString());
+                    }
+                  }
+                }
+                return Text("ciao");
+              },
+            ),
+          ),
+        ]),
+      ),
     );
   }
 }
