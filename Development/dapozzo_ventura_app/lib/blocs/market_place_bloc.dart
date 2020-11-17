@@ -21,8 +21,7 @@ class MarketPlaceBloc extends Bloc<MarketPlaceEvent, MarketPlaceState> {
     if (event is MarketPlaceSearch) {
       //qui cerco nel database i dati e creo un oggetto marketplace che li contenga
       print("sono passato in marketplace ");
-      final MarketPlace result = new MarketPlace(
-          ["a","v"]); // per ora creo un market place vuoto e lo passo come risultato
+      final MarketPlace result = MarketPlace.getVendorsWith(event.query);// per ora creo un market place vuoto e lo passo come risultato
 
       yield MarketPlaceSearched(result);
     } else {
@@ -32,9 +31,15 @@ class MarketPlaceBloc extends Bloc<MarketPlaceEvent, MarketPlaceState> {
         // e ritorno uno stato MarketplaceInside passandogli come parametro lo shop
         Vendor shop = new Vendor(); //per ora glielo passo vuoto
         yield MarketPlaceInside(shop);
-      } else {
-        yield MarketPlaceGeneralError("Unknown Action");
+      } else {if( event is MarketPlaceReset){
+        final MarketPlace initialResult=MarketPlace.getVendors();
+
+        yield MarketPlaceInitial(initialResult);
+
       }
+      else{
+        yield MarketPlaceGeneralError("Unknown Action");
+      }}
     }
   }
 }

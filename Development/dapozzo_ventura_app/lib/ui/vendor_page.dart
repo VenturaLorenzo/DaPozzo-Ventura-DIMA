@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class Vendor extends StatefulWidget {
   @override
@@ -6,8 +7,11 @@ class Vendor extends StatefulWidget {
 }
 
 class _VendorState extends State<Vendor> {
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    final String vendor= ModalRoute.of(context).settings.arguments;
+
+    return Scaffold(appBar: AppBar(title: Text(vendor),),);
   }
 }

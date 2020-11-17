@@ -7,7 +7,11 @@ class MarketPlaceSearch extends MarketPlaceEvent {
 
   MarketPlaceSearch(this.query);
 }
+class MarketPlaceReset extends MarketPlaceEvent {
 
+
+  MarketPlaceReset();
+}
 class MarketPlaceEnter extends MarketPlaceEvent {
 
   final Vendor whereToEnter;

@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class Cart extends StatefulWidget {
   @override
@@ -8,6 +9,18 @@ class Cart extends StatefulWidget {
 class _CartState extends State<Cart> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+        body: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        RaisedButton(child: Text("RETURN"),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        Text("CART PAGE")
+      ],
+    ));
   }
 }

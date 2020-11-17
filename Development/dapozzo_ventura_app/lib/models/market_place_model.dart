@@ -9,9 +9,20 @@ class MarketPlace {
  factory MarketPlace.getVendors(){
 
   //prendo i negozi dal database
-  List<String> vendors= ["negozio 1"," negozio 2", "negozio 3", "negozio 4"];
+  List<String> vendors= ["negozio 1","negozio 2", "negozio 3", "negozio 4"];
   return MarketPlace(vendors);
 }
+ factory MarketPlace.getVendorsWith(String query){
+
+  //prendo i negozi dal database
+  List<String> vendors= ["negozio 1"," negozio 2", "negozio 3", "negozio 4"];
+  List<String> filtered=[];
+  vendors.forEach((element) {if(element.contains(query)){
+   filtered.add(element);
+  }
+  });
+  return MarketPlace(filtered);
+ }
 
 
 
