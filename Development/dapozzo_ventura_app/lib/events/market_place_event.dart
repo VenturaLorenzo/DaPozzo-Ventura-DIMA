@@ -14,7 +14,7 @@ class MarketPlaceReset extends MarketPlaceEvent {
 }
 class MarketPlaceEnter extends MarketPlaceEvent {
 
-  final Vendor whereToEnter;
+  final VendorPage whereToEnter;
 
   MarketPlaceEnter(this.whereToEnter);
 

@@ -11,12 +11,12 @@ MarketPlaceInitial(this.initialResult);
 
 class MarketPlaceSearched  extends MarketPlaceState{
   final MarketPlace result;
-
-  MarketPlaceSearched(this.result);
+  final String search;
+  MarketPlaceSearched(this.result, this.search);
 }
 
 class MarketPlaceInside extends MarketPlaceState{
-final Vendor shop;
+final VendorPage shop;
 
 MarketPlaceInside(this.shop);
 }

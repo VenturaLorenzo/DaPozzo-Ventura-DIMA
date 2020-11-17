@@ -2,7 +2,6 @@ import 'package:dapozzo_ventura_app/events/market_place_event.dart';
 import 'package:dapozzo_ventura_app/models/market_place_model.dart';
 import 'package:dapozzo_ventura_app/states/market_place_state.dart';
 import 'package:dapozzo_ventura_app/ui/vendor_page.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc/bloc.dart';
 
 class MarketPlaceBloc extends Bloc<MarketPlaceEvent, MarketPlaceState> {
@@ -21,15 +20,16 @@ class MarketPlaceBloc extends Bloc<MarketPlaceEvent, MarketPlaceState> {
     if (event is MarketPlaceSearch) {
       //qui cerco nel database i dati e creo un oggetto marketplace che li contenga
       print("sono passato in marketplace ");
-      final MarketPlace result = MarketPlace.getVendorsWith(event.query);// per ora creo un market place vuoto e lo passo come risultato
+       MarketPlace result = new MarketPlace([]);
+       MarketPlace.getVendorsWith(event.query);// per ora creo un market place vuoto e lo passo come risultato
 
-      yield MarketPlaceSearched(result);
+      yield MarketPlaceSearched(result,event.query);
     } else {
       if (event is MarketPlaceEnter) {
         //prendo il parametro che mi viene passato dall'evento
         // (il negozio in cui voglio entrare) con event.shop per esempio
         // e ritorno uno stato MarketplaceInside passandogli come parametro lo shop
-        Vendor shop = new Vendor(); //per ora glielo passo vuoto
+        VendorPage shop = new VendorPage(); //per ora glielo passo vuoto
         yield MarketPlaceInside(shop);
       } else {if( event is MarketPlaceReset){
         final MarketPlace initialResult=MarketPlace.getVendors();
