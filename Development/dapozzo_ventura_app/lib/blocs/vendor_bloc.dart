@@ -16,7 +16,7 @@ class VendorBloc extends Bloc<VendorEvent,VendorState>{
   Stream<VendorState> mapEventToState(VendorEvent event) async* {
     if (event is VendorEventSearch) {
       Vendor result = new Vendor([]);
-      Vendor.getVendorsWith(event.query);
+      result=Vendor.getVendorsWith(event.query);
 
       yield VendorStateSearched(event.query,result);
     } else {

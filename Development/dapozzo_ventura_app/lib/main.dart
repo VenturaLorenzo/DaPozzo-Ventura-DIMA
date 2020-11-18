@@ -7,6 +7,7 @@ import 'package:dapozzo_ventura_app/ui/vendor_page.dart';
 import 'package:flutter/material.dart';
 
 
+
 void main() => runApp(MaterialApp(
   initialRoute: '/home',
   routes: {
@@ -14,7 +15,7 @@ void main() => runApp(MaterialApp(
     //'/' : (context)=>Loading(),
     '/home': (context)=>Home(),
     '/vendor' : (context)=> VendorPage(),
-    '/product' : (context)=> Product(),
+    '/product' : (context)=> ProductPage(),
     '/cart' : (context)=> Cart(),
     '/myprofile' : (context)=> MyProfile(),
 

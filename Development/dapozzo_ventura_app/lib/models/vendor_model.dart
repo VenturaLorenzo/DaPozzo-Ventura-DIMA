@@ -17,7 +17,7 @@ class Vendor{
     //prendo i negozi dal database
     List<String> vendors= ["prodotto1","prodotto2","prodotto3"];
 
-    return Vendor(vendors.where((element) => element.contains(query)));
+    return Vendor(vendors.where((element) => element.contains(query)).toList());
   }
 
 }

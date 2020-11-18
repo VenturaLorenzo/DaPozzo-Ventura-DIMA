@@ -17,7 +17,7 @@ class MarketPlace {
   //prendo i negozi dal database
   List<String> vendors= ["negozio 1"," negozio 2", "negozio 3", "negozio 4"];
 
-  return MarketPlace(vendors.where((element) => element.contains(query)));
+   return MarketPlace(vendors.where((element) => element.contains(query)).toList());
  }
 
 

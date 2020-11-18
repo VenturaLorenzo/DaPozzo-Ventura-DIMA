@@ -1,5 +1,7 @@
 import 'package:dapozzo_ventura_app/blocs/vendor_bloc.dart';
+import 'package:dapozzo_ventura_app/events/vendor_event.dart';
 import 'package:dapozzo_ventura_app/states/vendor_state.dart';
+import 'package:dapozzo_ventura_app/ui/product_list_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,18 +25,23 @@ class _VendorPageState extends State<VendorPage> {
       body: BlocProvider(
         builder: (BuildContext context) => _vendorBloc,
         child: Column(
-          children: [
+          children: [TextField(
+            onSubmitted: (typedText) {
+              _vendorBloc.add(VendorEventSearch(typedText));
+            },
+            decoration: InputDecoration(labelText: "Search"),
+          ),
             Expanded(
               child: BlocBuilder<VendorBloc, VendorState>(
                 builder: (context, state) {
                   List<String> products;
                   if (state is VendorStateInitial) {
                     products = state.vendorList.products;
-                    return Text(products.toString());
+                    return ProductList(products);
                   } else {
                     if (state is VendorStateSearched) {
                       products = state.result.products;
-                      return Text(products.toString());
+                      return ProductList(products);
                     } else {
                       if (state is VendorStateGeneralError) {
                         return Text(state.error);

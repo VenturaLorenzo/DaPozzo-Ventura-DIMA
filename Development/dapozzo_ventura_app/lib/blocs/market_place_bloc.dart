@@ -21,7 +21,7 @@ class MarketPlaceBloc extends Bloc<MarketPlaceEvent, MarketPlaceState> {
       //qui cerco nel database i dati e creo un oggetto marketplace che li contenga
       print("sono passato in marketplace ");
        MarketPlace result = new MarketPlace([]);
-       MarketPlace.getVendorsWith(event.query);// per ora creo un market place vuoto e lo passo come risultato
+       result =MarketPlace.getVendorsWith(event.query);// per ora creo un market place vuoto e lo passo come risultato
 
       yield MarketPlaceSearched(result,event.query);
     } else {

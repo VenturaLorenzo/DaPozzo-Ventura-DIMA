@@ -62,6 +62,7 @@ class _HomeState extends State<Home> {
                 } else {
                   if (state is MarketPlaceSearched) {
                     vendors = state.result.vendorsList;
+                    print(vendors);
                     return VendorList(vendors);
                   } else {
                     if (state is MarketPlaceGeneralError) {
