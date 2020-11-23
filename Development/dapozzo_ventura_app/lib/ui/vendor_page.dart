@@ -36,11 +36,11 @@ class _VendorPageState extends State<VendorPage> {
                 builder: (context, state) {
                   List<String> products;
                   if (state is VendorStateInitial) {
-                    products = state.vendorList.products;
+                    products = state.products;
                     return ProductList(products);
                   } else {
                     if (state is VendorStateSearched) {
-                      products = state.result.products;
+                      products = state.result;
                       return ProductList(products);
                     } else {
                       if (state is VendorStateGeneralError) {

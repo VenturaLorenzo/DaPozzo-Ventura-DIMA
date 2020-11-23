@@ -8,20 +8,19 @@ class VendorBloc extends Bloc<VendorEvent,VendorState>{
   @override
   VendorState get initialState {
 
-    final Vendor initialResult=Vendor.getVendors();
+    final List<String> initialResult=Vendor.getProducts();
     return VendorStateInitial(initialResult);
   }
 
   @override
   Stream<VendorState> mapEventToState(VendorEvent event) async* {
     if (event is VendorEventSearch) {
-      Vendor result = new Vendor([]);
-      result=Vendor.getVendorsWith(event.query);
+      List<String> result = Vendor.getProductsWith(event.query);
 
       yield VendorStateSearched(event.query,result);
     } else {
       if( event is VendorEventReset){
-        final Vendor initialResult=Vendor.getVendors();
+        final List<String> initialResult=Vendor.getProducts();
 
         yield VendorStateInitial(initialResult);
 

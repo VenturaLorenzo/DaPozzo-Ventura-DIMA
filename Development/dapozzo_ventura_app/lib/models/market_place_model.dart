@@ -1,23 +1,31 @@
+import 'package:dapozzo_ventura_app/models/vendor_model.dart';
+
+import '../database_helper.dart';
+
 class MarketPlace {
- List<String> vendorsList=["negozio 1"," negozio 2", "negozio 3", "negozio 4"];
+ //final List<Vendor> vendorsList;
 
- List get getVendors => vendorsList;
+// List get getVendors => vendorsList;
 
 
- MarketPlace(this.vendorsList);
+ //MarketPlace(this.vendorsList);
 
- factory MarketPlace.getVendors(){
+ static Future<List<Vendor>> getVendors() async{
 
   //prendo i negozi dal database
-  List<String> vendors= ["negozio 1","negozio 2", "negozio 3", "negozio 4"];
-  return MarketPlace(vendors);
+  final dbHelper = DatabaseHelper.instance;
+
+  List<Vendor> vendors=  await dbHelper.queryAllVendors() ;
+  return vendors;
 }
- factory MarketPlace.getVendorsWith(String query){
+
+ static Future<List<Vendor>> getVendorsWith(String query) async{
 
   //prendo i negozi dal database
-  List<String> vendors= ["negozio 1"," negozio 2", "negozio 3", "negozio 4"];
-
-   return MarketPlace(vendors.where((element) => element.contains(query)).toList());
+  final dbHelper = DatabaseHelper.instance;
+print(query);
+  List<Vendor> vendors=  await dbHelper.queryVendorsWith(query) ;
+  return vendors;
  }
 
 

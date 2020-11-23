@@ -1,6 +1,7 @@
 import 'package:dapozzo_ventura_app/blocs/market_place_bloc.dart';
 import 'package:dapozzo_ventura_app/events/market_place_event.dart';
 import 'package:dapozzo_ventura_app/models/market_place_model.dart';
+import 'package:dapozzo_ventura_app/models/vendor_model.dart';
 import 'package:dapozzo_ventura_app/states/market_place_state.dart';
 import 'package:dapozzo_ventura_app/ui/vendor_list_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -31,6 +32,7 @@ class _HomeState extends State<Home> {
         title: Text("name"),
       ),
       body: BlocProvider(
+
         builder: (BuildContext context) => _marketPlaceBloc,
         child: Column(children: [
           RaisedButton(
@@ -54,14 +56,17 @@ class _HomeState extends State<Home> {
           Expanded(
             child: BlocBuilder<MarketPlaceBloc, MarketPlaceState>(
               builder: (context, state) {
-                List<String> vendors;
-
+                List<Vendor> vendors;
+                if(state is MarketPlaceLoadingState){
+                  _marketPlaceBloc.add(MarketPlaceInit());
+                  return Center(child: CircularProgressIndicator(),);
+                }
                 if (state is MarketPlaceInitial) {
-                  vendors = state.initialResult.vendorsList;
+                  vendors = state.initialResult;
                   return VendorList(vendors);
                 } else {
                   if (state is MarketPlaceSearched) {
-                    vendors = state.result.vendorsList;
+                    vendors = state.result;
                     print(vendors);
                     return VendorList(vendors);
                   } else {

@@ -1,16 +1,17 @@
 import 'package:dapozzo_ventura_app/models/market_place_model.dart';
+import 'package:dapozzo_ventura_app/models/vendor_model.dart';
 import 'package:dapozzo_ventura_app/ui/vendor_page.dart';
 
 abstract class MarketPlaceState {}
 
 class MarketPlaceInitial extends MarketPlaceState {
-final MarketPlace  initialResult;
+final List<Vendor>  initialResult;
 
 MarketPlaceInitial(this.initialResult);
 }
 
 class MarketPlaceSearched  extends MarketPlaceState{
-  final MarketPlace result;
+  final List<Vendor> result;
   final String search;
   MarketPlaceSearched(this.result, this.search);
 }
@@ -38,5 +39,8 @@ class MarketPlaceGeneralError  extends MarketPlaceState{
   final String error;
 
   MarketPlaceGeneralError(this.error);
+
+}
+class MarketPlaceLoadingState extends MarketPlaceState {
 
 }

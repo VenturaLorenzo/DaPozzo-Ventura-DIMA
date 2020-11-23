@@ -4,14 +4,14 @@ import 'package:dapozzo_ventura_app/ui/vendor_page.dart';
 abstract class VendorState{}
 
 class VendorStateInitial extends VendorState{
-  final Vendor vendorList;
+  final List<String> products;
 
-  VendorStateInitial(this.vendorList);
+  VendorStateInitial(this.products);
 }
 
 class VendorStateSearched extends VendorState{
 final String search;
-final Vendor result;
+final List<String> result;
 
 VendorStateSearched(this.search,this.result);
 }
