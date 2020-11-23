@@ -1,17 +1,16 @@
 class Product{
 
-  final String typology;
-  final String color;
-  final String size;
-  final int quantity;
+  final String name;
+  final String image;
+  final int price;
 
-  Product({ this.typology,this.size, this.color, this.quantity});
+  Product({ this.name,this.price,this.image});
   Map<String, dynamic> toMap() {
-    return { 'typology': typology, 'size': size,'color' :color,'quantity':quantity};
+    return { 'name': price, 'size': price,'image' :image};
   }
 
   @override
   String toString() {
-    return 'Product{ typology: $typology, size: $size, color: $color, quantity : $quantity}';
+    return 'Product{ name: $name, price: $price, image: $image}';
   }
 }

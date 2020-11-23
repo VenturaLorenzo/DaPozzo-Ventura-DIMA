@@ -7,11 +7,12 @@ import 'package:dapozzo_ventura_app/ui/vendor_page.dart';
 import 'package:flutter/material.dart';
 
 import 'database_helper.dart';
+import 'models/product_model.dart';
 /*
 void main() async{
   final dbHelper = DatabaseHelper.instance;
-final List<Vendor> allerow = await dbHelper.queryVendorsWith('2');
- allerow.forEach((element) {print(element.name); });
+  List<Product> products=  await dbHelper.queryAllProduct('vendor1') ;
+ products.forEach((element) {print(element.name+ element.image+element.price.toString()); });
 }
 */
 void main() => runApp(MaterialApp(

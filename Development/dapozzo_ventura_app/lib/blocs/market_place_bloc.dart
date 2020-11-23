@@ -9,16 +9,7 @@ class MarketPlaceBloc extends Bloc<MarketPlaceEvent, MarketPlaceState> {
   @override
 
  MarketPlaceState get initialState => MarketPlaceLoadingState();
-/*
-  MarketPlaceState get initialState {
-    // se entro qui è perche l'ui mi sta richiedendo lo stato iniziale del marketplace
-    // cerco nel DB quello che devo cercare: lista negozi, immagini ecc
-    //e lo ritorno alla ui
 
-    List<Vendor> initialResult=MarketPlace.getVendors() as List<Vendor>;
-   print("sono passato in marketplaceInitial");
-    return MarketPlaceInitial(initialResult);
-  }*/
 
   @override
   Stream<MarketPlaceState> mapEventToState(MarketPlaceEvent event) async* {
@@ -43,8 +34,8 @@ class MarketPlaceBloc extends Bloc<MarketPlaceEvent, MarketPlaceState> {
           yield MarketPlaceInside(shop);
         } else {
           if (event is MarketPlaceReset) {
-            final List<Vendor> initialResult = MarketPlace.getVendors() as List<
-                Vendor>;
+            final List<Vendor> initialResult =await  MarketPlace.getVendors() ;
+
 
             yield MarketPlaceInitial(initialResult);
           }

@@ -1,23 +1,28 @@
+import 'package:dapozzo_ventura_app/models/product_model.dart';
+
+import '../database_helper.dart';
+
 class Vendor{
 
-  //List<String> products=["prodotto1","prodotto2","prodotto3"];
 final String name;
 final String desc;
 
-  //List get getProducts=>products;
    Vendor({this.name, this.desc});
 
-  static List<String> getProducts(){
+  static Future<List<Product>> getProducts(Vendor vendor) async{
 
     //prendo i negozi dal database
-    List<String> products= ["prodotto1","prodotto2","prodotto3"];
+    final dbHelper = DatabaseHelper.instance;
+
+    List<Product> products=  await dbHelper.queryAllProduct(vendor.name) ;
     return products;
   }
-  static List<String> getProductsWith(String query){
+  static Future<List<Product>> getProductsWith(Vendor vendor, String query) async{
 
     //prendo i negozi dal database
-    List<String> products= ["prodotto1","prodotto2","prodotto3"];
+    final dbHelper = DatabaseHelper.instance;
 
+    List<Product> products=  await dbHelper.queryAllProductWith(vendor.name, query) ;
     return products;
 
 

@@ -93,10 +93,10 @@ class DatabaseHelper {
 
     print("inserisco dati tabella good_typology");
     Map<String, dynamic> good_typology1 = {'vendor': 'vendor1','name':'felpa', 'image': 'prova','price': 1};
-    Map<String, dynamic> good_typology2 = {'vendor': 'vendor2', 'name':'felpa','image': 'prova','price': 1};
-    Map<String, dynamic> good_typology3 = {'vendor': 'vendor3', 'name':'felpa','image': 'prova','price': 1};
-    Map<String, dynamic> good_typology4 = {'vendor': 'vendor4','name':'felpa', 'image': 'prova','price': 1};
-    Map<String, dynamic> good_typology5 = {'vendor': 'vendor5','name':'felpa', 'image': 'prova','price': 1};
+    Map<String, dynamic> good_typology2 = {'vendor': 'vendor2', 'name':'felpa','image': 'prova1','price': 1};
+    Map<String, dynamic> good_typology3 = {'vendor': 'vendor3', 'name':'felpa','image': 'prova2','price': 1};
+    Map<String, dynamic> good_typology4 = {'vendor': 'vendor4','name':'felpa2', 'image': 'prova3','price': 1};
+    Map<String, dynamic> good_typology5 = {'vendor': 'vendor5','name':'felpa', 'image': 'prova4','price': 1};
 
 
     await db.insert('good_typology', good_typology1);
@@ -118,7 +118,7 @@ class DatabaseHelper {
     Database db = await instance.database;
     return await db.insert(table, row);
   }*/
-
+/*
   Future<List<Product>> queryAllGoods() async {
     Database db = await instance.database;
     final allRows = await db.query(table);
@@ -131,7 +131,7 @@ class DatabaseHelper {
         quantity: row['quantity'])));
     return goods;
   }
-
+*/
   Future<List<Vendor>> queryAllVendors() async {
     Database db = await instance.database;
     final allRows = await db.query('vendor');
@@ -140,7 +140,23 @@ class DatabaseHelper {
     allRows.forEach((row) => vendors.add(Vendor(name: row['name'], desc: row['description'])));
     return vendors;
   }
+  Future<List<Product>> queryAllProduct(String vendorName) async {
+    Database db = await instance.database;
+    List<Map> result = await db.rawQuery('''SELECT name,image,price FROM good_typology WHERE vendor= ?  ''',[vendorName]);
 
+    List<Product> products = new List<Product>();
+    result.forEach((row) => products.add(Product(name: row['name'],image: row['image'],price: row['price'])));
+    return products;
+  }
+
+  Future<List<Product>> queryAllProductWith(String vendorName, String query) async {
+    Database db = await instance.database;
+    List<Map> result = await db.rawQuery('''SELECT * FROM good_typology WHERE vendor= $vendorName  AND name LIke '%$query%'  ''');
+
+    List<Product> products = new List<Product>();
+    result.forEach((row) => products.add(Product(name: row['name'],image: row['image'],price: row['price'])));
+    return products;
+  }
   Future<List<Vendor>> queryVendorsWith(String query) async {
     Database db = await instance.database;
     List<Map> result = await db.rawQuery('''SELECT * FROM vendor WHERE name LIKE '%$query%' ''');

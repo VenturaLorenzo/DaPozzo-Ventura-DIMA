@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ProductList extends StatelessWidget {
-  final List<String> products;
+  final List<Product> products;
 
 ProductList(this.products);
   @override

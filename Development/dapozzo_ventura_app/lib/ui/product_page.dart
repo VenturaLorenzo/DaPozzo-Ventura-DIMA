@@ -12,12 +12,12 @@ class _ProductPageState extends State<ProductPage> {
   @override
   Widget build(BuildContext context) {
 
-    final String product= ModalRoute.of(context).settings.arguments;
+    final Product product= ModalRoute.of(context).settings.arguments;
 
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(product),
+        title: Text(product.name),
       ),
       body: Column(
         children: [
