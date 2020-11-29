@@ -26,13 +26,13 @@ class MarketPlaceBloc extends Bloc<MarketPlaceEvent, MarketPlaceState> {
 
         yield MarketPlaceSearched(result, event.query);
       } else {
-        if (event is MarketPlaceEnter) {
+       /* if (event is MarketPlaceEnter) {
           //prendo il parametro che mi viene passato dall'evento
           // (il negozio in cui voglio entrare) con event.shop per esempio
           // e ritorno uno stato MarketplaceInside passandogli come parametro lo shop
           VendorPage shop = new VendorPage(); //per ora glielo passo vuoto
           yield MarketPlaceInside(shop);
-        } else {
+        } else {*/
           if (event is MarketPlaceReset) {
             final List<Vendor> initialResult =await  MarketPlace.getVendors() ;
 
@@ -42,7 +42,7 @@ class MarketPlaceBloc extends Bloc<MarketPlaceEvent, MarketPlaceState> {
           else {
             yield MarketPlaceGeneralError("Unknown Action");
           }
-        }
+
       }
     }
   }
