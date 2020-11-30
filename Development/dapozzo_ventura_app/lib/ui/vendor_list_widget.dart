@@ -1,4 +1,5 @@
 import 'package:dapozzo_ventura_app/models/vendor_model.dart';
+import 'package:dapozzo_ventura_app/ui/vendor_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -8,13 +9,15 @@ class VendorList extends StatelessWidget {
   VendorList(this.vendors);
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: vendors.length,
-      itemBuilder: (context, index) => Card(
-        child: RaisedButton(child: Text(vendors[index].name),onPressed: (){
-          Navigator.pushNamed(context, "/vendor" , arguments: vendors[index]);
-        },),
-      ),
-    );
+    return SliverList(delegate: SliverChildBuilderDelegate(
+            (BuildContext context, int index) {
+          if (index < vendors.length) {
+            return VendorCard(
+              vendor: vendors[index],
+            );
+          } else {
+            return null;
+          }
+        }));
   }
 }
