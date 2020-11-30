@@ -23,13 +23,16 @@ class VendorCard extends StatelessWidget {
         // height: 400,
         child: Column(
           children: [
-            Container(
-              height: 250,
-              child:
-                 Image(
-                  image: AssetImage("lib/assets/image2.jpg"),fit: BoxFit.fill,
+            InkWell(
+              onTap: (){Navigator.pushNamed(context, '/vendor',arguments: vendor);},
+              child: Container(
+                height: 250,
+                child:
+                   Image(
+                    image: AssetImage("lib/assets/"+vendor.images[0]),fit: BoxFit.fill,
+                  ),
                 ),
-              ),
+            ),
 
             SizedBox(
               height: 10,
@@ -84,12 +87,14 @@ class VendorCard extends StatelessWidget {
                       shrinkWrap: true,
                       // Generate 100 widgets that display their index in the List.
                       children:
-                      images.map((path) {
+                      vendor.images.sublist(1).map((path) {
                         return Padding(padding: EdgeInsets.fromLTRB(3, 3, 3, 3),
-                            child: Container(
-                                child: FittedBox(fit: BoxFit.fill,
-                                    child: Image.asset(
-                                        path))));
+                            child: InkWell(onTap: (){},
+                              child: Container(
+                                  child: FittedBox(fit: BoxFit.fill,
+                                      child: Image.asset(
+                                          "lib/assets/"+path))),
+                            ));
                       }).toList()),
 
 

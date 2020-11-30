@@ -21,17 +21,19 @@ class MarketPlaceBloc extends Bloc<MarketPlaceEvent, MarketPlaceState> {
       if (event is MarketPlaceSearch) {
         //qui cerco nel database i dati e creo un oggetto marketplace che li contenga
         print("sono passato in marketplace ");
-       final List<Vendor> result = await MarketPlace.getVendorsWith(event.query) ;
+       final List<Vendor> result = await MarketPlace.getVendorsWithName(event.query) ;
         // per ora creo un market place vuoto e lo passo come risultato
 
         yield MarketPlaceSearched(result, event.query);
       } else {
-       /* if (event is MarketPlaceEnter) {
+      /* if (event is MarketPlaceSearchCategory ) {
           //prendo il parametro che mi viene passato dall'evento
           // (il negozio in cui voglio entrare) con event.shop per esempio
           // e ritorno uno stato MarketplaceInside passandogli come parametro lo shop
-          VendorPage shop = new VendorPage(); //per ora glielo passo vuoto
-          yield MarketPlaceInside(shop);
+         final List<Vendor> result = await MarketPlace.getVendorsWithCategory(event.category) ;
+         // per ora creo un market place vuoto e lo passo come risultato
+
+         yield MarketPlaceSearched(result, event.query);
         } else {*/
           if (event is MarketPlaceReset) {
             final List<Vendor> initialResult =await  MarketPlace.getVendors() ;

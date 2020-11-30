@@ -14,13 +14,20 @@ class MarketPlace {
   List<Vendor> vendors=  await dbHelper.queryAllVendors() ;
   return vendors;
 }
+ static Future<List<Vendor>> getVendorsWithCategory(String category) async{
 
- static Future<List<Vendor>> getVendorsWith(String query) async{
+   final dbHelper = DatabaseHelper.instance;
+   print(category);
+   List<Vendor> vendors=  await dbHelper.queryVendorsWithCategory(category) ;
+   return vendors;
+ }
+
+ static Future<List<Vendor>> getVendorsWithName(String query) async{
 
   //prendo i negozi dal database che hanno nel nome la stringa query
   final dbHelper = DatabaseHelper.instance;
 print(query);
-  List<Vendor> vendors=  await dbHelper.queryVendorsWith(query) ;
+  List<Vendor> vendors=  await dbHelper.queryVendorsWithName(query) ;
   return vendors;
  }
 

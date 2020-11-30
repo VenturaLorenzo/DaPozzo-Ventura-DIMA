@@ -15,10 +15,12 @@ class MarketPlaceReset extends MarketPlaceEvent {
 class MarketPlaceInit extends MarketPlaceEvent{
 
 }/*
-class MarketPlaceEnter extends MarketPlaceEvent {
+class MarketPlaceSearchCategory extends MarketPlaceEvent {
 
-  final VendorPage whereToEnter;
+  final String category ;
 
-  MarketPlaceEnter(this.whereToEnter);
+  MarketPlaceSearchCategory(this.category);
+
+
 
 }*/

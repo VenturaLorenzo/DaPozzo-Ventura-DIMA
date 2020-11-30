@@ -1,6 +1,8 @@
 import 'package:dapozzo_ventura_app/blocs/market_place_bloc.dart';
 import 'package:dapozzo_ventura_app/events/market_place_event.dart';
+import 'package:dapozzo_ventura_app/models/category_model.dart';
 import 'package:dapozzo_ventura_app/models/market_place_model.dart';
+import 'package:dapozzo_ventura_app/models/sport_model.dart';
 import 'package:dapozzo_ventura_app/models/vendor_model.dart';
 import 'package:dapozzo_ventura_app/states/market_place_state.dart';
 import 'package:dapozzo_ventura_app/ui/vendor_list_widget.dart';
@@ -17,29 +19,26 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   final _marketPlaceBloc = MarketPlaceBloc();
 
-  final List<IconData> categories = [
-    Icons.sentiment_very_dissatisfied,
-    Icons.search,
-    Icons.arrow_drop_down_circle,
-    Icons.gesture,
-    Icons.polymer,
-    Icons.sentiment_very_dissatisfied,
-    Icons.search,
-    Icons.arrow_drop_down_circle,
-    Icons.gesture,
-    Icons.polymer
+  final List<Category> categories = [
+   Category(Icons.sentiment_very_dissatisfied,"felpa"),
+    Category(Icons.search,"guanti"),
+    Category(Icons.arrow_drop_down_circle,"scarpe"),
+    Category(Icons.gesture,"pantaloni"),
+    Category(Icons.polymer,"giacca"),
+    Category(Icons.sentiment_very_dissatisfied,"calze"),
+    Category(Icons.search,"intimo"),
+    Category(Icons.arrow_drop_down_circle,"sciarpa"),
+    Category(Icons.gesture,"cappello"),
   ];
-  final List<IconData> sports = [
-    Icons.sentiment_very_dissatisfied,
-    Icons.search,
-    Icons.arrow_drop_down_circle,
-    Icons.gesture,
-    Icons.polymer,
-    Icons.sentiment_very_dissatisfied,
-    Icons.search,
-    Icons.arrow_drop_down_circle,
-    Icons.gesture,
-    Icons.polymer
+
+  final List<Sport> sports = [
+   Sport(Icons.sentiment_very_dissatisfied,"basket"),
+  Sport(Icons.search,"calcio"),
+  Sport(Icons.polymer,"golf"),
+  Sport(Icons.gesture,"atletica"),
+  Sport(Icons.arrow_drop_down_circle,"nuoto"),
+  Sport(Icons.sentiment_very_dissatisfied,"pallavolo"),
+
   ];
 
   @override
@@ -74,23 +73,23 @@ class _HomeState extends State<Home> {
               floating: true,expandedHeight: 250,
               pinned: false,
               flexibleSpace: FlexibleSpaceBar(
-                background: Column(
+                background: Column(crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
                       height: 10,
                     ),
-                    Text("Categories"),
+                    Padding(padding: EdgeInsets.fromLTRB(8,0 , 0, 0),child: Text("Categories",style: TextStyle(fontWeight: FontWeight.bold),)),
                     SizedBox(
                       height: 10,
                     ),
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
-                        children: categories.map((icon) {
+                        children: categories.map((category) {
                           return Padding(
                               padding: EdgeInsets.fromLTRB(9, 0, 9, 0),
                               child: Icon(
-                                icon,
+                                category.icon,
                                 size: 50,
                               ));
                         }).toList(),
@@ -99,19 +98,22 @@ class _HomeState extends State<Home> {
                     SizedBox(
                       height: 10,
                     ),
-                    Text("Sports"),
+                    Padding(padding: EdgeInsets.fromLTRB(8,0 , 0, 0),child: Text("Sports",style: TextStyle(fontWeight: FontWeight.bold),)),
                     SizedBox(
                       height: 10,
                     ),
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
-                        children: sports.map((icon) {
+                        children: sports.map((sport) {
                           return Padding(
                               padding: EdgeInsets.fromLTRB(9, 0, 9, 0),
-                              child: Icon(
-                                icon,
-                                size: 50,
+                              child: InkWell(
+                                onTap: (){},
+                                child: Icon(
+                                  sport.icon,
+                                  size: 50,
+                                ),
                               ));
                         }).toList(),
                       ),
@@ -119,8 +121,8 @@ class _HomeState extends State<Home> {
                     TextField(
                       onSubmitted: (typedText) {
                         _marketPlaceBloc.add(MarketPlaceSearch(typedText));
-                      },
-                      decoration: InputDecoration(labelText: "Search"),
+                      },style: TextStyle(color: Colors.black87,fontWeight: FontWeight.bold,letterSpacing: 1,),
+                      decoration: InputDecoration(labelText: "Search",),
                     ),
                   ],
                 ),
@@ -161,38 +163,7 @@ class _HomeState extends State<Home> {
                   }
               
             ),
-            /*SliverFillRemaining(
-              child: Column(children: [
-                Expanded(
-                  child: BlocBuilder<MarketPlaceBloc, MarketPlaceState>(
-                    builder: (context, state) {
-                      List<Vendor> vendors;
-                      if (state is MarketPlaceLoadingState) {
-                        _marketPlaceBloc.add(MarketPlaceInit());
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-                      if (state is MarketPlaceInitial) {
-                        vendors = state.initialResult;
-                        return VendorList(vendors);
-                      } else {
-                        if (state is MarketPlaceSearched) {
-                          vendors = state.result;
-                          print(vendors);
-                          return VendorList(vendors);
-                        } else {
-                          if (state is MarketPlaceGeneralError) {
-                            return Text(state.error.toString());
-                          }
-                        }
-                      }
-                      return Text("Error");
-                    },
-                  ),
-                ),
-              ]),
-            )*/
+
           ],
         ),
       ),

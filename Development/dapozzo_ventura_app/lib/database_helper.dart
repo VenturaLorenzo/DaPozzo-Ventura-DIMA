@@ -7,7 +7,6 @@ import 'package:sqflite/sqflite.dart';
 import 'models/product_model.dart';
 import 'models/vendor_model.dart';
 
-
 class DatabaseHelper {
   static final _databaseName = "GoodsDatabase.db";
   static final _databaseVersion = 1;
@@ -46,12 +45,12 @@ class DatabaseHelper {
 
   // SQL code to create the database table
   Future _onCreate(Database db, int version) async {
-
-
     print("creo tabella vendor");
     await db.execute(''' CREATE TABLE vendor (        
             name TEXT NOT NULL,
             description TEXT NOT NULL,
+            images TEXT NOT NULL,
+            categories TEXT NOT NULL,
             PRIMARY KEY ( name)      
           )''');
 
@@ -79,11 +78,43 @@ class DatabaseHelper {
           ''');
 
     print("inserisco dati tabella vendor");
-    Map<String, dynamic> vendor1 = {'name': 'vendor1', 'description': 'prova'};
-    Map<String, dynamic> vendor2 = {'name': 'vendor2', 'description': 'prova'};
-    Map<String, dynamic> vendor3 = {'name': 'vendor3', 'description': 'prova'};
-    Map<String, dynamic> vendor4 = {'name': 'vendor4', 'description': 'prova'};
-    Map<String, dynamic> vendor5 = {'name': 'vendor5', 'description': 'prova'};
+    Map<String, dynamic> vendor1 = {
+      'name': 'vendor1',
+      'description': 'prova',
+      'images':
+          'image2.jpg,image2.jpg,image2.jpg,image2.jpg,image2.jpg,image2.jpg,image2.jpg',
+      'categories':
+          'felpa,cappello,scarpe,giacca,sciarpa,calze,pantaloni,guanti,intimo'
+    };
+    Map<String, dynamic> vendor2 = {
+      'name': 'vendor2',
+      'description': 'prova',
+      'images':
+      'image2.jpg,image2.jpg,image2.jpg,image2.jpg,image2.jpg,image2.jpg,image2.jpg',
+      'categories':
+          'felpa,cappello,giacca,sciarpa,calze,pantaloni,guanti,intimo'
+    };
+    Map<String, dynamic> vendor3 = {
+      'name': 'vendor3',
+      'description': 'prova',
+      'images':
+      'image2.jpg,image2.jpg,image2.jpg,image2.jpg,image2.jpg,image2.jpg,image2.jpg',
+      'categories': 'cappello,scarpe,giacca,sciarpa,pantaloni,guanti,intimo'
+    };
+    Map<String, dynamic> vendor4 = {
+      'name': 'vendor4',
+      'description': 'prova',
+      'images':
+      'image2.jpg,image2.jpg,image2.jpg,image2.jpg,image2.jpg,image2.jpg,image2.jpg',
+      'categories': 'cappello,scarpe,giacca,sciarpa,calze,intimo'
+    };
+    Map<String, dynamic> vendor5 = {
+      'name': 'vendor5',
+      'description': 'prova',
+      'images':
+      'image2.jpg,image2.jpg,image2.jpg,image2.jpg,image2.jpg,image2.jpg,image2.jpg',
+      'categories': 'felpa,scarpe,giacca,sciarpa,calze,pantaloni,intimo'
+    };
 
     await db.insert('vendor', vendor1);
     await db.insert('vendor', vendor2);
@@ -92,12 +123,36 @@ class DatabaseHelper {
     await db.insert('vendor', vendor5);
 
     print("inserisco dati tabella good_typology");
-    Map<String, dynamic> good_typology1 = {'vendor': 'vendor1','name':'felpa', 'image': 'prova','price': 1};
-    Map<String, dynamic> good_typology2 = {'vendor': 'vendor2', 'name':'felpa','image': 'prova1','price': 1};
-    Map<String, dynamic> good_typology3 = {'vendor': 'vendor3', 'name':'felpa','image': 'prova2','price': 1};
-    Map<String, dynamic> good_typology4 = {'vendor': 'vendor4','name':'felpa2', 'image': 'prova3','price': 1};
-    Map<String, dynamic> good_typology5 = {'vendor': 'vendor5','name':'felpa', 'image': 'prova4','price': 1};
-
+    Map<String, dynamic> good_typology1 = {
+      'vendor': 'vendor1',
+      'name': 'felpa',
+      'image': 'prova',
+      'price': 1
+    };
+    Map<String, dynamic> good_typology2 = {
+      'vendor': 'vendor2',
+      'name': 'felpa',
+      'image': 'prova1',
+      'price': 1
+    };
+    Map<String, dynamic> good_typology3 = {
+      'vendor': 'vendor3',
+      'name': 'felpa',
+      'image': 'prova2',
+      'price': 1
+    };
+    Map<String, dynamic> good_typology4 = {
+      'vendor': 'vendor4',
+      'name': 'felpa2',
+      'image': 'prova3',
+      'price': 1
+    };
+    Map<String, dynamic> good_typology5 = {
+      'vendor': 'vendor5',
+      'name': 'felpa',
+      'image': 'prova4',
+      'price': 1
+    };
 
     await db.insert('good_typology', good_typology1);
     await db.insert('good_typology', good_typology2);
@@ -105,6 +160,7 @@ class DatabaseHelper {
     await db.insert('good_typology', good_typology4);
     await db.insert('good_typology', good_typology5);
   }
+
 /*
   Future<int> insert(Good good) async {
     // row to insert
@@ -137,34 +193,85 @@ class DatabaseHelper {
     final allRows = await db.query('vendor');
 
     List<Vendor> vendors = new List<Vendor>();
-    allRows.forEach((row) => vendors.add(Vendor(name: row['name'], desc: row['description'])));
+    allRows.forEach((row) {
+      String imageslist = row['images'];
+      List<String> images = imageslist.split(',');
+      String categoriesList = row['categories'];
+      List<String> categories = categoriesList.split(',');
+      return vendors.add(Vendor(
+          name: row['name'],
+          desc: row['description'],
+          images: images,
+          categories: categories));
+    });
     return vendors;
   }
+
   Future<List<Product>> queryAllProduct(String vendorName) async {
     Database db = await instance.database;
-    List<Map> result = await db.rawQuery('''SELECT name,image,price FROM good_typology WHERE vendor= ?  ''',[vendorName]);
+    List<Map> result = await db.rawQuery(
+        '''SELECT name,image,price FROM good_typology WHERE vendor= ?  ''',
+        [vendorName]);
 
     List<Product> products = new List<Product>();
-    result.forEach((row) => products.add(Product(name: row['name'],image: row['image'],price: row['price'])));
+    result.forEach((row) => products.add(
+        Product(name: row['name'], image: row['image'], price: row['price'])));
     return products;
   }
 
-  Future<List<Product>> queryAllProductWith(String vendorName, String query) async {
+  Future<List<Product>> queryAllProductWith(
+      String vendorName, String query) async {
     Database db = await instance.database;
-    List<Map> result = await db.rawQuery('''SELECT * FROM good_typology WHERE vendor= $vendorName  AND name LIke '%$query%'  ''');
+    List<Map> result = await db.rawQuery(
+        '''SELECT * FROM good_typology WHERE vendor= $vendorName  AND name LIke '%$query%'  ''');
 
     List<Product> products = new List<Product>();
-    result.forEach((row) => products.add(Product(name: row['name'],image: row['image'],price: row['price'])));
+    result.forEach((row) => products.add(
+        Product(name: row['name'], image: row['image'], price: row['price'])));
     return products;
   }
-  Future<List<Vendor>> queryVendorsWith(String query) async {
+
+  Future<List<Vendor>> queryVendorsWithCategory(String category) async {
     Database db = await instance.database;
-    List<Map> result = await db.rawQuery('''SELECT * FROM vendor WHERE name LIKE '%$query%' ''');
+    List<Map> result = await db.rawQuery(
+        '''SELECT * FROM vendor WHERE categories LIKE '%$category%' ''');
 
     List<Vendor> vendors = new List<Vendor>();
-    result.forEach((row) => vendors.add(Vendor(name: row['name'], desc: row['description'])));
+    result.forEach((row) {
+      String imagesList = row['images'];
+      List<String> images = imagesList.split(',');
+      String categoriesList = row['categories'];
+      List<String> categories = categoriesList.split(',');
+      return vendors.add(Vendor(
+          name: row['name'],
+          desc: row['description'],
+          images: images,
+          categories: categories));
+    });
     return vendors;
   }
+
+  Future<List<Vendor>> queryVendorsWithName(String query) async {
+    Database db = await instance.database;
+    List<Map> result = await db
+        .rawQuery('''SELECT * FROM vendor WHERE name LIKE '%$query%' ''');
+
+    List<Vendor> vendors = new List<Vendor>();
+    result.forEach((row) {
+      String imagesList = row['images'];
+      List<String> images = imagesList.split(',');
+
+      String categoriesList = row['categories'];
+      List<String> categories = categoriesList.split(',');
+      return vendors.add(Vendor(
+          name: row['name'],
+          desc: row['description'],
+          images: images,
+          categories: categories));
+    });
+    return vendors;
+  }
+
   Future<List<String>> queryAllGoodTypology() async {
     Database db = await instance.database;
     final allRows = await db.query('good_typology');
