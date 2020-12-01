@@ -60,7 +60,7 @@ class VendorCard extends StatelessWidget {
                 ],
               ),
               RatingBar.builder(
-                initialRating: 3.2,
+                initialRating: vendor.rating,
                 itemSize: 18,
                 minRating: 1,
                 direction: Axis.horizontal,

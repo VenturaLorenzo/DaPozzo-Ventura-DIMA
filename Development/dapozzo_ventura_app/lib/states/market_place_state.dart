@@ -12,8 +12,7 @@ MarketPlaceInitial(this.initialResult);
 
 class MarketPlaceSearched  extends MarketPlaceState{
   final List<Vendor> result;
-  final String search;
-  MarketPlaceSearched(this.result, this.search);
+  MarketPlaceSearched(this.result);
 }
 /*
 class MarketPlaceInside extends MarketPlaceState{

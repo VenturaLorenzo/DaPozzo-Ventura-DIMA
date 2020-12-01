@@ -4,14 +4,14 @@ import '../database_helper.dart';
 
 class MarketPlace {
 
+/*
 
-
- static Future<List<Vendor>> getVendors() async{
+ static Future<List<Vendor>> getVendors(String name, String category) async{
 
   //prendo i negozi dal database
   final dbHelper = DatabaseHelper.instance;
 
-  List<Vendor> vendors=  await dbHelper.queryAllVendors() ;
+  List<Vendor> vendors=  await dbHelper.queryVendors(name, category);
   return vendors;
 }
  static Future<List<Vendor>> getVendorsWithCategory(String category) async{
@@ -31,6 +31,6 @@ print(query);
   return vendors;
  }
 
-
+*/
 
 }

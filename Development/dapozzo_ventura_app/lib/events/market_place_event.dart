@@ -5,6 +5,7 @@ abstract class MarketPlaceEvent {}
 class MarketPlaceSearch extends MarketPlaceEvent {
   final String query;
 
+
   MarketPlaceSearch(this.query);
 }
 class MarketPlaceReset extends MarketPlaceEvent {

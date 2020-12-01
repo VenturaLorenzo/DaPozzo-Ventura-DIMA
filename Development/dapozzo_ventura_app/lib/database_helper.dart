@@ -51,6 +51,7 @@ class DatabaseHelper {
             description TEXT NOT NULL,
             images TEXT NOT NULL,
             categories TEXT NOT NULL,
+            rating REAL NOT NULL,
             PRIMARY KEY ( name)      
           )''');
 
@@ -84,36 +85,46 @@ class DatabaseHelper {
       'images':
           'image2.jpg,image2.jpg,image2.jpg,image2.jpg,image2.jpg,image2.jpg,image2.jpg',
       'categories':
-          'felpa,cappello,scarpe,giacca,sciarpa,calze,pantaloni,guanti,intimo'
+          'felpa,cappello,scarpe,giacca,sciarpa,calze,pantaloni,guanti,intimo',
+      'rating':
+          '3.6'
     };
     Map<String, dynamic> vendor2 = {
       'name': 'vendor2',
       'description': 'prova',
       'images':
-      'image2.jpg,image2.jpg,image2.jpg,image2.jpg,image2.jpg,image2.jpg,image2.jpg',
+          'image2.jpg,image2.jpg,image2.jpg,image2.jpg,image2.jpg,image2.jpg,image2.jpg',
       'categories':
-          'felpa,cappello,giacca,sciarpa,calze,pantaloni,guanti,intimo'
+          'felpa,cappello,giacca,sciarpa,calze,pantaloni,guanti,intimo',
+      'rating':
+      '2.2'
     };
     Map<String, dynamic> vendor3 = {
       'name': 'vendor3',
       'description': 'prova',
       'images':
-      'image2.jpg,image2.jpg,image2.jpg,image2.jpg,image2.jpg,image2.jpg,image2.jpg',
-      'categories': 'cappello,scarpe,giacca,sciarpa,pantaloni,guanti,intimo'
+          'image2.jpg,image2.jpg,image2.jpg,image2.jpg,image2.jpg,image2.jpg,image2.jpg',
+      'categories': 'cappello,scarpe,giacca,sciarpa,pantaloni,guanti,intimo',
+      'rating':
+      '4.8'
     };
     Map<String, dynamic> vendor4 = {
       'name': 'vendor4',
       'description': 'prova',
       'images':
-      'image2.jpg,image2.jpg,image2.jpg,image2.jpg,image2.jpg,image2.jpg,image2.jpg',
-      'categories': 'cappello,scarpe,giacca,sciarpa,calze,intimo'
+          'image2.jpg,image2.jpg,image2.jpg,image2.jpg,image2.jpg,image2.jpg,image2.jpg',
+      'categories': 'cappello,scarpe,giacca,sciarpa,calze,intimo',
+      'rating':
+      '1.2'
     };
     Map<String, dynamic> vendor5 = {
       'name': 'vendor5',
       'description': 'prova',
       'images':
-      'image2.jpg,image2.jpg,image2.jpg,image2.jpg,image2.jpg,image2.jpg,image2.jpg',
-      'categories': 'felpa,scarpe,giacca,sciarpa,calze,pantaloni,intimo'
+          'image2.jpg,image2.jpg,image2.jpg,image2.jpg,image2.jpg,image2.jpg,image2.jpg',
+      'categories': 'felpa,scarpe,giacca,sciarpa,calze,pantaloni,intimo',
+      'rating':
+      '3.2'
     };
 
     await db.insert('vendor', vendor1);
@@ -161,52 +172,6 @@ class DatabaseHelper {
     await db.insert('good_typology', good_typology5);
   }
 
-/*
-  Future<int> insert(Good good) async {
-    // row to insert
-    Map<String, dynamic> row = {
-      DatabaseHelper.columnTypology: good.typology,
-      DatabaseHelper.columnSize: good.size,
-      DatabaseHelper.columnColor: good.color,
-      DatabaseHelper.columnQuantity: good.quantity,
-    };
-
-    Database db = await instance.database;
-    return await db.insert(table, row);
-  }*/
-/*
-  Future<List<Product>> queryAllGoods() async {
-    Database db = await instance.database;
-    final allRows = await db.query(table);
-
-    List<Product> goods = new List<Product>();
-    allRows.forEach((row) => goods.add(Product(
-        typology: row['typology'],
-        size: row['size'],
-        color: row['color'],
-        quantity: row['quantity'])));
-    return goods;
-  }
-*/
-  Future<List<Vendor>> queryAllVendors() async {
-    Database db = await instance.database;
-    final allRows = await db.query('vendor');
-
-    List<Vendor> vendors = new List<Vendor>();
-    allRows.forEach((row) {
-      String imageslist = row['images'];
-      List<String> images = imageslist.split(',');
-      String categoriesList = row['categories'];
-      List<String> categories = categoriesList.split(',');
-      return vendors.add(Vendor(
-          name: row['name'],
-          desc: row['description'],
-          images: images,
-          categories: categories));
-    });
-    return vendors;
-  }
-
   Future<List<Product>> queryAllProduct(String vendorName) async {
     Database db = await instance.database;
     List<Map> result = await db.rawQuery(
@@ -231,45 +196,15 @@ class DatabaseHelper {
     return products;
   }
 
-  Future<List<Vendor>> queryVendorsWithCategory(String category) async {
+  Future<List<Vendor>> queryVendors(
+      String name, List<String> categories) async {
     Database db = await instance.database;
-    List<Map> result = await db.rawQuery(
-        '''SELECT * FROM vendor WHERE categories LIKE '%$category%' ''');
 
-    List<Vendor> vendors = new List<Vendor>();
-    result.forEach((row) {
-      String imagesList = row['images'];
-      List<String> images = imagesList.split(',');
-      String categoriesList = row['categories'];
-      List<String> categories = categoriesList.split(',');
-      return vendors.add(Vendor(
-          name: row['name'],
-          desc: row['description'],
-          images: images,
-          categories: categories));
-    });
-    return vendors;
-  }
-
-  Future<List<Vendor>> queryVendorsWithName(String query) async {
-    Database db = await instance.database;
     List<Map> result = await db
-        .rawQuery('''SELECT * FROM vendor WHERE name LIKE '%$query%' ''');
-
-    List<Vendor> vendors = new List<Vendor>();
-    result.forEach((row) {
-      String imagesList = row['images'];
-      List<String> images = imagesList.split(',');
-
-      String categoriesList = row['categories'];
-      List<String> categories = categoriesList.split(',');
-      return vendors.add(Vendor(
-          name: row['name'],
-          desc: row['description'],
-          images: images,
-          categories: categories));
-    });
-    return vendors;
+        .rawQuery('''SELECT * FROM vendor WHERE  name LIKE '%$name%'  ''');
+    print("entrato in query vendors");
+    List<Vendor> vendors = rowsToVendors(result);
+    return filterByCategory(vendors, categories);
   }
 
   Future<List<String>> queryAllGoodTypology() async {
@@ -297,5 +232,38 @@ class DatabaseHelper {
   Future<int> delete(int id) async {
     Database db = await instance.database;
     return await db.delete(table, where: '$columnGoodId = ?', whereArgs: [id]);
+  }
+
+  List<Vendor> rowsToVendors(List<Map> allRows) {
+    List<Vendor> vendors = new List<Vendor>();
+    allRows.forEach((row) {
+      String imagesList = row['images'];
+      List<String> images = imagesList.split(',');
+      String categoriesList = row['categories'];
+      List<String> categories = categoriesList.split(',');
+      return vendors.add(Vendor(
+          name: row['name'],
+          desc: row['description'],
+          images: images,
+          categories: categories,
+      rating: row['rating']),
+      );
+    });
+    return vendors;
+  }
+
+  List<Vendor> filterByCategory(List<Vendor> vendors, List<String> categories) {
+    if (categories.isEmpty) {
+      return vendors;
+    } else {
+      List<Vendor> result = new List<Vendor>();
+      vendors.forEach((vendor) {
+        if (vendor.categories.contains(categories[0])) {
+          result.add(vendor);
+        }
+      });
+
+      return filterByCategory(result, categories.sublist(1));
+    }
   }
 }

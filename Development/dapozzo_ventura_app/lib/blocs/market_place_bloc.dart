@@ -5,46 +5,49 @@ import 'package:dapozzo_ventura_app/states/market_place_state.dart';
 import 'package:dapozzo_ventura_app/ui/vendor_page.dart';
 import 'package:bloc/bloc.dart';
 
+import '../database_helper.dart';
+
 class MarketPlaceBloc extends Bloc<MarketPlaceEvent, MarketPlaceState> {
   @override
-
- MarketPlaceState get initialState => MarketPlaceLoadingState();
-
+  MarketPlaceState get initialState => MarketPlaceLoadingState();
 
   @override
   Stream<MarketPlaceState> mapEventToState(MarketPlaceEvent event) async* {
-    if(event is MarketPlaceInit){
-      final List<Vendor> initialResult= await MarketPlace.getVendors() ;
-      yield MarketPlaceInitial(initialResult);
+    final dbHelper = DatabaseHelper.instance;
 
-    }else {
+    if (event is MarketPlaceInit) {
+      final List<Vendor> initialResult = await dbHelper.queryVendors("", []);
+      yield MarketPlaceInitial(initialResult);
+    } else {
       if (event is MarketPlaceSearch) {
         //qui cerco nel database i dati e creo un oggetto marketplace che li contenga
-        print("sono passato in marketplace ");
-       final List<Vendor> result = await MarketPlace.getVendorsWithName(event.query) ;
+        List<String> splittedQuery = event.query.split('-');
+
+        String name = splittedQuery[0];
+        List<String> categories= new List<String>();
+        print(splittedQuery[1]);
+        if(splittedQuery[1]!= "") {
+         categories = splittedQuery[1].split(",");
+          categories = categories.sublist(0, categories.length - 1);
+        }else{
+          categories=[];
+        }
+        print(categories);
+        final List<Vendor> result =
+            await dbHelper.queryVendors(name, categories);
         // per ora creo un market place vuoto e lo passo come risultato
 
-        yield MarketPlaceSearched(result, event.query);
+        yield MarketPlaceSearched(result);
       } else {
-      /* if (event is MarketPlaceSearchCategory ) {
-          //prendo il parametro che mi viene passato dall'evento
-          // (il negozio in cui voglio entrare) con event.shop per esempio
-          // e ritorno uno stato MarketplaceInside passandogli come parametro lo shop
-         final List<Vendor> result = await MarketPlace.getVendorsWithCategory(event.category) ;
-         // per ora creo un market place vuoto e lo passo come risultato
 
-         yield MarketPlaceSearched(result, event.query);
-        } else {*/
-          if (event is MarketPlaceReset) {
-            final List<Vendor> initialResult =await  MarketPlace.getVendors() ;
+        if (event is MarketPlaceReset) {
+          final List<Vendor> initialResult =
+              await dbHelper.queryVendors("", []);
 
-
-            yield MarketPlaceInitial(initialResult);
-          }
-          else {
-            yield MarketPlaceGeneralError("Unknown Action");
-          }
-
+          yield MarketPlaceInitial(initialResult);
+        } else {
+          yield MarketPlaceGeneralError("Unknown Action");
+        }
       }
     }
   }
