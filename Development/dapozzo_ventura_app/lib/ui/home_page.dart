@@ -163,7 +163,7 @@ class _HomeState extends State<Home> {
                         letterSpacing: 1,
                       ),
                       decoration: InputDecoration(
-                        labelText: "Search",
+                        labelText: "Search for a shop name",
                       ),
                     ),
                   ],

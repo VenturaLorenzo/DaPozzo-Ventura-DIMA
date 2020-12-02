@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dapozzo_ventura_app/events/market_place_event.dart';
 import 'package:dapozzo_ventura_app/models/market_place_model.dart';
 import 'package:dapozzo_ventura_app/models/vendor_model.dart';
@@ -20,6 +22,9 @@ class MarketPlaceBloc extends Bloc<MarketPlaceEvent, MarketPlaceState> {
       yield MarketPlaceInitial(initialResult);
     } else {
       if (event is MarketPlaceSearch) {
+        yield MarketPlaceLoadingState();
+        await Future.delayed(Duration(milliseconds: 500));
+
         //qui cerco nel database i dati e creo un oggetto marketplace che li contenga
         List<String> splittedQuery = event.query.split('-');
 
