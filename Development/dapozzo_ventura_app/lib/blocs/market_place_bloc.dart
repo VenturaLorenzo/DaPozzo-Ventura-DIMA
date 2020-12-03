@@ -30,14 +30,12 @@ class MarketPlaceBloc extends Bloc<MarketPlaceEvent, MarketPlaceState> {
 
         String name = splittedQuery[0];
         List<String> categories= new List<String>();
-        print(splittedQuery[1]);
         if(splittedQuery[1]!= "") {
          categories = splittedQuery[1].split(",");
           categories = categories.sublist(0, categories.length - 1);
         }else{
           categories=[];
         }
-        print(categories);
         final List<Vendor> result =
             await dbHelper.queryVendors(name, categories);
         // per ora creo un market place vuoto e lo passo come risultato

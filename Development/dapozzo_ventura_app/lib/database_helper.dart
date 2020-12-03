@@ -204,7 +204,7 @@ class DatabaseHelper {
         .rawQuery('''SELECT * FROM vendor WHERE  name LIKE '%$name%'  ''');
     print("entrato in query vendors");
     List<Vendor> vendors = rowsToVendors(result);
-    return filterByCategory(vendors, categories);
+    return filterByCategoryOR(vendors, categories);
   }
 
   Future<List<String>> queryAllGoodTypology() async {
@@ -251,8 +251,28 @@ class DatabaseHelper {
     });
     return vendors;
   }
+  List<Vendor> filterByCategoryOR(List<Vendor> vendors, List<String> categories) {
+    if (categories.isEmpty) {
+      return vendors;
+    } else {
+      List<Vendor> result = new List<Vendor>();
+      vendors.forEach((vendor) {
+       bool has=false;
+        categories.forEach((cat) {
+         if(vendor.categories.contains(cat)){
+           has= true;
+         }
+         if(has==true && !result.contains(vendor)){
+           result.add(vendor);
+         }
+       });
 
-  List<Vendor> filterByCategory(List<Vendor> vendors, List<String> categories) {
+      });
+
+      return result;
+    }
+  }
+  List<Vendor> filterByCategoryAND(List<Vendor> vendors, List<String> categories) {
     if (categories.isEmpty) {
       return vendors;
     } else {
@@ -263,7 +283,7 @@ class DatabaseHelper {
         }
       });
 
-      return filterByCategory(result, categories.sublist(1));
+      return filterByCategoryAND(result, categories.sublist(1));
     }
   }
 }
