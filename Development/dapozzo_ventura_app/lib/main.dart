@@ -4,15 +4,14 @@ import 'package:dapozzo_ventura_app/blocs/vendor_bloc.dart';
 import 'package:dapozzo_ventura_app/models/market_place_model.dart';
 import 'package:dapozzo_ventura_app/models/vendor_model.dart';
 import 'package:dapozzo_ventura_app/ui/cart_page.dart';
+import 'package:dapozzo_ventura_app/ui/goods_typology_page.dart';
 import 'package:dapozzo_ventura_app/ui/home_page.dart';
-import 'package:dapozzo_ventura_app/ui/product_page.dart';
 import 'package:dapozzo_ventura_app/ui/profile_page.dart';
 import 'package:dapozzo_ventura_app/ui/vendor_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'database_helper.dart';
-import 'models/product_model.dart';
 
 /*
 void main() async{
@@ -43,7 +42,7 @@ void main() => runApp(
 
               '/vendor': (context) => VendorPage(),
 
-              '/product': (context) => ProductPage(),
+              '/goodtypology': (context) => GoodTypologyPage(),
 
               '/cart': (context) => Cart(),
 

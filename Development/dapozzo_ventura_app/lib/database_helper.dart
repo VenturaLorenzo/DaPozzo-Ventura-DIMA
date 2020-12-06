@@ -4,7 +4,8 @@ import 'dart:async';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-import 'models/product_model.dart';
+import 'models/good_typology_model.dart';
+import 'models/good_typology_model.dart';
 import 'models/vendor_model.dart';
 
 class DatabaseHelper {
@@ -65,18 +66,19 @@ class DatabaseHelper {
             PRIMARY KEY (vendor, name)
           )
           ''');
-
-    print("creo tabella goods");
+    print("creo tabella good");
     await db.execute('''
-          CREATE TABLE $table (
-            $columnTypology TEXT NOT NULL,
-            $columnSize TEXT NOT NULL,
-            $columnColor TEXT NOT NULL,
-            $columnQuantity INTEGER NOT NULL,
-            image STRING NOT NULL,
-            PRIMARY KEY ( $columnTypology,$columnColor,$columnSize)
+          CREATE TABLE good (
+            good_typology TEXT NOT NULL,
+            color TEXT NOT NULL,
+            size TEXT NOT NULL,
+            image TEXT NOT NULL,
+            quantity INTEGER NOT NULL,
+            PRIMARY KEY (good_typology, color,size)
           )
           ''');
+
+
 
     print("inserisco dati tabella vendor");
     Map<String, dynamic> vendor1 = {
@@ -172,28 +174,26 @@ class DatabaseHelper {
     await db.insert('good_typology', good_typology5);
   }
 
-  Future<List<Product>> queryAllProduct(String vendorName) async {
+  Future<List<GoodTypology>> queryAllGoodTypologies(String vendorName) async {
     Database db = await instance.database;
     List<Map> result = await db.rawQuery(
         '''SELECT name,image,price FROM good_typology WHERE vendor= ?  ''',
         [vendorName]);
+    List<GoodTypology> goodTypologies = rowToGoodTypologys(result);
 
-    List<Product> products = new List<Product>();
-    result.forEach((row) => products.add(
-        Product(name: row['name'], image: row['image'], price: row['price'])));
-    return products;
+    return goodTypologies;
   }
 
-  Future<List<Product>> queryAllProductWith(
+  Future<List<GoodTypology>> queryAllGoodTypeWith(
       String vendorName, String query) async {
     Database db = await instance.database;
     List<Map> result = await db.rawQuery(
         '''SELECT * FROM good_typology WHERE vendor= $vendorName  AND name LIke '%$query%'  ''');
 
-    List<Product> products = new List<Product>();
-    result.forEach((row) => products.add(
-        Product(name: row['name'], image: row['image'], price: row['price'])));
-    return products;
+    List<GoodTypology> goodTypologies = new List<GoodTypology>();
+    result.forEach((row) => goodTypologies.add(
+        GoodTypology(name: row['name'], images: row['image'], price: row['price'])));
+    return goodTypologies;
   }
 
   Future<List<Vendor>> queryVendors(
@@ -206,8 +206,8 @@ class DatabaseHelper {
     List<Vendor> vendors = rowsToVendors(result);
     return filterByCategoryOR(vendors, categories);
   }
-
-  Future<List<String>> queryAllGoodTypology() async {
+/*
+  Future<List<String>> queryAllGoodType() async {
     Database db = await instance.database;
     final allRows = await db.query('good_typology');
 
@@ -215,7 +215,7 @@ class DatabaseHelper {
     allRows.forEach((row) => types.add(row['vendor']));
     return types;
   }
-
+*/
   Future<int> queryRowCount() async {
     Database db = await instance.database;
     return Sqflite.firstIntValue(
@@ -233,6 +233,9 @@ class DatabaseHelper {
     Database db = await instance.database;
     return await db.delete(table, where: '$columnGoodId = ?', whereArgs: [id]);
   }
+
+
+
 
   List<Vendor> rowsToVendors(List<Map> allRows) {
     List<Vendor> vendors = new List<Vendor>();
@@ -285,5 +288,24 @@ class DatabaseHelper {
 
       return filterByCategoryAND(result, categories.sublist(1));
     }
+  }
+
+  List<GoodTypology> rowToGoodTypologys(List<Map> allRows) {
+
+
+    List<GoodTypology> goodtypology = new List<GoodTypology>();
+    allRows.forEach((row) {
+      String imagesList = row['image'];
+      List<String> images = imagesList.split(',');
+      String name = row['name'];
+      int price = row['price'];
+      return goodtypology.add(GoodTypology(
+          name: name,
+
+          images: images,
+         price: price),
+      );
+    });
+    return goodtypology;
   }
 }

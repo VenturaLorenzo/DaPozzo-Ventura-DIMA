@@ -1,26 +1,26 @@
 import 'package:dapozzo_ventura_app/blocs/cart_bloc.dart';
 import 'package:dapozzo_ventura_app/events/cart_event.dart';
-import 'package:dapozzo_ventura_app/models/product_model.dart';
+import 'package:dapozzo_ventura_app/models/good_typology_model.dart';
 import 'package:dapozzo_ventura_app/ui/eQuip_appbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ProductPage extends StatefulWidget {
+class GoodTypologyPage extends StatefulWidget {
   @override
-  _ProductPageState createState() => _ProductPageState();
+  _GoodTypologyPageState createState() => _GoodTypologyPageState();
 }
 
-class _ProductPageState extends State<ProductPage> {
+class _GoodTypologyPageState extends State<GoodTypologyPage> {
    CartBloc _cartBloc;
 
- // _ProductPageState({this.product});
+ // _GoodTypologyPageState({this.GoodTypology});
   @override
   Widget build(BuildContext context) {
-    final Product product = ModalRoute.of(context).settings.arguments;
+    final GoodTypology good_typology = ModalRoute.of(context).settings.arguments;
     _cartBloc= BlocProvider.of<CartBloc>(context);
     return Scaffold(
-      appBar: EquipAppBar(title: product.name,),
+      appBar: EquipAppBar(title: good_typology.name,),
       body: Column(
         children: [
           /*TextField(
@@ -32,7 +32,7 @@ class _ProductPageState extends State<ProductPage> {
           RaisedButton(
             child: Text("Add to cart"),
             onPressed: () {
-              _cartBloc.add(CartAddEvent(product.name));
+              _cartBloc.add(CartAddEvent(good_typology.name));
 
             },
           ),
