@@ -138,36 +138,67 @@ class DatabaseHelper {
     print("inserisco dati tabella good_typology");
     Map<String, dynamic> good_typology1 = {
       'vendor': 'vendor1',
-      'name': 'felpa',
-      'image': 'prova',
+      'name': 'felpa5',
+      'image': 'image2.jpg,image2.jpg,image2.jpg',
+      'price': 1
+    };
+    Map<String, dynamic> good_typology14 = {
+      'vendor': 'vendor1',
+      'name': 'felpa4',
+      'image': 'image2.jpg,image2.jpg,image2.jpg',
+      'price': 1
+    };
+    Map<String, dynamic> good_typology11 = {
+      'vendor': 'vendor1',
+      'name': 'felpa3',
+      'image': 'image2.jpg,image2.jpg,image2.jpg',
+      'price': 1
+    };
+    Map<String, dynamic> good_typology12 = {
+      'vendor': 'vendor1',
+      'name': 'felpa2',
+      'image': 'image2.jpg,image2.jpg,image2.jpg',
+      'price': 1
+    };
+    Map<String, dynamic> good_typology13 = {
+      'vendor': 'vendor1',
+      'name': 'felpa1',
+      'image': 'image2.jpg,image2.jpg,image2.jpg',
       'price': 1
     };
     Map<String, dynamic> good_typology2 = {
       'vendor': 'vendor2',
       'name': 'felpa',
-      'image': 'prova1',
+      'image': 'image2.jpg,image2.jpg,image2.jpg',
       'price': 1
     };
     Map<String, dynamic> good_typology3 = {
       'vendor': 'vendor3',
       'name': 'felpa',
-      'image': 'prova2',
+      'image': 'image2.jpg,image2.jpg,image2.jpg',
       'price': 1
     };
     Map<String, dynamic> good_typology4 = {
       'vendor': 'vendor4',
       'name': 'felpa2',
-      'image': 'prova3',
+    'image': 'image2.jpg,image2.jpg,image2.jpg',
+
       'price': 1
     };
     Map<String, dynamic> good_typology5 = {
       'vendor': 'vendor5',
       'name': 'felpa',
-      'image': 'prova4',
+      'image': 'image2.jpg,image2.jpg,image2.jpg',
       'price': 1
     };
 
     await db.insert('good_typology', good_typology1);
+    await db.insert('good_typology', good_typology12);
+    await db.insert('good_typology', good_typology11);
+    await db.insert('good_typology', good_typology13);
+
+    await db.insert('good_typology', good_typology14);
+
     await db.insert('good_typology', good_typology2);
     await db.insert('good_typology', good_typology3);
     await db.insert('good_typology', good_typology4);

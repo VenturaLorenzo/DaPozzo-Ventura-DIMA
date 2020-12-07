@@ -11,9 +11,13 @@ GoodTypologyList(this.goodTypologylist);
     return ListView.builder(
       itemCount: goodTypologylist.length,
       itemBuilder: (context, index) => Card(
-        child: RaisedButton(child: Text(goodTypologylist[index].toString()),onPressed: (){
-          Navigator.pushNamed(context, "/goodtypology" , arguments: goodTypologylist[index]);
-        },),
+        child: Column(
+          children: [SizedBox(height: 100,),
+            RaisedButton(child: Text(goodTypologylist[index].toString()),onPressed: (){
+              Navigator.pushNamed(context, "/goodtypology" , arguments: goodTypologylist[index]);
+            },),
+          ],
+        ),
       ),
     );
   }

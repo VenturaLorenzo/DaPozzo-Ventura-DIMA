@@ -2,6 +2,7 @@ import 'package:dapozzo_ventura_app/blocs/cart_bloc.dart';
 import 'package:dapozzo_ventura_app/events/cart_event.dart';
 import 'package:dapozzo_ventura_app/models/good_typology_model.dart';
 import 'package:dapozzo_ventura_app/ui/eQuip_appbar.dart';
+import 'package:dapozzo_ventura_app/ui/good_images_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,6 +30,7 @@ class _GoodTypologyPageState extends State<GoodTypologyPage> {
             },
             decoration: InputDecoration(labelText: "Search"),
           ),*/
+          SizedBox(height: 15,),
           RaisedButton(
             child: Text("Add to cart"),
             onPressed: () {
@@ -81,9 +83,11 @@ class _GoodTypologyPageState extends State<GoodTypologyPage> {
                   child: Icon(Icons.add),)
             ],
           ),
-          Container(
-            child: Container(),
-          ),
+      Expanded(
+            child: Container(
+               child: GoodImagesList(images: good_typology.images,),),
+            ),
+
         ],
       ),
     );
