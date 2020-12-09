@@ -1,5 +1,6 @@
 import 'package:dapozzo_ventura_app/blocs/cart_bloc.dart';
 import 'package:dapozzo_ventura_app/events/cart_event.dart';
+import 'package:dapozzo_ventura_app/models/good_model.dart';
 import 'package:dapozzo_ventura_app/models/good_typology_model.dart';
 import 'package:dapozzo_ventura_app/ui/eQuip_appbar.dart';
 import 'package:dapozzo_ventura_app/ui/good_images_list.dart';
@@ -13,15 +14,42 @@ class GoodTypologyPage extends StatefulWidget {
 }
 
 class _GoodTypologyPageState extends State<GoodTypologyPage> {
-   CartBloc _cartBloc;
+  CartBloc _cartBloc;
+  List<bool> isSelected = [true, false, false];
+  final List<Color> colori=[Colors.red,Colors.blue,Colors.yellow];
 
- // _GoodTypologyPageState({this.GoodTypology});
+  // _GoodTypologyPageState({this.GoodTypology});
   @override
   Widget build(BuildContext context) {
-    final GoodTypology good_typology = ModalRoute.of(context).settings.arguments;
-    _cartBloc= BlocProvider.of<CartBloc>(context);
+    final GoodTypology good_typology =
+        ModalRoute.of(context).settings.arguments;
+    final List<Good> goods = [
+      Good(
+          color: "red",
+          images: ["image2.jpg", "image2.jpg"],
+          quantity: 2,
+          size: "M"),
+      Good(
+          color: "blue",
+          images: ["image2.jpg", "image2.jpg"],
+          quantity: 2,
+          size: "M"),
+      Good(
+          color: "red",
+          images: ["image2.jpg", "image2.jpg"],
+          quantity: 2,
+          size: "M"),
+      Good(
+          color: "yellow",
+          images: ["image2.jpg", "image2.jpg"],
+          quantity: 2,
+          size: "M")
+    ];
+    _cartBloc = BlocProvider.of<CartBloc>(context);
     return Scaffold(
-      appBar: EquipAppBar(title: good_typology.name,),
+      appBar: EquipAppBar(
+        title: good_typology.name,
+      ),
       body: Column(
         children: [
           /*TextField(
@@ -30,12 +58,13 @@ class _GoodTypologyPageState extends State<GoodTypologyPage> {
             },
             decoration: InputDecoration(labelText: "Search"),
           ),*/
-          SizedBox(height: 15,),
+          SizedBox(
+            height: 15,
+          ),
           RaisedButton(
             child: Text("Add to cart"),
             onPressed: () {
               _cartBloc.add(CartAddEvent(good_typology.name));
-
             },
           ),
           SizedBox(
@@ -71,23 +100,66 @@ class _GoodTypologyPageState extends State<GoodTypologyPage> {
               )
             ],
           ),
-          Row(
-            children: [
-              Container(
-                color: Colors.black38,
-                child:Icon(Icons.add),
-
-              ),
-              Container(
-                  color: Colors.black38,
-                  child: Icon(Icons.add),)
-            ],
-          ),
-      Expanded(
-            child: Container(
-               child: GoodImagesList(images: good_typology.images,),),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+            child: Row(mainAxisAlignment: MainAxisAlignment.start,
+             children: colori.map((color) {
+               int x=colori.indexOf(color);
+                if (isSelected[x] == true) {
+                  return GestureDetector(onTap:(){setState(() {
+                    for (int buttonIndex = 0; buttonIndex < isSelected.length; buttonIndex++) {
+                      if (buttonIndex == x) {
+                        isSelected[buttonIndex] = true;
+                      } else {
+                        isSelected[buttonIndex] = false;
+                      }
+                    }
+                  });} ,
+                    child: Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: Container(
+                        width: 35.0,
+                        height: 35.0,
+                        decoration: new BoxDecoration(border: Border.all(color:Colors.black54,width: 5),
+                          color: color ,
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                    ),
+                  );
+                } else {
+                  return GestureDetector(onTap:(){setState(() {
+                    for (int buttonIndex = 0; buttonIndex < isSelected.length; buttonIndex++) {
+                      if (buttonIndex == x) {
+                        isSelected[buttonIndex] = true;
+                      } else {
+                        isSelected[buttonIndex] = false;
+                      }
+                    }
+                  });} ,
+                    child: Padding(padding:const EdgeInsets.all(4.0),
+                      child: Container(
+                        width: 30.0,
+                        height: 30.0,
+                        decoration: new BoxDecoration(
+                          color: color,
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                    ),
+                  );
+                }
+              }).toList(),
             ),
+          ),
 
+          Expanded(
+            child: Container(
+              child: GoodImagesList(
+                images: good_typology.images,
+              ),
+            ),
+          ),
         ],
       ),
     );

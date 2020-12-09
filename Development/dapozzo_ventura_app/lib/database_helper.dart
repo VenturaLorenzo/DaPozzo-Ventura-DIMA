@@ -72,7 +72,7 @@ class DatabaseHelper {
             good_typology TEXT NOT NULL,
             color TEXT NOT NULL,
             size TEXT NOT NULL,
-            image TEXT NOT NULL,
+            images TEXT NOT NULL,
             quantity INTEGER NOT NULL,
             PRIMARY KEY (good_typology, color,size)
           )
