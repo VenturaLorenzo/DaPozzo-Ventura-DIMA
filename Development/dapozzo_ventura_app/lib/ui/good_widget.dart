@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'love_icon_icons.dart';
 
 class GoodWidget extends StatelessWidget {
   final String image;

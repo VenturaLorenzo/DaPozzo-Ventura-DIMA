@@ -2,12 +2,13 @@ import 'package:badges/badges.dart';
 import 'package:dapozzo_ventura_app/blocs/cart_bloc.dart';
 import 'package:dapozzo_ventura_app/blocs/market_place_bloc.dart';
 import 'package:dapozzo_ventura_app/events/market_place_event.dart';
+import 'package:dapozzo_ventura_app/models/category_model.dart';
 import 'package:dapozzo_ventura_app/models/vendor_model.dart';
 import 'package:dapozzo_ventura_app/states/cart_state.dart';
 import 'package:dapozzo_ventura_app/states/market_place_state.dart';
 import 'package:dapozzo_ventura_app/ui/eQuip_appbar.dart';
 import 'package:dapozzo_ventura_app/ui/filter_bar_widget.dart';
-import 'package:dapozzo_ventura_app/ui/vendor_list_widget.dart';
+import 'file:///C:/Users/darkp/OneDrive/Desktop/Gitkraken/DaPozzo-Ventura-DIMA/Development/dapozzo_ventura_app/lib/ui/lists/vendor_list_widget.dart';
 import 'package:dapozzo_ventura_app/ui/vendor_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   var _marketPlaceBloc;
-
+  List<CategoryModel> categories;
   var _cartBloc;
 
   @override
@@ -36,6 +37,8 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    categories= ModalRoute.of(context).settings.arguments;
+
     return Scaffold(
       appBar: EquipAppBar(title: "eQuip", ),
       body: CustomScrollView(
@@ -45,7 +48,7 @@ class _HomeState extends State<Home> {
             floating: true,
             expandedHeight: 250,
             pinned: false,
-            flexibleSpace: FilterBar(marketPlaceBloc: _marketPlaceBloc),
+            flexibleSpace: FilterBar(marketPlaceBloc: _marketPlaceBloc,categories: categories),
           ),
           BlocBuilder<MarketPlaceBloc, MarketPlaceState>(
               builder: (context, state) {

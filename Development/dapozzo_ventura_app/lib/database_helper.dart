@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-import 'models/good_typology_model.dart';
+import 'package:dapozzo_ventura_app/models/category_model.dart';
 import 'models/good_typology_model.dart';
 import 'models/vendor_model.dart';
 
@@ -205,25 +207,25 @@ class DatabaseHelper {
     await db.insert('good_typology', good_typology5);
   }
 
-  Future<List<GoodTypology>> queryAllGoodTypologies(String vendorName) async {
+  Future<List<GoodTypologyModel>> queryAllGoodTypologies(String vendorName) async {
     Database db = await instance.database;
     List<Map> result = await db.rawQuery(
         '''SELECT name,image,price FROM good_typology WHERE vendor= ?  ''',
         [vendorName]);
-    List<GoodTypology> goodTypologies = rowToGoodTypologys(result);
+    List<GoodTypologyModel> goodTypologies = rowToGoodTypologys(result);
 
     return goodTypologies;
   }
 
-  Future<List<GoodTypology>> queryAllGoodTypeWith(
+  Future<List<GoodTypologyModel>> queryAllGoodTypeWith(
       String vendorName, String query) async {
     Database db = await instance.database;
     List<Map> result = await db.rawQuery(
         '''SELECT * FROM good_typology WHERE vendor= $vendorName  AND name LIke '%$query%'  ''');
 
-    List<GoodTypology> goodTypologies = new List<GoodTypology>();
+    List<GoodTypologyModel> goodTypologies = new List<GoodTypologyModel>();
     result.forEach((row) => goodTypologies.add(
-        GoodTypology(name: row['name'], images: row['image'], price: row['price'])));
+        GoodTypologyModel(name: row['name'], images: row['image'], price: row['price'])));
     return goodTypologies;
   }
 
@@ -236,6 +238,21 @@ class DatabaseHelper {
     print("entrato in query vendors");
     List<Vendor> vendors = rowsToVendors(result);
     return filterByCategoryOR(vendors, categories);
+  }
+
+  Future<List<CategoryModel>> queryCategories() async {
+    final List<CategoryModel> categories = [
+      CategoryModel(Icons.sentiment_very_dissatisfied, "felpa"),
+      CategoryModel(Icons.search, "guanti"),
+      CategoryModel(Icons.arrow_drop_down_circle, "scarpe"),
+      CategoryModel(Icons.gesture, "pantaloni"),
+      CategoryModel(Icons.polymer, "giacca"),
+      CategoryModel(Icons.sentiment_very_dissatisfied, "calze"),
+      CategoryModel(Icons.search, "intimo"),
+      CategoryModel(Icons.arrow_drop_down_circle, "sciarpa"),
+      CategoryModel(Icons.gesture, "cappello"),
+    ];
+    return categories;
   }
 /*
   Future<List<String>> queryAllGoodType() async {
@@ -275,14 +292,16 @@ class DatabaseHelper {
       List<String> images = imagesList.split(',');
       String categoriesList = row['categories'];
       List<String> categories = categoriesList.split(',');
+      List<CategoryModel> categoryModels=categories.map((stringa) => CategoryModel(Icons.ac_unit, stringa) ).toList();
       return vendors.add(Vendor(
           name: row['name'],
           desc: row['description'],
           images: images,
-          categories: categories,
+          categories: categoryModels,
       rating: row['rating']),
       );
     });
+    print(vendors[0].name);
     return vendors;
   }
   List<Vendor> filterByCategoryOR(List<Vendor> vendors, List<String> categories) {
@@ -293,9 +312,9 @@ class DatabaseHelper {
       vendors.forEach((vendor) {
        bool has=false;
         categories.forEach((cat) {
-         if(vendor.categories.contains(cat)){
-           has= true;
-         }
+          vendor.categories.forEach((catModel) {if(catModel.name==cat) {has=true;}
+          });
+
          if(has==true && !result.contains(vendor)){
            result.add(vendor);
          }
@@ -321,16 +340,16 @@ class DatabaseHelper {
     }
   }
 
-  List<GoodTypology> rowToGoodTypologys(List<Map> allRows) {
+  List<GoodTypologyModel> rowToGoodTypologys(List<Map> allRows) {
 
 
-    List<GoodTypology> goodtypology = new List<GoodTypology>();
+    List<GoodTypologyModel> goodtypology = new List<GoodTypologyModel>();
     allRows.forEach((row) {
       String imagesList = row['image'];
       List<String> images = imagesList.split(',');
       String name = row['name'];
       int price = row['price'];
-      return goodtypology.add(GoodTypology(
+      return goodtypology.add(GoodTypologyModel(
           name: name,
 
           images: images,

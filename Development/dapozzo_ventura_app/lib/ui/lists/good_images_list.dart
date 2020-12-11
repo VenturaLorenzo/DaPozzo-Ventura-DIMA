@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import 'good_widget.dart';
+import '../good_widget.dart';
 
 class GoodImagesList extends StatelessWidget {
   final List<String> images;

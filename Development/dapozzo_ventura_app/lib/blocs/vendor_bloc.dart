@@ -15,18 +15,18 @@ class VendorBloc extends Bloc<VendorEvent, VendorState> {
 
     if (event is VendorEventInit) {
       print(event.vendor.name);
-      final List<GoodTypology> initialResult =
+      final List<GoodTypologyModel> initialResult =
           await dbHelper.queryAllGoodTypologies(event.vendor.name);
       yield VendorStateInitial(initialResult);
     } else {
       if (event is VendorEventSearch) {
-        List<GoodTypology> result =
+        List<GoodTypologyModel> result =
             await dbHelper.queryAllGoodTypeWith(event.vendor.name, event.query);
 
         yield VendorStateSearched(event.query, result);
       } else {
         if (event is VendorEventReset) {
-          final List<GoodTypology> initialResult =
+          final List<GoodTypologyModel> initialResult =
               await dbHelper.queryAllGoodTypologies(event.vendor.name);
           yield VendorStateInitial(initialResult);
         } else {

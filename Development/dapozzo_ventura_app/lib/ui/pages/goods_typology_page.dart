@@ -3,7 +3,7 @@ import 'package:dapozzo_ventura_app/events/cart_event.dart';
 import 'package:dapozzo_ventura_app/models/good_model.dart';
 import 'package:dapozzo_ventura_app/models/good_typology_model.dart';
 import 'package:dapozzo_ventura_app/ui/eQuip_appbar.dart';
-import 'package:dapozzo_ventura_app/ui/good_images_list.dart';
+import 'file:///C:/Users/darkp/OneDrive/Desktop/Gitkraken/DaPozzo-Ventura-DIMA/Development/dapozzo_ventura_app/lib/ui/lists/good_images_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,7 +21,7 @@ class _GoodTypologyPageState extends State<GoodTypologyPage> {
   // _GoodTypologyPageState({this.GoodTypology});
   @override
   Widget build(BuildContext context) {
-    final GoodTypology good_typology =
+    final GoodTypologyModel good_typology =
         ModalRoute.of(context).settings.arguments;
     final List<Good> goods = [
       Good(

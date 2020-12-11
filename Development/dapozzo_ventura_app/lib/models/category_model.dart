@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 
-class Category {
+class CategoryModel {
 
   final IconData icon;
   final String name;
 
-  Category(this.icon, this.name);
+  CategoryModel(this.icon, this.name);
 
 
 

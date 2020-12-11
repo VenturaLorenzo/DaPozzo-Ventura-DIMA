@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 
 class FilterBar extends StatefulWidget {
   final marketPlaceBloc;
-
-  const FilterBar({this.marketPlaceBloc});
+  final List<CategoryModel> categories;
+  const FilterBar({this.marketPlaceBloc,this.categories});
 
   @override
   _FilterBarState createState() => _FilterBarState();
@@ -20,17 +20,7 @@ class _FilterBarState extends State<FilterBar> {
   String currentCategoryQuery = "";
   String currentSportQuery = "";
   String currentTextQuery = "";
-  final List<Category> categories = [
-    Category(Icons.sentiment_very_dissatisfied, "felpa"),
-    Category(Icons.search, "guanti"),
-    Category(Icons.arrow_drop_down_circle, "scarpe"),
-    Category(Icons.gesture, "pantaloni"),
-    Category(Icons.polymer, "giacca"),
-    Category(Icons.sentiment_very_dissatisfied, "calze"),
-    Category(Icons.search, "intimo"),
-    Category(Icons.arrow_drop_down_circle, "sciarpa"),
-    Category(Icons.gesture, "cappello"),
-  ];
+
   final List<Sport> sports = [
     Sport(Icons.sentiment_very_dissatisfied, "basket"),
     Sport(Icons.search, "calcio"),
@@ -118,7 +108,7 @@ class _FilterBarState extends State<FilterBar> {
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: ToggleButtons(
-              children: categories.map((cat) {
+              children: widget.categories.map((cat) {
                 return Padding(
                     padding: EdgeInsets.fromLTRB(9, 0, 9, 0),
                     child: Icon(
@@ -131,10 +121,10 @@ class _FilterBarState extends State<FilterBar> {
                   isSelectedCat[index] = !isSelectedCat[index];
                   if (isSelectedCat[index]) {
                     currentCategoryQuery =
-                        currentCategoryQuery + categories[index].name + ",";
+                        currentCategoryQuery + widget.categories[index].name + ",";
                   } else {
                     currentCategoryQuery = currentCategoryQuery.replaceAll(
-                        categories[index].name + ",", "");
+                        widget.categories[index].name + ",", "");
                   }
                 });
                 widget.marketPlaceBloc.add(MarketPlaceSearch(

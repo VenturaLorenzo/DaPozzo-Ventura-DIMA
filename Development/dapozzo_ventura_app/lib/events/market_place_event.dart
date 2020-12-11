@@ -1,4 +1,4 @@
-import 'package:dapozzo_ventura_app/ui/vendor_page.dart';
+import 'file:///C:/Users/darkp/OneDrive/Desktop/Gitkraken/DaPozzo-Ventura-DIMA/Development/dapozzo_ventura_app/lib/ui/pages/vendor_page.dart';
 
 abstract class MarketPlaceEvent {}
 

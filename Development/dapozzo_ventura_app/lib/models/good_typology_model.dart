@@ -1,10 +1,10 @@
-class GoodTypology{
+class GoodTypologyModel{
 
   final String name;
   final List<String> images;
   final int price;
 
-  GoodTypology({ this.name,this.price,this.images});
+  GoodTypologyModel({ this.name,this.price,this.images});
   Map<String, dynamic> toMap() {
     return { 'name': price, 'size': price,'image' :images};
   }

@@ -1,13 +1,14 @@
 import 'package:dapozzo_ventura_app/blocs/cart_bloc.dart';
 import 'package:dapozzo_ventura_app/blocs/market_place_bloc.dart';
 import 'package:dapozzo_ventura_app/blocs/vendor_bloc.dart';
-import 'package:dapozzo_ventura_app/models/market_place_model.dart';
-import 'package:dapozzo_ventura_app/models/vendor_model.dart';
-import 'package:dapozzo_ventura_app/ui/cart_page.dart';
-import 'package:dapozzo_ventura_app/ui/goods_typology_page.dart';
-import 'package:dapozzo_ventura_app/ui/home_page.dart';
-import 'package:dapozzo_ventura_app/ui/profile_page.dart';
-import 'package:dapozzo_ventura_app/ui/vendor_page.dart';
+import 'package:dapozzo_ventura_app/models/category_model.dart';
+import 'file:///C:/Users/darkp/OneDrive/Desktop/Gitkraken/DaPozzo-Ventura-DIMA/Development/dapozzo_ventura_app/lib/ui/pages/cart_page.dart';
+import 'file:///C:/Users/darkp/OneDrive/Desktop/Gitkraken/DaPozzo-Ventura-DIMA/Development/dapozzo_ventura_app/lib/ui/pages/goods_typology_page.dart';
+import 'file:///C:/Users/darkp/OneDrive/Desktop/Gitkraken/DaPozzo-Ventura-DIMA/Development/dapozzo_ventura_app/lib/ui/pages/home_page.dart';
+import 'file:///C:/Users/darkp/OneDrive/Desktop/Gitkraken/DaPozzo-Ventura-DIMA/Development/dapozzo_ventura_app/lib/ui/pages/launch_page.dart';
+import 'file:///C:/Users/darkp/OneDrive/Desktop/Gitkraken/DaPozzo-Ventura-DIMA/Development/dapozzo_ventura_app/lib/ui/pages/profile_page.dart';
+import 'file:///C:/Users/darkp/OneDrive/Desktop/Gitkraken/DaPozzo-Ventura-DIMA/Development/dapozzo_ventura_app/lib/ui/pages/vendor_page.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,9 +16,9 @@ import 'database_helper.dart';
 
 /*
 void main() async{
-  final dbHelper = DatabaseHelper.instance;
-  List<Product> products=  await dbHelper.queryAllProduct('vendor1') ;
- products.forEach((element) {print(element.name+ element.image+element.price.toString()); });
+
+  print(CategoryModel(Icons.ac_unit,"ciao").name==CategoryModel(Icons.ac_unit,"ciao").name);
+
 }
 */
 void main() => runApp(
@@ -34,9 +35,10 @@ void main() => runApp(
             )
           ],
           child: MaterialApp(
-            initialRoute: '/home',
+            initialRoute: '/launch',
             routes: {
               //'/' : (context)=>Loading(),
+              '/launch': (context) => LaunchPage(),
 
               '/home': (context) => Home(),
 

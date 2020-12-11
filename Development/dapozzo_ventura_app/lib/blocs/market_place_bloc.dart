@@ -4,7 +4,7 @@ import 'package:dapozzo_ventura_app/events/market_place_event.dart';
 import 'package:dapozzo_ventura_app/models/market_place_model.dart';
 import 'package:dapozzo_ventura_app/models/vendor_model.dart';
 import 'package:dapozzo_ventura_app/states/market_place_state.dart';
-import 'package:dapozzo_ventura_app/ui/vendor_page.dart';
+import 'file:///C:/Users/darkp/OneDrive/Desktop/Gitkraken/DaPozzo-Ventura-DIMA/Development/dapozzo_ventura_app/lib/ui/pages/vendor_page.dart';
 import 'package:bloc/bloc.dart';
 
 import '../database_helper.dart';
@@ -19,30 +19,36 @@ class MarketPlaceBloc extends Bloc<MarketPlaceEvent, MarketPlaceState> {
 
     if (event is MarketPlaceInit) {
       final List<Vendor> initialResult = await dbHelper.queryVendors("", []);
+
       yield MarketPlaceInitial(initialResult);
-    } else {
+     } else {
       if (event is MarketPlaceSearch) {
         yield MarketPlaceLoadingState();
         await Future.delayed(Duration(milliseconds: 500));
+        print("sono qui ");
 
         //qui cerco nel database i dati e creo un oggetto marketplace che li contenga
         List<String> splittedQuery = event.query.split('-');
 
         String name = splittedQuery[0];
-        List<String> categories= new List<String>();
-        if(splittedQuery[1]!= "") {
-         categories = splittedQuery[1].split(",");
+        List<String> categories = new List<String>();
+        if (splittedQuery[1] != "") {
+          categories = splittedQuery[1].split(",");
           categories = categories.sublist(0, categories.length - 1);
-        }else{
-          categories=[];
+        } else {
+          categories = [];
         }
+        print(name);
+    print(categories);
         final List<Vendor> result =
             await dbHelper.queryVendors(name, categories);
         // per ora creo un market place vuoto e lo passo come risultato
-
+        print("sono qui ");
+       // print(result[0].name);
         yield MarketPlaceSearched(result);
-      } else {
 
+
+      } else {
         if (event is MarketPlaceReset) {
           final List<Vendor> initialResult =
               await dbHelper.queryVendors("", []);

@@ -1,5 +1,6 @@
 import 'dart:ffi';
 
+import 'package:dapozzo_ventura_app/models/category_model.dart';
 import 'package:dapozzo_ventura_app/models/good_typology_model.dart';
 
 import '../database_helper.dart';
@@ -8,7 +9,7 @@ class Vendor {
   final String name;
   final String desc;
   final List<String> images;
-  final List<String> categories;
+  final List<CategoryModel> categories;
   final double rating;
 
 
