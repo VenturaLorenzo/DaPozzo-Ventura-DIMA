@@ -15,7 +15,7 @@ class GoodsTypologyItem extends StatelessWidget {
               height: 100,
               width: 120,
               child: Image.asset(
-                'lib/assets/Felpa2.JPG',
+                'lib/assets/image2.jpg',
                 fit: BoxFit.contain,
               )),
           Expanded(

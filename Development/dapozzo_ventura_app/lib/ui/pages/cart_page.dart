@@ -18,7 +18,7 @@ class _CartState extends State<Cart> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         RaisedButton(
-          child: Text("RETURN"),
+          child: Text("Return"),
           onPressed: () {
             Navigator.pop(context);
           },

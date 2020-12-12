@@ -1,6 +1,9 @@
+import 'package:dapozzo_ventura_app/blocs/vendor_bloc.dart';
+import 'package:dapozzo_ventura_app/events/vendor_event.dart';
 import 'package:dapozzo_ventura_app/models/vendor_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class VendorCard extends StatelessWidget {
@@ -24,7 +27,11 @@ class VendorCard extends StatelessWidget {
         child: Column(
           children: [
             InkWell(
-              onTap: (){Navigator.pushNamed(context, '/vendor',arguments: vendor);},
+              onTap: (){
+                BlocProvider.of<VendorBloc>(context).add(VendorEventInit(vendor));
+
+                Navigator.pushNamed(context, '/vendor',arguments: vendor);
+                },
               child: Container(
                 height: 250,
                 child:

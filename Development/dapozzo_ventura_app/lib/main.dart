@@ -2,12 +2,13 @@ import 'package:dapozzo_ventura_app/blocs/cart_bloc.dart';
 import 'package:dapozzo_ventura_app/blocs/market_place_bloc.dart';
 import 'package:dapozzo_ventura_app/blocs/vendor_bloc.dart';
 import 'package:dapozzo_ventura_app/models/category_model.dart';
-import 'file:///C:/Users/darkp/OneDrive/Desktop/Gitkraken/DaPozzo-Ventura-DIMA/Development/dapozzo_ventura_app/lib/ui/pages/cart_page.dart';
-import 'file:///C:/Users/darkp/OneDrive/Desktop/Gitkraken/DaPozzo-Ventura-DIMA/Development/dapozzo_ventura_app/lib/ui/pages/goods_typology_page.dart';
-import 'file:///C:/Users/darkp/OneDrive/Desktop/Gitkraken/DaPozzo-Ventura-DIMA/Development/dapozzo_ventura_app/lib/ui/pages/home_page.dart';
-import 'file:///C:/Users/darkp/OneDrive/Desktop/Gitkraken/DaPozzo-Ventura-DIMA/Development/dapozzo_ventura_app/lib/ui/pages/launch_page.dart';
-import 'file:///C:/Users/darkp/OneDrive/Desktop/Gitkraken/DaPozzo-Ventura-DIMA/Development/dapozzo_ventura_app/lib/ui/pages/profile_page.dart';
-import 'file:///C:/Users/darkp/OneDrive/Desktop/Gitkraken/DaPozzo-Ventura-DIMA/Development/dapozzo_ventura_app/lib/ui/pages/vendor_page.dart';
+import 'package:dapozzo_ventura_app/ui/pages/cart_page.dart';
+import 'package:dapozzo_ventura_app/ui/pages/goods_typology_page.dart';
+import 'package:dapozzo_ventura_app/ui/pages/home_page.dart';
+import 'package:dapozzo_ventura_app/ui/pages/launch_page.dart';
+import 'package:dapozzo_ventura_app/ui/pages/profile_page.dart';
+import 'package:dapozzo_ventura_app/ui/pages/vendor_page.dart';
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

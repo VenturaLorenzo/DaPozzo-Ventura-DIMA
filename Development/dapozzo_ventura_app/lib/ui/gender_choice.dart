@@ -19,9 +19,10 @@ class GenderChoice extends StatelessWidget {
             selectedBorderColor: Color.fromRGBO(33, 150, 243, 1),
             selectedColor: Colors.white,
             onPressed: (int index) {
+
               //BlocProvider.of<ShopWindowCubit>(context).toggleGender(0);
             },
-            isSelected: [false]),
+            isSelected: maleSelected),
         ToggleButtons(
             children: [Text("Donna")],
             fillColor: Color.fromRGBO(255, 45, 85, 1),
@@ -30,7 +31,7 @@ class GenderChoice extends StatelessWidget {
             onPressed: (int index) {
             //  BlocProvider.of<ShopWindowCubit>(context).toggleGender(1);
             },
-            isSelected: [false])
+            isSelected: femaleSelected)
       ]),
     );
   }
