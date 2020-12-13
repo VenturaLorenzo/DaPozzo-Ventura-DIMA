@@ -1,3 +1,4 @@
+import 'package:dapozzo_ventura_app/data/models/category_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -6,9 +7,8 @@ import 'dart:async';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-import 'package:dapozzo_ventura_app/models/category_model.dart';
-import 'models/good_typology_model.dart';
-import 'models/vendor_model.dart';
+import '../models/good_typology_model.dart';
+import '../models/vendor_model.dart';
 
 class DatabaseHelper {
   static final _databaseName = "GoodsDatabase.db";
@@ -301,7 +301,6 @@ class DatabaseHelper {
       rating: row['rating']),
       );
     });
-    print(vendors[0].name);
     return vendors;
   }
   List<Vendor> filterByCategoryOR(List<Vendor> vendors, List<String> categories) {

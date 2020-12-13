@@ -1,12 +1,13 @@
-import 'package:dapozzo_ventura_app/blocs/vendor_bloc.dart';
-import 'package:dapozzo_ventura_app/events/vendor_event.dart';
-import 'package:dapozzo_ventura_app/models/vendor_model.dart';
+
+import 'package:dapozzo_ventura_app/business_logic/blocs/vendor_bloc.dart';
+import 'package:dapozzo_ventura_app/business_logic/events/vendor_event.dart';
+import 'package:dapozzo_ventura_app/data/models/vendor_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-class VendorCard extends StatelessWidget {
+class VendorItem extends StatelessWidget {
   final Vendor vendor;
   final List<String> images = [
     "lib/assets/image2.jpg",
@@ -17,7 +18,7 @@ class VendorCard extends StatelessWidget {
     "lib/assets/image2.jpg"
   ];
 
-  VendorCard({Key key, this.vendor});
+  VendorItem({Key key, this.vendor});
 
   @override
   Widget build(BuildContext context) {

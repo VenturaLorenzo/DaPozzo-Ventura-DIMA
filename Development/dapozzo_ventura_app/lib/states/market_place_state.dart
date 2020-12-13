@@ -1,6 +1,4 @@
-import 'package:dapozzo_ventura_app/models/market_place_model.dart';
-import 'package:dapozzo_ventura_app/models/vendor_model.dart';
-import 'file:///C:/Users/darkp/OneDrive/Desktop/Gitkraken/DaPozzo-Ventura-DIMA/Development/dapozzo_ventura_app/lib/ui/pages/vendor_page.dart';
+import 'package:dapozzo_ventura_app/data/models/vendor_model.dart';
 
 abstract class MarketPlaceState {}
 

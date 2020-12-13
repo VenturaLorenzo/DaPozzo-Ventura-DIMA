@@ -1,10 +1,9 @@
-import 'package:dapozzo_ventura_app/blocs/cart_bloc.dart';
-import 'package:dapozzo_ventura_app/events/cart_event.dart';
-import 'package:dapozzo_ventura_app/models/good_model.dart';
-import 'package:dapozzo_ventura_app/models/good_typology_model.dart';
+import 'package:dapozzo_ventura_app/business_logic/blocs/cart_bloc.dart';
+import 'package:dapozzo_ventura_app/business_logic/events/cart_event.dart';
+import 'package:dapozzo_ventura_app/data/models/good_model.dart';
+import 'package:dapozzo_ventura_app/data/models/good_typology_model.dart';
 import 'package:dapozzo_ventura_app/ui/eQuip_appbar.dart';
-import 'file:///C:/Users/darkp/OneDrive/Desktop/Gitkraken/DaPozzo-Ventura-DIMA/Development/dapozzo_ventura_app/lib/ui/lists/good_images_list.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:dapozzo_ventura_app/ui/lists/good_images_list.dart';import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

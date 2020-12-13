@@ -1,8 +1,8 @@
-import 'package:dapozzo_ventura_app/models/good_typology_model.dart';
+import 'package:dapozzo_ventura_app/data/models/good_typology_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../good_typology_item.dart';
+import '../items/good_typology_item.dart';
 
 class GoodTypologyList extends StatelessWidget {
   final List<GoodTypologyModel> goodsTypologies;

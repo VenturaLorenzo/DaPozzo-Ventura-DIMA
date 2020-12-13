@@ -1,14 +1,13 @@
-import 'package:dapozzo_ventura_app/blocs/vendor_bloc.dart';
-import 'package:dapozzo_ventura_app/events/vendor_event.dart';
-import 'package:dapozzo_ventura_app/models/vendor_model.dart';
+import 'package:dapozzo_ventura_app/business_logic/blocs/vendor_bloc.dart';
+import 'package:dapozzo_ventura_app/business_logic/events/vendor_event.dart';
+import 'package:dapozzo_ventura_app/data/models/vendor_model.dart';
 import 'package:dapozzo_ventura_app/states/vendor_state.dart';
 import 'package:dapozzo_ventura_app/ui/eQuip_appbar.dart';
+import 'package:dapozzo_ventura_app/ui/lists/goods_typology_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../gender_choice.dart';
-import '../lists/goods_typology_list_widget.dart';
 
 /*
 class VendorPage extends StatefulWidget {
@@ -65,35 +64,36 @@ class _VendorPageState extends State<VendorPage> {
 }
 */
 class VendorPage extends StatefulWidget {
+
+
+  final Vendor vendor;
+  // IL VENDOR MI VIENE PASSATO DALLA HOME PAGE
+  const VendorPage({Key key, @required this.vendor}) : super(key: key);
+
   @override
   _VendorPageState createState() => _VendorPageState();
 }
 
 class _VendorPageState extends State<VendorPage> {
-   Vendor vendor;
-List<bool>   isSelectedCategory ;
 
-   @override
-  void initState() {
-    // TODO: implement initState
 
-    super.initState();
-
-  }
-
+  // DEFINISCO LE VARIABILI SENZA ASSEGNARLE IN MODO CHE QUANDO ESEGUO IL METODO BUILD CON SETSTATE() NON VENGANO SOVRASCRITTE
+  List<bool> isSelectedCategory;
   bool isSelectedMale = false;
-  bool isSelectedFemale = true;
+  bool isSelectedFemale = false;
+
+  @override
+  void initState() {
+    super.initState();
+  // GENERO UNA LISTA DI FALSE GRANDE QUANDO LA LISTA DI CATEGORIE CHE MI HA PASSATO LA HOMEPAGE
+    isSelectedCategory =
+        List.generate(widget.vendor.categories.length, (index) => false);
+  }
   @override
   Widget build(BuildContext context) {
-
-    vendor = ModalRoute.of(context).settings.arguments;
-
-    isSelectedCategory =
-        List.generate(vendor.categories.length, (index) => false);
-
     return Scaffold(
       appBar: EquipAppBar(
-        title: vendor.name,
+        title: widget.vendor.name,
       ),
       body: Padding(
         padding: EdgeInsets.all(0),
@@ -108,16 +108,16 @@ List<bool>   isSelectedCategory ;
                 selectedBorderColor: Color.fromARGB(0, 0, 0, 0),
                 borderColor: Color.fromARGB(0, 0, 0, 0),
                 fillColor: Color.fromARGB(0, 0, 0, 0),
-                children: vendor.categories.map((category) {
+                children: widget.vendor.categories.map((category) {
                   return new Icon(category.icon, size: 70);
                 }).toList(),
                 onPressed: (int index) {
+                  BlocProvider.of<VendorBloc>(context).add(VendorEventCategorySearch(widget.vendor.categories[index], widget.vendor));
                   setState(() {
-                    isSelectedFemale=false;
+                    isSelectedCategory[index] = !isSelectedCategory[index];
                   });
-/*
-                          BlocProvider.of<ShopWindowCubit>(context)
-                              .toggleCategory(index);*/
+
+
                 },
                 isSelected: isSelectedCategory,
               ),
@@ -132,37 +132,35 @@ List<bool>   isSelectedCategory ;
                           fontSize: 16,
                           fontWeight: FontWeight.w300,
                         ))),
-      Padding(
-        padding: EdgeInsets.all(8),
-        child: Row(children: [
-          ToggleButtons(
-              children: [Text("Uomo")],
-              fillColor: Color.fromRGBO(33, 150, 243, 1),
-              selectedBorderColor: Color.fromRGBO(33, 150, 243, 1),
-              selectedColor: Colors.white,
-              onPressed: (int index) {
-                      setState(() {
-                        isSelectedMale=  !isSelectedMale;
-                        print(isSelectedMale);
-
-                      });
-                //BlocProvider.of<ShopWindowCubit>(context).toggleGender(0);
-              },
-              isSelected: [isSelectedMale]),
-          ToggleButtons(
-              children: [Text("Donna")],
-              fillColor: Color.fromRGBO(255, 45, 85, 1),
-              selectedBorderColor: Color.fromRGBO(255, 45, 85, 1),
-              selectedColor: Colors.white,
-              onPressed: (int index) {
-                setState(() {
-                  isSelectedFemale=!isSelectedFemale;
-                });
-                //  BlocProvider.of<ShopWindowCubit>(context).toggleGender(1);
-              },
-              isSelected: [isSelectedFemale])
-        ]),
-      ),
+                Padding(
+                  padding: EdgeInsets.all(8),
+                  child: Row(children: [
+                    ToggleButtons(
+                        children: [Text("Uomo")],
+                        fillColor: Color.fromRGBO(33, 150, 243, 1),
+                        selectedBorderColor: Color.fromRGBO(33, 150, 243, 1),
+                        selectedColor: Colors.white,
+                        onPressed: (int index) {
+                          setState(() {
+                            isSelectedMale = !isSelectedMale;
+                          });
+                          //BlocProvider.of<ShopWindowCubit>(context).toggleGender(0);
+                        },
+                        isSelected: [isSelectedMale]),
+                    ToggleButtons(
+                        children: [Text("Donna")],
+                        fillColor: Color.fromRGBO(255, 45, 85, 1),
+                        selectedBorderColor: Color.fromRGBO(255, 45, 85, 1),
+                        selectedColor: Colors.white,
+                        onPressed: (int index) {
+                          setState(() {
+                            isSelectedFemale = !isSelectedFemale;
+                          });
+                          //  BlocProvider.of<ShopWindowCubit>(context).toggleGender(1);
+                        },
+                        isSelected: [isSelectedFemale])
+                  ]),
+                ),
               ],
             ),
             BlocBuilder<VendorBloc, VendorState>(

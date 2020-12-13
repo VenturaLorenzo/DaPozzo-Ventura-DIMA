@@ -1,6 +1,5 @@
+import 'package:dapozzo_ventura_app/ui/items/good_item.dart';
 import 'package:flutter/cupertino.dart';
-
-import '../good_widget.dart';
 
 class GoodImagesList extends StatelessWidget {
   final List<String> images;
@@ -10,11 +9,11 @@ class GoodImagesList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       itemCount: images.length,
-      itemBuilder: (context, index){ return GoodWidget(image: images[index],);}
+      itemBuilder: (context, index){ return GoodItem(image: images[index],);}
     );
     return Column(children: images.map((image) {
 
-      return GoodWidget(image: image,);
+      return GoodItem(image: image,);
 
     }).toList(),);
   }

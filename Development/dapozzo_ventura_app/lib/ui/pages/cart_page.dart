@@ -1,15 +1,15 @@
-import 'package:dapozzo_ventura_app/blocs/cart_bloc.dart';
+import 'package:dapozzo_ventura_app/business_logic/blocs/cart_bloc.dart';
 import 'package:dapozzo_ventura_app/states/cart_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class Cart extends StatefulWidget {
+class CartPage extends StatefulWidget {
   @override
-  _CartState createState() => _CartState();
+  _CartPageState createState() => _CartPageState();
 }
 
-class _CartState extends State<Cart> {
+class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 
-class GoodWidget extends StatelessWidget {
+class GoodItem extends StatelessWidget {
   final String image;
 
-  const GoodWidget({Key key, this.image}) : super(key: key);
+  const GoodItem({Key key, this.image}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -1,7 +1,7 @@
-import 'package:dapozzo_ventura_app/models/category_model.dart';
+import 'package:dapozzo_ventura_app/data/models/category_model.dart';
+import 'package:dapozzo_ventura_app/data/providers/database_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../database_helper.dart';
 
 import '../../main.dart';
 

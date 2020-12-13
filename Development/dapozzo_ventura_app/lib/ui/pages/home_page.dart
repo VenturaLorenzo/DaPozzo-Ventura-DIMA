@@ -1,20 +1,22 @@
-import 'package:badges/badges.dart';
-import 'package:dapozzo_ventura_app/blocs/cart_bloc.dart';
-import 'package:dapozzo_ventura_app/blocs/market_place_bloc.dart';
-import 'package:dapozzo_ventura_app/events/market_place_event.dart';
-import 'package:dapozzo_ventura_app/models/category_model.dart';
-import 'package:dapozzo_ventura_app/models/vendor_model.dart';
-import 'package:dapozzo_ventura_app/states/cart_state.dart';
+import 'package:dapozzo_ventura_app/business_logic/blocs/cart_bloc.dart';
+import 'package:dapozzo_ventura_app/business_logic/blocs/market_place_bloc.dart';
+import 'package:dapozzo_ventura_app/business_logic/events/market_place_event.dart';
+import 'package:dapozzo_ventura_app/data/models/category_model.dart';
+import 'package:dapozzo_ventura_app/data/models/vendor_model.dart';
 import 'package:dapozzo_ventura_app/states/market_place_state.dart';
 import 'package:dapozzo_ventura_app/ui/eQuip_appbar.dart';
 import 'package:dapozzo_ventura_app/ui/filter_bar_widget.dart';
-import 'file:///C:/Users/darkp/OneDrive/Desktop/Gitkraken/DaPozzo-Ventura-DIMA/Development/dapozzo_ventura_app/lib/ui/lists/vendor_list_widget.dart';
-import 'package:dapozzo_ventura_app/ui/vendor_widget.dart';
+import 'package:dapozzo_ventura_app/ui/items/vendor_item.dart';
+import 'package:dapozzo_ventura_app/ui/lists/vendor_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Home extends StatefulWidget {
+  final List<CategoryModel> categories;
+
+  const Home({Key key, this.categories}) : super(key: key);
+
   @override
   _HomeState createState() => _HomeState();
 }
@@ -29,6 +31,7 @@ class _HomeState extends State<Home> {
     // TODO: implement initState
     super.initState();
     imageCache.clear();
+    categories=widget.categories;
     _marketPlaceBloc = BlocProvider.of<MarketPlaceBloc>(context);
     _cartBloc = BlocProvider.of<CartBloc>(context);
 
@@ -37,7 +40,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    categories= ModalRoute.of(context).settings.arguments;
+  //  categories= ModalRoute.of(context).settings.arguments;
 
     return Scaffold(
       appBar: EquipAppBar(title: "eQuip", ),
@@ -65,7 +68,7 @@ class _HomeState extends State<Home> {
               return SliverList(delegate:
                   SliverChildBuilderDelegate((BuildContext context, int index) {
                 if (index < vendors.length) {
-                  return VendorCard(
+                  return VendorItem(
                     vendor: vendors[index],
                   );
                 } else {

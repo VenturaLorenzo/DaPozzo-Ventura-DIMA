@@ -1,9 +1,10 @@
 
 
 
-import 'package:dapozzo_ventura_app/events/cart_event.dart';
 import 'package:dapozzo_ventura_app/states/cart_state.dart';
 import 'package:bloc/bloc.dart';
+
+import '../events/cart_event.dart';
 
 class CartBloc extends Bloc<CartEvent, CartState> {
   List<String> products=["ciao"];

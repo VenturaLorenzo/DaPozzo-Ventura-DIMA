@@ -1,8 +1,7 @@
-import 'package:dapozzo_ventura_app/blocs/market_place_bloc.dart';
-import 'package:dapozzo_ventura_app/events/market_place_event.dart';
-import 'package:dapozzo_ventura_app/models/category_model.dart';
-import 'package:dapozzo_ventura_app/models/sport_model.dart';
-import 'package:flutter/cupertino.dart';
+
+import 'package:dapozzo_ventura_app/business_logic/events/market_place_event.dart';
+import 'package:dapozzo_ventura_app/data/models/category_model.dart';
+import 'package:dapozzo_ventura_app/data/models/sport_model.dart';
 import 'package:flutter/material.dart';
 
 class FilterBar extends StatefulWidget {
