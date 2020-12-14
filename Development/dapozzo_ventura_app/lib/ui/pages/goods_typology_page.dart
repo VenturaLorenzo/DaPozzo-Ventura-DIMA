@@ -5,6 +5,7 @@ import 'package:dapozzo_ventura_app/business_logic/events/good_typology_event.da
 import 'package:dapozzo_ventura_app/data/models/good_model.dart';
 import 'package:dapozzo_ventura_app/data/models/good_typology_model.dart';
 import 'package:dapozzo_ventura_app/states/good_typology_state.dart';
+import 'package:dapozzo_ventura_app/ui/color_selector.dart';
 import 'package:dapozzo_ventura_app/ui/eQuip_appbar.dart';
 import 'package:dapozzo_ventura_app/ui/lists/good_images_list.dart';import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,8 @@ class _GoodTypologyPageState extends State<GoodTypologyPage> {
   CartBloc _cartBloc;
   GoodTypologyBloc _goodTypologyBloc;
   List<bool> isSelected ;
-  List<Color> colors=[];
+  List<MaterialColor> colors=[];
+  MaterialColor currentColor;
   GoodTypologyModel goodTypology;
   @override
   void initState() {
@@ -95,49 +97,12 @@ class _GoodTypologyPageState extends State<GoodTypologyPage> {
                 return Column();
               }else {
                 if (state is GoodTypologyLoadingState) {
-                  return Column();
+                  return ColorSelector(colors: colors,current: currentColor,);
                 } else {
                   if (state is GoodTypologyCurrentState) {
-                    return Row(mainAxisAlignment: MainAxisAlignment.start,
-                      children: state.colors.map((color) {
-                        if (color == state.currentSearch) {
-                          return GestureDetector(onTap: () {
-                            _goodTypologyBloc.add(
-                                GoodTypologyEventSearchGood(color));
-                          },
-                            child: Padding(
-                              padding: const EdgeInsets.all(4.0),
-                              child: Container(
-                                width: 35.0,
-                                height: 35.0,
-                                decoration: new BoxDecoration(
-                                  border: Border.all(
-                                      color: Colors.black54, width: 5),
-                                  color: color,
-                                  shape: BoxShape.circle,
-                                ),
-                              ),
-                            ),
-                          );
-                        } else {
-                          return GestureDetector(onTap: () {
-                            _goodTypologyBloc.add(
-                                GoodTypologyEventSearchGood(color));
-                          },
-                            child: Padding(padding: const EdgeInsets.all(4.0),
-                              child: Container(
-                                width: 30.0,
-                                height: 30.0,
-                                decoration: new BoxDecoration(
-                                  color: color,
-                                  shape: BoxShape.circle,
-                                ),
-                              ),
-                            ),
-                          );
-                        }
-                      }).toList(),
-                    );
+                    colors=state.colors;
+                    currentColor=state.currentSearch;
+                    return ColorSelector(colors: state.colors,current: state.currentSearch,);
                   } else {
                     return Text("STATO DI ERRORE GOODTYPOLOGYBLOC");
                   }
@@ -151,7 +116,7 @@ class _GoodTypologyPageState extends State<GoodTypologyPage> {
           BlocBuilder<GoodTypologyBloc,GoodTypologyState>(builder:(context,state){
 
             if(state is GoodTypologyLoadingState){
-              return CircularProgressIndicator();
+              return Center(child: CircularProgressIndicator());
             }else{
               if(state is GoodTypologyCurrentState){
                 return Expanded(
