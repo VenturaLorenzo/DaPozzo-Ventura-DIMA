@@ -21,7 +21,7 @@ static Route<dynamic> generateRoute(RouteSettings settings){
     case  '/vendor':
       return MaterialPageRoute(builder: (context)=>VendorPage( vendor: settings.arguments,));
     case  '/goodtypology':
-      return MaterialPageRoute(builder: (context)=>GoodTypologyPage());
+      return MaterialPageRoute(builder: (context)=>GoodTypologyPage(goodTypology:  settings.arguments,));
     case  '/cart':
       return MaterialPageRoute(builder: (context)=>CartPage());
     case  '/profile':

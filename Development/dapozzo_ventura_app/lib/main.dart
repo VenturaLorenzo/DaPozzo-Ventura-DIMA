@@ -1,4 +1,6 @@
 
+import 'package:dapozzo_ventura_app/business_logic/blocs/good_typology_bloc.dart';
+
 import 'business_logic/blocs/cart_bloc.dart';
 import 'business_logic/blocs/market_place_bloc.dart';
 import 'business_logic/blocs/vendor_bloc.dart';
@@ -28,6 +30,9 @@ void main() => runApp(
             ),
             BlocProvider(
               create: (BuildContext context) => VendorBloc(),
+            )
+            , BlocProvider(
+              create: (BuildContext context) => GoodTypologyBloc(),
             )
           ],
           child: MaterialApp(

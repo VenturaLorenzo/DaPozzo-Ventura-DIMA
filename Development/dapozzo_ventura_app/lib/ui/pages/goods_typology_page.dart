@@ -1,69 +1,57 @@
 import 'package:dapozzo_ventura_app/business_logic/blocs/cart_bloc.dart';
+import 'package:dapozzo_ventura_app/business_logic/blocs/good_typology_bloc.dart';
 import 'package:dapozzo_ventura_app/business_logic/events/cart_event.dart';
+import 'package:dapozzo_ventura_app/business_logic/events/good_typology_event.dart';
 import 'package:dapozzo_ventura_app/data/models/good_model.dart';
 import 'package:dapozzo_ventura_app/data/models/good_typology_model.dart';
+import 'package:dapozzo_ventura_app/states/good_typology_state.dart';
 import 'package:dapozzo_ventura_app/ui/eQuip_appbar.dart';
 import 'package:dapozzo_ventura_app/ui/lists/good_images_list.dart';import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GoodTypologyPage extends StatefulWidget {
+  final GoodTypologyModel goodTypology;
+
+  const GoodTypologyPage({Key key, @required this.goodTypology}) : super(key: key);
+
   @override
   _GoodTypologyPageState createState() => _GoodTypologyPageState();
 }
 
 class _GoodTypologyPageState extends State<GoodTypologyPage> {
   CartBloc _cartBloc;
-  List<bool> isSelected = [true, false, false];
-  final List<Color> colori=[Colors.red,Colors.blue,Colors.yellow];
+  GoodTypologyBloc _goodTypologyBloc;
+  List<bool> isSelected ;
+  List<Color> colors=[];
+  GoodTypologyModel goodTypology;
+  @override
+  void initState() {
+    super.initState();
+    _cartBloc = BlocProvider.of<CartBloc>(context);
+    _goodTypologyBloc=BlocProvider.of<GoodTypologyBloc>(context);
+    goodTypology=widget.goodTypology;
+    _goodTypologyBloc.add(GoodTypologyEventInitialize(goodTypology));
 
-  // _GoodTypologyPageState({this.GoodTypology});
+  }
   @override
   Widget build(BuildContext context) {
-    final GoodTypologyModel good_typology =
-        ModalRoute.of(context).settings.arguments;
-    final List<Good> goods = [
-      Good(
-          color: "red",
-          images: ["image2.jpg", "image2.jpg"],
-          quantity: 2,
-          size: "M"),
-      Good(
-          color: "blue",
-          images: ["image2.jpg", "image2.jpg"],
-          quantity: 2,
-          size: "M"),
-      Good(
-          color: "red",
-          images: ["image2.jpg", "image2.jpg"],
-          quantity: 2,
-          size: "M"),
-      Good(
-          color: "yellow",
-          images: ["image2.jpg", "image2.jpg"],
-          quantity: 2,
-          size: "M")
-    ];
-    _cartBloc = BlocProvider.of<CartBloc>(context);
+
+
     return Scaffold(
       appBar: EquipAppBar(
-        title: good_typology.name,
+        title: goodTypology.name,
       ),
       body: Column(
         children: [
-          /*TextField(
-            onSubmitted: (typedText) {
-              _vendorBloc.add(VendorEventSearch(typedText ,vendor));
-            },
-            decoration: InputDecoration(labelText: "Search"),
-          ),*/
+
           SizedBox(
             height: 15,
           ),
           RaisedButton(
             child: Text("Add to cart"),
             onPressed: () {
-              _cartBloc.add(CartAddEvent(good_typology.name));
+              _cartBloc.add(CartAddEvent(goodTypology.name));
             },
           ),
           SizedBox(
@@ -94,70 +82,91 @@ class _GoodTypologyPageState extends State<GoodTypologyPage> {
                   SizedBox(
                     height: 7,
                   ),
-                  Text("mom"),
+                  Text(goodTypology.price.toString()),
                 ],
               )
             ],
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-            child: Row(mainAxisAlignment: MainAxisAlignment.start,
-             children: colori.map((color) {
-               int x=colori.indexOf(color);
-                if (isSelected[x] == true) {
-                  return GestureDetector(onTap:(){setState(() {
-                    for (int buttonIndex = 0; buttonIndex < isSelected.length; buttonIndex++) {
-                      if (buttonIndex == x) {
-                        isSelected[buttonIndex] = true;
-                      } else {
-                        isSelected[buttonIndex] = false;
-                      }
-                    }
-                  });} ,
-                    child: Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: Container(
-                        width: 35.0,
-                        height: 35.0,
-                        decoration: new BoxDecoration(border: Border.all(color:Colors.black54,width: 5),
-                          color: color ,
-                          shape: BoxShape.circle,
-                        ),
-                      ),
-                    ),
-                  );
+            child: BlocBuilder<GoodTypologyBloc,GoodTypologyState>(builder:(context,state){
+
+              if(state is GoodTypologyUninitializedState){
+                return Column();
+              }else {
+                if (state is GoodTypologyLoadingState) {
+                  return Column();
                 } else {
-                  return GestureDetector(onTap:(){setState(() {
-                    for (int buttonIndex = 0; buttonIndex < isSelected.length; buttonIndex++) {
-                      if (buttonIndex == x) {
-                        isSelected[buttonIndex] = true;
-                      } else {
-                        isSelected[buttonIndex] = false;
-                      }
-                    }
-                  });} ,
-                    child: Padding(padding:const EdgeInsets.all(4.0),
-                      child: Container(
-                        width: 30.0,
-                        height: 30.0,
-                        decoration: new BoxDecoration(
-                          color: color,
-                          shape: BoxShape.circle,
-                        ),
-                      ),
-                    ),
-                  );
+                  if (state is GoodTypologyCurrentState) {
+                    return Row(mainAxisAlignment: MainAxisAlignment.start,
+                      children: state.colors.map((color) {
+                        if (color == state.currentSearch) {
+                          return GestureDetector(onTap: () {
+                            _goodTypologyBloc.add(
+                                GoodTypologyEventSearchGood(color));
+                          },
+                            child: Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: Container(
+                                width: 35.0,
+                                height: 35.0,
+                                decoration: new BoxDecoration(
+                                  border: Border.all(
+                                      color: Colors.black54, width: 5),
+                                  color: color,
+                                  shape: BoxShape.circle,
+                                ),
+                              ),
+                            ),
+                          );
+                        } else {
+                          return GestureDetector(onTap: () {
+                            _goodTypologyBloc.add(
+                                GoodTypologyEventSearchGood(color));
+                          },
+                            child: Padding(padding: const EdgeInsets.all(4.0),
+                              child: Container(
+                                width: 30.0,
+                                height: 30.0,
+                                decoration: new BoxDecoration(
+                                  color: color,
+                                  shape: BoxShape.circle,
+                                ),
+                              ),
+                            ),
+                          );
+                        }
+                      }).toList(),
+                    );
+                  } else {
+                    return Text("STATO DI ERRORE GOODTYPOLOGYBLOC");
+                  }
                 }
-              }).toList(),
+              }
+            } ,
+
             ),
           ),
 
-          Expanded(
-            child: Container(
-              child: GoodImagesList(
-                images: good_typology.images,
-              ),
-            ),
+          BlocBuilder<GoodTypologyBloc,GoodTypologyState>(builder:(context,state){
+
+            if(state is GoodTypologyLoadingState){
+              return CircularProgressIndicator();
+            }else{
+              if(state is GoodTypologyCurrentState){
+                return Expanded(
+                  child: Container(
+                    child: GoodImagesList(
+                      images:state.goods[0].images,
+                    ),
+                  ),
+                );
+              }else{
+                return Text("ERROR WITH GOODTYPOLOGYBLOC");
+              }
+            }
+          },
+
           ),
         ],
       ),

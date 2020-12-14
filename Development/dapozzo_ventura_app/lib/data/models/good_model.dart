@@ -1,11 +1,13 @@
-class Good {
+import 'package:flutter/material.dart';
 
-  final String color;
+class GoodModel {
+
+  final MaterialColor color;
   final List<String> images;
   final String size;
   final int quantity;
 
-  Good({this.color, this.images, this.size, this.quantity});
+  GoodModel({this.color, this.images, this.size, this.quantity});
 
 
 

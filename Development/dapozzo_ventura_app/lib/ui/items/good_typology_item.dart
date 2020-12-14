@@ -9,7 +9,10 @@ class GoodsTypologyItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlatButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, "/goodtypology",arguments: goodsTypology);
+
+        },
         child: Row(children: [
           SizedBox(
               height: 100,

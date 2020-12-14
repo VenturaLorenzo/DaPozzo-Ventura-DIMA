@@ -9,64 +9,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 
-/*
-class VendorPage extends StatefulWidget {
-  @override
-  _VendorPageState createState() => _VendorPageState();
-}
-
-class _VendorPageState extends State<VendorPage> {
-  var _vendorBloc;
-
-  @override
-  Widget build(BuildContext context) {
-    final Vendor vendor = ModalRoute
-        .of(context)
-        .settings
-        .arguments;
-    print(vendor.name);
-    _vendorBloc = BlocProvider.of<VendorBloc>(context);
-    return Scaffold(
-      appBar: EquipAppBar(title: "eQuip",),
-      body:Column(children:[
-      Expanded(
-        child: BlocBuilder<VendorBloc, VendorState>(
-          builder: (context, state) {
-            List<GoodTypology> goodtypology;
-            if (state is VendorStateLoading) {
-              _vendorBloc.add(VendorEventInit(vendor));
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            } else {
-              if (state is VendorStateInitial) {
-                goodtypology = state.goodtypology;
-                return GoodTypologyList(goodtypology);
-              } else {
-                if (state is VendorStateSearched) {
-                  goodtypology = state.result;
-                  return GoodTypologyList(goodtypology);
-                } else {
-                  if (state is VendorStateGeneralError) {
-                    return Text(state.error);
-                  }
-                }
-              }
-              return Text("Error");
-            }
-          },
-        ),
-      ),
-      ],
-      )
-    );
-  }
-}
-*/
 class VendorPage extends StatefulWidget {
 
 
   final Vendor vendor;
+
   // IL VENDOR MI VIENE PASSATO DALLA HOME PAGE
   const VendorPage({Key key, @required this.vendor}) : super(key: key);
 
@@ -79,16 +26,16 @@ class _VendorPageState extends State<VendorPage> {
 
   // DEFINISCO LE VARIABILI SENZA ASSEGNARLE IN MODO CHE QUANDO ESEGUO IL METODO BUILD CON SETSTATE() NON VENGANO SOVRASCRITTE
   List<bool> isSelectedCategory;
-  bool isSelectedMale = false;
-  bool isSelectedFemale = false;
+  List<bool> isSelectedGender = [false, false];
 
   @override
   void initState() {
     super.initState();
-  // GENERO UNA LISTA DI FALSE GRANDE QUANDO LA LISTA DI CATEGORIE CHE MI HA PASSATO LA HOMEPAGE
+    // GENERO UNA LISTA DI FALSE GRANDE QUANDO LA LISTA DI CATEGORIE CHE MI HA PASSATO LA HOMEPAGE
     isSelectedCategory =
         List.generate(widget.vendor.categories.length, (index) => false);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -112,11 +59,13 @@ class _VendorPageState extends State<VendorPage> {
                   return new Icon(category.icon, size: 70);
                 }).toList(),
                 onPressed: (int index) {
+                  //MANDO L'EVENTO
                   BlocProvider.of<VendorBloc>(context).add(VendorEventCategorySearch(widget.vendor.categories[index], widget.vendor));
+
+                  //CAMBIO L?ICONA VISIVAMENTE
                   setState(() {
                     isSelectedCategory[index] = !isSelectedCategory[index];
                   });
-
 
                 },
                 isSelected: isSelectedCategory,
@@ -142,11 +91,11 @@ class _VendorPageState extends State<VendorPage> {
                         selectedColor: Colors.white,
                         onPressed: (int index) {
                           setState(() {
-                            isSelectedMale = !isSelectedMale;
+                           swapGender("MALE");
                           });
-                          //BlocProvider.of<ShopWindowCubit>(context).toggleGender(0);
+
                         },
-                        isSelected: [isSelectedMale]),
+                        isSelected: [isSelectedGender[0]]),
                     ToggleButtons(
                         children: [Text("Donna")],
                         fillColor: Color.fromRGBO(255, 45, 85, 1),
@@ -154,11 +103,11 @@ class _VendorPageState extends State<VendorPage> {
                         selectedColor: Colors.white,
                         onPressed: (int index) {
                           setState(() {
-                            isSelectedFemale = !isSelectedFemale;
+                            swapGender("FEMALE");
                           });
-                          //  BlocProvider.of<ShopWindowCubit>(context).toggleGender(1);
+
                         },
-                        isSelected: [isSelectedFemale])
+                        isSelected: [isSelectedGender[1]])
                   ]),
                 ),
               ],
@@ -192,5 +141,42 @@ class _VendorPageState extends State<VendorPage> {
         ),
       ),
     );
+  }
+
+  void swapGender(String gender) {
+
+    //-------LOGICA CHE CAMBIA isSelectedGender--------
+    if (gender == "MALE") {
+      isSelectedGender[0] = !isSelectedGender[0];
+      if (isSelectedGender[1]) {
+        isSelectedGender[1] = false;
+      }
+    }
+    if (gender == "FEMALE") {
+      isSelectedGender[1] = !isSelectedGender[1];
+      if (isSelectedGender[0]) {
+        isSelectedGender[0] = false;
+      }
+    }
+
+    //--------------------------------------------------
+
+
+    //-------LOGICA CHE MANDA L?EVENTO AL BLOC IN BASE A isSelectedGender-
+
+    if(isSelectedGender[0]){
+      BlocProvider.of<VendorBloc>(context).add(
+          VendorEventGenderSearch("MALE", widget.vendor));
+    }
+    if(isSelectedGender[1]){
+      BlocProvider.of<VendorBloc>(context).add(
+          VendorEventGenderSearch("FEMALE", widget.vendor));
+    }
+    if(!isSelectedGender[0] && !isSelectedGender[1]){
+      BlocProvider.of<VendorBloc>(context).add(
+          VendorEventGenderSearch("NONE", widget.vendor));
+    }
+
+    //----------------------------------------------------------
   }
 }
