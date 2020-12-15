@@ -1,3 +1,4 @@
+import 'package:cart_test/cart_model.dart';
 
 abstract class CartState{}
 
@@ -15,7 +16,7 @@ class CartStateLoading extends CartState{
 
 }
 class CartErrorState extends CartState{
-  final String error;
+   final String error;
 
   CartErrorState(this.error);
 

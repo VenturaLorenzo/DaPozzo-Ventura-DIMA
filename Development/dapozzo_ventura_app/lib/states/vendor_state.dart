@@ -1,22 +1,21 @@
-import 'package:dapozzo_ventura_app/models/product_model.dart';
-import 'package:dapozzo_ventura_app/models/vendor_model.dart';
-import 'package:dapozzo_ventura_app/ui/vendor_page.dart';
+import 'package:dapozzo_ventura_app/data/models/good_typology_model.dart';
+
 
 abstract class VendorState{}
 
 class VendorStateInitial extends VendorState{
-  final List<Product> products;
+  final List<GoodTypologyModel> goodtypology;
 
-  VendorStateInitial(this.products);
+  VendorStateInitial(this.goodtypology);
 }
 class VendorStateLoading extends VendorState{
 
 }
 class VendorStateSearched extends VendorState{
-final String search;
-final List<Product> result;
+//final String search;
+final List<GoodTypologyModel> result;
 
-VendorStateSearched(this.search,this.result);
+VendorStateSearched(this.result);
 }
 class VendorStateGeneralError extends VendorState{
   final String error;

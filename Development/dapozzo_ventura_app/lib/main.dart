@@ -1,30 +1,42 @@
-import 'package:dapozzo_ventura_app/models/vendor_model.dart';
-import 'package:dapozzo_ventura_app/ui/cart_page.dart';
-import 'package:dapozzo_ventura_app/ui/home_page.dart';
-import 'package:dapozzo_ventura_app/ui/product_page.dart';
-import 'package:dapozzo_ventura_app/ui/profile_page.dart';
-import 'package:dapozzo_ventura_app/ui/vendor_page.dart';
-import 'package:flutter/material.dart';
 
-import 'database_helper.dart';
-import 'models/product_model.dart';
+import 'package:dapozzo_ventura_app/business_logic/blocs/good_typology_bloc.dart';
+
+import 'business_logic/blocs/cart_bloc.dart';
+import 'business_logic/blocs/market_place_bloc.dart';
+import 'business_logic/blocs/vendor_bloc.dart';
+import 'data/providers/route_generator.dart';
+
+
+
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+
 /*
 void main() async{
-  final dbHelper = DatabaseHelper.instance;
-  List<Product> products=  await dbHelper.queryAllProduct('vendor1') ;
- products.forEach((element) {print(element.name+ element.image+element.price.toString()); });
+
+  print(CategoryModel(Icons.ac_unit,"ciao").name==CategoryModel(Icons.ac_unit,"ciao").name);
+
 }
 */
-void main() => runApp(MaterialApp(
-  initialRoute: '/home',
-  routes: {
-
-    //'/' : (context)=>Loading(),
-    '/home': (context)=>Home(),
-    '/vendor' : (context)=> VendorPage(),
-    '/product' : (context)=> ProductPage(),
-    '/cart' : (context)=> Cart(),
-    '/myprofile' : (context)=> MyProfile(),
-
-  },
-));
+void main() => runApp(
+      MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (BuildContext context) => MarketPlaceBloc(),
+            ),
+            BlocProvider(
+              create: (BuildContext context) => CartBloc(),
+            ),
+            BlocProvider(
+              create: (BuildContext context) => VendorBloc(),
+            )
+            , BlocProvider(
+              create: (BuildContext context) => GoodTypologyBloc(),
+            )
+          ],
+          child: MaterialApp(
+            initialRoute: '/launch',
+           onGenerateRoute: RouteGenerator.generateRoute,
+          )),
+    );

@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="137bda6b-ab8a-4540-add6-6842e215cd9f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../dapozzo_ventura_app/lib/assets/image1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dapozzo_ventura_app/lib/assets/image2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dapozzo_ventura_app/lib/ui/vendor_widget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dapozzo_ventura_app/lib/blocs/market_place_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../dapozzo_ventura_app/lib/blocs/market_place_bloc.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dapozzo_ventura_app/lib/events/market_place_event.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../dapozzo_ventura_app/lib/events/market_place_event.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dapozzo_ventura_app/lib/inutilizzati/loading_page.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dapozzo_ventura_app/lib/states/market_place_state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../dapozzo_ventura_app/lib/states/market_place_state.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dapozzo_ventura_app/lib/ui/home_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../dapozzo_ventura_app/lib/ui/home_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dapozzo_ventura_app/lib/ui/vendor_list_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../dapozzo_ventura_app/lib/ui/vendor_list_widget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dapozzo_ventura_app/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../dapozzo_ventura_app/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dapozzo_ventura_app/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../dapozzo_ventura_app/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="137bda6b-ab8a-4540-add6-6842e215cd9f" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
