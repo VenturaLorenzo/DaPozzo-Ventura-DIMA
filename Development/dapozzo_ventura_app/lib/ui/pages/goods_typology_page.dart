@@ -11,6 +11,8 @@ import 'package:dapozzo_ventura_app/ui/lists/good_images_list.dart';import 'pack
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../cart_icon.dart';
+
 class GoodTypologyPage extends StatefulWidget {
   final GoodTypologyModel goodTypology;
 
@@ -41,8 +43,20 @@ class _GoodTypologyPageState extends State<GoodTypologyPage> {
 
 
     return Scaffold(
-      appBar: EquipAppBar(
-        title: goodTypology.name,
+      appBar: AppBar(
+
+        backgroundColor: Colors.black87,
+        centerTitle: true,
+        leading: Builder(builder: (BuildContext context){
+
+          return  IconButton(onPressed:() {
+            Navigator.pop(context);
+          } ,icon: Icon(Icons.arrow_back));
+        }),
+        actions: [
+          CartIcon(),
+        ],
+        title: Text(goodTypology.name),
       ),
       body: Column(
         children: [
@@ -54,7 +68,8 @@ class _GoodTypologyPageState extends State<GoodTypologyPage> {
             child: Text("Add to cart"),
             onPressed: () {
               _cartBloc.add(CartAddEvent(goodTypology.name));
-            },
+            _showMyDialog();
+              },
           ),
           SizedBox(
             height: 15,
@@ -135,6 +150,33 @@ class _GoodTypologyPageState extends State<GoodTypologyPage> {
           ),
         ],
       ),
+    );
+  }
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('AlertDialog Title'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('This is a demo alert dialog.'),
+                Text('Would you like to approve of this message?'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Approve'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

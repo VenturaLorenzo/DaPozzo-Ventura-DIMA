@@ -36,7 +36,7 @@ class _LaunchPageState extends State<LaunchPage> {
     await Future.delayed(Duration(seconds: 3));
 
     print('LaunchState _appInitialization middle');
-    Navigator.pushNamed(context,"/home",arguments: allCategories);
+    Navigator.pushReplacementNamed(context,"/home",arguments: allCategories);
     print('LaunchState _appInitialization end');
   }
 }
