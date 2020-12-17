@@ -1,6 +1,8 @@
 import 'package:dapozzo_ventura_app/business_logic/blocs/vendor_bloc.dart';
 import 'package:dapozzo_ventura_app/business_logic/events/vendor_event.dart';
+import 'package:dapozzo_ventura_app/data/models/category_model.dart';
 import 'package:dapozzo_ventura_app/data/models/vendor_model.dart';
+import 'package:dapozzo_ventura_app/data/repositories/category_repository.dart';
 import 'package:dapozzo_ventura_app/states/vendor_state.dart';
 import 'package:dapozzo_ventura_app/ui/eQuip_appbar.dart';
 import 'package:dapozzo_ventura_app/ui/lists/goods_typology_list.dart';
@@ -27,13 +29,14 @@ class _VendorPageState extends State<VendorPage> {
   // DEFINISCO LE VARIABILI SENZA ASSEGNARLE IN MODO CHE QUANDO ESEGUO IL METODO BUILD CON SETSTATE() NON VENGANO SOVRASCRITTE
   List<bool> isSelectedCategory;
   List<bool> isSelectedGender = [false, false];
-
+List<CategoryModel> categories=[];
   @override
-  void initState() {
+  void initState()  {
     super.initState();
+    categories=  await CategoryRepository.getCategoriesByVendor(widget.vendor.id);
     // GENERO UNA LISTA DI FALSE GRANDE QUANDO LA LISTA DI CATEGORIE CHE MI HA PASSATO LA HOMEPAGE
     isSelectedCategory =
-        List.generate(widget.vendor.categories.length, (index) => false);
+        List.generate(categories.length, (index) => false);
   }
 
   @override
@@ -55,12 +58,16 @@ class _VendorPageState extends State<VendorPage> {
                 selectedBorderColor: Color.fromARGB(0, 0, 0, 0),
                 borderColor: Color.fromARGB(0, 0, 0, 0),
                 fillColor: Color.fromARGB(0, 0, 0, 0),
-                children: widget.vendor.categories.map((category) {
-                  return new Icon(category.icon, size: 70);
+                children: categories.map((category) {
+                  return new Icon(
+                      Icons.ac_unit,
+                      //category.icon,
+
+                      size: 70);
                 }).toList(),
                 onPressed: (int index) {
                   //MANDO L'EVENTO
-                  BlocProvider.of<VendorBloc>(context).add(VendorEventCategorySearch(widget.vendor.categories[index], widget.vendor));
+                  BlocProvider.of<VendorBloc>(context).add(VendorEventCategorySearch(categories[index], widget.vendor));
 
                   //CAMBIO L?ICONA VISIVAMENTE
                   setState(() {

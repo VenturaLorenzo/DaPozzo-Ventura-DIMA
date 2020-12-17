@@ -7,44 +7,27 @@ import 'package:flutter/material.dart';
 class FilterBar extends StatefulWidget {
   final marketPlaceBloc;
   final List<CategoryModel> categories;
-  const FilterBar({this.marketPlaceBloc,this.categories});
+  final List<Sport> sports;
+
+  const FilterBar({this.marketPlaceBloc,this.categories, this.sports});
 
   @override
   _FilterBarState createState() => _FilterBarState();
 }
 
 class _FilterBarState extends State<FilterBar> {
-  //final _marketPlaceBloc;
 
-  String currentCategoryQuery = "";
-  String currentSportQuery = "";
-  String currentTextQuery = "";
 
-  final List<Sport> sports = [
-    Sport(Icons.sentiment_very_dissatisfied, "basket"),
-    Sport(Icons.search, "calcio"),
-    Sport(Icons.polymer, "golf"),
-    Sport(Icons.gesture, "atletica"),
-    Sport(Icons.arrow_drop_down_circle, "nuoto"),
-    Sport(Icons.sentiment_very_dissatisfied, "pallavolo"),
-  ];
-  List<bool> isSelectedCat = [
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false
-  ];
-  List<bool> isSelectedSport = [false, false, false, false, false, false];
+
+  List<bool> isSelectedCat =[];
+  List<bool> isSelectedSport = [];
   TextEditingController _textController;
 @override
   void initState() {
     // TODO: implement initState
   _textController = TextEditingController();
+  isSelectedCat= List.generate(widget.categories.length, (index) => false);
+  isSelectedSport= List.generate(widget.sports.length, (index) => false);
 
   super.initState();
   }
@@ -69,7 +52,7 @@ class _FilterBarState extends State<FilterBar> {
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: ToggleButtons(
-              children: sports.map((sport) {
+              children: widget.sports.map((sport) {
                 return Padding(
                     padding: EdgeInsets.fromLTRB(9, 0, 9, 0),
                     child: Icon(
@@ -80,14 +63,10 @@ class _FilterBarState extends State<FilterBar> {
               onPressed: (int index) {
                 setState(() {
                   isSelectedSport[index] = !isSelectedSport[index];
-                  if (isSelectedSport[index]) {
-                    currentSportQuery =
-                        currentSportQuery + sports[index].name + ",";
-                  } else {
-                    currentSportQuery = currentSportQuery.replaceAll(
-                        sports[index].name + ",", "");
-                  }
+
                 });
+                widget.marketPlaceBloc.add(MarketPlaceSearchSport(widget.sports[index]));
+
               },
               isSelected: isSelectedSport,
             ),
@@ -111,23 +90,19 @@ class _FilterBarState extends State<FilterBar> {
                 return Padding(
                     padding: EdgeInsets.fromLTRB(9, 0, 9, 0),
                     child: Icon(
-                      cat.icon,
+                      //cat.icon,
+                      Icons.ac_unit,
                       size: 50,
                     ));
               }).toList(),
               onPressed: (int index) {
                 setState(() {
                   isSelectedCat[index] = !isSelectedCat[index];
-                  if (isSelectedCat[index]) {
-                    currentCategoryQuery =
-                        currentCategoryQuery + widget.categories[index].name + ",";
-                  } else {
-                    currentCategoryQuery = currentCategoryQuery.replaceAll(
-                        widget.categories[index].name + ",", "");
-                  }
+
                 });
-                widget.marketPlaceBloc.add(MarketPlaceSearch(
-                    currentTextQuery + "-" + currentCategoryQuery));
+
+                widget.marketPlaceBloc.add(MarketPlaceSearchCategory(widget.categories[index].id
+                ));
               },
               isSelected: isSelectedCat,
             ),
@@ -135,9 +110,7 @@ class _FilterBarState extends State<FilterBar> {
           TextField(
             controller: _textController,
             onSubmitted: (typedText) {
-              currentTextQuery = typedText;
-              widget.marketPlaceBloc.add(
-                  MarketPlaceSearch(typedText + "-" + currentCategoryQuery));
+              widget.marketPlaceBloc.add(MarketPlaceSearchText(typedText));
             },
             style: TextStyle(
               color: Colors.black87,

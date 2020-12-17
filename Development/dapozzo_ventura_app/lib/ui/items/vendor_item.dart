@@ -2,6 +2,7 @@
 import 'package:dapozzo_ventura_app/business_logic/blocs/vendor_bloc.dart';
 import 'package:dapozzo_ventura_app/business_logic/events/vendor_event.dart';
 import 'package:dapozzo_ventura_app/data/models/vendor_model.dart';
+import 'package:dapozzo_ventura_app/data/providers/database_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,15 +31,17 @@ class VendorItem extends StatelessWidget {
             InkWell(
               onTap: (){
                 BlocProvider.of<VendorBloc>(context).add(VendorEventInit(vendor));
+              ;
 
                 Navigator.pushNamed(context, '/vendor',arguments: vendor);
                 },
               child: Container(
                 height: 250,
                 child:
-                   Image(
-                    image: AssetImage("lib/assets/"+vendor.images[0]),fit: BoxFit.fill,
-                  ),
+                Image.network(
+                  'https://www.laccademiabjj.it/images/sfondi/${vendor.image}',
+                  fit: BoxFit.cover,
+                ),
                 ),
             ),
 
@@ -95,13 +98,15 @@ class VendorItem extends StatelessWidget {
                       shrinkWrap: true,
                       // Generate 100 widgets that display their index in the List.
                       children:
-                      vendor.images.sublist(1).map((path) {
+                      [vendor.image].map((path) {
                         return Padding(padding: EdgeInsets.fromLTRB(3, 3, 3, 3),
                             child: InkWell(onTap: (){},
                               child: Container(
                                   child: FittedBox(fit: BoxFit.fill,
-                                      child: Image.asset(
-                                          "lib/assets/"+path))),
+                                      child: Image.network(
+                                        'https://www.laccademiabjj.it/images/sfondi/${vendor.image}',
+                                        fit: BoxFit.cover,
+                                      ),)),
                             ));
                       }).toList()),
 

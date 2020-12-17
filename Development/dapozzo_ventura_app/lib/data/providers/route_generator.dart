@@ -17,7 +17,7 @@ static Route<dynamic> generateRoute(RouteSettings settings){
     case'/launch':
       return MaterialPageRoute(builder: (context)=>LaunchPage());
     case  '/home':
-      return MaterialPageRoute(builder: (context)=>Home( categories: settings.arguments,));
+      return MaterialPageRoute(builder: (context)=>Home( categoriesAndSports: settings.arguments,));
     case  '/vendor':
       return MaterialPageRoute(builder: (context)=>VendorPage( vendor: settings.arguments,));
     case  '/goodtypology':

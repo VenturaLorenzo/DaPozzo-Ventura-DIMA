@@ -2,20 +2,22 @@ import 'package:dapozzo_ventura_app/business_logic/blocs/cart_bloc.dart';
 import 'package:dapozzo_ventura_app/business_logic/blocs/market_place_bloc.dart';
 import 'package:dapozzo_ventura_app/business_logic/events/market_place_event.dart';
 import 'package:dapozzo_ventura_app/data/models/category_model.dart';
+import 'package:dapozzo_ventura_app/data/models/sport_model.dart';
 import 'package:dapozzo_ventura_app/data/models/vendor_model.dart';
 import 'package:dapozzo_ventura_app/states/market_place_state.dart';
 import 'package:dapozzo_ventura_app/ui/eQuip_appbar.dart';
 import 'package:dapozzo_ventura_app/ui/filter_bar_widget.dart';
 import 'package:dapozzo_ventura_app/ui/items/vendor_item.dart';
 import 'package:dapozzo_ventura_app/ui/lists/vendor_list.dart';
+import 'package:dapozzo_ventura_app/ui/pages/launch_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Home extends StatefulWidget {
-  final List<CategoryModel> categories;
+  final Arguments categoriesAndSports;
 
-  const Home({Key key, this.categories}) : super(key: key);
+  const Home({Key key, this.categoriesAndSports}) : super(key: key);
 
   @override
   _HomeState createState() => _HomeState();
@@ -24,6 +26,8 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   var _marketPlaceBloc;
   List<CategoryModel> categories;
+  List<Sport> sports;
+
   var _cartBloc;
 
   @override
@@ -31,7 +35,8 @@ class _HomeState extends State<Home> {
     // TODO: implement initState
     super.initState();
     imageCache.clear();
-    categories=widget.categories;
+    categories=widget.categoriesAndSports.allCategories;
+    sports=widget.categoriesAndSports.allSports;
     _marketPlaceBloc = BlocProvider.of<MarketPlaceBloc>(context);
     _cartBloc = BlocProvider.of<CartBloc>(context);
 
@@ -51,7 +56,7 @@ class _HomeState extends State<Home> {
             floating: true,
             expandedHeight: 250,
             pinned: false,
-            flexibleSpace: FilterBar(marketPlaceBloc: _marketPlaceBloc,categories: categories),
+            flexibleSpace: FilterBar(marketPlaceBloc: _marketPlaceBloc,categories: categories,sports: sports,),
           ),
           BlocBuilder<MarketPlaceBloc, MarketPlaceState>(
               builder: (context, state) {
@@ -65,6 +70,8 @@ class _HomeState extends State<Home> {
             }
             if (state is MarketPlaceInitial) {
               vendors = state.initialResult;
+              return VendorList(vendors);
+              /*vendors.forEach((element) {print(element.name);});
               return SliverList(delegate:
                   SliverChildBuilderDelegate((BuildContext context, int index) {
                 if (index < vendors.length) {
@@ -74,7 +81,7 @@ class _HomeState extends State<Home> {
                 } else {
                   return null;
                 }
-              }));
+              }));*/
             } else {
               if (state is MarketPlaceSearched) {
                 vendors = state.result;
