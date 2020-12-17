@@ -1,4 +1,4 @@
-import 'package:dapozzo_ventura_app/data/models/category_model.dart';
+/*import 'package:dapozzo_ventura_app/data/models/category_model.dart';
 import 'package:dapozzo_ventura_app/data/models/sport_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -370,3 +370,4 @@ class DatabaseHelper {
     return goodtypology;
   }
 }
+*/

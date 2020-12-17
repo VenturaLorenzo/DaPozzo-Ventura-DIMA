@@ -33,7 +33,7 @@ List<CategoryModel> categories=[];
   @override
   void initState()  {
     super.initState();
-    categories=  await CategoryRepository.getCategoriesByVendor(widget.vendor.id);
+    categories=  widget.vendor.categories;
     // GENERO UNA LISTA DI FALSE GRANDE QUANDO LA LISTA DI CATEGORIE CHE MI HA PASSATO LA HOMEPAGE
     isSelectedCategory =
         List.generate(categories.length, (index) => false);
