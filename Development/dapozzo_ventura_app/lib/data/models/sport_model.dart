@@ -6,7 +6,11 @@ class Sport {
   final String name;
 
   Sport(this.icon, this.name);
-
+  @override
+  String toString() {
+    // TODO: implement toString
+    return name;
+  }
 
 
 }

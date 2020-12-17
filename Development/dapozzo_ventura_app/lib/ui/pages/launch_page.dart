@@ -1,5 +1,7 @@
 import 'package:dapozzo_ventura_app/data/models/category_model.dart';
+import 'package:dapozzo_ventura_app/data/models/sport_model.dart';
 import 'package:dapozzo_ventura_app/data/providers/database_helper.dart';
+import 'package:dapozzo_ventura_app/data/repositories/category_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +25,6 @@ class _LaunchPageState extends State<LaunchPage> {
   void initState() {
     print('LaunchState initState start');
     super.initState();
-    print('LaunchState initState middle');
     _appInitialization();
     print('LaunchState initState end');
   }
@@ -32,11 +33,19 @@ class _LaunchPageState extends State<LaunchPage> {
     print('LaunchState _appInitialization begin');
     // simulate some time consuming initialization task
     final dbHelper = DatabaseHelper.instance;
-    List<CategoryModel> allCategories= await dbHelper.queryCategories();
-    await Future.delayed(Duration(seconds: 3));
 
-    print('LaunchState _appInitialization middle');
-    Navigator.pushNamed(context,"/home",arguments: allCategories);
+
+    List<CategoryModel> allCategories= await CategoryRepository.getAllCategories();
+    List<Sport> allSports= await dbHelper.querySports();
+    await Future.delayed(Duration(seconds: 2));
+
+    Navigator.pushNamed(context,"/home",arguments: Arguments(allSports, allCategories));
     print('LaunchState _appInitialization end');
   }
+}
+class Arguments {
+  final List<CategoryModel> allCategories;
+  final List<Sport> allSports;
+
+  Arguments(this.allSports,this.allCategories);
 }

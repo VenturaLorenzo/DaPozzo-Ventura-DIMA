@@ -1,16 +1,15 @@
-import 'dart:ffi';
 
 
-import 'category_model.dart';
+import 'package:dapozzo_ventura_app/data/models/category_model.dart';
 
 class Vendor {
+  final int id;
   final String name;
   final String desc;
-  final List<String> images;
-  final List<CategoryModel> categories;
+  final String image;
   final double rating;
+  //final List<CategoryModel> categories;
 
-
-  Vendor({this.name, this.desc, this.images,this.categories,this.rating});
+  Vendor({this.id,this.name, this.desc, this.image,this.rating});
 
 }
