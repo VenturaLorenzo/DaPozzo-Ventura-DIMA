@@ -8,8 +8,8 @@ class Vendor {
   final String desc;
   final String image;
   final double rating;
-  //final List<CategoryModel> categories;
+   List<CategoryModel> categories;
 
-  Vendor({this.id,this.name, this.desc, this.image,this.rating});
+  Vendor({this.id,this.name, this.desc, this.image,this.rating,this.categories});
 
 }

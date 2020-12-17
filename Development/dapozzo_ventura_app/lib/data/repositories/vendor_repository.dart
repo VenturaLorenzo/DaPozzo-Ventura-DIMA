@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dapozzo_ventura_app/data/models/category_model.dart';
 import 'package:dapozzo_ventura_app/data/models/sport_model.dart';
 import 'package:dapozzo_ventura_app/data/models/vendor_model.dart';
@@ -33,15 +35,17 @@ class VendorRepository {
     List<Map> allVendorRows = await dbHelper.getVendors(text, categories);
     List<Vendor> retVal = [];
 
-    allVendorRows.forEach((row) {
+    allVendorRows.forEach((row)  {
+     print(categories);
       retVal.add(Vendor(
           name: row[DatabaseHelper.columnName],
           image: row[DatabaseHelper.columnImage],
           rating: row[DatabaseHelper.columnRating],
           desc: row[DatabaseHelper.columnDescription],
-          id: row[DatabaseHelper.columnId]));
+          id: row[DatabaseHelper.columnId],
+      ));
     });
-
+    retVal.forEach((element) async {element.categories= await  CategoryRepository.getCategoriesByVendor(element.id);});
     return retVal;
   }
 }
