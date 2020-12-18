@@ -1,4 +1,6 @@
+import 'package:dapozzo_ventura_app/ui/eQuip_appbar.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class MyProfile extends StatefulWidget {
   @override
@@ -8,6 +10,6 @@ class MyProfile extends StatefulWidget {
 class _MyProfileState extends State<MyProfile> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(appBar: EquipAppBar(title: "ciao",),);
   }
 }

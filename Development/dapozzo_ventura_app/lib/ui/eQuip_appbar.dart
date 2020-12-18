@@ -5,6 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'cart_icon.dart';
+
 class EquipAppBar extends StatelessWidget implements PreferredSize {
   final String title;
 
@@ -12,33 +14,17 @@ class EquipAppBar extends StatelessWidget implements PreferredSize {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+
       backgroundColor: Colors.black87,
       centerTitle: true,
-      leading: Icon(Icons.menu),
+      leading: Builder(builder: (BuildContext context){
+
+        return  IconButton(onPressed:() {
+          Scaffold.of(context).openDrawer();
+        } ,icon: Icon(Icons.menu));
+      }),
       actions: [
-        Stack(children: [
-          IconButton(
-            onPressed: () {
-              Navigator.pushNamed(context, "/cart");
-            },
-            icon: Icon(Icons.shopping_cart),
-          ),
-          BlocBuilder<CartBloc, CartState>(builder: (context, state) {
-            if (state is CartCurrentState) {
-              return Badge(
-                toAnimate: false,
-                shape: BadgeShape.square,
-                animationType: BadgeAnimationType.scale	,
-                badgeColor: Colors.red,
-                borderRadius: BorderRadius.circular(8),
-                badgeContent:
-                Text(state.products.length.toString(), style: TextStyle(color: Colors.white)),
-              );
-            } else {
-              return Text("ERROR");
-            }
-          }),
-        ])
+        CartIcon(),
       ],
       title: Text(title),
     );

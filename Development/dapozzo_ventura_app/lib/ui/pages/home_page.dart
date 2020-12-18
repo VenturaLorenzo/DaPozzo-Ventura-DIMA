@@ -6,6 +6,7 @@ import 'package:dapozzo_ventura_app/data/models/sport_model.dart';
 import 'package:dapozzo_ventura_app/data/models/vendor_model.dart';
 import 'package:dapozzo_ventura_app/states/market_place_state.dart';
 import 'package:dapozzo_ventura_app/ui/eQuip_appbar.dart';
+import 'package:dapozzo_ventura_app/ui/eQuip_navigator_menu.dart';
 import 'package:dapozzo_ventura_app/ui/filter_bar_widget.dart';
 import 'package:dapozzo_ventura_app/ui/items/vendor_item.dart';
 import 'package:dapozzo_ventura_app/ui/lists/vendor_list.dart';
@@ -45,14 +46,20 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-  //  categories= ModalRoute.of(context).settings.arguments;
+    //  categories= ModalRoute.of(context).settings.arguments;
 
     return Scaffold(
-      appBar: EquipAppBar(title: "eQuip", ),
+      appBar: EquipAppBar(
+        title: "eQuip",
+      ),
+      drawer: EquipNavigatorMenu(
+        navigationTiles: [Column(mainAxisAlignment: MainAxisAlignment.spaceBetween,children: [],
+      )]),
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
             backgroundColor: Colors.white,
+            leading: Container(),
             floating: true,
             expandedHeight: 250,
             pinned: false,

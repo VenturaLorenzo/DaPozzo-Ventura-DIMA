@@ -3,7 +3,9 @@ import 'package:dapozzo_ventura_app/ui/pages/goods_typology_page.dart';
 import 'package:dapozzo_ventura_app/ui/pages/home_page.dart';
 import 'package:dapozzo_ventura_app/ui/pages/launch_page.dart';
 import 'package:dapozzo_ventura_app/ui/pages/profile_page.dart';
+import 'package:dapozzo_ventura_app/ui/pages/settings_page.dart';
 import 'package:dapozzo_ventura_app/ui/pages/vendor_page.dart';
+import 'package:dapozzo_ventura_app/ui/pages/vendor_profile_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -24,8 +26,12 @@ static Route<dynamic> generateRoute(RouteSettings settings){
       return MaterialPageRoute(builder: (context)=>GoodTypologyPage(goodTypology:  settings.arguments,));
     case  '/cart':
       return MaterialPageRoute(builder: (context)=>CartPage());
+    case  '/vendor_profile':
+      return MaterialPageRoute(builder: (context)=>VendorProfilePage());
     case  '/profile':
       return MaterialPageRoute(builder: (context)=>MyProfile());
+    case  '/settings':
+      return MaterialPageRoute(builder: (context)=>SettingsPage());
 
 
   }
