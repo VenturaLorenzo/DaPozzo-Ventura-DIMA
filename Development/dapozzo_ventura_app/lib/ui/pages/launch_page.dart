@@ -5,8 +5,6 @@ import 'package:dapozzo_ventura_app/data/repositories/category_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../main.dart';
-
 class LaunchPage extends StatefulWidget {
   @override
   _LaunchPageState createState() => _LaunchPageState();
@@ -16,7 +14,14 @@ class _LaunchPageState extends State<LaunchPage> {
   @override
   Widget build(final BuildContext context) {
     print('LaunchState build start');
-    final Widget w = Scaffold(body: Center(child: CircularProgressIndicator(),),);
+    final Widget w = Scaffold(
+      body: Center(
+        child: CircularProgressIndicator(
+          valueColor: AlwaysStoppedAnimation<Color>(Colors.black54),
+          strokeWidth: 5,
+        ),
+      ),
+    );
     print('LaunchState build end');
     return w;
   }
@@ -34,18 +39,20 @@ class _LaunchPageState extends State<LaunchPage> {
     // simulate some time consuming initialization task
     final dbHelper = DatabaseHelper.instance;
 
-
-    List<CategoryModel> allCategories= await CategoryRepository.getAllCategories();
-    List<Sport> allSports= await dbHelper.querySports();
+    List<CategoryModel> allCategories =
+        await CategoryRepository.getAllCategories();
+    List<Sport> allSports = await dbHelper.querySports();
     await Future.delayed(Duration(seconds: 2));
 
-    Navigator.pushNamed(context,"/home",arguments: Arguments(allSports, allCategories));
+    Navigator.pushNamed(context, "/home",
+        arguments: Arguments(allSports, allCategories));
     print('LaunchState _appInitialization end');
   }
 }
+
 class Arguments {
   final List<CategoryModel> allCategories;
   final List<Sport> allSports;
 
-  Arguments(this.allSports,this.allCategories);
+  Arguments(this.allSports, this.allCategories);
 }

@@ -7,7 +7,6 @@ import 'package:dapozzo_ventura_app/data/models/vendor_model.dart';
 import 'package:dapozzo_ventura_app/states/market_place_state.dart';
 import 'package:dapozzo_ventura_app/ui/eQuip_appbar.dart';
 import 'package:dapozzo_ventura_app/ui/filter_bar_widget.dart';
-import 'package:dapozzo_ventura_app/ui/items/vendor_item.dart';
 import 'package:dapozzo_ventura_app/ui/lists/vendor_list.dart';
 import 'package:dapozzo_ventura_app/ui/pages/launch_page.dart';
 import 'package:flutter/cupertino.dart';
@@ -35,8 +34,8 @@ class _HomeState extends State<Home> {
     // TODO: implement initState
     super.initState();
     imageCache.clear();
-    categories=widget.categoriesAndSports.allCategories;
-    sports=widget.categoriesAndSports.allSports;
+    categories = widget.categoriesAndSports.allCategories;
+    sports = widget.categoriesAndSports.allSports;
     _marketPlaceBloc = BlocProvider.of<MarketPlaceBloc>(context);
     _cartBloc = BlocProvider.of<CartBloc>(context);
 
@@ -45,10 +44,12 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-  //  categories= ModalRoute.of(context).settings.arguments;
+    //  categories= ModalRoute.of(context).settings.arguments;
 
     return Scaffold(
-      appBar: EquipAppBar(title: "eQuip", ),
+      appBar: EquipAppBar(
+        title: "eQuip",
+      ),
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
@@ -56,7 +57,11 @@ class _HomeState extends State<Home> {
             floating: true,
             expandedHeight: 250,
             pinned: false,
-            flexibleSpace: FilterBar(marketPlaceBloc: _marketPlaceBloc,categories: categories,sports: sports,),
+            flexibleSpace: FilterBar(
+              marketPlaceBloc: _marketPlaceBloc,
+              categories: categories,
+              sports: sports,
+            ),
           ),
           BlocBuilder<MarketPlaceBloc, MarketPlaceState>(
               builder: (context, state) {
@@ -64,7 +69,9 @@ class _HomeState extends State<Home> {
             if (state is MarketPlaceLoadingState) {
               return SliverFillRemaining(
                 child: Center(
-                  child: CircularProgressIndicator(),
+                  child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.black54),
+                  ),
                 ),
               );
             }

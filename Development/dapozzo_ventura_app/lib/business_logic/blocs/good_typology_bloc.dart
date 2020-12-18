@@ -1,9 +1,7 @@
-import 'package:dapozzo_ventura_app/business_logic/events/cart_event.dart';
 import 'package:dapozzo_ventura_app/business_logic/events/good_typology_event.dart';
 import 'package:dapozzo_ventura_app/data/models/good_model.dart';
 import 'package:dapozzo_ventura_app/data/repositories/color_repository.dart';
 import 'package:dapozzo_ventura_app/data/repositories/good_repository.dart';
-import 'package:dapozzo_ventura_app/states/cart_state.dart';
 import 'package:dapozzo_ventura_app/states/good_typology_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,19 +25,17 @@ class GoodTypologyBloc extends Bloc<GoodTypologyEvent, GoodTypologyState> {
         yield GoodTypologyLoadingState();
         await Future.delayed(Duration(milliseconds: 500));
 
-        currentSearch=event.color;
+        currentSearch = event.color;
         goods = await GoodRepository.getGoodsByColor(currentSearch);
 
-        yield GoodTypologyCurrentState(goods,colors,currentSearch);
-      } else {if(event is GoodTypologyEventClear){
-
-        currentSearch=null;
-        colors=[];
-        goods=[];
-        yield GoodTypologyUninitializedState();
-      }
-
-
+        yield GoodTypologyCurrentState(goods, colors, currentSearch);
+      } else {
+        if (event is GoodTypologyEventClear) {
+          currentSearch = null;
+          colors = [];
+          goods = [];
+          yield GoodTypologyUninitializedState();
+        }
       }
     }
   }

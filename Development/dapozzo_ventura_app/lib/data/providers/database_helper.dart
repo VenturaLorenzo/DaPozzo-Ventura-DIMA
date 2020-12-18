@@ -6,7 +6,6 @@ import 'dart:async';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-
 class DatabaseHelper {
   static final _databaseName = "GoodsDatabase.db";
   static final _databaseVersion = 1;
@@ -314,7 +313,7 @@ class DatabaseHelper {
 
     if (categories.length > 0) {
       query =
-      "SELECT DISTINCT $tableVendor.* FROM  $tableVendor, $tableVendorCategory WHERE $tableVendor.$columnName LIKE '%$name%' AND (";
+          "SELECT DISTINCT $tableVendor.* FROM  $tableVendor, $tableVendorCategory WHERE $tableVendor.$columnName LIKE '%$name%' AND (";
       categories.forEach((element) {
         query += "$tableVendorCategory.$columnCategoryId = $element OR";
       });
@@ -357,10 +356,10 @@ class DatabaseHelper {
     var query =
         "SELECT $tableTypology.$columnId, $tableTypology.$columnCategoryId, $tableTypology.$columnGender,";
     query +=
-    "$tableTypology.$columnImage, $tableTypology.$columnName, $tableTypology.$columnDescription, $tableTypology.$columnPrice,";
+        "$tableTypology.$columnImage, $tableTypology.$columnName, $tableTypology.$columnDescription, $tableTypology.$columnPrice,";
     query += "$tableCategory.$columnName AS categoryName ";
     query +=
-    "FROM $tableTypology INNER JOIN $tableCategory ON $tableTypology.$columnCategoryId = $tableCategory.$columnId";
+        "FROM $tableTypology INNER JOIN $tableCategory ON $tableTypology.$columnCategoryId = $tableCategory.$columnId";
 
     List<Map> result;
 
@@ -389,6 +388,47 @@ class DatabaseHelper {
 
     return result;
   }
+
+  Future<List<Map>> getGoodsTypologiesByVendor(
+      List<int> categoryIds, int genderFilter, int vendorId) async {
+    Database db = await instance.database;
+
+    var query =
+        "SELECT $tableTypology.$columnId, $tableTypology.$columnCategoryId, $tableTypology.$columnGender,$tableTypology.$columnVendorId,";
+    query +=
+        "$tableTypology.$columnImage, $tableTypology.$columnName, $tableTypology.$columnDescription, $tableTypology.$columnPrice,";
+    query += "$tableCategory.$columnName AS categoryName ";
+    query +=
+        "FROM $tableTypology INNER JOIN $tableCategory ON $tableTypology.$columnCategoryId = $tableCategory.$columnId";
+
+    List<Map> result;
+
+    var whereString = "";
+
+    if (genderFilter > -1) {
+      whereString += "($columnGender = ${genderFilter.toString()})";
+    }
+
+    if (categoryIds.length > 0) {
+      if (whereString.isNotEmpty) {
+        whereString += " and ";
+      }
+
+      whereString += " (";
+      for (var i = 0; i < categoryIds.length; i++) {
+        whereString += "($columnCategoryId = ${categoryIds[i].toString()}) OR ";
+      }
+      whereString = whereString.substring(0, whereString.length - 3);
+      whereString += ")";
+
+      query += " WHERE " + whereString;
+    }
+
+    result = await db.rawQuery(query);
+
+    return result;
+  }
+
   // da cancellare
   Future<List<Sport>> querySports() async {
     final List<Sport> sports = [
@@ -402,5 +442,3 @@ class DatabaseHelper {
     return sports;
   }
 }
-
-

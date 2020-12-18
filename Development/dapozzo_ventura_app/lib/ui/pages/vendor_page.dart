@@ -2,7 +2,6 @@ import 'package:dapozzo_ventura_app/business_logic/blocs/vendor_bloc.dart';
 import 'package:dapozzo_ventura_app/business_logic/events/vendor_event.dart';
 import 'package:dapozzo_ventura_app/data/models/category_model.dart';
 import 'package:dapozzo_ventura_app/data/models/vendor_model.dart';
-import 'package:dapozzo_ventura_app/data/repositories/category_repository.dart';
 import 'package:dapozzo_ventura_app/states/vendor_state.dart';
 import 'package:dapozzo_ventura_app/ui/eQuip_appbar.dart';
 import 'package:dapozzo_ventura_app/ui/lists/goods_typology_list.dart';
@@ -10,10 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
 class VendorPage extends StatefulWidget {
-
-
   final Vendor vendor;
 
   // IL VENDOR MI VIENE PASSATO DALLA HOME PAGE
@@ -24,19 +20,16 @@ class VendorPage extends StatefulWidget {
 }
 
 class _VendorPageState extends State<VendorPage> {
-
-
   // DEFINISCO LE VARIABILI SENZA ASSEGNARLE IN MODO CHE QUANDO ESEGUO IL METODO BUILD CON SETSTATE() NON VENGANO SOVRASCRITTE
   List<bool> isSelectedCategory;
   List<bool> isSelectedGender = [false, false];
-List<CategoryModel> categories=[];
+  List<CategoryModel> categories = [];
   @override
-  void initState()  {
+  void initState() {
     super.initState();
-    categories=  widget.vendor.categories;
+    categories = widget.vendor.categories;
     // GENERO UNA LISTA DI FALSE GRANDE QUANDO LA LISTA DI CATEGORIE CHE MI HA PASSATO LA HOMEPAGE
-    isSelectedCategory =
-        List.generate(categories.length, (index) => false);
+    isSelectedCategory = List.generate(categories.length, (index) => false);
   }
 
   @override
@@ -59,21 +52,21 @@ List<CategoryModel> categories=[];
                 borderColor: Color.fromARGB(0, 0, 0, 0),
                 fillColor: Color.fromARGB(0, 0, 0, 0),
                 children: categories.map((category) {
-                  return new Icon(
-                      Icons.ac_unit,
+                  return new Icon(Icons.ac_unit,
                       //category.icon,
 
                       size: 70);
                 }).toList(),
                 onPressed: (int index) {
                   //MANDO L'EVENTO
-                  BlocProvider.of<VendorBloc>(context).add(VendorEventCategorySearch(categories[index], widget.vendor));
+                  BlocProvider.of<VendorBloc>(context).add(
+                      VendorEventCategorySearch(
+                          categories[index], widget.vendor));
 
                   //CAMBIO L?ICONA VISIVAMENTE
                   setState(() {
                     isSelectedCategory[index] = !isSelectedCategory[index];
                   });
-
                 },
                 isSelected: isSelectedCategory,
               ),
@@ -98,9 +91,8 @@ List<CategoryModel> categories=[];
                         selectedColor: Colors.white,
                         onPressed: (int index) {
                           setState(() {
-                           swapGender("MALE");
+                            swapGender("MALE");
                           });
-
                         },
                         isSelected: [isSelectedGender[0]]),
                     ToggleButtons(
@@ -112,7 +104,6 @@ List<CategoryModel> categories=[];
                           setState(() {
                             swapGender("FEMALE");
                           });
-
                         },
                         isSelected: [isSelectedGender[1]])
                   ]),
@@ -151,7 +142,6 @@ List<CategoryModel> categories=[];
   }
 
   void swapGender(String gender) {
-
     //-------LOGICA CHE CAMBIA isSelectedGender--------
     if (gender == "MALE") {
       isSelectedGender[0] = !isSelectedGender[0];
@@ -168,20 +158,19 @@ List<CategoryModel> categories=[];
 
     //--------------------------------------------------
 
-
     //-------LOGICA CHE MANDA L?EVENTO AL BLOC IN BASE A isSelectedGender-
 
-    if(isSelectedGender[0]){
-      BlocProvider.of<VendorBloc>(context).add(
-          VendorEventGenderSearch("MALE", widget.vendor));
+    if (isSelectedGender[0]) {
+      BlocProvider.of<VendorBloc>(context)
+          .add(VendorEventGenderSearch("MALE", widget.vendor));
     }
-    if(isSelectedGender[1]){
-      BlocProvider.of<VendorBloc>(context).add(
-          VendorEventGenderSearch("FEMALE", widget.vendor));
+    if (isSelectedGender[1]) {
+      BlocProvider.of<VendorBloc>(context)
+          .add(VendorEventGenderSearch("FEMALE", widget.vendor));
     }
-    if(!isSelectedGender[0] && !isSelectedGender[1]){
-      BlocProvider.of<VendorBloc>(context).add(
-          VendorEventGenderSearch("NONE", widget.vendor));
+    if (!isSelectedGender[0] && !isSelectedGender[1]) {
+      BlocProvider.of<VendorBloc>(context)
+          .add(VendorEventGenderSearch("NONE", widget.vendor));
     }
 
     //----------------------------------------------------------
