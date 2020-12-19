@@ -11,6 +11,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../cart_icon.dart';
+
 class GoodTypologyPage extends StatefulWidget {
   final GoodTypologyModel goodTypology;
 
@@ -25,9 +27,11 @@ class _GoodTypologyPageState extends State<GoodTypologyPage> {
   CartBloc _cartBloc;
   GoodTypologyBloc _goodTypologyBloc;
   List<bool> isSelected;
+
   List<MaterialColor> colors = [];
   MaterialColor currentColor;
   GoodTypologyModel goodTypology;
+
   @override
   void initState() {
     super.initState();
@@ -40,8 +44,20 @@ class _GoodTypologyPageState extends State<GoodTypologyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: EquipAppBar(
-        title: goodTypology.name,
+      appBar: AppBar(
+        backgroundColor: Colors.black87,
+        centerTitle: true,
+        leading: Builder(builder: (BuildContext context) {
+          return IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: Icon(Icons.arrow_back));
+        }),
+        actions: [
+          CartIcon(),
+        ],
+        title: Text(goodTypology.name),
       ),
       body: Column(
         children: [
@@ -52,6 +68,7 @@ class _GoodTypologyPageState extends State<GoodTypologyPage> {
             child: Text("Add to cart"),
             onPressed: () {
               _cartBloc.add(CartAddEvent(goodTypology.name));
+              _showSuccesPopup();
             },
           ),
           SizedBox(
@@ -136,6 +153,25 @@ class _GoodTypologyPageState extends State<GoodTypologyPage> {
           ),
         ],
       ),
+    );
+  }
+
+  Future<void> _showSuccesPopup() async {
+    Future.delayed(Duration(milliseconds: 2000), () {
+      Navigator.pop(context);
+    });
+    return showDialog<void>(barrierColor: Colors.black54.withOpacity(0.02),
+      context: context,
+      barrierDismissible: true, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          elevation: 2,
+          backgroundColor: Colors.lightGreen.withOpacity(0.5),
+          title: Center(
+            child: Text('Success'),
+          ),
+        );
+      },
     );
   }
 }

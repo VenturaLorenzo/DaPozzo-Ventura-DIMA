@@ -9,6 +9,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../eQuip_navigator_menu.dart';
+
 class VendorPage extends StatefulWidget {
   final Vendor vendor;
 
@@ -37,6 +39,37 @@ class _VendorPageState extends State<VendorPage> {
     return Scaffold(
       appBar: EquipAppBar(
         title: widget.vendor.name,
+      ),
+      drawer: EquipNavigatorMenu(
+        navigationTiles:  [
+                ListTile(
+                  title: Text("Torna a eQuip"),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                  },
+                ),
+                Divider(color: Colors.black87,height: 5,),
+                ListTile(
+                  title: Text("Vai al tuo Profilo"),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, "/profile");
+                  },
+                ),
+
+                Divider(color: Colors.black87,height: 5,),
+                ListTile(
+                  title: Text("Vai al profilo dello Shop"),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, "/vendor_profile",arguments: widget.vendor);
+                  },
+                ),
+          Divider(color: Colors.black87,height: 5,),
+
+
+        ],
       ),
       body: Padding(
         padding: EdgeInsets.all(0),
