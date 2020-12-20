@@ -1,4 +1,3 @@
-import 'package:dapozzo_ventura_app/data/models/sport_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
@@ -15,6 +14,10 @@ class DatabaseHelper {
   static final tableVendorCategory = "VendorCategory";
   static final tableVendor = "Vendor";
   static final tableTypology = "good_typology";
+  static final tableSport = "Sport";
+  static final tableVendorSport = "VendorSport";
+  static final tableColor = "Color";
+  static final tableSize = "Size";
 
   static final columnId = 'id';
   static final columnName = 'name';
@@ -25,12 +28,17 @@ class DatabaseHelper {
   static final columnColor = 'color';
   static final columnVendorId = 'vendorId';
   static final columnCategoryId = 'categoryId';
+  static final columnSportId = 'sportId';
   static final columnDescription = 'description';
   static final columnImage = 'image';
   static final columnRating = 'rating';
   static final columnIcon = 'icon';
   static final columnGender = 'gender';
   static final columnPrice = 'price';
+  static final columnCode = 'code';
+  static final columnColorId = 'colorId';
+  static final columnSizeId = 'sizeId';
+  static final columnTypologyId = 'typologyId';
 
   // make this a singleton class
   DatabaseHelper._privateConstructor();
@@ -81,6 +89,16 @@ class DatabaseHelper {
           )''');
     print("Creazione tabella GoodsCategories TERMINATA");
 
+// SQL code to create the database table SPORT
+    print("Creazione tabella " + tableSport);
+    await db.execute(''' CREATE TABLE $tableSport (  
+            $columnId INTEGER NOT NULL,   
+            $columnName TEXT NOT NULL,
+            $columnIcon TEXT NOT NULL,
+            PRIMARY KEY (id)      
+          )''');
+    print("Creazione tabella $tableSport TERMINATA");
+
     // SQL code to create the database table GOODSTYPOLOGIES
     print("Creazione tabella $tableTypology");
     await db.execute(''' CREATE TABLE $tableTypology (   
@@ -97,32 +115,59 @@ class DatabaseHelper {
     print("Creazione tabella $tableTypology TERMINATA");
 
     // SQL code to create the database table VENDORCATEGORY
-    print("Creazione tabella VendorCategory");
+    print("Creazione tabella $tableVendorCategory");
     await db.execute(''' CREATE TABLE $tableVendorCategory (  
             $columnVendorId INTEGER NOT NULL,   
             $columnCategoryId INTEGER NOT NULL,
             PRIMARY KEY ($columnVendorId,$columnCategoryId)      
           )''');
-    print("Creazione tabella VendorCategory TERMINATA");
+    print("Creazione tabella $tableVendorCategory TERMINATA");
+
+    // SQL code to create the database table VENDORSPORT
+    print("Creazione tabella $tableVendorSport");
+    await db.execute(''' CREATE TABLE $tableVendorSport (  
+            $columnVendorId INTEGER NOT NULL,   
+            $columnSportId INTEGER NOT NULL,
+            PRIMARY KEY ($columnVendorId,$columnSportId)      
+          )''');
+    print("Creazione tabella $tableVendorSport TERMINATA");
 
     // SQL code to create the database table GOODS
-    print("Creazione tabella good");
+    print("Creazione tabella $tableGood");
     await db.execute('''
-          CREATE TABLE good (
-            $columnTypology TEXT NOT NULL,
-            $columnColor TEXT NOT NULL,
-            $columnSize TEXT NOT NULL,
+          CREATE TABLE $tableGood (
+            $columnId INTEGER NOT NULL,
+            $columnTypologyId INTEGER NOT NULL,
+            $columnColorId INTEGER NOT NULL,
+            $columnSizeId INTEGER NOT NULL,
             $columnQuantity INTEGER NOT NULL,
-            PRIMARY KEY ($columnTypology ,$columnColor,$columnSize)
-          )
-          ''');
-    print("Creazione tabella good TERMINATA");
+            PRIMARY KEY ($columnId)
+          )''');
+    print("Creazione tabella $tableGood TERMINATA");
+
+    // SQL code to create the database table COLOR
+    print("Creazione tabella $tableColor");
+    await db.execute(''' CREATE TABLE $tableColor (   
+            $columnId INTEGER NOT NULL,              
+            $columnName TEXT NOT NULL,
+            $columnCode TEXT NOT NULL,
+            PRIMARY KEY (id)      
+          )''');
+    print("Inserimento dati tabella $tableColor");
+
+    // SQL code to create the database table SIZE
+    print("Creazione tabella $tableSize");
+    await db.execute(''' CREATE TABLE $tableSize (   
+            $columnId INTEGER NOT NULL,              
+            $columnName TEXT NOT NULL,
+            PRIMARY KEY (id)      
+          )''');
+    print("Inserimento dati tabella $tableSize");
 
     /*++++++++++++++++++++++++++++++++++    INSERIMENTO DATI IN TABELLE    +++++++++++++++++++++++++++++++++++++++++*/
 
     /*TABELLA VENDOR*/
-
-    print("inserisco dati tabella vendor");
+    print("inserisco dati tabella $tableVendor");
     Map<String, dynamic> vendor1 = {
       columnId: 1,
       columnName: 'LAccademia',
@@ -140,11 +185,10 @@ class DatabaseHelper {
 
     await db.insert(tableVendor, vendor1);
     await db.insert(tableVendor, vendor2);
-    print("inserimento dati tabella vendor TERMINATO");
+    print("inserimento dati tabella $tableVendor TERMINATO");
 
     /*TABELLA GOOD_TYPOLOGY*/
-
-    print("Inserimento dati tabella good_typology");
+    print("Inserimento dati tabella $tableTypology");
     Map<String, dynamic> goodsTypology1 = {
       columnId: 1,
       columnVendorId: 1,
@@ -226,7 +270,6 @@ class DatabaseHelper {
     print("Fine inserimento dati tabella $tableTypology");
 
     /*TABELLA CATEGORY*/
-
     print("Inserimento dati tabella $tableCategory");
     Map<String, dynamic> goodsCategory1 = {
       columnId: 1,
@@ -301,6 +344,238 @@ class DatabaseHelper {
     await db.insert(tableVendorCategory, vendorCategory5);
     await db.insert(tableVendorCategory, vendorCategory6);
     print("Fine Inserimento dati tabella $tableVendorCategory");
+
+    /*TABELLA SPORT*/
+    print("Inserimento dati tabella $tableSport");
+    Map<String, dynamic> sport1 = {
+      columnId: 1,
+      columnName: 'Bjj',
+      columnIcon: 'favorite'
+    };
+    Map<String, dynamic> sport2 = {
+      columnId: 2,
+      columnName: 'MMA',
+      columnIcon: 'favorite'
+    };
+    Map<String, dynamic> sport3 = {
+      columnId: 3,
+      columnName: 'Arrampicata',
+      columnIcon: 'favorite'
+    };
+    Map<String, dynamic> sport4 = {
+      columnId: 4,
+      columnName: 'Tennnis',
+      columnIcon: 'favorite'
+    };
+
+    await db.insert(tableSport, sport1);
+    await db.insert(tableSport, sport2);
+    await db.insert(tableSport, sport3);
+    await db.insert(tableSport, sport4);
+    print("Fine Inserimento dati tabella $tableSport");
+
+    /*TABELLA VENDOR SPORT*/
+    print("Inserimento dati tabella $tableVendorSport");
+    Map<String, dynamic> vendorSport1 = {
+      columnVendorId: 1,
+      columnSportId: 1,
+    };
+    Map<String, dynamic> vendorSport2 = {
+      columnVendorId: 2,
+      columnSportId: 2,
+    };
+    await db.insert(tableVendorSport, vendorSport1);
+    await db.insert(tableVendorSport, vendorSport2);
+    print("Fine Inserimento dati tabella $tableVendorSport");
+
+    /*TABELLA COLOR*/
+    print("Inserimento dati tabella $tableColor");
+    Map<String, dynamic> color1 = {
+      columnId: 1,
+      columnName: 'Black',
+      columnCode: '000000',
+    };
+    Map<String, dynamic> color2 = {
+      columnId: 2,
+      columnName: 'White',
+      columnCode: 'FFFFFF',
+    };
+    Map<String, dynamic> color3 = {
+      columnId: 3,
+      columnName: 'RoyalBlue',
+      columnCode: '4169e1',
+    };
+    Map<String, dynamic> color4 = {
+      columnId: 4,
+      columnName: 'Burgundy',
+      columnCode: '5e2e2d',
+    };
+    Map<String, dynamic> color5 = {
+      columnId: 5,
+      columnName: 'LightGrey',
+      columnCode: 'c5c7c4',
+    };
+    await db.insert(tableColor, color1);
+    await db.insert(tableColor, color2);
+    await db.insert(tableColor, color3);
+    await db.insert(tableColor, color4);
+    await db.insert(tableColor, color5);
+    print("Fine Inserimento dati tabella $tableColor");
+
+    /*TABELLA SIZE*/
+    print("Inserimento dati tabella $tableSize");
+    Map<String, dynamic> size1 = {
+      columnId: 1,
+      columnName: 'S',
+    };
+    Map<String, dynamic> size2 = {
+      columnId: 2,
+      columnName: 'M',
+    };
+    Map<String, dynamic> size3 = {
+      columnId: 3,
+      columnName: 'L',
+    };
+    Map<String, dynamic> size4 = {
+      columnId: 4,
+      columnName: 'XL',
+    };
+    await db.insert(tableSize, size1);
+    await db.insert(tableSize, size2);
+    await db.insert(tableSize, size3);
+    await db.insert(tableSize, size4);
+
+    /*TABELLA GOODS*/
+    print("Inserimento dati tabella $tableGood");
+    Map<String, dynamic> good1 = {
+      columnId: 1,
+      columnTypologyId: 1,
+      columnColorId: 3,
+      columnSizeId: 1,
+      columnQuantity: 100,
+    };
+    Map<String, dynamic> good2 = {
+      columnId: 2,
+      columnTypologyId: 1,
+      columnColorId: 3,
+      columnSizeId: 2,
+      columnQuantity: 100,
+    };
+    Map<String, dynamic> good3 = {
+      columnId: 3,
+      columnTypologyId: 1,
+      columnColorId: 3,
+      columnSizeId: 3,
+      columnQuantity: 100,
+    };
+    Map<String, dynamic> good4 = {
+      columnId: 4,
+      columnTypologyId: 1,
+      columnColorId: 3,
+      columnSizeId: 4,
+      columnQuantity: 100,
+    };
+    Map<String, dynamic> good5 = {
+      columnId: 5,
+      columnTypologyId: 1,
+      columnColorId: 4,
+      columnSizeId: 1,
+      columnQuantity: 100,
+    };
+    Map<String, dynamic> good6 = {
+      columnId: 6,
+      columnTypologyId: 1,
+      columnColorId: 4,
+      columnSizeId: 2,
+      columnQuantity: 100,
+    };
+    Map<String, dynamic> good7 = {
+      columnId: 7,
+      columnTypologyId: 1,
+      columnColorId: 4,
+      columnSizeId: 3,
+      columnQuantity: 100,
+    };
+    Map<String, dynamic> good8 = {
+      columnId: 8,
+      columnTypologyId: 1,
+      columnColorId: 4,
+      columnSizeId: 4,
+      columnQuantity: 100,
+    };
+    Map<String, dynamic> good9 = {
+      columnId: 9,
+      columnTypologyId: 5,
+      columnColorId: 3,
+      columnSizeId: 1,
+      columnQuantity: 100,
+    };
+    Map<String, dynamic> good10 = {
+      columnId: 10,
+      columnTypologyId: 5,
+      columnColorId: 3,
+      columnSizeId: 2,
+      columnQuantity: 100,
+    };
+    Map<String, dynamic> good11 = {
+      columnId: 11,
+      columnTypologyId: 5,
+      columnColorId: 3,
+      columnSizeId: 3,
+      columnQuantity: 100,
+    };
+    Map<String, dynamic> good12 = {
+      columnId: 12,
+      columnTypologyId: 5,
+      columnColorId: 3,
+      columnSizeId: 4,
+      columnQuantity: 100,
+    };
+    Map<String, dynamic> good13 = {
+      columnId: 13,
+      columnTypologyId: 5,
+      columnColorId: 1,
+      columnSizeId: 1,
+      columnQuantity: 100,
+    };
+    Map<String, dynamic> good14 = {
+      columnId: 14,
+      columnTypologyId: 5,
+      columnColorId: 1,
+      columnSizeId: 2,
+      columnQuantity: 100,
+    };
+    Map<String, dynamic> good15 = {
+      columnId: 15,
+      columnTypologyId: 5,
+      columnColorId: 1,
+      columnSizeId: 3,
+      columnQuantity: 100,
+    };
+    Map<String, dynamic> good16 = {
+      columnId: 16,
+      columnTypologyId: 5,
+      columnColorId: 1,
+      columnSizeId: 4,
+      columnQuantity: 100,
+    };
+    await db.insert(tableGood, good1);
+    await db.insert(tableGood, good2);
+    await db.insert(tableGood, good3);
+    await db.insert(tableGood, good4);
+    await db.insert(tableGood, good5);
+    await db.insert(tableGood, good6);
+    await db.insert(tableGood, good7);
+    await db.insert(tableGood, good8);
+    await db.insert(tableGood, good9);
+    await db.insert(tableGood, good10);
+    await db.insert(tableGood, good11);
+    await db.insert(tableGood, good12);
+    await db.insert(tableGood, good13);
+    await db.insert(tableGood, good14);
+    await db.insert(tableGood, good15);
+    await db.insert(tableGood, good16);
+    print("Fine Inserimento dati tabella $tableGood");
   }
 
   /*++++++++++++++++++++++++++++++++++    QUERY    +++++++++++++++++++++++++++++++++++++++++*/
@@ -403,42 +678,79 @@ class DatabaseHelper {
 
     List<Map> result;
 
-    var whereString = "";
+    var whereString = "WHERE $tableTypology.$columnVendorId=$vendorId";
 
     if (genderFilter > -1) {
-      whereString += "($columnGender = ${genderFilter.toString()})";
+      whereString += " AND ($columnGender = ${genderFilter.toString()})";
     }
 
     if (categoryIds.length > 0) {
-      if (whereString.isNotEmpty) {
-        whereString += " and ";
-      }
-
-      whereString += " (";
+      whereString += " AND (";
       for (var i = 0; i < categoryIds.length; i++) {
         whereString += "($columnCategoryId = ${categoryIds[i].toString()}) OR ";
       }
       whereString = whereString.substring(0, whereString.length - 3);
       whereString += ")";
-
-      query += " WHERE " + whereString;
     }
+
+    query += whereString;
 
     result = await db.rawQuery(query);
 
     return result;
   }
 
-  // da cancellare
-  Future<List<Sport>> querySports() async {
-    final List<Sport> sports = [
-      Sport(Icons.sentiment_very_dissatisfied, "basket"),
-      Sport(Icons.search, "calcio"),
-      Sport(Icons.polymer, "golf"),
-      Sport(Icons.gesture, "atletica"),
-      Sport(Icons.arrow_drop_down_circle, "nuoto"),
-      Sport(Icons.sentiment_very_dissatisfied, "pallavolo"),
-    ];
-    return sports;
+  Future<List<Map>> getAllSports() async {
+    Database db = await instance.database;
+
+    List<String> columnsToSelect = [columnId, columnName, columnIcon];
+
+    List<Map> result = await db.query(tableSport, columns: columnsToSelect);
+
+    return result;
+  }
+
+  Future<List<Map>> getColorsByTypology(int typologyId) async {
+    Database db = await instance.database;
+
+    List<Map> result = await db.rawQuery(
+        '''SELECT DISTINCT $tableColor.* FROM $tableColor INNER JOIN $tableGood ON $tableColor.$columnId = $tableGood.$columnColorId WHERE $tableGood.$columnTypologyId = ?''',
+        [typologyId]);
+    return result;
+  }
+
+  Future<List<Map>> getGoodsByTypology(int typologyId) async {
+    Database db = await instance.database;
+
+    List<Map> result = await db.rawQuery(
+        '''SELECT $tableGood.* FROM $tableGood INNER JOIN $tableTypology ON $tableTypology.$columnId = $tableGood.$columnTypologyId WHERE $tableTypology.$columnId = ?''',
+        [typologyId]);
+    return result;
+  }
+
+/*+++++++++++ da verificare +++++++++++++++++++  */
+  Future<List<Map>> getVendorsByCategorySportText(
+      String name, List<int> categories, List<int> sports) async {
+    Database db = await instance.database;
+
+    var query = "SELECT * FROM $tableVendor WHERE name LIKE '%$name%'";
+    List<Map> result;
+
+    if (categories.length > 0) {
+      query =
+          "SELECT DISTINCT $tableVendor.* FROM  $tableVendor, $tableVendorCategory WHERE $tableVendor.$columnName LIKE '%$name%' AND (";
+      categories.forEach((element) {
+        query += "$tableVendorCategory.$columnCategoryId = $element OR";
+      });
+      query = query.substring(0, query.length - 3);
+      query += ")";
+
+      result = await db.rawQuery(query);
+    } else {
+      var query = "SELECT * FROM $tableVendor WHERE name LIKE '%$name%'";
+      result = await db.rawQuery(query);
+    }
+
+    return result;
   }
 }

@@ -1,16 +1,11 @@
-import 'package:flutter/cupertino.dart';
-
 class Sport {
-
-  final IconData icon;
+  final int id;
+  final String icon;
   final String name;
 
-  Sport(this.icon, this.name);
+  Sport(this.id, this.icon, this.name);
   @override
   String toString() {
-    // TODO: implement toString
     return name;
   }
-
-
 }
