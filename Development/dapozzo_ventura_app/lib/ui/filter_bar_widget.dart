@@ -48,7 +48,7 @@ class _FilterBarState extends State<FilterBar> {
               fillColor: Color.fromARGB(0, 0, 0, 0),
               children: widget.sports.map((sport) {
                 return Icon(
-                  sport.icon,
+                  Icons.ac_unit,
                   size: 50,
                 );
               }).toList(),

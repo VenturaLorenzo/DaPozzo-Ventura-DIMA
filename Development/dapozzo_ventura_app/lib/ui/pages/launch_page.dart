@@ -41,7 +41,7 @@ class _LaunchPageState extends State<LaunchPage> {
     final dbHelper = DatabaseHelper.instance;
     List<CategoryModel> allCategories =
         await CategoryRepository.getAllCategories();
-    List<Sport> allSports = await dbHelper.getAllSports();
+    List<Sport> allSports = await dbHelper.querySports();
     await Future.delayed(Duration(seconds: 2));
     Navigator.pushReplacementNamed(context, "/home",
         arguments: Arguments(allSports, allCategories));
