@@ -15,4 +15,9 @@ class Vendor {
       this.image,
       this.rating,
       this.categories});
+  @override
+  String toString() {
+    // TODO: implement toString
+    return "VENDOR -> id: $id , name: $name, desc: $desc, image: $image, rating: $rating, categories: $categories";
+  }
 }

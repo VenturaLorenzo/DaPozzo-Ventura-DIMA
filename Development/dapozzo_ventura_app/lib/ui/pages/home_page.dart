@@ -48,7 +48,7 @@ class _HomeState extends State<Home> {
     //  categories= ModalRoute.of(context).settings.arguments;
 
     return Scaffold(
-      appBar: EquipAppBar(
+      appBar: EquipAppBar(size: MediaQuery.of(context).size.height/16,
         title: "eQuip",
       ),
       drawer: EquipNavigatorMenu(navigationTiles: [
@@ -63,7 +63,7 @@ class _HomeState extends State<Home> {
             backgroundColor: Colors.white,
             leading: Container(),
             floating: true,
-            expandedHeight: 250,
+            expandedHeight: MediaQuery.of(context).size.height/3.2,
             pinned: false,
             flexibleSpace: FilterBar(
               marketPlaceBloc: _marketPlaceBloc,

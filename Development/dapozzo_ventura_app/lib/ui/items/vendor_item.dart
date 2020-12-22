@@ -45,7 +45,7 @@ class VendorItem extends StatelessWidget {
                   Navigator.pushNamed(context, '/vendor', arguments: vendor);
                 },
                 child: Container(
-                    height: 250,
+                    height: MediaQuery.of(context).size.height/2.8,
                     child: ClipRRect(
                       child: Image.network(
                         'https://www.laccademiabjj.it/images/sfondi/${vendor.image}',

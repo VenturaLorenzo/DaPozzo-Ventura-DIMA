@@ -26,6 +26,7 @@ class _VendorPageState extends State<VendorPage> {
   List<bool> isSelectedCategory;
   List<bool> isSelectedGender = [false, false];
   List<CategoryModel> categories = [];
+
   @override
   void initState() {
     super.initState();
@@ -37,7 +38,7 @@ class _VendorPageState extends State<VendorPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: EquipAppBar(
+      appBar: EquipAppBar(size: MediaQuery.of(context).size.height/16,
         title: widget.vendor.name,
       ),
       drawer: EquipNavigatorMenu(
@@ -186,12 +187,12 @@ class _VendorPageState extends State<VendorPage> {
 
                 if (state is VendorStateSearched) {
                   return GoodTypologyList(
-                    goodsTypologies: state.result,
+                    goodsTypologies: state.goodTypologies,
                   );
                 }
                 if (state is VendorStateInitial) {
                   return GoodTypologyList(
-                    goodsTypologies: state.goodtypology,
+                    goodsTypologies: state.goodTypologies,
                   );
                 }
 

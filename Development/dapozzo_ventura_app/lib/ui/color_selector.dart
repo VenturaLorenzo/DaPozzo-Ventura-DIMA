@@ -1,23 +1,25 @@
 import 'package:dapozzo_ventura_app/business_logic/blocs/good_typology_bloc.dart';
 import 'package:dapozzo_ventura_app/business_logic/events/good_typology_event.dart';
+import 'package:dapozzo_ventura_app/data/models/color_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ColorSelector extends StatelessWidget {
-  final List<MaterialColor> colors;
-  final MaterialColor current;
+  final List<ColorModel> colors;
+  final ColorModel current;
 
   const ColorSelector({Key key, this.colors, this.current}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(mainAxisAlignment: MainAxisAlignment.start,
-      children: colors.map((color) {
-        if (color == current) {
+      children: colors.map((colorModel) {
+        Color color=new Color(int.parse(colorModel.code, radix: 16) + 0xFF000000);
+        if (colorModel == current) {
           return GestureDetector(onTap: () {
             BlocProvider.of<GoodTypologyBloc>(context).add(
-                GoodTypologyEventSearchGood(color));
+                GoodTypologyEventSearchGood(colorModel));
           },
             child: Padding(
               padding: const EdgeInsets.all(4.0),
@@ -27,7 +29,7 @@ class ColorSelector extends StatelessWidget {
                 decoration: new BoxDecoration(
                   border: Border.all(
                       color: Colors.black54, width: 5),
-                  color: color,
+                  color: new Color(int.parse(colorModel.code, radix: 16) + 0xFF000000),
                   shape: BoxShape.circle,
                 ),
               ),
@@ -36,7 +38,7 @@ class ColorSelector extends StatelessWidget {
         } else {
           return GestureDetector(onTap: () {
             BlocProvider.of<GoodTypologyBloc>(context).add(
-                GoodTypologyEventSearchGood(color));
+                GoodTypologyEventSearchGood(colorModel));
           },
             child: Padding(padding: const EdgeInsets.all(4.0),
               child: Container(

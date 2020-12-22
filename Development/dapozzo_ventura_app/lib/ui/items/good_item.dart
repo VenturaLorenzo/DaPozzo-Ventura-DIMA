@@ -30,7 +30,7 @@ class GoodItem extends StatelessWidget {
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(7),
                       topRight: Radius.circular(7)),
-                  child: Image.asset("lib/assets/" + image)),
+                  child: SizedBox.expand(child: FittedBox(fit: BoxFit.fill , child: Image.asset("lib/assets/" + "image2.jpg")))),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

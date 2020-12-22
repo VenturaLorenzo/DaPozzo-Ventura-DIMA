@@ -11,14 +11,14 @@ class GoodsTypologyRepository {
     var retVal = new List<GoodTypologyModel>();
 
     rawGoodsTypologies.forEach((row) => retVal.add(new GoodTypologyModel(
-        id: row["id"],
-        categoryId: row["goodsCategoryId"],
-        gender: row["gender"],
-        vendorId: row["vendorId"],
-        name: row["name"],
-        description: row["description"],
-        image: row["image"],
-        price: row["price"],
+        id: row[DatabaseHelper.columnId],
+        categoryId: row[DatabaseHelper.columnCategoryId],
+        gender: row[DatabaseHelper.columnGender],
+        vendorId: row[DatabaseHelper.columnVendorId],
+        name: row[DatabaseHelper.columnName],
+        description: row[DatabaseHelper.columnDescription],
+        image: row[DatabaseHelper.columnImage],
+        price: row[DatabaseHelper.columnPrice],
         categoryName: row["categoryName"])));
 
     return retVal;

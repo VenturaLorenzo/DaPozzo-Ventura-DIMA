@@ -560,6 +560,27 @@ class DatabaseHelper {
       columnSizeId: 4,
       columnQuantity: 100,
     };
+    Map<String, dynamic> good17 = {
+      columnId: 17,
+      columnTypologyId: 2,
+      columnColorId: 1,
+      columnSizeId: 4,
+      columnQuantity: 100,
+    };
+    Map<String, dynamic> good18 = {
+      columnId: 18,
+      columnTypologyId: 2,
+      columnColorId: 1,
+      columnSizeId: 4,
+      columnQuantity: 100,
+    };
+    Map<String, dynamic> good19 = {
+      columnId: 19,
+      columnTypologyId: 2,
+      columnColorId: 3,
+      columnSizeId:1,
+      columnQuantity: 120,
+    };
     await db.insert(tableGood, good1);
     await db.insert(tableGood, good2);
     await db.insert(tableGood, good3);
@@ -576,6 +597,10 @@ class DatabaseHelper {
     await db.insert(tableGood, good14);
     await db.insert(tableGood, good15);
     await db.insert(tableGood, good16);
+    await db.insert(tableGood, good17);
+    await db.insert(tableGood, good18);
+    await db.insert(tableGood, good19);
+
     print("Fine Inserimento dati tabella $tableGood");
   }
 
@@ -712,7 +737,7 @@ class DatabaseHelper {
   }
 
 /*   Future<List<SportModel>> querySports() async {
-    final List<SportModel> sports = [
+    final List<Sportodel> sports = [
       SportModel(1, "", "basket"),
       SportModel(1, "", "basket"),
       SportModel(1, "", "basket"),

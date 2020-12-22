@@ -2,6 +2,7 @@ import 'package:dapozzo_ventura_app/business_logic/blocs/cart_bloc.dart';
 import 'package:dapozzo_ventura_app/business_logic/blocs/good_typology_bloc.dart';
 import 'package:dapozzo_ventura_app/business_logic/events/cart_event.dart';
 import 'package:dapozzo_ventura_app/business_logic/events/good_typology_event.dart';
+import 'package:dapozzo_ventura_app/data/models/color_model.dart';
 import 'package:dapozzo_ventura_app/data/models/good_typology_model.dart';
 import 'package:dapozzo_ventura_app/states/good_typology_state.dart';
 import 'package:dapozzo_ventura_app/ui/color_selector.dart';
@@ -27,8 +28,8 @@ class _GoodTypologyPageState extends State<GoodTypologyPage> {
   GoodTypologyBloc _goodTypologyBloc;
   List<bool> isSelected;
 
-  List<MaterialColor> colors = [];
-  MaterialColor currentColor;
+  List<ColorModel> colors = [];
+  ColorModel currentColor;
   GoodTypologyModel goodTypology;
 
   @override
@@ -49,6 +50,8 @@ class _GoodTypologyPageState extends State<GoodTypologyPage> {
         leading: Builder(builder: (BuildContext context) {
           return IconButton(
               onPressed: () {
+                BlocProvider.of<GoodTypologyBloc>(context)
+                    .add(GoodTypologyEventClear());
                 Navigator.pop(context);
               },
               icon: Icon(Icons.arrow_back));
@@ -63,45 +66,59 @@ class _GoodTypologyPageState extends State<GoodTypologyPage> {
           SizedBox(
             height: 15,
           ),
-          RaisedButton(
-            child: Text("Add to cart"),
-            onPressed: () {
-              _cartBloc.add(CartAddEvent(goodTypology.name));
-              _showSuccesPopup();
+          BlocBuilder<GoodTypologyBloc, GoodTypologyState>(
+            builder: (context, state) {
+              if (state is GoodTypologyStateOutOfStock) {
+                return SizedBox(
+                  height: 10,
+                );
+              } else {
+                return Column(
+                  children: [
+                    RaisedButton(
+                      child: Text("Add to cart"),
+                      onPressed: () {
+                        _cartBloc.add(CartAddEvent(goodTypology.name));
+                        _showSuccesPopup();
+                      },
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Column(
+                          children: [
+                            Text("Size"),
+                            SizedBox(
+                              height: 10,
+                            )
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Text("Q.ty"),
+                            SizedBox(
+                              height: 10,
+                            )
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Text("Price"),
+                            SizedBox(
+                              height: 7,
+                            ),
+                            Text(goodTypology.price.toString()),
+                          ],
+                        )
+                      ],
+                    ),
+                  ],
+                );
+              }
             },
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Column(
-                children: [
-                  Text("Size"),
-                  SizedBox(
-                    height: 10,
-                  )
-                ],
-              ),
-              Column(
-                children: [
-                  Text("Q.ty"),
-                  SizedBox(
-                    height: 10,
-                  )
-                ],
-              ),
-              Column(
-                children: [
-                  Text("Price"),
-                  SizedBox(
-                    height: 7,
-                  ),
-                  Text(goodTypology.price.toString()),
-                ],
-              )
-            ],
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
@@ -110,21 +127,27 @@ class _GoodTypologyPageState extends State<GoodTypologyPage> {
                 if (state is GoodTypologyUninitializedState) {
                   return Column();
                 } else {
-                  if (state is GoodTypologyLoadingState) {
-                    return ColorSelector(
-                      colors: colors,
-                      current: currentColor,
+                  if (state is GoodTypologyStateOutOfStock) {
+                    return SizedBox(
+                      height: 20,
                     );
                   } else {
-                    if (state is GoodTypologyCurrentState) {
-                      colors = state.colors;
-                      currentColor = state.currentSearch;
+                    if (state is GoodTypologyLoadingState) {
                       return ColorSelector(
-                        colors: state.colors,
-                        current: state.currentSearch,
+                        colors: colors,
+                        current: currentColor,
                       );
                     } else {
-                      return Text("STATO DI ERRORE GOODTYPOLOGYBLOC");
+                      if (state is GoodTypologyCurrentState) {
+                        colors = state.colors;
+                        currentColor = state.currentSearch;
+                        return ColorSelector(
+                          colors: state.colors,
+                          current: state.currentSearch,
+                        );
+                      } else {
+                        return Text("STATO DI ERRORE GOODTYPOLOGYBLOC");
+                      }
                     }
                   }
                 }
@@ -136,16 +159,25 @@ class _GoodTypologyPageState extends State<GoodTypologyPage> {
               if (state is GoodTypologyLoadingState) {
                 return Center(child: CircularProgressIndicator());
               } else {
-                if (state is GoodTypologyCurrentState) {
-                  return Expanded(
-                    child: Container(
-                      child: GoodImagesList(
-                        images: state.goods[0].images,
-                      ),
+                if (state is GoodTypologyStateOutOfStock) {
+                  return Center(
+                    child: Text(
+                      "OUT OF STOCK",
+                      style: TextStyle(color: Colors.red),
                     ),
                   );
                 } else {
-                  return Text("ERROR WITH GOODTYPOLOGYBLOC");
+                  if (state is GoodTypologyCurrentState) {
+                    return Expanded(
+                      child: Container(
+                        child: GoodImagesList(
+                          images: state.goods[0].images,
+                        ),
+                      ),
+                    );
+                  } else {
+                    return Text("ERROR WITH GOODTYPOLOGYBLOC");
+                  }
                 }
               }
             },

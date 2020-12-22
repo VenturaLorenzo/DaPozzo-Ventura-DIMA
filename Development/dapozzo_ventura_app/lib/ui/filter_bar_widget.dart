@@ -49,7 +49,7 @@ class _FilterBarState extends State<FilterBar> {
               children: widget.sports.map((sport) {
                 return Icon(
                   Icons.favorite,
-                  size: 50,
+                  size: MediaQuery.of(context).size.width/7,
                 );
               }).toList(),
               onPressed: (int index) {
