@@ -1,20 +1,15 @@
-import 'package:dapozzo_ventura_app/data/models/category_model.dart';
 import 'package:dapozzo_ventura_app/data/models/vendor_model.dart';
 
 abstract class VendorEvent {}
 
-class VendorEventCategorySearch extends VendorEvent {
-  final CategoryModel category;
-  final Vendor vendor;
+class VendorEventSearch extends VendorEvent {
+  final int gender;
+  final List<int> categories;
+  final int vendorId;
 
-  VendorEventCategorySearch(this.category, this.vendor);
+  VendorEventSearch(this.categories, this.gender, this.vendorId);
 }
-class VendorEventGenderSearch extends VendorEvent {
-  final String gender;
-  final Vendor vendor;
 
-  VendorEventGenderSearch(this.gender, this.vendor);
-}
 class VendorEventInit extends VendorEvent {
   final Vendor vendor;
 

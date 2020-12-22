@@ -678,7 +678,7 @@ class DatabaseHelper {
 
     List<Map> result;
 
-    var whereString = "WHERE $tableTypology.$columnVendorId=$vendorId";
+    var whereString = " WHERE $tableTypology.$columnVendorId=$vendorId";
 
     if (genderFilter > -1) {
       whereString += " AND ($columnGender = ${genderFilter.toString()})";

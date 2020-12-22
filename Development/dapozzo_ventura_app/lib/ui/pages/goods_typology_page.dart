@@ -5,7 +5,6 @@ import 'package:dapozzo_ventura_app/business_logic/events/good_typology_event.da
 import 'package:dapozzo_ventura_app/data/models/good_typology_model.dart';
 import 'package:dapozzo_ventura_app/states/good_typology_state.dart';
 import 'package:dapozzo_ventura_app/ui/color_selector.dart';
-import 'package:dapozzo_ventura_app/ui/eQuip_appbar.dart';
 import 'package:dapozzo_ventura_app/ui/lists/good_images_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -160,7 +159,8 @@ class _GoodTypologyPageState extends State<GoodTypologyPage> {
     Future.delayed(Duration(milliseconds: 2000), () {
       Navigator.pop(context);
     });
-    return showDialog<void>(barrierColor: Colors.black54.withOpacity(0.02),
+    return showDialog<void>(
+      barrierColor: Colors.black54.withOpacity(0.02),
       context: context,
       barrierDismissible: true, // user must tap button!
       builder: (BuildContext context) {

@@ -41,34 +41,41 @@ class _VendorPageState extends State<VendorPage> {
         title: widget.vendor.name,
       ),
       drawer: EquipNavigatorMenu(
-        navigationTiles:  [
-                ListTile(
-                  title: Text("Torna a eQuip"),
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.pop(context);
-                  },
-                ),
-                Divider(color: Colors.black87,height: 5,),
-                ListTile(
-                  title: Text("Vai al tuo Profilo"),
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.pushNamed(context, "/profile");
-                  },
-                ),
-
-                Divider(color: Colors.black87,height: 5,),
-                ListTile(
-                  title: Text("Vai al profilo dello Shop"),
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.pushNamed(context, "/vendor_profile",arguments: widget.vendor);
-                  },
-                ),
-          Divider(color: Colors.black87,height: 5,),
-
-
+        navigationTiles: [
+          ListTile(
+            title: Text("Torna a eQuip"),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.pop(context);
+            },
+          ),
+          Divider(
+            color: Colors.black87,
+            height: 5,
+          ),
+          ListTile(
+            title: Text("Vai al tuo Profilo"),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.pushNamed(context, "/profile");
+            },
+          ),
+          Divider(
+            color: Colors.black87,
+            height: 5,
+          ),
+          ListTile(
+            title: Text("Vai al profilo dello Shop"),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.pushNamed(context, "/vendor_profile",
+                  arguments: widget.vendor);
+            },
+          ),
+          Divider(
+            color: Colors.black87,
+            height: 5,
+          ),
         ],
       ),
       body: Padding(
@@ -85,64 +92,92 @@ class _VendorPageState extends State<VendorPage> {
                 borderColor: Color.fromARGB(0, 0, 0, 0),
                 fillColor: Color.fromARGB(0, 0, 0, 0),
                 children: categories.map((category) {
-                  return new Icon(Icons.ac_unit,
-                      //category.icon,
-
-                      size: 70);
+                  return new Icon(Icons.ac_unit, size: 70);
                 }).toList(),
                 onPressed: (int index) {
-                  //MANDO L'EVENTO
-                  BlocProvider.of<VendorBloc>(context).add(
-                      VendorEventCategorySearch(
-                          categories[index], widget.vendor));
-
                   //CAMBIO L?ICONA VISIVAMENTE
                   setState(() {
                     isSelectedCategory[index] = !isSelectedCategory[index];
+
+                    //MANDO L'EVENTO
+                    BlocProvider.of<VendorBloc>(context).add(VendorEventSearch(
+                        getSelectedCategories(),
+                        getSelectedGender(),
+                        widget.vendor.id));
                   });
                 },
                 isSelected: isSelectedCategory,
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text('Scroll our Item List',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w300,
-                        ))),
-                Padding(
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+              Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text('Scroll our Item List',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w300,
+                      ))),
+              Padding(
                   padding: EdgeInsets.all(8),
-                  child: Row(children: [
-                    ToggleButtons(
-                        children: [Text("Uomo")],
-                        fillColor: Color.fromRGBO(33, 150, 243, 1),
-                        selectedBorderColor: Color.fromRGBO(33, 150, 243, 1),
-                        selectedColor: Colors.white,
-                        onPressed: (int index) {
-                          setState(() {
-                            swapGender("MALE");
-                          });
-                        },
-                        isSelected: [isSelectedGender[0]]),
-                    ToggleButtons(
-                        children: [Text("Donna")],
-                        fillColor: Color.fromRGBO(255, 45, 85, 1),
-                        selectedBorderColor: Color.fromRGBO(255, 45, 85, 1),
-                        selectedColor: Colors.white,
-                        onPressed: (int index) {
-                          setState(() {
-                            swapGender("FEMALE");
-                          });
-                        },
-                        isSelected: [isSelectedGender[1]])
-                  ]),
-                ),
-              ],
-            ),
+                  child: Container(
+                      height: 35,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey[300],
+                              offset: Offset(4.0, 4.0),
+                              blurRadius: 5.0,
+                              spreadRadius: 1,
+                            ),
+                          ]),
+                      child: Row(children: [
+                        ToggleButtons(
+                            children: [
+                              Padding(
+                                  padding: const EdgeInsets.all(5),
+                                  child: Text("Uomo",
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w300,
+                                      )))
+                            ],
+                            borderColor: Colors.grey[200],
+                            fillColor: Color.fromRGBO(33, 150, 243, 1),
+                            selectedBorderColor:
+                                Color.fromRGBO(33, 150, 243, 1),
+                            selectedColor: Colors.white,
+                            onPressed: (int index) {
+                              setState(() {
+                                swapGender(0);
+                              });
+                            },
+                            isSelected: [isSelectedGender[0]]),
+                        ToggleButtons(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(5),
+                                child: Text("Donna",
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w300,
+                                    )),
+                              )
+                            ],
+                            borderColor: Colors.grey[200],
+                            fillColor: Color.fromRGBO(255, 45, 85, 1),
+                            selectedBorderColor: Color.fromRGBO(255, 45, 85, 1),
+                            selectedColor: Colors.white,
+                            onPressed: (int index) {
+                              setState(() {
+                                swapGender(1);
+                              });
+                            },
+                            isSelected: [isSelectedGender[1]])
+                      ])))
+            ]),
             BlocBuilder<VendorBloc, VendorState>(
               builder: (context, state) {
                 if (state is VendorStateGeneralError) {
@@ -174,38 +209,38 @@ class _VendorPageState extends State<VendorPage> {
     );
   }
 
-  void swapGender(String gender) {
+  void swapGender(int index) {
     //-------LOGICA CHE CAMBIA isSelectedGender--------
-    if (gender == "MALE") {
-      isSelectedGender[0] = !isSelectedGender[0];
-      if (isSelectedGender[1]) {
-        isSelectedGender[1] = false;
-      }
-    }
-    if (gender == "FEMALE") {
-      isSelectedGender[1] = !isSelectedGender[1];
-      if (isSelectedGender[0]) {
-        isSelectedGender[0] = false;
-      }
-    }
 
-    //--------------------------------------------------
+    isSelectedGender[index] = !isSelectedGender[index];
+    isSelectedGender[(index + 1) % 2] = false;
 
     //-------LOGICA CHE MANDA L?EVENTO AL BLOC IN BASE A isSelectedGender-
 
+    BlocProvider.of<VendorBloc>(context).add(VendorEventSearch(
+        getSelectedCategories(), getSelectedGender(), widget.vendor.id));
+    //----------------------------------------------------------
+  }
+
+  int getSelectedGender() {
+    var retVal = -1;
     if (isSelectedGender[0]) {
-      BlocProvider.of<VendorBloc>(context)
-          .add(VendorEventGenderSearch("MALE", widget.vendor));
+      retVal = 0;
     }
     if (isSelectedGender[1]) {
-      BlocProvider.of<VendorBloc>(context)
-          .add(VendorEventGenderSearch("FEMALE", widget.vendor));
+      retVal = 1;
     }
-    if (!isSelectedGender[0] && !isSelectedGender[1]) {
-      BlocProvider.of<VendorBloc>(context)
-          .add(VendorEventGenderSearch("NONE", widget.vendor));
+    return retVal;
+  }
+
+  List<int> getSelectedCategories() {
+    var selectedCategories = new List<int>();
+    for (var i = 0; i < this.isSelectedCategory.length; i++) {
+      if (this.isSelectedCategory[i]) {
+        selectedCategories.add(this.categories[i].id);
+      }
     }
 
-    //----------------------------------------------------------
+    return selectedCategories;
   }
 }

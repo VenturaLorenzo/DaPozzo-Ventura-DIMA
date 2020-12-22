@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class FilterBar extends StatefulWidget {
   final marketPlaceBloc;
   final List<CategoryModel> categories;
-  final List<Sport> sports;
+  final List<SportModel> sports;
 
   const FilterBar({this.marketPlaceBloc, this.categories, this.sports});
 
@@ -48,7 +48,7 @@ class _FilterBarState extends State<FilterBar> {
               fillColor: Color.fromARGB(0, 0, 0, 0),
               children: widget.sports.map((sport) {
                 return Icon(
-                  sport.icon,
+                  Icons.favorite,
                   size: 50,
                 );
               }).toList(),

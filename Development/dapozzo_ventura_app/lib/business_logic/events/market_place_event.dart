@@ -9,7 +9,7 @@ class MarketPlaceSearchCategory extends MarketPlaceEvent {
 }
 
 class MarketPlaceSearchSport extends MarketPlaceEvent {
-  final Sport sport;
+  final SportModel sport;
 
   MarketPlaceSearchSport(this.sport);
 }

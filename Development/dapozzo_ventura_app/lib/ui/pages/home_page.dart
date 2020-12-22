@@ -26,7 +26,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   var _marketPlaceBloc;
   List<CategoryModel> categories;
-  List<Sport> sports;
+  List<SportModel> sports;
 
   var _cartBloc;
 
@@ -51,9 +51,12 @@ class _HomeState extends State<Home> {
       appBar: EquipAppBar(
         title: "eQuip",
       ),
-      drawer: EquipNavigatorMenu(
-        navigationTiles: [Column(mainAxisAlignment: MainAxisAlignment.spaceBetween,children: [],
-      )]),
+      drawer: EquipNavigatorMenu(navigationTiles: [
+        Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [],
+        )
+      ]),
       body: CustomScrollView(
         slivers: [
           SliverAppBar(

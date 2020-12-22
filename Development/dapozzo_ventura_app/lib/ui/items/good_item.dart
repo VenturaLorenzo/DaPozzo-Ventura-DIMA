@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-
 class GoodItem extends StatelessWidget {
   final String image;
 
@@ -9,7 +8,8 @@ class GoodItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(padding: EdgeInsets.fromLTRB(16,8,16,8),
+    return Padding(
+      padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
       child: Container(
         decoration: BoxDecoration(
             color: Colors.white,
@@ -24,11 +24,13 @@ class GoodItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(7)),
         child: Column(
           children: [
-            Container(height: 180,
+            Container(
+              height: 180,
               child: ClipRRect(
                   borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(7), topRight: Radius.circular(7)),
-                  child: FittedBox(fit: BoxFit.fill,child: Image.asset("lib/assets/" + image))),
+                      topLeft: Radius.circular(7),
+                      topRight: Radius.circular(7)),
+                  child: Image.asset("lib/assets/" + image)),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

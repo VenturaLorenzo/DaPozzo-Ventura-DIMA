@@ -4,10 +4,10 @@ import 'package:dapozzo_ventura_app/data/providers/database_helper.dart';
 class CategoryRepository {
   static Future<List<CategoryModel>> getAllCategories() async {
     var db = DatabaseHelper.instance;
-    List<Map> rawGoodsTypologies = await db.getAllCategories();
+    List<Map> rawGoodsCategories = await db.getAllCategories();
     var retVal = new List<CategoryModel>();
 
-    rawGoodsTypologies.forEach((row) => retVal.add(
+    rawGoodsCategories.forEach((row) => retVal.add(
         CategoryModel(id: row["id"], name: row["name"], icon: row["icon"])));
 
     return retVal;

@@ -2,6 +2,7 @@ import 'package:dapozzo_ventura_app/data/models/category_model.dart';
 import 'package:dapozzo_ventura_app/data/models/sport_model.dart';
 import 'package:dapozzo_ventura_app/data/providers/database_helper.dart';
 import 'package:dapozzo_ventura_app/data/repositories/category_repository.dart';
+import 'package:dapozzo_ventura_app/data/repositories/sport_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +42,7 @@ class _LaunchPageState extends State<LaunchPage> {
     final dbHelper = DatabaseHelper.instance;
     List<CategoryModel> allCategories =
         await CategoryRepository.getAllCategories();
-    List<Sport> allSports = await dbHelper.getAllSports();
+    List<SportModel> allSports = await SportRepository.getAllSports();
     await Future.delayed(Duration(seconds: 2));
     Navigator.pushReplacementNamed(context, "/home",
         arguments: Arguments(allSports, allCategories));
@@ -51,7 +52,7 @@ class _LaunchPageState extends State<LaunchPage> {
 
 class Arguments {
   final List<CategoryModel> allCategories;
-  final List<Sport> allSports;
+  final List<SportModel> allSports;
 
   Arguments(this.allSports, this.allCategories);
 }
