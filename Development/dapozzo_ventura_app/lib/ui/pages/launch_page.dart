@@ -39,11 +39,9 @@ class _LaunchPageState extends State<LaunchPage> {
   void _appInitialization() async {
     print('LaunchState _appInitialization begin');
     // simulate some time consuming initialization task
-    final dbHelper = DatabaseHelper.instance;
     List<CategoryModel> allCategories =
         await CategoryRepository.getAllCategories();
-    List<Sport> allSports = await dbHelper.querySports();
-    await Future.delayed(Duration(seconds: 2));
+    List<SportModel> allSports = await SportRepository.getAllSports();
     Navigator.pushReplacementNamed(context, "/home",
         arguments: Arguments(allSports, allCategories));
     print('LaunchState _appInitialization end');

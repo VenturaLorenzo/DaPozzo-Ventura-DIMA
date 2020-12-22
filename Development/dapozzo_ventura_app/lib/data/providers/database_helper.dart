@@ -711,20 +711,21 @@ class DatabaseHelper {
     return result;
   }
 
-  Future<List<Sport>> querySports() async {
-    final List<Sport> sports = [
-      Sport(1,"", "basket"),
-      Sport(1,"", "basket"),
-      Sport(1,"", "basket"),
-      Sport(1,"", "basket"),
-      Sport(1,"", "basket"),
-      Sport(1,"", "basket"),
-      Sport(1,"", "basket"),
-      Sport(1,"", "basket"),
-      Sport(1,"", "basket"),
+/*   Future<List<SportModel>> querySports() async {
+    final List<SportModel> sports = [
+      SportModel(1, "", "basket"),
+      SportModel(1, "", "basket"),
+      SportModel(1, "", "basket"),
+      SportModel(1, "", "basket"),
+      SportModel(1, "", "basket"),
+      SportModel(1, "", "basket"),
+      SportModel(1, "", "basket"),
+      SportModel(1, "", "basket"),
+      SportModel(1, "", "basket"),
     ];
     return sports;
-  }
+  } */
+
   Future<List<Map>> getColorsByTypology(int typologyId) async {
     Database db = await instance.database;
 
