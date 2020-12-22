@@ -1,3 +1,4 @@
+import 'package:dapozzo_ventura_app/data/models/sport_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
@@ -710,6 +711,20 @@ class DatabaseHelper {
     return result;
   }
 
+  Future<List<Sport>> querySports() async {
+    final List<Sport> sports = [
+      Sport(1,"", "basket"),
+      Sport(1,"", "basket"),
+      Sport(1,"", "basket"),
+      Sport(1,"", "basket"),
+      Sport(1,"", "basket"),
+      Sport(1,"", "basket"),
+      Sport(1,"", "basket"),
+      Sport(1,"", "basket"),
+      Sport(1,"", "basket"),
+    ];
+    return sports;
+  }
   Future<List<Map>> getColorsByTypology(int typologyId) async {
     Database db = await instance.database;
 
