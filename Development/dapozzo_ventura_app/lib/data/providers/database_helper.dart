@@ -654,7 +654,7 @@ class DatabaseHelper {
       columnId: 20,
       columnTypologyId: 8,
       columnColorId: 3,
-      columnSizeId: 4,
+      columnSizeId: 3,
       columnQuantity: 100,
     };
     Map<String, dynamic> good21 = {
@@ -910,7 +910,7 @@ class DatabaseHelper {
   }
 
 /*   Future<List<SportModel>> querySports() async {
-    final List<SportModel> sports = [
+    final List<Sportodel> sports = [
       SportModel(1, "", "basket"),
       SportModel(1, "", "basket"),
       SportModel(1, "", "basket"),

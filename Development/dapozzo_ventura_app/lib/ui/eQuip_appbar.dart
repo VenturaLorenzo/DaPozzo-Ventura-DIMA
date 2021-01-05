@@ -9,24 +9,26 @@ import 'cart_icon.dart';
 
 class EquipAppBar extends StatelessWidget implements PreferredSize {
   final String title;
+  final double size;
 
-  const EquipAppBar({Key key,@required this.title}) : super(key: key);
+  const EquipAppBar({Key key,@required this.title, this.size}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return AppBar(
+    return  AppBar(
 
-      backgroundColor: Colors.black87,
-      centerTitle: true,
-      leading: Builder(builder: (BuildContext context){
+        backgroundColor: Colors.black87,
+        centerTitle: true,
+        leading: Builder(builder: (BuildContext context){
 
-        return  IconButton(onPressed:() {
-          Scaffold.of(context).openDrawer();
-        } ,icon: Icon(Icons.menu));
-      }),
-      actions: [
-        CartIcon(),
-      ],
-      title: Text(title),
+          return  IconButton(onPressed:() {
+            Scaffold.of(context).openDrawer();
+          } ,icon: Icon(Icons.menu,size: MediaQuery.of(context).size.width/16,));
+        }),
+        actions: [
+          CartIcon(),
+        ],
+        title: Text(title),
+
     );
   }
 
@@ -37,6 +39,6 @@ class EquipAppBar extends StatelessWidget implements PreferredSize {
   @override
   // TODO: implement preferredSize
   Size get preferredSize {
-    return Size.fromHeight(45.0);
+    return Size.fromHeight(size);
   }
 }

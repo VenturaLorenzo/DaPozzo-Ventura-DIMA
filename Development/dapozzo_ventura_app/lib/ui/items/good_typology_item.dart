@@ -26,6 +26,7 @@ class GoodsTypologyItem extends StatelessWidget {
             ]),
         child: FlatButton(
           onPressed: () {
+            print(goodsTypology);
             Navigator.pushNamed(context, "/goodtypology",
                 arguments: goodsTypology);
           },

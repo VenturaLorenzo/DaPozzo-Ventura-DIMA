@@ -2,6 +2,7 @@ import 'package:dapozzo_ventura_app/business_logic/blocs/cart_bloc.dart';
 import 'package:dapozzo_ventura_app/business_logic/blocs/good_typology_bloc.dart';
 import 'package:dapozzo_ventura_app/business_logic/events/cart_event.dart';
 import 'package:dapozzo_ventura_app/business_logic/events/good_typology_event.dart';
+import 'package:dapozzo_ventura_app/data/models/color_model.dart';
 import 'package:dapozzo_ventura_app/data/models/good_typology_model.dart';
 import 'package:dapozzo_ventura_app/states/good_typology_state.dart';
 import 'package:dapozzo_ventura_app/ui/color_selector.dart';
@@ -27,8 +28,8 @@ class _GoodTypologyPageState extends State<GoodTypologyPage> {
   GoodTypologyBloc _goodTypologyBloc;
   List<bool> isSelected;
 
-  List<MaterialColor> colors = [];
-  MaterialColor currentColor;
+  List<ColorModel> colors = [];
+  ColorModel currentColor;
   GoodTypologyModel goodTypology;
 
   @override
@@ -49,6 +50,8 @@ class _GoodTypologyPageState extends State<GoodTypologyPage> {
         leading: Builder(builder: (BuildContext context) {
           return IconButton(
               onPressed: () {
+                BlocProvider.of<GoodTypologyBloc>(context)
+                    .add(GoodTypologyEventClear());
                 Navigator.pop(context);
               },
               icon: Icon(Icons.arrow_back));
@@ -110,6 +113,7 @@ class _GoodTypologyPageState extends State<GoodTypologyPage> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(7.5),
+
                   child: Container(
                       decoration: BoxDecoration(
                           color: Colors.white,
