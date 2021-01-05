@@ -8,18 +8,12 @@ class GoodImagesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+        scrollDirection: Axis.horizontal,
         itemCount: images.length,
         itemBuilder: (context, index) {
           return GoodItem(
             image: images[index],
           );
         });
-    // return Column(
-    //   children: images.map((image) {
-    //     return GoodItem(
-    //       image: image,
-    //     );
-    //   }).toList(),
-    // );
   }
 }

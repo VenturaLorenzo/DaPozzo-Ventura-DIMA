@@ -22,11 +22,12 @@ class VendorRepository {
     return retVal;
   }
 
-  static Future<List<Vendor>> getVendorsByTextAndCategory(
-      List<int> categories, String text) async {
+  static Future<List<Vendor>> getVendorsByFiters(
+      List<int> categories, String text, List<int> sports) async {
     var dbHelper = DatabaseHelper.instance;
 
-    List<Map> allVendorRows = await dbHelper.getVendors(text, categories);
+    List<Map> allVendorRows =
+        await dbHelper.getVendorsByCategorySportText(text, categories, sports);
     List<Vendor> retVal = [];
 
     allVendorRows.forEach((row) {

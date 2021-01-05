@@ -34,9 +34,12 @@ class _FilterBarState extends State<FilterBar> {
       background: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            "Sports",
-            style: TextStyle(fontWeight: FontWeight.bold),
+          Padding(
+            padding: EdgeInsets.fromLTRB(5, 5, 5, 0),
+            child: Text(
+              "Sports",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
           ),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
@@ -62,9 +65,12 @@ class _FilterBarState extends State<FilterBar> {
               isSelected: isSelectedSport,
             ),
           ),
-          Text(
-            "Categories",
-            style: TextStyle(fontWeight: FontWeight.bold),
+          Padding(
+            padding: EdgeInsets.fromLTRB(5, 5, 5, 0),
+            child: Text(
+              "Categories",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
           ),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,

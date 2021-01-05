@@ -183,9 +183,17 @@ class DatabaseHelper {
       columnImage: 'SfondoNicola002.jpg',
       columnRating: '4.2'
     };
+    Map<String, dynamic> vendor3 = {
+      columnId: 3,
+      columnName: 'Patagonia',
+      columnDescription: 'Be Natural',
+      columnImage: 'SfondoMauro003.jpg',
+      columnRating: '4.8'
+    };
 
     await db.insert(tableVendor, vendor1);
     await db.insert(tableVendor, vendor2);
+    await db.insert(tableVendor, vendor3);
     print("inserimento dati tabella $tableVendor TERMINATO");
 
     /*TABELLA GOOD_TYPOLOGY*/
@@ -260,6 +268,27 @@ class DatabaseHelper {
       columnDescription: '1.5 kg , disponibile anche Rosa',
       columnPrice: '100'
     };
+    Map<String, dynamic> goodsTypology8 = {
+      columnId: 8,
+      columnVendorId: 3,
+      columnCategoryId: 7,
+      columnGender: 0,
+      columnImage:
+          'https://www.patagonia.com/dw/image/v2/BDJB_PRD/on/demandware.static/-/Sites-patagonia-master/default/dw3b35cee4/images/hi-res/34540_FGE.jpg?sw=500&sh=500&sfrm=png&q=95&bgcolor=f6f6f6',
+      columnName: 'Capinele Midweight Liner Gloves',
+      columnDescription: 'con tessuto riciclato',
+      columnPrice: '45'
+    };
+    Map<String, dynamic> goodsTypology9 = {
+      columnId: 9,
+      columnVendorId: 1,
+      columnCategoryId: 5,
+      columnGender: 0,
+      columnImage: 'FelpaCompetition.jpg',
+      columnName: 'Competition Team',
+      columnDescription: 'Produzione Italiana',
+      columnPrice: '40'
+    };
 
     await db.insert(tableTypology, goodsTypology1);
     await db.insert(tableTypology, goodsTypology2);
@@ -268,6 +297,8 @@ class DatabaseHelper {
     await db.insert(tableTypology, goodsTypology5);
     await db.insert(tableTypology, goodsTypology6);
     await db.insert(tableTypology, goodsTypology7);
+    await db.insert(tableTypology, goodsTypology8);
+    await db.insert(tableTypology, goodsTypology9);
     print("Fine inserimento dati tabella $tableTypology");
 
     /*TABELLA CATEGORY*/
@@ -275,32 +306,37 @@ class DatabaseHelper {
     Map<String, dynamic> goodsCategory1 = {
       columnId: 1,
       columnName: 'Maglietta',
-      columnIcon: 'ac_unit'
+      columnIcon: 'ac_unit.png'
     };
     Map<String, dynamic> goodsCategory2 = {
       columnId: 2,
       columnName: 'Pantaloncino',
-      columnIcon: 'cake'
+      columnIcon: 'pantaloncino.png'
     };
     Map<String, dynamic> goodsCategory3 = {
       columnId: 3,
       columnName: 'Kimono',
-      columnIcon: 'backspace'
+      columnIcon: 'kimono.png'
     };
     Map<String, dynamic> goodsCategory4 = {
       columnId: 4,
       columnName: 'Cintura',
-      columnIcon: 'dashboard'
+      columnIcon: 'cintura.png'
     };
     Map<String, dynamic> goodsCategory5 = {
       columnId: 5,
       columnName: 'Felpa',
-      columnIcon: 'face'
+      columnIcon: 'felpa.png'
     };
     Map<String, dynamic> goodsCategory6 = {
       columnId: 6,
       columnName: 'Tuta',
-      columnIcon: 'favorite'
+      columnIcon: 'tuta.png'
+    };
+    Map<String, dynamic> goodsCategory7 = {
+      columnId: 7,
+      columnName: 'Gloves',
+      columnIcon: 'gloves.png'
     };
 
     await db.insert(tableCategory, goodsCategory1);
@@ -309,6 +345,7 @@ class DatabaseHelper {
     await db.insert(tableCategory, goodsCategory4);
     await db.insert(tableCategory, goodsCategory5);
     await db.insert(tableCategory, goodsCategory6);
+    await db.insert(tableCategory, goodsCategory7);
     print("Fine inserimento dati tabella $tableCategory");
 
     /*TABELLA VENDOR CATEGORY*/
@@ -337,6 +374,14 @@ class DatabaseHelper {
       columnVendorId: 2,
       columnCategoryId: 1,
     };
+    Map<String, dynamic> vendorCategory7 = {
+      columnVendorId: 3,
+      columnCategoryId: 7,
+    };
+    Map<String, dynamic> vendorCategory8 = {
+      columnVendorId: 1,
+      columnCategoryId: 5,
+    };
 
     await db.insert(tableVendorCategory, vendorCategory1);
     await db.insert(tableVendorCategory, vendorCategory2);
@@ -344,6 +389,8 @@ class DatabaseHelper {
     await db.insert(tableVendorCategory, vendorCategory4);
     await db.insert(tableVendorCategory, vendorCategory5);
     await db.insert(tableVendorCategory, vendorCategory6);
+    await db.insert(tableVendorCategory, vendorCategory7);
+    await db.insert(tableVendorCategory, vendorCategory8);
     print("Fine Inserimento dati tabella $tableVendorCategory");
 
     /*TABELLA SPORT*/
@@ -368,11 +415,23 @@ class DatabaseHelper {
       columnName: 'Tennnis',
       columnIcon: 'favorite'
     };
+    Map<String, dynamic> sport5 = {
+      columnId: 5,
+      columnName: 'Montagna',
+      columnIcon: 'favorite'
+    };
+    Map<String, dynamic> sport6 = {
+      columnId: 6,
+      columnName: 'Funzionale',
+      columnIcon: 'favorite'
+    };
 
     await db.insert(tableSport, sport1);
     await db.insert(tableSport, sport2);
     await db.insert(tableSport, sport3);
     await db.insert(tableSport, sport4);
+    await db.insert(tableSport, sport5);
+    await db.insert(tableSport, sport6);
     print("Fine Inserimento dati tabella $tableSport");
 
     /*TABELLA VENDOR SPORT*/
@@ -385,8 +444,18 @@ class DatabaseHelper {
       columnVendorId: 2,
       columnSportId: 2,
     };
+    Map<String, dynamic> vendorSport3 = {
+      columnVendorId: 3,
+      columnSportId: 5,
+    };
+    Map<String, dynamic> vendorSport4 = {
+      columnVendorId: 1,
+      columnSportId: 6,
+    };
     await db.insert(tableVendorSport, vendorSport1);
     await db.insert(tableVendorSport, vendorSport2);
+    await db.insert(tableVendorSport, vendorSport3);
+    await db.insert(tableVendorSport, vendorSport4);
     print("Fine Inserimento dati tabella $tableVendorSport");
 
     /*TABELLA COLOR*/
@@ -560,6 +629,119 @@ class DatabaseHelper {
       columnSizeId: 4,
       columnQuantity: 100,
     };
+    Map<String, dynamic> good17 = {
+      columnId: 17,
+      columnTypologyId: 8,
+      columnColorId: 3,
+      columnSizeId: 1,
+      columnQuantity: 100,
+    };
+    Map<String, dynamic> good18 = {
+      columnId: 18,
+      columnTypologyId: 8,
+      columnColorId: 3,
+      columnSizeId: 2,
+      columnQuantity: 100,
+    };
+    Map<String, dynamic> good19 = {
+      columnId: 19,
+      columnTypologyId: 8,
+      columnColorId: 3,
+      columnSizeId: 3,
+      columnQuantity: 100,
+    };
+    Map<String, dynamic> good20 = {
+      columnId: 20,
+      columnTypologyId: 8,
+      columnColorId: 3,
+      columnSizeId: 4,
+      columnQuantity: 100,
+    };
+    Map<String, dynamic> good21 = {
+      columnId: 21,
+      columnTypologyId: 8,
+      columnColorId: 1,
+      columnSizeId: 1,
+      columnQuantity: 100,
+    };
+    Map<String, dynamic> good22 = {
+      columnId: 22,
+      columnTypologyId: 8,
+      columnColorId: 1,
+      columnSizeId: 2,
+      columnQuantity: 100,
+    };
+    Map<String, dynamic> good23 = {
+      columnId: 23,
+      columnTypologyId: 8,
+      columnColorId: 1,
+      columnSizeId: 3,
+      columnQuantity: 100,
+    };
+    Map<String, dynamic> good24 = {
+      columnId: 24,
+      columnTypologyId: 8,
+      columnColorId: 1,
+      columnSizeId: 4,
+      columnQuantity: 100,
+    };
+    Map<String, dynamic> good25 = {
+      columnId: 25,
+      columnTypologyId: 9,
+      columnColorId: 3,
+      columnSizeId: 1,
+      columnQuantity: 100,
+    };
+    Map<String, dynamic> good26 = {
+      columnId: 26,
+      columnTypologyId: 9,
+      columnColorId: 3,
+      columnSizeId: 2,
+      columnQuantity: 100,
+    };
+    Map<String, dynamic> good27 = {
+      columnId: 27,
+      columnTypologyId: 9,
+      columnColorId: 3,
+      columnSizeId: 3,
+      columnQuantity: 100,
+    };
+    Map<String, dynamic> good28 = {
+      columnId: 28,
+      columnTypologyId: 9,
+      columnColorId: 3,
+      columnSizeId: 4,
+      columnQuantity: 100,
+    };
+    Map<String, dynamic> good29 = {
+      columnId: 29,
+      columnTypologyId: 9,
+      columnColorId: 1,
+      columnSizeId: 1,
+      columnQuantity: 100,
+    };
+    Map<String, dynamic> good30 = {
+      columnId: 30,
+      columnTypologyId: 9,
+      columnColorId: 1,
+      columnSizeId: 2,
+      columnQuantity: 100,
+    };
+    Map<String, dynamic> good31 = {
+      columnId: 31,
+      columnTypologyId: 9,
+      columnColorId: 1,
+      columnSizeId: 3,
+      columnQuantity: 100,
+    };
+    Map<String, dynamic> good32 = {
+      columnId: 32,
+      columnTypologyId: 9,
+      columnColorId: 1,
+      columnSizeId: 4,
+      columnQuantity: 100,
+    };
+
     await db.insert(tableGood, good1);
     await db.insert(tableGood, good2);
     await db.insert(tableGood, good3);
@@ -576,6 +758,22 @@ class DatabaseHelper {
     await db.insert(tableGood, good14);
     await db.insert(tableGood, good15);
     await db.insert(tableGood, good16);
+    await db.insert(tableGood, good17);
+    await db.insert(tableGood, good18);
+    await db.insert(tableGood, good19);
+    await db.insert(tableGood, good20);
+    await db.insert(tableGood, good21);
+    await db.insert(tableGood, good22);
+    await db.insert(tableGood, good23);
+    await db.insert(tableGood, good24);
+    await db.insert(tableGood, good25);
+    await db.insert(tableGood, good26);
+    await db.insert(tableGood, good27);
+    await db.insert(tableGood, good28);
+    await db.insert(tableGood, good29);
+    await db.insert(tableGood, good30);
+    await db.insert(tableGood, good31);
+    await db.insert(tableGood, good32);
     print("Fine Inserimento dati tabella $tableGood");
   }
 
@@ -749,23 +947,35 @@ class DatabaseHelper {
       String name, List<int> categories, List<int> sports) async {
     Database db = await instance.database;
 
-    var query = "SELECT * FROM $tableVendor WHERE name LIKE '%$name%'";
     List<Map> result;
+    var selectClause = "SELECT DISTINCT $tableVendor.*";
+    var fromClause = "FROM $tableVendor";
+    var whereClause = "WHERE $tableVendor.$columnName LIKE '%$name%'";
 
     if (categories.length > 0) {
-      query =
-          "SELECT DISTINCT $tableVendor.* FROM  $tableVendor, $tableVendorCategory WHERE $tableVendor.$columnName LIKE '%$name%' AND (";
+      fromClause += ", $tableVendorCategory";
+      whereClause +=
+          "AND $tableVendor.$columnId = $tableVendorCategory.$columnVendorId AND (";
       categories.forEach((element) {
-        query += "$tableVendorCategory.$columnCategoryId = $element OR";
+        whereClause += " $tableVendorCategory.$columnCategoryId = $element OR";
       });
-      query = query.substring(0, query.length - 3);
-      query += ")";
-
-      result = await db.rawQuery(query);
-    } else {
-      var query = "SELECT * FROM $tableVendor WHERE name LIKE '%$name%'";
-      result = await db.rawQuery(query);
+      whereClause = whereClause.substring(0, whereClause.length - 3);
+      whereClause += ")";
     }
+
+    if (sports.length > 0) {
+      fromClause += ", $tableVendorSport";
+      whereClause +=
+          "AND $tableVendor.$columnId = $tableVendorSport.$columnVendorId AND (";
+      sports.forEach((element) {
+        whereClause += " $tableVendorSport.$columnSportId = $element OR";
+      });
+      whereClause = whereClause.substring(0, whereClause.length - 3);
+      whereClause += ")";
+    }
+
+    var query = "$selectClause $fromClause $whereClause";
+    result = await db.rawQuery(query);
 
     return result;
   }

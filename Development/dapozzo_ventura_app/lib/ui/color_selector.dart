@@ -12,39 +12,52 @@ class ColorSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(mainAxisAlignment: MainAxisAlignment.start,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
       children: colors.map((color) {
         if (color == current) {
-          return GestureDetector(onTap: () {
-            BlocProvider.of<GoodTypologyBloc>(context).add(
-                GoodTypologyEventSearchGood(color));
-          },
-            child: Padding(
-              padding: const EdgeInsets.all(4.0),
+          return Padding(
+            padding: const EdgeInsets.all(5),
+            child: GestureDetector(
+              onTap: () {
+                BlocProvider.of<GoodTypologyBloc>(context)
+                    .add(GoodTypologyEventSearchGood(color));
+              },
               child: Container(
-                width: 35.0,
-                height: 35.0,
+                width: 25.0,
+                height: 25.0,
                 decoration: new BoxDecoration(
-                  border: Border.all(
-                      color: Colors.black54, width: 5),
+                  // border: Border.all(color: Colors.black54, width: 2),
+                  borderRadius: BorderRadius.circular(5),
                   color: color,
-                  shape: BoxShape.circle,
+                  shape: BoxShape.rectangle,
                 ),
               ),
             ),
           );
         } else {
-          return GestureDetector(onTap: () {
-            BlocProvider.of<GoodTypologyBloc>(context).add(
-                GoodTypologyEventSearchGood(color));
-          },
-            child: Padding(padding: const EdgeInsets.all(4.0),
+          return Padding(
+            padding: const EdgeInsets.all(5),
+            child: GestureDetector(
+              onTap: () {
+                BlocProvider.of<GoodTypologyBloc>(context)
+                    .add(GoodTypologyEventSearchGood(color));
+              },
               child: Container(
                 width: 30.0,
                 height: 30.0,
                 decoration: new BoxDecoration(
                   color: color,
-                  shape: BoxShape.circle,
+                  borderRadius: BorderRadius.circular(5),
+                  shape: BoxShape.rectangle,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey[300],
+                      offset: Offset(4.0, 4.0),
+                      blurRadius: 5.0,
+                      spreadRadius: 1,
+                    ),
+                  ],
                 ),
               ),
             ),

@@ -92,7 +92,12 @@ class _VendorPageState extends State<VendorPage> {
                 borderColor: Color.fromARGB(0, 0, 0, 0),
                 fillColor: Color.fromARGB(0, 0, 0, 0),
                 children: categories.map((category) {
-                  return new Icon(Icons.ac_unit, size: 70);
+                  return
+                      // SizedBox(
+                      //   child: new Image.asset(category.icon),
+                      //   height: 70,
+                      // );
+                      Icon(Icons.ac_unit, size: 70);
                 }).toList(),
                 onPressed: (int index) {
                   //CAMBIO L?ICONA VISIVAMENTE

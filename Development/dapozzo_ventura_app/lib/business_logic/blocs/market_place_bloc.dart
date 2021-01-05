@@ -10,7 +10,7 @@ import 'package:bloc/bloc.dart';
 class MarketPlaceBloc extends Bloc<MarketPlaceEvent, MarketPlaceState> {
   List<Vendor> currentVendorsSearch = [];
   List<int> currentCategorySearch = [];
-  List<SportModel> currentSportSearch = [];
+  List<int> currentSportSearch = [];
   String currentTextSearch = "";
 
   @override
@@ -18,11 +18,9 @@ class MarketPlaceBloc extends Bloc<MarketPlaceEvent, MarketPlaceState> {
 
   @override
   Stream<MarketPlaceState> mapEventToState(MarketPlaceEvent event) async* {
-    final dbHelper = DatabaseHelper.instance;
-
     if (event is MarketPlaceInit) {
       final List<Vendor> initialResult =
-          await VendorRepository.getVendorsByTextAndCategory([], "");
+          await VendorRepository.getVendorsByFiters([], "", []);
 
       yield MarketPlaceInitial(initialResult);
     } else {
@@ -31,9 +29,8 @@ class MarketPlaceBloc extends Bloc<MarketPlaceEvent, MarketPlaceState> {
         await Future.delayed(Duration(milliseconds: 500));
         _updateCategories(event.categoryId);
 
-        final List<Vendor> result =
-            await VendorRepository.getVendorsByTextAndCategory(
-                currentCategorySearch, currentTextSearch);
+        final List<Vendor> result = await VendorRepository.getVendorsByFiters(
+            currentCategorySearch, currentTextSearch, currentSportSearch);
         //await dbHelper.queryVendors(name, categories);
         // per ora creo un market place vuoto e lo passo come risultato
 
@@ -44,18 +41,16 @@ class MarketPlaceBloc extends Bloc<MarketPlaceEvent, MarketPlaceState> {
           await Future.delayed(Duration(milliseconds: 500));
           _updateSport(event.sport);
 
-          yield MarketPlaceSearched(
-              await VendorRepository.getVendorsByTextAndCategory(
-                  currentCategorySearch, currentTextSearch));
+          yield MarketPlaceSearched(await VendorRepository.getVendorsByFiters(
+              currentCategorySearch, currentTextSearch, currentSportSearch));
         } else {
           if (event is MarketPlaceSearchText) {
             yield MarketPlaceLoadingState();
             await Future.delayed(Duration(milliseconds: 500));
             _updateText(event.text);
 
-            yield MarketPlaceSearched(
-                await VendorRepository.getVendorsByTextAndCategory(
-                    currentCategorySearch, currentTextSearch));
+            yield MarketPlaceSearched(await VendorRepository.getVendorsByFiters(
+                currentCategorySearch, currentTextSearch, currentSportSearch));
           } else {
             if (event is MarketPlaceReset) {
               final List<Vendor> initialResult =
@@ -86,10 +81,10 @@ class MarketPlaceBloc extends Bloc<MarketPlaceEvent, MarketPlaceState> {
   }
 
   void _updateSport(SportModel sport) {
-    if (currentSportSearch.contains(sport)) {
-      currentSportSearch.remove(sport);
+    if (currentSportSearch.contains(sport.id)) {
+      currentSportSearch.remove(sport.id);
     } else {
-      currentSportSearch.add(sport);
+      currentSportSearch.add(sport.id);
     }
     print("sto cercando i venditori con categoria " +
         currentCategorySearch.toString() +
