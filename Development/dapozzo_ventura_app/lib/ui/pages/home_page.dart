@@ -48,7 +48,8 @@ class _HomeState extends State<Home> {
     //  categories= ModalRoute.of(context).settings.arguments;
 
     return Scaffold(
-      appBar: EquipAppBar(size: MediaQuery.of(context).size.height/16,
+      appBar: EquipAppBar(
+        size: MediaQuery.of(context).size.height / 16,
         title: "eQuip",
       ),
       drawer: EquipNavigatorMenu(navigationTiles: [
@@ -63,7 +64,7 @@ class _HomeState extends State<Home> {
             backgroundColor: Colors.white,
             leading: Container(),
             floating: true,
-            expandedHeight: MediaQuery.of(context).size.height/3.2,
+            expandedHeight: MediaQuery.of(context).size.height / 3.2,
             pinned: false,
             flexibleSpace: FilterBar(
               marketPlaceBloc: _marketPlaceBloc,
@@ -85,7 +86,7 @@ class _HomeState extends State<Home> {
             }
             if (state is MarketPlaceInitial) {
               vendors = state.initialResult;
-              return VendorList(vendors);
+              return VendorList(vendors, state.categories);
               /*vendors.forEach((element) {print(element.name);});
               return SliverList(delegate:
                   SliverChildBuilderDelegate((BuildContext context, int index) {
@@ -100,7 +101,7 @@ class _HomeState extends State<Home> {
             } else {
               if (state is MarketPlaceSearched) {
                 vendors = state.result;
-                return VendorList(vendors);
+                return VendorList(vendors, state.categories);
               } else {
                 if (state is MarketPlaceGeneralError) {
                   return Text(state.error.toString());

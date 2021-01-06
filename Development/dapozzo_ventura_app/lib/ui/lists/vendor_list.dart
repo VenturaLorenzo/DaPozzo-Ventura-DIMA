@@ -5,19 +5,21 @@ import 'package:flutter/material.dart';
 
 class VendorList extends StatelessWidget {
   final List<Vendor> vendors;
+  final List<int> categories;
 
-  VendorList(this.vendors);
+  VendorList(this.vendors, this.categories);
   @override
   Widget build(BuildContext context) {
-    return SliverList(delegate: SliverChildBuilderDelegate(
-            (BuildContext context, int index) {
-          if (index < vendors.length) {
-            return VendorItem(
-              vendor: vendors[index],
-            );
-          } else {
-            return null;
-          }
-        }));
+    return SliverList(
+        delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
+      if (index < vendors.length) {
+        return VendorItem(
+          vendor: vendors[index],
+          categories: categories,
+        );
+      } else {
+        return null;
+      }
+    }));
   }
 }

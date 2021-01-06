@@ -13,9 +13,12 @@ import '../eQuip_navigator_menu.dart';
 
 class VendorPage extends StatefulWidget {
   final Vendor vendor;
+  final List<int> preselectedCategories;
 
   // IL VENDOR MI VIENE PASSATO DALLA HOME PAGE
-  const VendorPage({Key key, @required this.vendor}) : super(key: key);
+  const VendorPage(
+      {Key key, @required this.vendor, @required this.preselectedCategories})
+      : super(key: key);
 
   @override
   _VendorPageState createState() => _VendorPageState();
@@ -33,12 +36,18 @@ class _VendorPageState extends State<VendorPage> {
     categories = widget.vendor.categories;
     // GENERO UNA LISTA DI FALSE GRANDE QUANDO LA LISTA DI CATEGORIE CHE MI HA PASSATO LA HOMEPAGE
     isSelectedCategory = List.generate(categories.length, (index) => false);
+
+    for (var i = 0; i < categories.length; i++) {
+      isSelectedCategory[i] =
+          widget.preselectedCategories.contains(categories[i].id);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: EquipAppBar(size: MediaQuery.of(context).size.height/16,
+      appBar: EquipAppBar(
+        size: MediaQuery.of(context).size.height / 16,
         title: widget.vendor.name,
       ),
       drawer: EquipNavigatorMenu(

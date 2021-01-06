@@ -22,7 +22,7 @@ class MarketPlaceBloc extends Bloc<MarketPlaceEvent, MarketPlaceState> {
       final List<Vendor> initialResult =
           await VendorRepository.getVendorsByFiters([], "", []);
 
-      yield MarketPlaceInitial(initialResult);
+      yield MarketPlaceInitial(initialResult, currentCategorySearch);
     } else {
       if (event is MarketPlaceSearchCategory) {
         yield MarketPlaceLoadingState();
@@ -34,29 +34,33 @@ class MarketPlaceBloc extends Bloc<MarketPlaceEvent, MarketPlaceState> {
         //await dbHelper.queryVendors(name, categories);
         // per ora creo un market place vuoto e lo passo come risultato
 
-        yield MarketPlaceSearched(result);
+        yield MarketPlaceSearched(result, currentCategorySearch);
       } else {
         if (event is MarketPlaceSearchSport) {
           yield MarketPlaceLoadingState();
           await Future.delayed(Duration(milliseconds: 500));
           _updateSport(event.sport);
 
-          yield MarketPlaceSearched(await VendorRepository.getVendorsByFiters(
-              currentCategorySearch, currentTextSearch, currentSportSearch));
+          yield MarketPlaceSearched(
+              await VendorRepository.getVendorsByFiters(
+                  currentCategorySearch, currentTextSearch, currentSportSearch),
+              currentCategorySearch);
         } else {
           if (event is MarketPlaceSearchText) {
             yield MarketPlaceLoadingState();
             await Future.delayed(Duration(milliseconds: 500));
             _updateText(event.text);
 
-            yield MarketPlaceSearched(await VendorRepository.getVendorsByFiters(
-                currentCategorySearch, currentTextSearch, currentSportSearch));
+            yield MarketPlaceSearched(
+                await VendorRepository.getVendorsByFiters(currentCategorySearch,
+                    currentTextSearch, currentSportSearch),
+                currentCategorySearch);
           } else {
             if (event is MarketPlaceReset) {
               final List<Vendor> initialResult =
                   await VendorRepository.getAllVendors();
               _resetSearch();
-              yield MarketPlaceInitial(initialResult);
+              yield MarketPlaceInitial(initialResult, currentCategorySearch);
             } else {
               yield MarketPlaceGeneralError("Unknown Action");
             }

@@ -10,32 +10,37 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class RouteGenerator {
+  static Route<dynamic> generateRoute(RouteSettings settings) {
+    final arg = settings.arguments;
 
-static Route<dynamic> generateRoute(RouteSettings settings){
-
-  final arg= settings.arguments;
-
-  switch(settings.name){
-    case'/launch':
-      return MaterialPageRoute(builder: (context)=>LaunchPage());
-    case  '/home':
-      return MaterialPageRoute(builder: (context)=>Home( categoriesAndSports: settings.arguments,));
-    case  '/vendor':
-      return MaterialPageRoute(builder: (context)=>VendorPage( vendor: settings.arguments,));
-    case  '/goodtypology':
-      return MaterialPageRoute(builder: (context)=>GoodTypologyPage(goodTypology:  settings.arguments,));
-    case  '/cart':
-      return MaterialPageRoute(builder: (context)=>CartPage());
-    case  '/vendor_profile':
-      return MaterialPageRoute(builder: (context)=>VendorProfilePage());
-    case  '/profile':
-      return MaterialPageRoute(builder: (context)=>MyProfile());
-    case  '/settings':
-      return MaterialPageRoute(builder: (context)=>SettingsPage());
-
-
+    switch (settings.name) {
+      case '/launch':
+        return MaterialPageRoute(builder: (context) => LaunchPage());
+      case '/home':
+        return MaterialPageRoute(
+            builder: (context) => Home(
+                  categoriesAndSports: settings.arguments,
+                ));
+      case '/vendor':
+        final Map arguments = settings.arguments as Map;
+        return MaterialPageRoute(
+            builder: (context) => VendorPage(
+                  vendor: arguments["vendor"],
+                  preselectedCategories: arguments["preselectedCategories"],
+                ));
+      case '/goodtypology':
+        return MaterialPageRoute(
+            builder: (context) => GoodTypologyPage(
+                  goodTypology: settings.arguments,
+                ));
+      case '/cart':
+        return MaterialPageRoute(builder: (context) => CartPage());
+      case '/vendor_profile':
+        return MaterialPageRoute(builder: (context) => VendorProfilePage());
+      case '/profile':
+        return MaterialPageRoute(builder: (context) => MyProfile());
+      case '/settings':
+        return MaterialPageRoute(builder: (context) => SettingsPage());
+    }
   }
-}
-
-
 }

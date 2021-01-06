@@ -815,6 +815,7 @@ class DatabaseHelper {
   Future<List<Map>> getAllCategories() async {
     Database db = await instance.database;
 
+    // get single row
     List<String> columnsToSelect = [columnId, columnName, columnIcon];
 
     List<Map> result = await db.query(tableCategory, columns: columnsToSelect);
@@ -908,6 +909,21 @@ class DatabaseHelper {
     return result;
   }
 
+/*   Future<List<SportModel>> querySports() async {
+    final List<Sportodel> sports = [
+      SportModel(1, "", "basket"),
+      SportModel(1, "", "basket"),
+      SportModel(1, "", "basket"),
+      SportModel(1, "", "basket"),
+      SportModel(1, "", "basket"),
+      SportModel(1, "", "basket"),
+      SportModel(1, "", "basket"),
+      SportModel(1, "", "basket"),
+      SportModel(1, "", "basket"),
+    ];
+    return sports;
+  } */
+
   Future<List<Map>> getColorsByTypology(int typologyId) async {
     Database db = await instance.database;
 
@@ -926,6 +942,7 @@ class DatabaseHelper {
     return result;
   }
 
+/*+++++++++++ da verificare +++++++++++++++++++  */
   Future<List<Map>> getVendorsByCategorySportText(
       String name, List<int> categories, List<int> sports) async {
     Database db = await instance.database;
@@ -960,26 +977,6 @@ class DatabaseHelper {
     var query = "$selectClause $fromClause $whereClause";
     result = await db.rawQuery(query);
 
-    return result;
-  }
-
-/*+++++++++++ da verificare +++++++++++++++++++  */
-  Future<List<Map>> getSizesByTypology(int typologyId) async {
-    Database db = await instance.database;
-
-    List<Map> result = await db.rawQuery(
-        '''SELECT DISTINCT $tableSize.* FROM $tableSize INNER JOIN $tableGood ON $tableSize.$columnId = $tableGood.$columnSizeId WHERE $tableGood.$columnTypologyId = ?''',
-        [typologyId]);
-    return result;
-  }
-
-  Future<List<Map>> getAvailableQuantity(
-      int typologyId, int colorId, int sizeId) async {
-    Database db = await instance.database;
-
-    List<Map> result = await db.rawQuery(
-        '''SELECT DISTINCT $tableGood.$columnQuantity FROM $tableGood WHERE $tableGood.$columnTypologyId = ?''',
-        [typologyId, colorId, sizeId]);
     return result;
   }
 }

@@ -8,6 +8,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class VendorItem extends StatelessWidget {
   final Vendor vendor;
+  final List<int> categories;
   final List<String> images = [
     "lib/assets/image2.jpg",
     "lib/assets/image2.jpg",
@@ -17,7 +18,7 @@ class VendorItem extends StatelessWidget {
     "lib/assets/image2.jpg"
   ];
 
-  VendorItem({Key key, this.vendor});
+  VendorItem({Key key, this.vendor, this.categories});
 
   @override
   Widget build(BuildContext context) {
@@ -41,11 +42,14 @@ class VendorItem extends StatelessWidget {
               InkWell(
                 onTap: () {
                   BlocProvider.of<VendorBloc>(context)
-                      .add(VendorEventInit(vendor));
-                  Navigator.pushNamed(context, '/vendor', arguments: vendor);
+                      .add(VendorEventInit(vendor, categories));
+                  Navigator.pushNamed(context, '/vendor', arguments: {
+                    "vendor": vendor,
+                    "preselectedCategories": categories
+                  });
                 },
                 child: Container(
-                    height: MediaQuery.of(context).size.height/2.8,
+                    height: MediaQuery.of(context).size.height / 2.8,
                     child: ClipRRect(
                       child: Image.network(
                         'https://www.laccademiabjj.it/images/sfondi/${vendor.image}',

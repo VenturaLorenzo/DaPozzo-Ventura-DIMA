@@ -12,8 +12,9 @@ class VendorEventSearch extends VendorEvent {
 
 class VendorEventInit extends VendorEvent {
   final Vendor vendor;
+  final List<int> categories;
 
-  VendorEventInit(this.vendor);
+  VendorEventInit(this.vendor, this.categories);
 }
 
 class VendorEventReset extends VendorEvent {

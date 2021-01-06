@@ -1,6 +1,4 @@
-class ColorModel{
-
-
+class ColorModel {
   final String name;
   final String code;
 
@@ -10,5 +8,4 @@ class ColorModel{
     // TODO: implement toString
     return name;
   }
-
 }

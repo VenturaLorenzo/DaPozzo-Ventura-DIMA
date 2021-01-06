@@ -14,8 +14,8 @@ class VendorBloc extends Bloc<VendorEvent, VendorState> {
       print("sto inizializzando la pagina del venditore " + event.vendor.name);
       final List<GoodTypologyModel> allGoodTypologies =
           await GoodsTypologyRepository.getGoodsTypologies(
-              [], -1, event.vendor.id);
-     // allGoodTypologies.forEach((element) {print(element);});
+              event.categories, -1, event.vendor.id);
+      // allGoodTypologies.forEach((element) {print(element);});
       yield VendorStateSearched(allGoodTypologies);
     } else if (event is VendorEventSearch) {
       final List<GoodTypologyModel> allGoodTypologies =
