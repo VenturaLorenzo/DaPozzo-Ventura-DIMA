@@ -64,7 +64,7 @@ class _HomeState extends State<Home> {
             backgroundColor: Colors.white,
             leading: Container(),
             floating: true,
-            expandedHeight: MediaQuery.of(context).size.height / 3.2,
+            expandedHeight: MediaQuery.of(context).size.height / 2.2,
             pinned: false,
             flexibleSpace: FilterBar(
               marketPlaceBloc: _marketPlaceBloc,
