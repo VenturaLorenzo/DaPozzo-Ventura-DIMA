@@ -60,139 +60,316 @@ class _GoodTypologyPageState extends State<GoodTypologyPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(0, 0, 0, 7.5),
-        child: Column(
-          children: [
-            BlocBuilder<GoodTypologyBloc, GoodTypologyState>(
+        child:  BlocBuilder<GoodTypologyBloc, GoodTypologyState>(
+            builder: (context, state) {
+              if(state is GoodTypologyStateOutOfStock){
+              return Center(
+                child: Text(
+                  "OUT OF STOCK",
+                  style: TextStyle(color: Colors.red),
+                ),
+              );
+
+            }else{
+            return Column(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                BlocBuilder<GoodTypologyBloc, GoodTypologyState>(
+                  builder: (context, state) {
+                    if (state is GoodTypologyLoadingState) {
+                      return SizedBox(height: 350,
+                        child: Column(mainAxisAlignment: MainAxisAlignment.center,
+                            children:[ CircularProgressIndicator()]),
+                      );
+                    } else {
+                      if (state is GoodTypologyCurrentState) {
+                        return GoodImagesList(
+                          images: state.goods[0].images,
+                        );
+                      }  else {
+                          return Text("ERROR WITH GOODTYPOLOGYBLOC");
+                        }
+                      }
+
+                  },
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Row(mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          BlocBuilder<GoodTypologyBloc, GoodTypologyState>(
+                            builder: (context, state) {
+                              if (state is GoodTypologyUninitializedState) {
+                                return Column();
+                              } else {
+                                if (state is GoodTypologyLoadingState) {
+                                  return ColorSelector(
+                                    colors: colors,
+                                    current: currentColor,
+                                  );
+                                } else {
+                                  if (state is GoodTypologyCurrentState) {
+                                    colors = state.colors;
+                                    currentColor = state.currentSearch;
+                                    return ColorSelector(
+                                      colors: state.colors,
+                                      current: state.currentSearch,
+                                    );
+                                  }  else {
+                                      return Text("STATO DI ERRORE GOODTYPOLOGYBLOC");
+                                    }
+                                  }
+                                }
+
+                            },
+                          ),
+                        ],
+                      ),
+                      BlocBuilder<GoodTypologyBloc, GoodTypologyState>(
+                          builder: (context, state) {
+
+                              if (state is GoodTypologyLoadingState) {
+                                return Column();
+                              } else {
+                                return Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(7.5),
+                                        child: Container(
+                                            decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.grey[300],
+                                                    offset: Offset(4.0, 4.0),
+                                                    blurRadius: 5.0,
+                                                    spreadRadius: 1,
+                                                  ),
+                                                ],
+                                                borderRadius: BorderRadius.circular(15)),
+                                            child: Center(
+                                              child: Column(
+                                                children: [
+                                                  Text("Q.ty"),
+                                                  SizedBox(height: 20),
+                                                  DropdownButton(
+                                                    items: [],
+                                                    onChanged: null,
+                                                    // values: _selectedSize,
+                                                    // items: _dropdownMenuItems,
+                                                    // onChanged: onChangeDropdownItem,
+                                                  )
+                                                ],
+                                              ),
+                                            )),
+                                      ),
+                                      Container(
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.grey[300],
+                                                  offset: Offset(4.0, 4.0),
+                                                  blurRadius: 5.0,
+                                                  spreadRadius: 1,
+                                                ),
+                                              ],
+                                              borderRadius: BorderRadius.circular(15)),
+                                          child: Center(
+                                            child: Column(
+                                              children: [
+                                                Text("Size"),
+                                                SizedBox(height: 20),
+                                                DropdownButton(
+                                                    value: null, items: null, onChanged: null)
+                                              ],
+                                            ),
+                                          )),
+                                    ],
+                                  ),
+                                );
+                              }
+
+                          }),
+                      BlocBuilder<GoodTypologyBloc, GoodTypologyState>(
+                          builder: (context, state) {
+
+                              if (state is GoodTypologyCurrentState) {
+                                return AddToChartButton(true);
+                              }else{
+                                if(state is GoodTypologyLoadingState){
+                                  return AddToChartButton(false);
+                                }else{
+                                  return Text("ERROR");
+                                }
+                              }
+
+                          }),
+                    ],
+                  ),
+                ),
+
+              ],
+            );
+          }}
+        ),
+      ),
+    );
+  }
+
+/*
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.black87,
+        centerTitle: true,
+        leading: Builder(builder: (BuildContext context) {
+          return IconButton(
+              onPressed: () {
+                BlocProvider.of<GoodTypologyBloc>(context)
+                    .add(GoodTypologyEventClear());
+                Navigator.pop(context);
+              },
+              icon: Icon(Icons.arrow_back));
+        }),
+        actions: [
+          CartIcon(),
+        ],
+        title: Text(goodTypology.name),
+      ),
+      body: Column(
+        children: [
+          SizedBox(
+            height: 15,
+          ),
+          BlocBuilder<GoodTypologyBloc, GoodTypologyState>(
+            builder: (context, state) {
+              if (state is GoodTypologyStateOutOfStock) {
+                return SizedBox(
+                  height: 10,
+                );
+              } else {
+                return Column(
+                  children: [
+                    RaisedButton(
+                      child: Text("Add to cart"),
+                      onPressed: () {
+                        _cartBloc.add(CartAddEvent(goodTypology.name));
+                        _showSuccesPopup();
+                      },
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Column(
+                          children: [
+                            Text("Size"),
+                            SizedBox(
+                              height: 10,
+                            )
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Text("Q.ty"),
+                            SizedBox(
+                              height: 10,
+                            )
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Text("Price"),
+                            SizedBox(
+                              height: 7,
+                            ),
+                            Text(goodTypology.price.toString()),
+                          ],
+                        )
+                      ],
+                    ),
+                  ],
+                );
+              }
+            },
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+            child: BlocBuilder<GoodTypologyBloc, GoodTypologyState>(
               builder: (context, state) {
-                if (state is GoodTypologyLoadingState) {
-                  return Center(child: CircularProgressIndicator());
+                if (state is GoodTypologyUninitializedState) {
+                  return Column();
+                } else {
+                  if (state is GoodTypologyStateOutOfStock) {
+                    return SizedBox(
+                      height: 20,
+                    );
+                  } else {
+                    if (state is GoodTypologyLoadingState) {
+                      return ColorSelector(
+                        colors: colors,
+                        current: currentColor,
+                      );
+                    } else {
+                      if (state is GoodTypologyCurrentState) {
+                        colors = state.colors;
+                        currentColor = state.currentSearch;
+                        return ColorSelector(
+                          colors: state.colors,
+                          current: state.currentSearch,
+                        );
+                      } else {
+                        return Text("STATO DI ERRORE GOODTYPOLOGYBLOC");
+                      }
+                    }
+                  }
+                }
+              },
+            ),
+          ),
+          BlocBuilder<GoodTypologyBloc, GoodTypologyState>(
+            builder: (context, state) {
+              if (state is GoodTypologyLoadingState) {
+                return Center(child: CircularProgressIndicator());
+              } else {
+                if (state is GoodTypologyStateOutOfStock) {
+                  return Center(
+                    child: Text(
+                      "OUT OF STOCK",
+                      style: TextStyle(color: Colors.red),
+                    ),
+                  );
                 } else {
                   if (state is GoodTypologyCurrentState) {
                     return Expanded(
-                      child: GoodImagesList(
-                        images: state.goods[0].images,
+                      child: Container(
+                        child: GoodImagesList(
+                          images: state.goods[0].images,
+                        ),
                       ),
                     );
                   } else {
                     return Text("ERROR WITH GOODTYPOLOGYBLOC");
                   }
                 }
-              },
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                BlocBuilder<GoodTypologyBloc, GoodTypologyState>(
-                  builder: (context, state) {
-                    if (state is GoodTypologyUninitializedState) {
-                      return Column();
-                    } else {
-                      if (state is GoodTypologyLoadingState) {
-                        return ColorSelector(
-                          colors: colors,
-                          current: currentColor,
-                        );
-                      } else {
-                        if (state is GoodTypologyCurrentState) {
-                          colors = state.colors;
-                          currentColor = state.currentSearch;
-                          return ColorSelector(
-                            colors: state.colors,
-                            current: state.currentSearch,
-                          );
-                        } else {
-                          return Text("STATO DI ERRORE GOODTYPOLOGYBLOC");
-                        }
-                      }
-                    }
-                  },
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(7.5),
-                  child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey[300],
-                              offset: Offset(4.0, 4.0),
-                              blurRadius: 5.0,
-                              spreadRadius: 1,
-                            ),
-                          ],
-                          borderRadius: BorderRadius.circular(15)),
-                      child: Center(
-                        child: Column(
-                          children: [
-                            Text("Q.ty"),
-                            SizedBox(height: 20),
-                            DropdownButton(
-                              items: [],
-                              onChanged: null,
-                              // values: _selectedSize,
-                              // items: _dropdownMenuItems,
-                              // onChanged: onChangeDropdownItem,
-                            )
-                          ],
-                        ),
-                      )),
-                ),
-                Container(
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey[300],
-                            offset: Offset(4.0, 4.0),
-                            blurRadius: 5.0,
-                            spreadRadius: 1,
-                          ),
-                        ],
-                        borderRadius: BorderRadius.circular(15)),
-                    child: Center(
-                      child: Column(
-                        children: [
-                          Text("Size"),
-                          SizedBox(height: 20),
-                          DropdownButton(
-                              value: null, items: null, onChanged: null)
-                        ],
-                      ),
-                    )),
-              ],
-            ),
-            Container(
-              width: 200,
-              decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 1, 136, 73),
-                  shape: BoxShape.rectangle,
-                  borderRadius: BorderRadius.circular(5),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey[300],
-                      offset: Offset(4.0, 4.0),
-                      blurRadius: 5.0,
-                      spreadRadius: 1,
-                    ),
-                  ]),
-              child: FlatButton(
-                child: Text("ADD TO CART",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        color: Colors.white60,
-                        fontStyle: FontStyle.normal)),
-                onPressed: () {
-                  _cartBloc.add(CartAddEvent(goodTypology.name));
-                  _showSuccesPopup();
-                },
-              ),
-            ),
-          ],
-        ),
+              }
+            },
+          ),
+        ],
       ),
     );
   }
+*/
 //++++++++++++++++++++++++  DropDown Size   ++++++++++++++++++++++++
 
 // class DropDownState extends State<DropDown> {
@@ -217,6 +394,35 @@ class _GoodTypologyPageState extends State<GoodTypologyPage> {
 
 // }
 // +++++++++++++++++++++++  PopUp Successo  ++++++++++++++++++++++++
+  Container AddToChartButton(bool on){
+    return Container(
+      width: 200,
+      decoration: BoxDecoration(
+          color: Color.fromARGB(255, 1, 136, 73),
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.circular(5),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey[300],
+              offset: Offset(4.0, 4.0),
+              blurRadius: 5.0,
+              spreadRadius: 1,
+            ),
+          ]),
+      child: FlatButton(
+        child: Text("ADD TO CART",
+            style: TextStyle(
+                fontWeight: FontWeight.w500,
+                color: (on == true) ? Colors.white : Colors.white38,
+                fontStyle: FontStyle.normal)),
+        onPressed: () {
+          _cartBloc.add(CartAddEvent(goodTypology.name));
+          _showSuccesPopup();
+        },
+      ),
+    );
+  }
+
 
   Future<void> _showSuccesPopup() async {
     Future.delayed(Duration(milliseconds: 2000), () {
