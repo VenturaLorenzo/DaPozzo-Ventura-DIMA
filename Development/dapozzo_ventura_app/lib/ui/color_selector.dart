@@ -1,6 +1,7 @@
 import 'package:dapozzo_ventura_app/business_logic/blocs/good_typology_bloc.dart';
 import 'package:dapozzo_ventura_app/business_logic/events/good_typology_event.dart';
 import 'package:dapozzo_ventura_app/data/models/color_model.dart';
+import 'package:dapozzo_ventura_app/data/models/good_typology_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,8 +9,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ColorSelector extends StatelessWidget {
   final List<ColorModel> colors;
   final ColorModel current;
-
-  const ColorSelector({Key key, this.colors, this.current}) : super(key: key);
+  final GoodTypologyModel goodTypology;
+  const ColorSelector({Key key, this.colors, this.current,this.goodTypology}) : super(key: key);
 /*
   @override
   Widget build(BuildContext context) {
@@ -97,7 +98,7 @@ class ColorSelector extends StatelessWidget {
             child: GestureDetector(
               onTap: () {
                 BlocProvider.of<GoodTypologyBloc>(context).add(
-                             GoodTypologyEventSearchGood(colorModel));
+                             GoodTypologyEventSearchGood(colorModel,goodTypology));
               },
               child: Container(
                 width: 25.0,

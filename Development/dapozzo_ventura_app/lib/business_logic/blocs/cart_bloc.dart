@@ -1,23 +1,25 @@
+import 'package:dapozzo_ventura_app/data/models/cart_model.dart';
+import 'package:dapozzo_ventura_app/data/models/good_model.dart';
 import 'package:dapozzo_ventura_app/states/cart_state.dart';
 import 'package:bloc/bloc.dart';
 import '../events/cart_event.dart';
 
 class CartBloc extends Bloc<CartEvent, CartState> {
-  List<String> products = ["ciao"];
+  CartModel cart= CartModel(products: []);
 
   @override
-  CartState get initialState => CartCurrentState(products);
+  CartState get initialState => CartCurrentState(cart);
 
   @override
   Stream<CartState> mapEventToState(CartEvent event) async* {
     if (event is CartAddEvent) {
-      products.add(event.product);
-      print("aggiunto elemento");
-      yield CartCurrentState(products);
+      cart.addProduct(event.product);
+      print(cart.toString());
+      yield CartCurrentState(cart);
     } else {
       if (event is CartRemoveEvent) {
-        products.remove(event.product);
-        yield CartCurrentState(products);
+        cart.removeProduct(event.product);
+        yield CartCurrentState(cart);
       } else {
         yield CartErrorState("Random error");
       }

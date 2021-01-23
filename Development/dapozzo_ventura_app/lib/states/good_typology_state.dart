@@ -13,10 +13,10 @@ class GoodTypologyLoadingState extends GoodTypologyState{
 
 }
 class GoodTypologyCurrentState extends GoodTypologyState{
-  final List<GoodModel> goods;
+  final GoodModel good;
   final List<ColorModel> colors;
   final ColorModel currentSearch;
-  GoodTypologyCurrentState(this.goods, this.colors, this.currentSearch);
+  GoodTypologyCurrentState(this.good, this.colors, this.currentSearch);
 
 }
 class GoodTypologyStateOutOfStock extends GoodTypologyState{

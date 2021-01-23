@@ -13,37 +13,45 @@ class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
-     // mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        RaisedButton(
-          child: Text("Return"),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        BlocBuilder<CartBloc, CartState>(
-          bloc: BlocProvider.of<CartBloc>(context),
-          builder: (context, state) {
-            if (state is CartStateLoading) {
-              return CircularProgressIndicator();
+      appBar: AppBar(
+        backgroundColor: Colors.black87,
+        centerTitle: true,
+        leading: Builder(builder: (BuildContext context) {
+          return IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: Icon(Icons.arrow_back));
+        }),
+
+        title: Text("Cart"),
+      ),
+      body:
+
+      BlocBuilder<CartBloc, CartState>(
+        bloc: BlocProvider.of<CartBloc>(context),
+        builder: (context, state) {
+          if (state is CartStateLoading) {
+            return CircularProgressIndicator();
+          } else {
+            if (state is CartCurrentState) {
+              return Column(
+                children: <Widget>[
+                  Text(" Totale : "+state.cart.total.toString())]
+                    +
+                    state.cart.products.map((product) {
+                  return Card(
+                    child: Text(product.type.name+ "("+product.color.toString()+")"),
+                  );
+                }).toList(),
+              );
             } else {
-              if (state is CartCurrentState) {
-                return Column(
-                  children: state.products.map((product) {
-                    return Card(
-                      child: Text(product),
-                    );
-                  }).toList(),
-                );
-              } else {
-                return Text("ERROR RANDOM CART STATE");
-              }
+              return Text("ERROR RANDOM CART STATE");
             }
-          },
-        ),
-      ],
-    ));
+          }
+        },
+      ),
+
+    );
   }
 }

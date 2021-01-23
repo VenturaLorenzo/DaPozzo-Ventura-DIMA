@@ -1,11 +1,14 @@
 
+import 'package:dapozzo_ventura_app/data/models/cart_model.dart';
+import 'package:dapozzo_ventura_app/data/models/good_model.dart';
+
 abstract class CartState{}
 
 class CartCurrentState extends CartState{
 
-  final List<String> products;
+  final CartModel cart;
 
-  CartCurrentState(this.products);
+  CartCurrentState(this.cart);
 
 
 

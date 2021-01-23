@@ -21,6 +21,13 @@ class GoodTypologyModel {
       this.categoryName});
 
   @override
+  bool operator ==(other) {
+    return (other is GoodTypologyModel)
+        && other.id == id
+        && other.gender == gender
+        && other.name == name;
+  }
+  @override
   String toString() {
     // TODO: implement toString
     return "GOODTYPOLOGY -> id: $id , categoryId: $categoryId , vendorId: $vendorId, gender: $gender, name: $name, description : $description, price: $price, image : $image, categoryName: $categoryName";

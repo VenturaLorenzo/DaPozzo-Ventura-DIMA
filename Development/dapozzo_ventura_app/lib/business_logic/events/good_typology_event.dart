@@ -12,7 +12,9 @@ class GoodTypologyEventInitialize extends GoodTypologyEvent {
 }
 class GoodTypologyEventSearchGood extends GoodTypologyEvent {
   final ColorModel color;
-  GoodTypologyEventSearchGood(this.color);
+  final GoodTypologyModel goodTypology;
+
+  GoodTypologyEventSearchGood(this.color,this.goodTypology);
 }
 class GoodTypologyEventClear extends GoodTypologyEvent {
 

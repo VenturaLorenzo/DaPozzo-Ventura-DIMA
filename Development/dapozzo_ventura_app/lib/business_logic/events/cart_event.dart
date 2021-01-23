@@ -1,16 +1,18 @@
+import 'package:dapozzo_ventura_app/data/models/good_model.dart';
+
 abstract class CartEvent{
 
 }
 
 class CartAddEvent extends CartEvent{
-  final String product;
+  final GoodModel product;
 
   CartAddEvent(this.product);
 
 
 }
 class CartRemoveEvent extends CartEvent{
-  final String product;
+  final GoodModel product;
 
   CartRemoveEvent(this.product);
 
