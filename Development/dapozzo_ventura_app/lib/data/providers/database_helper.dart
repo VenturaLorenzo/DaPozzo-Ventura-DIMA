@@ -19,6 +19,7 @@ class DatabaseHelper {
   static final tableVendorSport = "VendorSport";
   static final tableColor = "Color";
   static final tableSize = "Size";
+  static final tableGoodImage = "GoodImage";
 
   static final columnId = 'id';
   static final columnName = 'name';
@@ -58,7 +59,7 @@ class DatabaseHelper {
 
   _initDatabase() async {
     WidgetsFlutterBinding.ensureInitialized();
-   // deleteDatabase("GoodsDatabase.db");
+    deleteDatabase("GoodsDatabase.db");
 
     String path = join(await getDatabasesPath(), _databaseName);
     return await openDatabase(path,
@@ -86,7 +87,7 @@ class DatabaseHelper {
             $columnId INTEGER NOT NULL,   
             $columnName TEXT NOT NULL,
             $columnIcon TEXT NOT NULL,
-            PRIMARY KEY (id)      
+            PRIMARY KEY ($columnId)      
           )''');
     print("Creazione tabella GoodsCategories TERMINATA");
 
@@ -96,7 +97,7 @@ class DatabaseHelper {
             $columnId INTEGER NOT NULL,   
             $columnName TEXT NOT NULL,
             $columnIcon TEXT NOT NULL,
-            PRIMARY KEY (id)      
+            PRIMARY KEY ($columnId)      
           )''');
     print("Creazione tabella $tableSport TERMINATA");
 
@@ -111,7 +112,7 @@ class DatabaseHelper {
             $columnName TEXT NOT NULL,
             $columnDescription TEXT NOT NULL,
             $columnPrice INTEGER NOT NULL,
-            PRIMARY KEY (id)      
+            PRIMARY KEY ($columnId)      
           )''');
     print("Creazione tabella $tableTypology TERMINATA");
 
@@ -152,18 +153,29 @@ class DatabaseHelper {
             $columnId INTEGER NOT NULL,              
             $columnName TEXT NOT NULL,
             $columnCode TEXT NOT NULL,
-            PRIMARY KEY (id)      
+            PRIMARY KEY ($columnId)      
           )''');
-    print("Inserimento dati tabella $tableColor");
+    print("Creazione tabella $tableColor TERMINATA");
 
     // SQL code to create the database table SIZE
     print("Creazione tabella $tableSize");
     await db.execute(''' CREATE TABLE $tableSize (   
             $columnId INTEGER NOT NULL,              
             $columnName TEXT NOT NULL,
-            PRIMARY KEY (id)      
+            PRIMARY KEY ($columnId)      
           )''');
-    print("Inserimento dati tabella $tableSize");
+    print("Creazione tabella $tableSize TERMINATA");
+
+    // SQL code to create the database table GOODIMAGE
+    print("Creazione tabella $tableGoodImage");
+    await db.execute(''' CREATE TABLE $tableGoodImage (   
+            $columnId INTEGER NOT NULL,
+            $columnTypologyId INTEGER NOT NULL,              
+            $columnColorId INTEGER NOT NULL,
+            $columnImage TEXT NOT NULL,
+            PRIMARY KEY ($columnId)      
+          )''');
+    print("Creazione tabella $tableGoodImage TERMINATA");
 
     /*++++++++++++++++++++++++++++++++++    INSERIMENTO DATI IN TABELLE    +++++++++++++++++++++++++++++++++++++++++*/
 
@@ -274,7 +286,7 @@ class DatabaseHelper {
       columnCategoryId: 7,
       columnGender: 0,
       columnImage:
-          'https://www.patagonia.com/dw/image/v2/BDJB_PRD/on/demandware.static/-/Sites-patagonia-master/default/dw3b35cee4/images/hi-res/34540_FGE.jpg?sw=500&sh=500&sfrm=png&q=95&bgcolor=f6f6f6',
+      'https://www.patagonia.com/dw/image/v2/BDJB_PRD/on/demandware.static/-/Sites-patagonia-master/default/dw3b35cee4/images/hi-res/34540_FGE.jpg?sw=500&sh=500&sfrm=png&q=95&bgcolor=f6f6f6',
       columnName: 'Capinele Midweight Liner Gloves',
       columnDescription: 'con tessuto riciclato',
       columnPrice: '45'
@@ -775,6 +787,75 @@ class DatabaseHelper {
     await db.insert(tableGood, good31);
     await db.insert(tableGood, good32);
     print("Fine Inserimento dati tabella $tableGood");
+
+    /*TABELLA GOODIMAGE*/
+    print("Inserimento dati tabella $tableGoodImage");
+    Map<String, dynamic> goodImage1 = {
+      columnId: 1,
+      columnTypologyId: 9,
+      columnColorId: 3,
+      columnImage: 'FelpaCompetitionRoyalBlue1.jpg',
+    };
+    Map<String, dynamic> goodImage2 = {
+      columnId: 2,
+      columnTypologyId: 9,
+      columnColorId: 3,
+      columnImage: 'FelpaCompetitionRoyalBlue2.jpg',
+    };
+    Map<String, dynamic> goodImage3 = {
+      columnId: 3,
+      columnTypologyId: 9,
+      columnColorId: 3,
+      columnImage: 'FelpaCompetitionRoyalBlue3.jpg',
+    };
+    Map<String, dynamic> goodImage4 = {
+      columnId: 4,
+      columnTypologyId: 9,
+      columnColorId: 3,
+      columnImage: 'FelpaCompetitionRoyalBlue4.jpg',
+    };
+    Map<String, dynamic> goodImage5 = {
+      columnId: 5,
+      columnTypologyId: 9,
+      columnColorId: 3,
+      columnImage: 'FelpaCompetitionRoyalBlue5.jpg',
+    };
+    Map<String, dynamic> goodImage6 = {
+      columnId: 6,
+      columnTypologyId: 9,
+      columnColorId: 1,
+      columnImage: 'FelpaWICBlack1.jpg',
+    };
+    Map<String, dynamic> goodImage7 = {
+      columnId: 7,
+      columnTypologyId: 9,
+      columnColorId: 1,
+      columnImage: 'FelpaWICBlack2.jpg',
+    };
+    Map<String, dynamic> goodImage8 = {
+      columnId: 8,
+      columnTypologyId: 9,
+      columnColorId: 1,
+      columnImage: 'FelpaWICBlack3.jpg',
+    };
+    Map<String, dynamic> goodImage9 = {
+      columnId: 9,
+      columnTypologyId: 9,
+      columnColorId: 1,
+      columnImage: 'FelpaWICBlack4.jpg',
+    };
+
+    await db.insert(tableGoodImage, goodImage1);
+    await db.insert(tableGoodImage, goodImage2);
+    await db.insert(tableGoodImage, goodImage3);
+    await db.insert(tableGoodImage, goodImage4);
+    await db.insert(tableGoodImage, goodImage5);
+    await db.insert(tableGoodImage, goodImage6);
+    await db.insert(tableGoodImage, goodImage7);
+    await db.insert(tableGoodImage, goodImage8);
+    await db.insert(tableGoodImage, goodImage9);
+
+    print("Fine Inserimento dati tabella $tableGoodImage");
   }
 
   /*++++++++++++++++++++++++++++++++++    QUERY    +++++++++++++++++++++++++++++++++++++++++*/
@@ -787,7 +868,7 @@ class DatabaseHelper {
 
     if (categories.length > 0) {
       query =
-          "SELECT DISTINCT $tableVendor.* FROM  $tableVendor, $tableVendorCategory WHERE $tableVendor.$columnName LIKE '%$name%' AND (";
+      "SELECT DISTINCT $tableVendor.* FROM  $tableVendor, $tableVendorCategory WHERE $tableVendor.$columnName LIKE '%$name%' AND (";
       categories.forEach((element) {
         query += "$tableVendorCategory.$columnCategoryId = $element OR";
       });
@@ -829,10 +910,10 @@ class DatabaseHelper {
     var query =
         "SELECT $tableTypology.$columnId, $tableTypology.$columnCategoryId, $tableTypology.$columnGender,";
     query +=
-        "$tableTypology.$columnImage, $tableTypology.$columnName, $tableTypology.$columnDescription, $tableTypology.$columnPrice,";
+    "$tableTypology.$columnImage, $tableTypology.$columnName, $tableTypology.$columnDescription, $tableTypology.$columnPrice,";
     query += "$tableCategory.$columnName AS categoryName ";
     query +=
-        "FROM $tableTypology INNER JOIN $tableCategory ON $tableTypology.$columnCategoryId = $tableCategory.$columnId";
+    "FROM $tableTypology INNER JOIN $tableCategory ON $tableTypology.$columnCategoryId = $tableCategory.$columnId";
 
     List<Map> result;
 
@@ -869,10 +950,10 @@ class DatabaseHelper {
     var query =
         "SELECT $tableTypology.$columnId, $tableTypology.$columnCategoryId, $tableTypology.$columnGender,$tableTypology.$columnVendorId,";
     query +=
-        "$tableTypology.$columnImage, $tableTypology.$columnName, $tableTypology.$columnDescription, $tableTypology.$columnPrice,";
+    "$tableTypology.$columnImage, $tableTypology.$columnName, $tableTypology.$columnDescription, $tableTypology.$columnPrice,";
     query += "$tableCategory.$columnName AS categoryName ";
     query +=
-        "FROM $tableTypology INNER JOIN $tableCategory ON $tableTypology.$columnCategoryId = $tableCategory.$columnId";
+    "FROM $tableTypology INNER JOIN $tableCategory ON $tableTypology.$columnCategoryId = $tableCategory.$columnId";
 
     List<Map> result;
 
@@ -938,7 +1019,7 @@ class DatabaseHelper {
     if (categories.length > 0) {
       fromClause += ", $tableVendorCategory";
       whereClause +=
-          "AND $tableVendor.$columnId = $tableVendorCategory.$columnVendorId AND (";
+      "AND $tableVendor.$columnId = $tableVendorCategory.$columnVendorId AND (";
       categories.forEach((element) {
         whereClause += " $tableVendorCategory.$columnCategoryId = $element OR";
       });
@@ -949,7 +1030,7 @@ class DatabaseHelper {
     if (sports.length > 0) {
       fromClause += ", $tableVendorSport";
       whereClause +=
-          "AND $tableVendor.$columnId = $tableVendorSport.$columnVendorId AND (";
+      "AND $tableVendor.$columnId = $tableVendorSport.$columnVendorId AND (";
       sports.forEach((element) {
         whereClause += " $tableVendorSport.$columnSportId = $element OR";
       });
@@ -963,23 +1044,44 @@ class DatabaseHelper {
     return result;
   }
 
+  Future<List<Map>> getAvailableSizesByTypologyAndColor(
+      int typologyId, int colorId) async {
+    Database db = await instance.database;
+
+    var sql =
+    '''SELECT DISTINCT $tableSize.* FROM $tableSize INNER JOIN $tableGood ON $tableSize.$columnId = $tableGood.$columnSizeId WHERE $tableGood.$columnTypologyId = $typologyId AND $tableGood.$columnColorId = $colorId ''';
+    List<Map> result = await db.rawQuery(sql);
+    return result;
+  }
+
+  Future<List<Map>> getGoodImagesByTypologyAndColor(
+      int typologyId, int colorId) async {
+    Database db = await instance.database;
+
+    List<Map> result = await db.rawQuery(
+        '''SELECT DISTINCT $tableGoodImage.* FROM $tableGoodImage WHERE $tableGoodImage.$columnTypologyId = ? AND $tableGoodImage.$columnColorId = ?''',
+        [typologyId, colorId]);
+    return result;
+  }
+
+  Future<List<Map>> getFrontTypologyImages(int vendorId) async {
+    Database db = await instance.database;
+
+    List<Map> result = await db.rawQuery(
+        '''SELECT $tableTypology.$columnImage FROM $tableTypology INNER JOIN $tableVendor WHERE $tableTypology.$columnVendorId = ? LIMIT 6''',
+        [vendorId]);
+    return result;
+  }
+
 /*+++++++++++ da verificare +++++++++++++++++++  */
-  Future<List<Map>> getSizesByTypology(int typologyId) async {
+
+  Future<List<Map>> getGood(int typologyId, int colorId, int sizeId) async {
     Database db = await instance.database;
 
     List<Map> result = await db.rawQuery(
-        '''SELECT DISTINCT $tableSize.* FROM $tableSize INNER JOIN $tableGood ON $tableSize.$columnId = $tableGood.$columnSizeId WHERE $tableGood.$columnTypologyId = ?''',
-        [typologyId]);
+      '''SELECT DISTINCT $tableGood.* FROM $tableGood WHERE $tableGood.$columnTypologyId = $typologyId AND $tableGood.$columnColorId = $colorId AND $tableGood.$columnSizeId = $sizeId''',
+    );
     return result;
   }
 
-  Future<List<Map>> getAvailableQuantity(
-      int typologyId, int colorId, int sizeId) async {
-    Database db = await instance.database;
-
-    List<Map> result = await db.rawQuery(
-        '''SELECT DISTINCT $tableGood.$columnQuantity FROM $tableGood WHERE $tableGood.$columnTypologyId = ?''',
-        [typologyId, colorId, sizeId]);
-    return result;
-  }
 }

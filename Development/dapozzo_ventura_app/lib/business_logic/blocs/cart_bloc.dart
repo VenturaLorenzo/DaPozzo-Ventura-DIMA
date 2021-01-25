@@ -5,7 +5,7 @@ import 'package:bloc/bloc.dart';
 import '../events/cart_event.dart';
 
 class CartBloc extends Bloc<CartEvent, CartState> {
-  CartModel cart= CartModel(products: []);
+  CartModel cart= CartModel();
 
   @override
   CartState get initialState => CartCurrentState(cart);

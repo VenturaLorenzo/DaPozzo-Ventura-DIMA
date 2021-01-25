@@ -57,10 +57,7 @@ class MarketPlaceBloc extends Bloc<MarketPlaceEvent, MarketPlaceState> {
                 currentCategorySearch);
           } else {
             if (event is MarketPlaceReset) {
-              final List<Vendor> initialResult =
-                  await VendorRepository.getAllVendors();
-              _resetSearch();
-              yield MarketPlaceInitial(initialResult, currentCategorySearch);
+            //da imaplementare
             } else {
               yield MarketPlaceGeneralError("Unknown Action");
             }

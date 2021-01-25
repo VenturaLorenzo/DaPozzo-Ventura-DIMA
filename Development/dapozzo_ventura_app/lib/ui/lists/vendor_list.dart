@@ -15,7 +15,7 @@ class VendorList extends StatelessWidget {
       if (index < vendors.length) {
         return VendorItem(
           vendor: vendors[index],
-          categories: categories,
+          selectedCategories: categories,
         );
       } else {
         return null;

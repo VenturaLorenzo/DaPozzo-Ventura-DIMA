@@ -8,17 +8,10 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class VendorItem extends StatelessWidget {
   final Vendor vendor;
-  final List<int> categories;
-  final List<String> images = [
-    "lib/assets/image2.jpg",
-    "lib/assets/image2.jpg",
-    "lib/assets/image2.jpg",
-    "lib/assets/image2.jpg",
-    "lib/assets/image2.jpg",
-    "lib/assets/image2.jpg"
-  ];
+  final List<int> selectedCategories;
 
-  VendorItem({Key key, this.vendor, this.categories});
+
+  VendorItem({Key key, this.vendor, this.selectedCategories});
 
   @override
   Widget build(BuildContext context) {
@@ -42,10 +35,10 @@ class VendorItem extends StatelessWidget {
               InkWell(
                 onTap: () {
                   BlocProvider.of<VendorBloc>(context)
-                      .add(VendorEventInit(vendor, categories));
+                      .add(VendorEventInit(vendor, selectedCategories));
                   Navigator.pushNamed(context, '/vendor', arguments: {
                     "vendor": vendor,
-                    "preselectedCategories": categories
+                    "preselectedCategories": selectedCategories
                   });
                 },
                 child: Container(
@@ -123,14 +116,14 @@ class VendorItem extends StatelessWidget {
                             //scrollDirection: Axis.vertical,
                             shrinkWrap: true,
                             // Generate 100 widgets that display their index in the List.
-                            children: [vendor.image].map((path) {
+                            children: vendor.frontImages.map((path) {
                               return Padding(
                                 padding: EdgeInsets.fromLTRB(3, 3, 3, 3),
                                 child: InkWell(
                                     onTap: () {},
                                     child: ClipRRect(
                                       child: Image.network(
-                                        'https://www.laccademiabjj.it/images/sfondi/${vendor.image}',
+                                        'https://www.laccademiabjj.it/images/Shop/$path',
                                         fit: BoxFit.cover,
                                       ),
                                       borderRadius: BorderRadius.circular(5),

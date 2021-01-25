@@ -10,6 +10,7 @@ class ColorRepository {
     List<Map> rows = await dbHelper.getColorsByTypology(goodTypology.id);
     rows.forEach((row) {
       colors.add(ColorModel(
+          id: row[DatabaseHelper.columnId],
           name: row[DatabaseHelper.columnName],
           code: row[DatabaseHelper.columnCode]));
     });

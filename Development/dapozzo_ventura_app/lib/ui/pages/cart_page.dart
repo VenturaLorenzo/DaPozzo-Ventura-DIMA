@@ -37,9 +37,9 @@ class _CartPageState extends State<CartPage> {
             if (state is CartCurrentState) {
               return Column(
                 children: <Widget>[
-                  Text(" Totale : "+state.cart.total.toString())]
+                  Text(" Totale : "+state.cart.getTotal().toString())]
                     +
-                    state.cart.products.map((product) {
+                    state.cart.getProducts().map((product) {
                   return Card(
                     child: Text(product.type.name+ "("+product.color.toString()+")"),
                   );

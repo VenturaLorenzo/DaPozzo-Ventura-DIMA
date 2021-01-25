@@ -1,5 +1,5 @@
 import 'package:dapozzo_ventura_app/ui/pages/cart_page.dart';
-import 'package:dapozzo_ventura_app/ui/pages/goods_typology_page.dart';
+import 'package:dapozzo_ventura_app/ui/pages/good_window_page.dart';
 import 'package:dapozzo_ventura_app/ui/pages/home_page.dart';
 import 'package:dapozzo_ventura_app/ui/pages/launch_page.dart';
 import 'package:dapozzo_ventura_app/ui/pages/profile_page.dart';
@@ -30,7 +30,7 @@ class RouteGenerator {
                 ));
       case '/goodtypology':
         return MaterialPageRoute(
-            builder: (context) => GoodTypologyPage(
+            builder: (context) => GoodWindowPage(
                   goodTypology: settings.arguments,
                 ));
       case '/cart':

@@ -28,7 +28,7 @@ class CartIcon extends StatelessWidget {
               animationType: BadgeAnimationType.scale,
               badgeColor: Colors.red,
               borderRadius: BorderRadius.circular(8),
-              badgeContent: Text(state.cart.products.length.toString(),
+              badgeContent: Text(state.cart.getProducts().length.toString(),
                   style: TextStyle(color: Colors.white)),
             );
           } else {

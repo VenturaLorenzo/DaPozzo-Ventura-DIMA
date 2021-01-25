@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 
 class ColorModel {
+  final int id;
   final String name;
   final String code;
 
-  ColorModel({this.name, this.code});
+  ColorModel({this.name, this.code,this.id});
   @override
   String toString() {
     // TODO: implement toString

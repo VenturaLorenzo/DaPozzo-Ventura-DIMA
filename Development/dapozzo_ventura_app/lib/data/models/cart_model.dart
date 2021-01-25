@@ -1,64 +1,84 @@
 import 'package:dapozzo_ventura_app/data/models/good_model.dart';
 
 class CartModel {
-  List<GoodModel> products=[];
-  double total=0;
+  List<GoodModel> _products;
+  double _total;
 
-  CartModel({this.products}) {
-    total = calculateTotal(products);
+  CartModel() {
+    _products = [];
+    _total = 0;
   }
+
+  CartModel.fromProducts({List<GoodModel> products}) {
+    _products = products;
+    calculateTotal();
+  }
+
   @override
   String toString() {
     // TODO: implement toString
-    String cartToString="";
-    cartToString= cartToString+" Total : "+ total.toString()+"\n";
-    cartToString= cartToString+" Items : "+ "\n";
+    String cartToString = "";
+    cartToString = cartToString + " Total : " + _total.toString() + "\n";
+    cartToString = cartToString + " Items : " + "\n";
 
-
-    products.forEach((element) { cartToString=cartToString + element.toString()+"\n";});
+    _products.forEach((element) {
+      cartToString = cartToString + element.toString() + "\n";
+    });
     return cartToString;
   }
 
   void addProduct(GoodModel product) {
-    print(product.quantity);
-    if (products.contains(product)) {
-      GoodModel toChange = products[products.indexOf(product)];
-      int currentQuantity = toChange.quantity;
-      int newQuantity = product.quantity;
-      print(currentQuantity);
-      print(newQuantity);
-      toChange.quantity=currentQuantity + newQuantity;
-      print(toChange);
-      products[products.indexOf(product)]= toChange;
+    if (_products.contains(product)) {
+      GoodModel toChange = _products[_products.indexOf(product)];
+      int currentQuantity = toChange.getQuantity();
+      int newQuantity = product.getQuantity();
+      toChange.setQuantity(currentQuantity + newQuantity);
+      _products[_products.indexOf(product)] = toChange;
     } else {
-      GoodModel newProduct= new GoodModel(color: product.color,quantity: product.quantity,size: product.size,type: product.type);
+        GoodModel newProduct = new GoodModel(
+          color: product.color,
+          quantity: product.getQuantity(),
+          size: product.size,
+          type: product.type);
 
-      products.add(newProduct);
+      _products.add(newProduct);
     }
-    total = calculateTotal(products);
+    calculateTotal();
   }
 
   void removeProduct(GoodModel product) {
-    if (products.contains(product)) {
-      GoodModel toChange = products[products.indexOf(product)];
-      if (toChange.quantity <= product.quantity) {
-        products.remove(product);
+    if (_products.contains(product)) {
+      GoodModel toChange = _products[_products.indexOf(product)];
+      if (toChange.getQuantity() <= product.getQuantity()) {
+        _products.remove(product);
       } else {
-        int currentQuantity = toChange.quantity;
-        int toRemoveQuantity = product.quantity;
-        toChange.quantity = currentQuantity - toRemoveQuantity;
+        int currentQuantity = toChange.getQuantity();
+        int toRemoveQuantity = product.getQuantity();
+        toChange.setQuantity(currentQuantity - toRemoveQuantity);
       }
     } else {
-      throw("TRYING TO REMOVE FROM CART AN OBJECT THAT IS NOT PRESENT");
+      throw ("TRYING TO REMOVE FROM CART AN OBJECT THAT IS NOT PRESENT");
     }
-    total = calculateTotal(products);
+    calculateTotal();
   }
 
-  double calculateTotal(List<GoodModel> products) {
+  List<GoodModel> getProducts() {
+    return _products;
+  }
+
+  double getTotal() {
+    return _total;
+  }
+
+  calculateTotal() {
     double tot = 0;
-    products.forEach((product) {
-      tot = tot + (product.type.price * product.quantity);
+    _products.forEach((product) {
+      tot = tot + (product.type.price * product.getQuantity());
     });
-    return tot;
+    if (tot >= 0) {
+      _total = tot;
+    } else {
+      throw ("TOTALE LESS THAN 0");
+    }
   }
 }
