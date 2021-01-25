@@ -13,7 +13,7 @@ print(images);
 
 }*/
 void main() {
- // SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft,DeviceOrientation.portraitUp]);
+  // SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft,DeviceOrientation.portraitUp]);
   runApp(
     MultiBlocProvider(
         providers: [

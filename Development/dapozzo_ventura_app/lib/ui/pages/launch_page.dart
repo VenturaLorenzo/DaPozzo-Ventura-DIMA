@@ -1,10 +1,8 @@
 import 'package:dapozzo_ventura_app/data/models/category_model.dart';
 import 'package:dapozzo_ventura_app/data/models/sport_model.dart';
-import 'package:dapozzo_ventura_app/data/providers/database_helper.dart';
 import 'package:dapozzo_ventura_app/data/repositories/category_repository.dart';
 import 'package:dapozzo_ventura_app/data/repositories/sport_repository.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class LaunchPage extends StatefulWidget {

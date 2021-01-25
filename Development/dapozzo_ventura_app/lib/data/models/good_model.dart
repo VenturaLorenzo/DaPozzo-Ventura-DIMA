@@ -1,7 +1,4 @@
 import 'dart:math';
-
-import 'package:flutter/material.dart';
-
 import 'color_model.dart';
 import 'good_typology_model.dart';
 
@@ -12,11 +9,17 @@ class GoodModel {
   final String size;
   int _quantity;
 
-  static GoodModel createFake(String name,String size,int quantity){
-    Random rnd= Random();
-    return GoodModel( type: GoodTypologyModel.createFake(name),quantity: quantity,size: size,color: ColorModel(name: "green"),images:["fake.jpg"]  );
+  static GoodModel createFake(String name, String size, int quantity) {
+    Random rnd = Random();
+    return GoodModel(
+        type: GoodTypologyModel.createFake(name),
+        quantity: quantity,
+        size: size,
+        color: ColorModel(name: "green"),
+        images: ["fake.jpg"]);
   }
-  GoodModel({this.size, this.color, this.images, this.type,int quantity}) {
+
+  GoodModel({this.size, this.color, this.images, this.type, int quantity}) {
     if (images == []) {
       throw ("IMMAGINI NON CONFORMI, LISTA VUOTA");
     }
@@ -37,8 +40,8 @@ class GoodModel {
     }
     if (quantity <= 0) {
       throw ("QUANTITY LESS THAN 0");
-    }else{
-      _quantity=quantity;
+    } else {
+      _quantity = quantity;
     }
   }
 
@@ -55,22 +58,26 @@ class GoodModel {
     // TODO: implement toString
     return "GOOD ->  color : $color, images : $images, size: $size, quantity: $_quantity";
   }
-  int getQuantity(){
+
+  int getQuantity() {
     return _quantity;
   }
-  void setQuantity(int newQuantity){
-    if(newQuantity >=0 )
-      {_quantity= newQuantity;}
-    else{
-      throw("TRYING TO SET A QUANTITY LESS THAN 0");
+
+  void setQuantity(int newQuantity) {
+    if (newQuantity >= 0) {
+      _quantity = newQuantity;
+    } else {
+      throw ("TRYING TO SET A QUANTITY LESS THAN 0");
     }
   }
-  void addOnePiece(){
-    _quantity=_quantity+1;
-  } void removeOnePiece(){
-    if(_quantity>0) {
+
+  void addOnePiece() {
+    _quantity = _quantity + 1;
+  }
+
+  void removeOnePiece() {
+    if (_quantity > 0) {
       _quantity = _quantity - 1;
     }
-
   }
 }

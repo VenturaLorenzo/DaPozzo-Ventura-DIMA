@@ -2,11 +2,8 @@ import 'package:dapozzo_ventura_app/data/models/vendor_model.dart';
 import 'package:dapozzo_ventura_app/data/providers/database_helper.dart';
 import 'package:dapozzo_ventura_app/data/repositories/category_repository.dart';
 import 'package:dapozzo_ventura_app/data/repositories/front_image_repository.dart';
-import 'package:flutter/cupertino.dart';
 
 class VendorRepository {
-
-
   static Future<List<Vendor>> getVendorsByFiters(
       List<int> categories, String text, List<int> sports) async {
     var dbHelper = DatabaseHelper.instance;
@@ -16,7 +13,7 @@ class VendorRepository {
     List<Vendor> retVal = [];
 
     allVendorRows.forEach((row) {
-    //  print(categories);
+      //  print(categories);
       retVal.add(Vendor(
         name: row[DatabaseHelper.columnName],
         image: row[DatabaseHelper.columnImage],
@@ -25,13 +22,13 @@ class VendorRepository {
         id: row[DatabaseHelper.columnId],
       ));
     });
-   await Future.wait(retVal.map((element)  async {
+    await Future.wait(retVal.map((element) async {
       element.categories =
           await CategoryRepository.getCategoriesByVendor(element.id);
-      element.frontImages= await FrontImageRepository.getFrontTypologyImages(element.id);
+      element.frontImages =
+          await FrontImageRepository.getFrontTypologyImages(element.id);
     }));
     print(retVal);
-    return  retVal;
+    return retVal;
   }
-
 }

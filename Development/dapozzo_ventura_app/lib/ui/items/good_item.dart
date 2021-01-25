@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -56,12 +55,12 @@ class GoodItem extends StatelessWidget {
                   width: 200,
                   child: Center(
                       child: Text(
-                        '25' + '€',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            color: Colors.green,
-                            fontSize: 24),
-                      )),
+                    '25' + '€',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        color: Colors.green,
+                        fontSize: 24),
+                  )),
                 ),
                 IconButton(
                   onPressed: () {},

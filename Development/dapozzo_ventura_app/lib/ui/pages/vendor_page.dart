@@ -211,7 +211,11 @@ class _VendorPageState extends State<VendorPage> {
                 }
 
                 if (state is VendorStateLoading) {
-                  return Center(child: CircularProgressIndicator());
+                  return Center(
+                    child: CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.black54),
+                    ),
+                  );
                 }
 
                 return Center(
