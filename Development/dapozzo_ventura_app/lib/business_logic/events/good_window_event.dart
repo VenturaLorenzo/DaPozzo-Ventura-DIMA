@@ -14,3 +14,4 @@ class GoodWindowEventFilterChange extends GoodWindowEvent {
   GoodWindowEventFilterChange(this.goodTypology, this.selectedColor);
 }
 
+class GoodWindowResetEvent extends GoodWindowEvent {}

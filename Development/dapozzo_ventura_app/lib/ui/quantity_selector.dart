@@ -36,21 +36,62 @@ class QuantitySelector extends StatelessWidget {
               Container(
                 width: 65,
                 child: Center(
-                  child: DropdownButton(
-                    items: [
-                      DropdownMenuItem(child: Text('1')),
-                      DropdownMenuItem(child: Text('2')),
-                      DropdownMenuItem(child: Text('3')),
-                      DropdownMenuItem(child: Text('4')),
-                    ],
-                    onChanged: (index) {},
-                  ),
+                  child: DropDownQuantityWidget(),
                 ),
-              )
+              ),
             ],
           ),
         ),
       ),
     );
   }
+}
+
+//++++++++++++++++++++++++  DropDown Size   ++++++++++++++++++++++++
+
+class DropDownQuantityWidget extends StatefulWidget {
+  @override
+  _DropDownSizeWidgetState createState() => _DropDownSizeWidgetState();
+}
+
+class _DropDownSizeWidgetState extends State<DropDownQuantityWidget> {
+  List<String> quantity = ["1", "2", "3", "4", "5"];
+  String dropdownValue = "1";
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButton<String>(
+      value: dropdownValue,
+      icon: Icon(Icons.arrow_drop_down),
+      iconSize: 24,
+      elevation: 16,
+      disabledHint: Text('none'),
+      style: TextStyle(color: Colors.black54),
+      underline: Container(
+        height: 1,
+        color: Colors.black26,
+      ),
+      onChanged: (String newValue) {
+        setState(() {
+          dropdownValue = newValue;
+        });
+      },
+      items: quantity.map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+    );
+  }
+}
+
+getSizesNames(List<SizeModel> goodSize) {
+  var retVal = new List<String>();
+
+  goodSize.forEach((element) {
+    retVal.add(element.name);
+  });
+
+  return retVal;
 }

@@ -39,6 +39,13 @@ class _GoodWindowPageState extends State<GoodWindowPage> {
   }
 
   @override
+  void dispose() {
+    _goodWindowBloc.add(GoodWindowResetEvent());
+    // TODO: implement dispose
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -88,12 +95,10 @@ class _GoodWindowPageState extends State<GoodWindowPage> {
                       colors: state.colors,
                       current: state.currentColor,
                     ),
-                    QuantitySelector(),
                     SizeSelector(
-                      goodTypology: state.typology,
                       sizes: state.sizes,
-                      // current: state.currentSize,
                     ),
+                    QuantitySelector(),
                   ],
                 ),
                 Row(
@@ -150,84 +155,11 @@ class _GoodWindowPageState extends State<GoodWindowPage> {
                       colors: state.colors,
                       current: state.currentColor,
                     ),
-                    // SizeSelector
-                    Padding(
-                      padding: const EdgeInsets.all(5),
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey[300],
-                                offset: Offset(4.0, 4.0),
-                                blurRadius: 5.0,
-                                spreadRadius: 1,
-                              ),
-                            ],
-                            borderRadius: BorderRadius.circular(5)),
-                        child: Padding(
-                          padding: const EdgeInsets.all(2.5),
-                          child: Column(
-                            children: [
-                              Text("Quantity"),
-                              Container(
-                                width: 65,
-                                child: Center(
-                                  child: DropdownButton(
-                                    items: [
-                                      DropdownMenuItem(child: Text('1')),
-                                      DropdownMenuItem(child: Text('2')),
-                                      DropdownMenuItem(child: Text('3')),
-                                      DropdownMenuItem(child: Text('4')),
-                                    ],
-                                    onChanged: (index) {},
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
+                    SizeSelector(
+                      sizes: state.sizes,
+                      // current: state.currentSize,
                     ),
-                    // QuantitySelector
-                    Padding(
-                      padding: const EdgeInsets.all(5),
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey[300],
-                                offset: Offset(4.0, 4.0),
-                                blurRadius: 5.0,
-                                spreadRadius: 1,
-                              ),
-                            ],
-                            borderRadius: BorderRadius.circular(5)),
-                        child: Padding(
-                          padding: const EdgeInsets.all(2.5),
-                          child: Column(
-                            children: [
-                              Text("Sizes"),
-                              Container(
-                                width: 65,
-                                child: Center(
-                                  child: DropdownButton(
-                                    items: [
-                                      DropdownMenuItem(child: Text('S')),
-                                      DropdownMenuItem(child: Text('M')),
-                                      DropdownMenuItem(child: Text('L')),
-                                      DropdownMenuItem(child: Text('XL')),
-                                    ],
-                                    onChanged: (index) {},
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
+                    QuantitySelector()
                   ],
                 ),
                 Row(
@@ -282,29 +214,7 @@ class _GoodWindowPageState extends State<GoodWindowPage> {
       ),
     );
   }
-//++++++++++++++++++++++++  DropDown Size   ++++++++++++++++++++++++
 
-// class DropDownState extends State<DropDown> {
-// List<Size> _sizes = Size.getSizes();
-// List<DropdownMenuItem<Size>> _dropdownMenuItems;
-// Size _selectedSizes;
-
-// @override
-// void initState(){
-//   _dropownMenuItems = buildDropdownMenuItems(_sizes);
-//   _selectedSizes = _dropdownMenuItems[0].value;
-//   super.initState();
-// }
-
-// List<DropdownMenuItem<Size> buildDropdownMenuItems(List sizes){
-//   List<DropdownMenuItem<Size>> items = List();
-//   for (Size size in sizes){
-//     items.add(DropdownMenuItem(child: Text(size.name),value:size));
-//   }
-//   return items;
-// };
-
-// }
 // +++++++++++++++++++++++  PopUp Successo  ++++++++++++++++++++++++
 
   Future<void> _showSuccesPopup() async {
@@ -320,7 +230,7 @@ class _GoodWindowPageState extends State<GoodWindowPage> {
           elevation: 2,
           backgroundColor: Colors.lightGreen.withOpacity(0.5),
           title: Center(
-            child: Text('Success'),
+            child: Text('Item aggiunto al carrello con successo'),
           ),
         );
       },
