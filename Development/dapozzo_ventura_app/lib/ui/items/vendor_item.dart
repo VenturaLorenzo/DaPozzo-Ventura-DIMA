@@ -1,7 +1,5 @@
-import 'dart:ffi';
+import 'package:dapozzo_ventura_app/business_logic/cubit/vendor_cubit.dart';
 
-import 'package:dapozzo_ventura_app/business_logic/blocs/vendor_bloc.dart';
-import 'package:dapozzo_ventura_app/business_logic/events/vendor_event.dart';
 import 'package:dapozzo_ventura_app/data/models/vendor_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -35,8 +33,7 @@ class VendorItem extends StatelessWidget {
             children: [
               InkWell(
                 onTap: () {
-                  BlocProvider.of<VendorBloc>(context)
-                      .add(VendorEventInit(vendor, selectedCategories));
+                  BlocProvider.of<VendorCubit>(context).initialize( selectedCategories,vendor);
                   Navigator.pushNamed(context, '/vendor', arguments: {
                     "vendor": vendor,
                     "preselectedCategories": selectedCategories

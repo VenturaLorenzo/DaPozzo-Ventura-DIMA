@@ -1,11 +1,14 @@
 import 'dart:math';
+import 'package:dapozzo_ventura_app/data/models/good_image_model.dart';
+import 'package:dapozzo_ventura_app/ui/lists/good_images_list.dart';
+
 import 'color_model.dart';
 import 'good_typology_model.dart';
 
 class GoodModel {
   final GoodTypologyModel type;
   final ColorModel color;
-  final List<String> images;
+  final List<GoodImageModel> images;
   final String size;
   int _quantity;
 
@@ -15,8 +18,8 @@ class GoodModel {
         type: GoodTypologyModel.createFake(name),
         quantity: quantity,
         size: size,
-        color: ColorModel(name: "green"),
-        images: ["fake.jpg"]);
+        color: ColorModel(name: "green"));
+     //   images: ["fake.jpg"]);
   }
 
   GoodModel({this.size, this.color, this.images, this.type, int quantity}) {

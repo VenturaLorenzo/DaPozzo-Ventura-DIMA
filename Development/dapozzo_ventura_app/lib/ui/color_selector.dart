@@ -1,9 +1,8 @@
+import 'package:dapozzo_ventura_app/business_logic/cubit/good_window_cubit.dart';
 import 'package:dapozzo_ventura_app/data/models/color_model.dart';
 import 'package:dapozzo_ventura_app/data/models/good_typology_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:dapozzo_ventura_app/business_logic/blocs/good_window_bloc.dart';
-import 'package:dapozzo_ventura_app/business_logic/events/good_window_event.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ColorSelector extends StatelessWidget {
@@ -26,8 +25,7 @@ class ColorSelector extends StatelessWidget {
             padding: const EdgeInsets.all(5),
             child: GestureDetector(
               onTap: () {
-                BlocProvider.of<GoodWindowBloc>(context)
-                    .add(GoodWindowEventFilterChange(goodTypology, colorModel));
+                BlocProvider.of<GoodWindwCubit>(context).filterChange(goodTypology, colorModel);
               },
               child: Container(
                 width: 25.0,
@@ -46,8 +44,8 @@ class ColorSelector extends StatelessWidget {
             padding: const EdgeInsets.all(5),
             child: GestureDetector(
               onTap: () {
-                BlocProvider.of<GoodWindowBloc>(context)
-                    .add(GoodWindowEventFilterChange(goodTypology, colorModel));
+                BlocProvider.of<GoodWindwCubit>(context)
+                    .filterChange(goodTypology, colorModel);
               },
               child: Container(
                 width: 30.0,

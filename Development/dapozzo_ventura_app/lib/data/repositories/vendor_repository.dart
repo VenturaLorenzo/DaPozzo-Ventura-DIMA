@@ -13,7 +13,6 @@ class VendorRepository {
     List<Vendor> retVal = [];
 
     allVendorRows.forEach((row) {
-      //  print(categories);
       retVal.add(Vendor(
         name: row[DatabaseHelper.columnName],
         image: row[DatabaseHelper.columnImage],
@@ -28,7 +27,6 @@ class VendorRepository {
       element.frontImages =
           await FrontImageRepository.getFrontTypologyImages(element.id);
     }));
-    print(retVal);
     return retVal;
   }
 }

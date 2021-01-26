@@ -1,6 +1,4 @@
-import 'package:dapozzo_ventura_app/business_logic/blocs/cart_bloc.dart';
-import 'package:dapozzo_ventura_app/business_logic/blocs/market_place_bloc.dart';
-import 'package:dapozzo_ventura_app/business_logic/events/market_place_event.dart';
+import 'package:dapozzo_ventura_app/business_logic/cubit/market_place_cubit.dart';
 import 'package:dapozzo_ventura_app/data/models/category_model.dart';
 import 'package:dapozzo_ventura_app/data/models/sport_model.dart';
 import 'package:dapozzo_ventura_app/data/models/vendor_model.dart';
@@ -24,7 +22,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  var _marketPlaceBloc;
+  MarketPlaceCubit _marketPlaceCubit;
   List<CategoryModel> categories;
   List<SportModel> sports;
 
@@ -37,15 +35,14 @@ class _HomeState extends State<Home> {
     imageCache.clear();
     categories = widget.categoriesAndSports.allCategories;
     sports = widget.categoriesAndSports.allSports;
-    _marketPlaceBloc = BlocProvider.of<MarketPlaceBloc>(context);
-    _cartBloc = BlocProvider.of<CartBloc>(context);
+    _marketPlaceCubit = BlocProvider.of<MarketPlaceCubit>(context);
+    //_cartBloc = BlocProvider.of<CartBloc>(context);
 
-    _marketPlaceBloc.add(MarketPlaceInit());
+    _marketPlaceCubit.initialize();
   }
 
   @override
   Widget build(BuildContext context) {
-    //  categories= ModalRoute.of(context).settings.arguments;
 
     return Scaffold(
       appBar: EquipAppBar(
@@ -67,12 +64,12 @@ class _HomeState extends State<Home> {
             expandedHeight: MediaQuery.of(context).size.height / 2.2,
             pinned: false,
             flexibleSpace: FilterBar(
-              marketPlaceBloc: _marketPlaceBloc,
+              marketPlaceCubit:  _marketPlaceCubit,
               categories: categories,
               sports: sports,
             ),
           ),
-          BlocBuilder<MarketPlaceBloc, MarketPlaceState>(
+          BlocBuilder<MarketPlaceCubit, MarketPlaceState>(
               builder: (context, state) {
             List<Vendor> vendors;
             if (state is MarketPlaceLoadingState) {
@@ -87,17 +84,7 @@ class _HomeState extends State<Home> {
             if (state is MarketPlaceInitial) {
               vendors = state.initialResult;
               return VendorList(vendors, state.categories);
-              /*vendors.forEach((element) {print(element.name);});
-              return SliverList(delegate:
-                  SliverChildBuilderDelegate((BuildContext context, int index) {
-                if (index < vendors.length) {
-                  return VendorItem(
-                    vendor: vendors[index],
-                  );
-                } else {
-                  return null;
-                }
-              }));*/
+
             } else {
               if (state is MarketPlaceSearched) {
                 vendors = state.result;
@@ -119,6 +106,6 @@ class _HomeState extends State<Home> {
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    _marketPlaceBloc.close();
+    _marketPlaceCubit.close();
   }
 }
