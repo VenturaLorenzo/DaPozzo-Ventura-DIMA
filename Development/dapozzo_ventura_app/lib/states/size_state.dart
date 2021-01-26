@@ -4,8 +4,7 @@ abstract class SizeState {}
 
 class SizeStateUninitialized extends SizeState {}
 
-class SizeStateInitialized extends SizeState {
-  List<SizeModel> sizes;
-  SizeModel currentSize;
-  SizeStateInitialized(this.sizes, this.currentSize);
+class SizeStateCurrent extends SizeState {
+ final String currentSize;
+ SizeStateCurrent(this.currentSize);
 }

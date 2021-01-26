@@ -40,6 +40,12 @@ class GoodWindwCubit extends Cubit<GoodWindowState> {
       emit(GoodWindowImagesNotFuondState());
     }
   }
+  Future<void> reset(){
+    sizes=[];
+    goodTypology=null;
+    colors=[];
+    emit(GoodWindowInitState());
+  }
 
 
 }

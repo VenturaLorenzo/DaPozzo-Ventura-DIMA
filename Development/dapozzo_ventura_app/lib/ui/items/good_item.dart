@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 
 class GoodItem extends StatelessWidget {
   final String image;
-
-  const GoodItem({Key key, this.image}) : super(key: key);
+final int price;
+  const GoodItem({Key key, this.image,this.price}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +55,7 @@ class GoodItem extends StatelessWidget {
                   width: 200,
                   child: Center(
                       child: Text(
-                    '25' + '€',
+                    price.toString()+ '€',
                     style: TextStyle(
                         fontWeight: FontWeight.w400,
                         color: Colors.green,

@@ -1,5 +1,7 @@
 import 'package:dapozzo_ventura_app/business_logic/cubit/cart_cubit.dart';
 import 'package:dapozzo_ventura_app/business_logic/cubit/good_window_cubit.dart';
+import 'package:dapozzo_ventura_app/business_logic/cubit/quantity_cubit.dart';
+import 'package:dapozzo_ventura_app/business_logic/cubit/size_cubit.dart';
 import 'package:dapozzo_ventura_app/business_logic/cubit/vendor_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'business_logic/cubit/market_place_cubit.dart';
@@ -29,7 +31,12 @@ void main() {
           BlocProvider(
             create: (BuildContext context) => GoodWindwCubit(),
           ),
-
+          BlocProvider(
+            create: (BuildContext context) => QuantityCubit(),
+          ),
+          BlocProvider(
+            create: (BuildContext context) => SizeCubit(),
+          ),
         ],
         child: MaterialApp(
           initialRoute: '/launch',
