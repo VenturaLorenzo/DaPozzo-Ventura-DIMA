@@ -15,12 +15,7 @@ class MarketPlaceSearched extends MarketPlaceState {
 
   MarketPlaceSearched(this.result, this.categories);
 }
-/*
-class MarketPlaceInside extends MarketPlaceState{
-final VendorPage shop;
 
-MarketPlaceInside(this.shop);
-}*/
 
 class MarketPlaceSearchFailed extends MarketPlaceState {
   final String error;
@@ -28,13 +23,7 @@ class MarketPlaceSearchFailed extends MarketPlaceState {
   MarketPlaceSearchFailed(this.error);
 }
 
-/*
-class MarketPlaceEntranceFailed  extends MarketPlaceState{
-  final String error;
 
-  MarketPlaceEntranceFailed(this.error);
-
-}*/
 class MarketPlaceGeneralError extends MarketPlaceState {
   final String error;
 

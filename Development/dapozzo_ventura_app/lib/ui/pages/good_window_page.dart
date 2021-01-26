@@ -1,7 +1,4 @@
-import 'package:dapozzo_ventura_app/business_logic/blocs/cart_bloc.dart';
-import 'package:dapozzo_ventura_app/business_logic/blocs/good_window_bloc.dart';
-import 'package:dapozzo_ventura_app/business_logic/events/cart_event.dart';
-import 'package:dapozzo_ventura_app/business_logic/events/good_window_event.dart';
+import 'package:dapozzo_ventura_app/business_logic/cubit/good_window_cubit.dart';
 import 'package:dapozzo_ventura_app/data/models/good_image_model.dart';
 import 'package:dapozzo_ventura_app/data/models/good_typology_model.dart';
 import 'package:dapozzo_ventura_app/states/good_window_state.dart';
@@ -23,18 +20,17 @@ class GoodWindowPage extends StatefulWidget {
 }
 
 class _GoodWindowPageState extends State<GoodWindowPage> {
-  CartBloc _cartBloc;
-  GoodWindowBloc _goodWindowBloc;
+  GoodWindwCubit _goodWindwCubit;
   List<bool> isSelected;
   GoodTypologyModel goodTypology;
 
   @override
   void initState() {
     super.initState();
-    _cartBloc = BlocProvider.of<CartBloc>(context);
-    _goodWindowBloc = BlocProvider.of<GoodWindowBloc>(context);
+  //  _cartBloc = BlocProvider.of<CartBloc>(context);
+    _goodWindwCubit = BlocProvider.of<GoodWindwCubit>(context);
     goodTypology = widget.goodTypology;
-    _goodWindowBloc.add(GoodWindowEventInitialize(goodTypology));
+    _goodWindwCubit.initialize(goodTypology);
   }
 
   @override
@@ -57,7 +53,7 @@ class _GoodWindowPageState extends State<GoodWindowPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-        child: BlocBuilder<GoodWindowBloc, GoodWindowState>(
+        child: BlocBuilder<GoodWindwCubit, GoodWindowState>(
             builder: (context, state) {
               if (state is GoodWindowInitState) {
                 return Center(

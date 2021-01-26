@@ -1,10 +1,10 @@
-import 'package:dapozzo_ventura_app/business_logic/blocs/good_window_bloc.dart';
-import 'business_logic/blocs/cart_bloc.dart';
-import 'business_logic/blocs/market_place_bloc.dart';
-import 'business_logic/blocs/vendor_bloc.dart';
+import 'package:dapozzo_ventura_app/business_logic/cubit/cart_cubit.dart';
+import 'package:dapozzo_ventura_app/business_logic/cubit/good_window_cubit.dart';
+import 'package:dapozzo_ventura_app/business_logic/cubit/vendor_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'business_logic/cubit/market_place_cubit.dart';
 import 'data/providers/route_generator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 /*
 
 void main() async{
@@ -18,16 +18,16 @@ void main() {
     MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (BuildContext context) => MarketPlaceBloc(),
+            create: (BuildContext context) => MarketPlaceCubit(),
+          ),
+     BlocProvider(
+            create: (BuildContext context) => CartCubit(),
           ),
           BlocProvider(
-            create: (BuildContext context) => CartBloc(),
+            create: (BuildContext context) => VendorCubit(),
           ),
           BlocProvider(
-            create: (BuildContext context) => VendorBloc(),
-          ),
-          BlocProvider(
-            create: (BuildContext context) => GoodWindowBloc(),
+            create: (BuildContext context) => GoodWindwCubit(),
           ),
 
         ],

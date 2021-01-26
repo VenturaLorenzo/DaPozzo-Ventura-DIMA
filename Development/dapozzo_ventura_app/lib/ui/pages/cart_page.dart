@@ -1,4 +1,4 @@
-import 'package:dapozzo_ventura_app/business_logic/blocs/cart_bloc.dart';
+import 'package:dapozzo_ventura_app/business_logic/cubit/cart_cubit.dart';
 import 'package:dapozzo_ventura_app/states/cart_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -26,10 +26,9 @@ class _CartPageState extends State<CartPage> {
 
         title: Text("Cart"),
       ),
-      body:
+     body:
 
-      BlocBuilder<CartBloc, CartState>(
-        bloc: BlocProvider.of<CartBloc>(context),
+      BlocBuilder<CartCubit, CartState>(
         builder: (context, state) {
           if (state is CartStateLoading) {
             return CircularProgressIndicator();
@@ -51,7 +50,6 @@ class _CartPageState extends State<CartPage> {
           }
         },
       ),
-
     );
   }
 }
