@@ -222,16 +222,24 @@ class _GoodWindowPageState extends State<GoodWindowPage> {
       Navigator.pop(context);
     });
     return showDialog<void>(
-      barrierColor: Colors.black54.withOpacity(0.02),
+      barrierColor: Colors.lightGreen.withOpacity(0.02),
       context: context,
       barrierDismissible: true, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
           elevation: 2,
-          backgroundColor: Colors.lightGreen.withOpacity(0.5),
-          title: Center(
-            child: Text('Item aggiunto al carrello con successo'),
-          ),
+          backgroundColor: Colors.grey[300].withOpacity(0.80),
+          title: Column(children: [
+            Text(
+              "Added to CART",
+              style: TextStyle(color: Colors.green[900]),
+            ),
+            Icon(
+              Icons.check,
+              color: Colors.green[900],
+              size: 50,
+            ),
+          ]),
         );
       },
     );

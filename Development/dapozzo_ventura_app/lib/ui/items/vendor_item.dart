@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:dapozzo_ventura_app/business_logic/blocs/vendor_bloc.dart';
 import 'package:dapozzo_ventura_app/business_logic/events/vendor_event.dart';
 import 'package:dapozzo_ventura_app/data/models/vendor_model.dart';
@@ -9,7 +11,6 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 class VendorItem extends StatelessWidget {
   final Vendor vendor;
   final List<int> selectedCategories;
-
 
   VendorItem({Key key, this.vendor, this.selectedCategories});
 
@@ -96,9 +97,7 @@ class VendorItem extends StatelessWidget {
                             Icons.star,
                             color: Colors.black87,
                           ),
-                          onRatingUpdate: (rating) {
-                            print(rating);
-                          },
+                          onRatingUpdate: null,
                         ),
                         Text(
                           '${vendor.rating}',
@@ -120,7 +119,17 @@ class VendorItem extends StatelessWidget {
                               return Padding(
                                 padding: EdgeInsets.fromLTRB(3, 3, 3, 3),
                                 child: InkWell(
-                                    onTap: () {},
+                                    onTap: () {
+                                      BlocProvider.of<VendorBloc>(context).add(
+                                          VendorEventInit(
+                                              vendor, selectedCategories));
+                                      Navigator.pushNamed(context, '/vendor',
+                                          arguments: {
+                                            "vendor": vendor,
+                                            "preselectedCategories":
+                                                selectedCategories
+                                          });
+                                    },
                                     child: ClipRRect(
                                       child: Image.network(
                                         'https://www.laccademiabjj.it/images/Shop/$path',
