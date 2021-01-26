@@ -24,18 +24,17 @@ class GoodWindowPage extends StatefulWidget {
 }
 
 class _GoodWindowPageState extends State<GoodWindowPage> {
-  CartBloc _cartBloc;
-  GoodWindowBloc _goodWindowBloc;
+  GoodWindwCubit _goodWindwCubit;
   List<bool> isSelected;
   GoodTypologyModel goodTypology;
 
   @override
   void initState() {
     super.initState();
-    _cartBloc = BlocProvider.of<CartBloc>(context);
-    _goodWindowBloc = BlocProvider.of<GoodWindowBloc>(context);
+  //  _cartBloc = BlocProvider.of<CartBloc>(context);
+    _goodWindwCubit = BlocProvider.of<GoodWindwCubit>(context);
     goodTypology = widget.goodTypology;
-    _goodWindowBloc.add(GoodWindowEventInitialize(goodTypology));
+    _goodWindwCubit.initialize(goodTypology);
   }
 
   @override

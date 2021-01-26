@@ -1,14 +1,14 @@
-import 'package:dapozzo_ventura_app/business_logic/events/market_place_event.dart';
+import 'package:dapozzo_ventura_app/business_logic/cubit/market_place_cubit.dart';
 import 'package:dapozzo_ventura_app/data/models/category_model.dart';
 import 'package:dapozzo_ventura_app/data/models/sport_model.dart';
 import 'package:flutter/material.dart';
 
 class FilterBar extends StatefulWidget {
-  final marketPlaceBloc;
+  final MarketPlaceCubit marketPlaceCubit;
   final List<CategoryModel> categories;
   final List<SportModel> sports;
 
-  const FilterBar({this.marketPlaceBloc, this.categories, this.sports});
+  const FilterBar({this.marketPlaceCubit, this.categories, this.sports});
 
   @override
   _FilterBarState createState() => _FilterBarState();
@@ -59,8 +59,7 @@ class _FilterBarState extends State<FilterBar> {
                 setState(() {
                   isSelectedSport[index] = !isSelectedSport[index];
                 });
-                widget.marketPlaceBloc
-                    .add(MarketPlaceSearchSport(widget.sports[index]));
+                widget.marketPlaceCubit.searchSport(widget.sports[index]);
               },
               isSelected: isSelectedSport,
             ),
@@ -92,8 +91,7 @@ class _FilterBarState extends State<FilterBar> {
                   isSelectedCat[index] = !isSelectedCat[index];
                 });
 
-                widget.marketPlaceBloc.add(
-                    MarketPlaceSearchCategory(widget.categories[index].id));
+                widget.marketPlaceCubit.searchCategory(widget.categories[index].id);
               },
               isSelected: isSelectedCat,
             ),
@@ -101,7 +99,7 @@ class _FilterBarState extends State<FilterBar> {
           TextField(
             controller: _textController,
             onSubmitted: (typedText) {
-              widget.marketPlaceBloc.add(MarketPlaceSearchText(typedText));
+              widget.marketPlaceCubit.searchText(typedText);
             },
             style: TextStyle(
               color: Colors.black87,

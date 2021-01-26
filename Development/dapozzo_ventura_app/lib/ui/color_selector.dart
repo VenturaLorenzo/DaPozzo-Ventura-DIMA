@@ -26,8 +26,7 @@ class ColorSelector extends StatelessWidget {
             padding: const EdgeInsets.all(5),
             child: GestureDetector(
               onTap: () {
-                BlocProvider.of<GoodWindowBloc>(context)
-                    .add(GoodWindowEventFilterChange(goodTypology, colorModel));
+                BlocProvider.of<GoodWindwCubit>(context).filterChange(goodTypology, colorModel);
               },
               child: Container(
                 width: 25.0,
@@ -46,8 +45,8 @@ class ColorSelector extends StatelessWidget {
             padding: const EdgeInsets.all(5),
             child: GestureDetector(
               onTap: () {
-                BlocProvider.of<GoodWindowBloc>(context)
-                    .add(GoodWindowEventFilterChange(goodTypology, colorModel));
+                BlocProvider.of<GoodWindwCubit>(context)
+                    .filterChange(goodTypology, colorModel);
               },
               child: Container(
                 width: 30.0,

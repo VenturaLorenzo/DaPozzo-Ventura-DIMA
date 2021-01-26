@@ -37,12 +37,12 @@ packages:
     source: hosted
     version: "1.1.4"
   bloc:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: bloc
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.0"
+    version: "6.1.1"
   boolean_selector:
     dependency: transitive
     description:
@@ -145,7 +145,7 @@ packages:
       name: flutter_bloc
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.2.0"
+    version: "6.1.1"
   flutter_rating_bar:
     dependency: "direct main"
     description:
@@ -297,7 +297,7 @@ packages:
       name: provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.3.2+2"
+    version: "4.3.3"
   pub_semver:
     dependency: transitive
     description:
@@ -305,13 +305,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.4.4"
-  rxdart:
-    dependency: transitive
-    description:
-      name: rxdart
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.23.1"
   shelf:
     dependency: transitive
     description:

@@ -1,5 +1,5 @@
 import 'package:badges/badges.dart';
-import 'package:dapozzo_ventura_app/business_logic/blocs/cart_bloc.dart';
+import 'package:dapozzo_ventura_app/business_logic/cubit/cart_cubit.dart';
 import 'package:dapozzo_ventura_app/states/cart_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +20,7 @@ class CartIcon extends StatelessWidget {
             size: MediaQuery.of(context).size.width / 18,
           ),
         ),
-        BlocBuilder<CartBloc, CartState>(builder: (context, state) {
+        BlocBuilder<CartCubit, CartState>(builder: (context, state) {
           if (state is CartCurrentState) {
             return Badge(
               toAnimate: false,

@@ -20,10 +20,10 @@ class GoodWindowBloc extends Bloc<GoodWindowEvent, GoodWindowState> {
   Stream<GoodWindowState> mapEventToState(GoodWindowEvent event) async* {
     if (event is GoodWindowEventInitialize) {
       colors = await ColorRepository.getGoodTypologyColors(event.goodTypology);
+      sizes =
+      await SizeRepository.getAvailableSizes(event.goodTypology, colors[0]);
 
       if (colors.isNotEmpty) {
-        sizes = await SizeRepository.getAvailableSizes(
-            event.goodTypology, colors[0]);
         add(new GoodWindowEventFilterChange(event.goodTypology, colors[0]));
       } else {
         yield (new GoodWindowColorsNotFoundState());
@@ -32,11 +32,7 @@ class GoodWindowBloc extends Bloc<GoodWindowEvent, GoodWindowState> {
 
     if (event is GoodWindowEventFilterChange) {
       yield new GoodWindowImageLoadingState(
-        event.goodTypology,
-        sizes,
-        colors,
-        event.selectedColor,
-      );
+          event.goodTypology, sizes, colors, event.selectedColor);
       var goodImages = await GoodImageRepository.getImages(
           event.goodTypology, event.selectedColor);
 
@@ -46,13 +42,6 @@ class GoodWindowBloc extends Bloc<GoodWindowEvent, GoodWindowState> {
       } else {
         yield (new GoodWindowImagesNotFuondState());
       }
-    }
-
-    if (event is GoodWindowResetEvent) {
-      colors = [];
-      sizes = [];
-      goodTypology = null;
-      yield new GoodWindowInitState();
     }
   }
 }

@@ -1,5 +1,4 @@
-import 'package:dapozzo_ventura_app/business_logic/blocs/vendor_bloc.dart';
-import 'package:dapozzo_ventura_app/business_logic/events/vendor_event.dart';
+import 'package:dapozzo_ventura_app/business_logic/cubit/vendor_cubit.dart';
 import 'package:dapozzo_ventura_app/data/models/category_model.dart';
 import 'package:dapozzo_ventura_app/data/models/vendor_model.dart';
 import 'package:dapozzo_ventura_app/states/vendor_state.dart';
@@ -115,10 +114,10 @@ class _VendorPageState extends State<VendorPage> {
                     isSelectedCategory[index] = !isSelectedCategory[index];
 
                     //MANDO L'EVENTO
-                    BlocProvider.of<VendorBloc>(context).add(VendorEventSearch(
+                    BlocProvider.of<VendorCubit>(context).search(
                         getSelectedCategories(),
                         getSelectedGender(),
-                        widget.vendor.id));
+                        widget.vendor.id);
                   });
                 },
                 isSelected: isSelectedCategory,
@@ -193,7 +192,7 @@ class _VendorPageState extends State<VendorPage> {
                             isSelected: [isSelectedGender[1]])
                       ])))
             ]),
-            BlocBuilder<VendorBloc, VendorState>(
+            BlocBuilder<VendorCubit, VendorState>(
               builder: (context, state) {
                 if (state is VendorStateGeneralError) {
                   return Column();
@@ -236,8 +235,9 @@ class _VendorPageState extends State<VendorPage> {
 
     //-------LOGICA CHE MANDA L?EVENTO AL BLOC IN BASE A isSelectedGender-
 
-    BlocProvider.of<VendorBloc>(context).add(VendorEventSearch(
-        getSelectedCategories(), getSelectedGender(), widget.vendor.id));
+    BlocProvider.of<VendorCubit>(context)
+        .search(getSelectedCategories(), getSelectedGender(), widget.vendor.id);
+
     //----------------------------------------------------------
   }
 
