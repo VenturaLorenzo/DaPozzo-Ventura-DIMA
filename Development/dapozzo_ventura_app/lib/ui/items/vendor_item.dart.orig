@@ -1,5 +1,11 @@
-import 'package:dapozzo_ventura_app/business_logic/cubit/vendor_cubit.dart';
+<<<<<<< HEAD
+import 'dart:ffi';
 
+import 'package:dapozzo_ventura_app/business_logic/blocs/vendor_bloc.dart';
+import 'package:dapozzo_ventura_app/business_logic/events/vendor_event.dart';
+=======
+import 'package:dapozzo_ventura_app/business_logic/cubit/vendor_cubit.dart';
+>>>>>>> f2306e1ed61e45881f4c6c8122280d72591ee354
 import 'package:dapozzo_ventura_app/data/models/vendor_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -33,8 +39,7 @@ class VendorItem extends StatelessWidget {
             children: [
               InkWell(
                 onTap: () {
-                  BlocProvider.of<VendorCubit>(context)
-                      .initialize(selectedCategories, vendor);
+                  BlocProvider.of<VendorCubit>(context).initialize( selectedCategories,vendor);
                   Navigator.pushNamed(context, '/vendor', arguments: {
                     "vendor": vendor,
                     "preselectedCategories": selectedCategories
@@ -118,9 +123,9 @@ class VendorItem extends StatelessWidget {
                                 padding: EdgeInsets.fromLTRB(3, 3, 3, 3),
                                 child: InkWell(
                                     onTap: () {
-                                      BlocProvider.of<VendorCubit>(context)
-                                          .initialize(
-                                              selectedCategories, vendor);
+                                      BlocProvider.of<VendorBloc>(context).add(
+                                          VendorEventInit(
+                                              vendor, selectedCategories));
                                       Navigator.pushNamed(context, '/vendor',
                                           arguments: {
                                             "vendor": vendor,
