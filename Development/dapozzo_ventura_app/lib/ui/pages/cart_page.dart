@@ -24,26 +24,75 @@ class _CartPageState extends State<CartPage> {
               },
               icon: Icon(Icons.arrow_back));
         }),
-
         title: Text("Cart"),
       ),
-     body:
-
-      BlocBuilder<CartCubit, CartState>(
+      body: BlocBuilder<CartCubit, CartState>(
         builder: (context, state) {
           if (state is CartStateLoading) {
             return CircularProgressIndicator();
           } else {
             if (state is CartCurrentState) {
-              return Column(
-                children: <Widget>[
-                  Text(" Totale : "+state.cart.getTotal().toString())]
-                    +
-                    state.cart.getProducts().map((product) {
-                  return CartItem(
-                    cartGood: product,
-                  );
-                }).toList(),
+              return Padding(
+                padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      children: <Widget>[
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  " Spesa Totale : " +
+                                      state.cart.getTotal().toString() +
+                                      "€",
+                                  style: TextStyle(
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.black54),
+                                ),
+                              ],
+                            )
+                          ] +
+                          state.cart.getProducts().map((product) {
+                            return CartItem(
+                              cartGood: product,
+                            );
+                          }).toList(),
+                    ),
+                    Column(
+                      children: [
+                        FlatButton(
+                            child: Container(
+                              height: 40,
+                              decoration: BoxDecoration(
+                                  color: Color.fromARGB(255, 1, 136, 73),
+                                  shape: BoxShape.rectangle,
+                                  borderRadius: BorderRadius.circular(15),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey[300],
+                                      offset: Offset(4.0, 4.0),
+                                      blurRadius: 5.0,
+                                      spreadRadius: 1,
+                                    ),
+                                  ]),
+                              child: Center(
+                                child: Text(
+                                  "COMPRA",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            onPressed: () {}),
+                      ],
+                    )
+                  ],
+                ),
               );
             } else {
               return Text("ERROR RANDOM CART STATE");

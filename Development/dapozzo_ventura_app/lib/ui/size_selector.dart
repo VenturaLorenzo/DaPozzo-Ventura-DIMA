@@ -25,17 +25,18 @@ class _SizeSelectorState extends State<SizeSelector> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    sizes= widget.sizes;
-    _sizeCubit= BlocProvider.of<SizeCubit>(context);
+    sizes = widget.sizes;
+    _sizeCubit = BlocProvider.of<SizeCubit>(context);
     _sizeCubit.setSize(sizes[0].name);
-
   }
+
   @override
   void dispose() {
-_sizeCubit.reset();
+    _sizeCubit.reset();
     // TODO: implement dispose
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     print(widget.sizes);
