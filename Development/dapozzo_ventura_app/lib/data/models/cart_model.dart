@@ -39,7 +39,8 @@ class CartModel {
           color: product.color,
           quantity: product.getQuantity(),
           size: product.size,
-          type: product.type);
+          type: product.type,
+        images: product.images);
 
       _products.add(newProduct);
     }

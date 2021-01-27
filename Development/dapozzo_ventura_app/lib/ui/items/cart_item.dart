@@ -1,6 +1,8 @@
+import 'package:dapozzo_ventura_app/business_logic/cubit/cart_cubit.dart';
 import 'package:dapozzo_ventura_app/data/models/good_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CartItem extends StatelessWidget {
   final GoodModel cartGood;
@@ -40,7 +42,7 @@ class CartItem extends StatelessWidget {
                       borderRadius: BorderRadius.circular(2.5),
                       child: Image.network(
                         'https://www.laccademiabjj.it/images/Shop/' +
-                            'FelpaLeggeraGrigio3.jpg',
+                            cartGood.images[0].image,
                         fit: BoxFit.cover,
                       ),
                     ))),
@@ -56,7 +58,7 @@ class CartItem extends StatelessWidget {
                             Center(
                               child: SizedBox(
                                   child: Text(
-                                'LAccademia',
+                                cartGood.type.vendorId.toString(),
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
@@ -66,7 +68,7 @@ class CartItem extends StatelessWidget {
                             Center(
                               child: SizedBox(
                                 child: Text(
-                                  'Easy',
+                                  cartGood.type.name,
                                   style: TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w300,
@@ -80,11 +82,11 @@ class CartItem extends StatelessWidget {
                                 children: [
                                   Container(
                                     child: Column(
-                                        children: [Text("Q.ty"), Text("1")]),
+                                        children: [Text("Q.ty"), Text(cartGood.getQuantity().toString())]),
                                   ),
                                   Container(
                                     child: Column(
-                                        children: [Text("Size"), Text("S")]),
+                                        children: [Text("Size"), Text(cartGood.size)]),
                                   ),
                                 ]),
                           ]))),
@@ -98,19 +100,21 @@ class CartItem extends StatelessWidget {
                     height: 40,
                     child: Center(
                         child: Text(
-                      '10' + '€',
+                      cartGood.type.price.toString() + '€',
                       style: TextStyle(
                           fontWeight: FontWeight.w400,
                           color: Colors.green,
                           fontSize: 20),
                     )),
                   ),
-                  SizedBox(
-                      child: Icon(
-                    Icons.delete,
-                    color: Colors.red[400],
-                    size: 30,
-                  ))
+                  InkWell(
+                    child: SizedBox(
+                        child: Icon(
+                      Icons.delete,
+                      color: Colors.red[400],
+                      size: 30,
+                    )),onTap:(){ BlocProvider.of<CartCubit>(context).removeGood(cartGood);},
+                  )
                 ],
               ),
             ),

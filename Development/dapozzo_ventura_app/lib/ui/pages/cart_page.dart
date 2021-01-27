@@ -1,6 +1,7 @@
 import 'package:dapozzo_ventura_app/business_logic/cubit/cart_cubit.dart';
 import 'package:dapozzo_ventura_app/states/cart_state.dart';
 import 'package:dapozzo_ventura_app/ui/items/cart_item.dart';
+import 'package:dapozzo_ventura_app/ui/lists/cart_items_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -52,13 +53,9 @@ class _CartPageState extends State<CartPage> {
                                       color: Colors.black54),
                                 ),
                               ],
-                            )
-                          ] +
-                          state.cart.getProducts().map((product) {
-                            return CartItem(
-                              cartGood: product,
-                            );
-                          }).toList(),
+                            ), CartItemList(items: state.cart.getProducts(),)
+                          ]
+
                     ),
                     Column(
                       children: [

@@ -23,7 +23,7 @@ class GoodModel {
   }
 
   GoodModel({this.size, this.color, this.images, this.type, int quantity}) {
-    if (images == []) {
+    if (images == [] || images== null) {
       throw ("IMMAGINI NON CONFORMI, LISTA VUOTA");
     }
     String formatedSize = size.toLowerCase();

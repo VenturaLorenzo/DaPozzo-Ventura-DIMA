@@ -197,12 +197,13 @@ class _GoodWindowPageState extends State<GoodWindowPage> {
                             child: Text("ADD TO CART",
                                 style: TextStyle(
                                     fontWeight: FontWeight.w600,
-                                    color: Colors.white,
+                                    color: (sizeState is SizeStateCurrent)?  (sizeState.currentSize!= "none")?Colors.white: Colors.white70:Colors.white,
                                     fontSize: 16,
                                     fontStyle: FontStyle.normal)),
                             onPressed: () {
                               if (quantityState is QuantityStateCurrent &&
                                   sizeState is SizeStateCurrent) {
+                                if(sizeState.currentSize!= "none"){
                                 BlocProvider.of<CartCubit>(context).addGood(
                                     GoodModel(
                                         color: state.currentColor,
@@ -210,10 +211,12 @@ class _GoodWindowPageState extends State<GoodWindowPage> {
                                         quantity: quantityState.currentQuantity,
                                         type: goodTypology,
                                         size: sizeState.currentSize));
+                                _showSuccesPopup();
+
+                                }
                               } else {
                                 throw ("QUANTITY NOT SETTED");
                               }
-                              _showSuccesPopup();
                             },
                           );
                         });

@@ -4,6 +4,7 @@ class GoodTypologyModel {
   final int id;
   final int categoryId;
   final int vendorId;
+  final String vendorName;
   final int gender;
   final String name;
   final String description;
@@ -27,7 +28,7 @@ class GoodTypologyModel {
   }
 
   GoodTypologyModel(
-      {this.id,
+      {this.id,this.vendorName,
       this.categoryId,
       this.vendorId,
       this.gender,
