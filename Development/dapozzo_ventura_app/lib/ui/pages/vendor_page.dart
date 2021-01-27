@@ -51,40 +51,103 @@ class _VendorPageState extends State<VendorPage> {
       ),
       drawer: EquipNavigatorMenu(
         navigationTiles: [
-          ListTile(
-            title: Text("Torna a eQuip"),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.pop(context);
-            },
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
+            child: FlatButton(
+                child: Container(
+                  height: 40,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.circular(15),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey[300],
+                          offset: Offset(4.0, 4.0),
+                          blurRadius: 5.0,
+                          spreadRadius: 1,
+                        ),
+                      ]),
+                  child: Center(
+                    child: Text(
+                      "Torna a eQuip",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                  Navigator.pop(context);
+                }),
           ),
-          Divider(
-            color: Colors.black87,
-            height: 5,
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+            child: FlatButton(
+                child: Container(
+                  height: 40,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.circular(15),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey[300],
+                          offset: Offset(4.0, 4.0),
+                          blurRadius: 5.0,
+                          spreadRadius: 1,
+                        ),
+                      ]),
+                  child: Center(
+                    child: Text(
+                      "Vai al tuo profilo",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, "/profile");
+                }),
           ),
-          ListTile(
-            title: Text("Vai al tuo Profilo"),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.pushNamed(context, "/profile");
-            },
-          ),
-          Divider(
-            color: Colors.black87,
-            height: 5,
-          ),
-          ListTile(
-            title: Text("Vai al profilo dello Shop"),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.pushNamed(context, "/vendor_profile",
-                  arguments: widget.vendor);
-            },
-          ),
-          Divider(
-            color: Colors.black87,
-            height: 5,
-          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+            child: FlatButton(
+                child: Container(
+                  height: 40,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.circular(15),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey[300],
+                          offset: Offset(4.0, 4.0),
+                          blurRadius: 5.0,
+                          spreadRadius: 1,
+                        ),
+                      ]),
+                  child: Center(
+                    child: Text(
+                      "Vai al profilo Shop",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, "/vendor_profile",
+                      arguments: widget.vendor);
+                }),
+          )
         ],
       ),
       body: Padding(

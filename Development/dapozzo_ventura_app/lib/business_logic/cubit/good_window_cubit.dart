@@ -6,6 +6,7 @@ import 'package:dapozzo_ventura_app/data/repositories/color_repository.dart';
 import 'package:dapozzo_ventura_app/data/repositories/good_image_repository.dart';
 import 'package:dapozzo_ventura_app/data/repositories/size_repository.dart';
 import 'package:dapozzo_ventura_app/states/good_window_state.dart';
+import 'package:dapozzo_ventura_app/states/size_state.dart';
 
 class GoodWindwCubit extends Cubit<GoodWindowState> {
   List<ColorModel> colors;
@@ -31,7 +32,8 @@ class GoodWindwCubit extends Cubit<GoodWindowState> {
     emit(GoodWindowImageLoadingState(
         goodTypology, sizes, colors, selectedColor));
     var goodImages =
-    await GoodImageRepository.getImages(goodTypology, selectedColor);
+        await GoodImageRepository.getImages(goodTypology, selectedColor);
+    sizes = await SizeRepository.getAvailableSizes(goodTypology, selectedColor);
 
     if (goodImages.isNotEmpty) {
       emit(GoodWindowImageLoadedState(
@@ -40,12 +42,11 @@ class GoodWindwCubit extends Cubit<GoodWindowState> {
       emit(GoodWindowImagesNotFuondState());
     }
   }
-  Future<void> reset(){
-    sizes=[];
-    goodTypology=null;
-    colors=[];
+
+  Future<void> reset() {
+    sizes = [];
+    goodTypology = null;
+    colors = [];
     emit(GoodWindowInitState());
   }
-
-
 }

@@ -251,7 +251,7 @@ class DatabaseHelper {
     };
     Map<String, dynamic> goodsTypology5 = {
       columnId: 5,
-      columnVendorId: 1,
+      columnVendorId: 2,
       columnCategoryId: 3,
       columnGender: 0,
       columnImage: 'KimonoUomoBianco1.jpg',
@@ -261,7 +261,7 @@ class DatabaseHelper {
     };
     Map<String, dynamic> goodsTypology6 = {
       columnId: 6,
-      columnVendorId: 1,
+      columnVendorId: 2,
       columnCategoryId: 3,
       columnGender: 0,
       columnImage: 'KimonoUomoBlack1.jpg',
@@ -271,7 +271,7 @@ class DatabaseHelper {
     };
     Map<String, dynamic> goodsTypology7 = {
       columnId: 7,
-      columnVendorId: 1,
+      columnVendorId: 2,
       columnCategoryId: 3,
       columnGender: 1,
       columnImage: 'KimonoDonna.jpg',
@@ -285,7 +285,7 @@ class DatabaseHelper {
       columnCategoryId: 7,
       columnGender: 0,
       columnImage:
-      'https://www.patagonia.com/dw/image/v2/BDJB_PRD/on/demandware.static/-/Sites-patagonia-master/default/dw3b35cee4/images/hi-res/34540_FGE.jpg?sw=500&sh=500&sfrm=png&q=95&bgcolor=f6f6f6',
+          'https://www.patagonia.com/dw/image/v2/BDJB_PRD/on/demandware.static/-/Sites-patagonia-master/default/dw3b35cee4/images/hi-res/34540_FGE.jpg?sw=500&sh=500&sfrm=png&q=95&bgcolor=f6f6f6',
       columnName: 'Capinele Midweight Liner Gloves',
       columnDescription: 'con tessuto riciclato',
       columnPrice: '45'
@@ -300,6 +300,26 @@ class DatabaseHelper {
       columnDescription: 'Produzione Italiana',
       columnPrice: '40'
     };
+    Map<String, dynamic> goodsTypology10 = {
+      columnId: 10,
+      columnVendorId: 2,
+      columnCategoryId: 5,
+      columnGender: 0,
+      columnImage: 'FelpaLeggeraBurgundy4.jpg',
+      columnName: 'Ricciolo',
+      columnDescription: 'Anche sul polso',
+      columnPrice: '30'
+    };
+    Map<String, dynamic> goodsTypology11 = {
+      columnId: 11,
+      columnVendorId: 2,
+      columnCategoryId: 5,
+      columnGender: 1,
+      columnImage: 'FelpaLeggeraGrigio3.jpg',
+      columnName: 'Ricciolo',
+      columnDescription: 'Anche sul polso',
+      columnPrice: '30'
+    };
 
     await db.insert(tableTypology, goodsTypology1);
     await db.insert(tableTypology, goodsTypology2);
@@ -310,6 +330,9 @@ class DatabaseHelper {
     await db.insert(tableTypology, goodsTypology7);
     await db.insert(tableTypology, goodsTypology8);
     await db.insert(tableTypology, goodsTypology9);
+    await db.insert(tableTypology, goodsTypology10);
+    await db.insert(tableTypology, goodsTypology11);
+
     print("Fine inserimento dati tabella $tableTypology");
 
     /*TABELLA CATEGORY*/
@@ -375,16 +398,16 @@ class DatabaseHelper {
     };
     Map<String, dynamic> vendorCategory4 = {
       columnVendorId: 2,
-      columnCategoryId: 5,
+      columnCategoryId: 3,
     };
     Map<String, dynamic> vendorCategory5 = {
       columnVendorId: 2,
-      columnCategoryId: 6,
+      columnCategoryId: 5,
     };
-    Map<String, dynamic> vendorCategory6 = {
-      columnVendorId: 2,
-      columnCategoryId: 1,
-    };
+    // Map<String, dynamic> vendorCategory6 = {
+    //   columnVendorId: 2,
+    //   columnCategoryId: 1,
+    // };
     Map<String, dynamic> vendorCategory7 = {
       columnVendorId: 3,
       columnCategoryId: 7,
@@ -399,7 +422,7 @@ class DatabaseHelper {
     await db.insert(tableVendorCategory, vendorCategory3);
     await db.insert(tableVendorCategory, vendorCategory4);
     await db.insert(tableVendorCategory, vendorCategory5);
-    await db.insert(tableVendorCategory, vendorCategory6);
+    // await db.insert(tableVendorCategory, vendorCategory6);
     await db.insert(tableVendorCategory, vendorCategory7);
     await db.insert(tableVendorCategory, vendorCategory8);
     print("Fine Inserimento dati tabella $tableVendorCategory");
@@ -463,10 +486,15 @@ class DatabaseHelper {
       columnVendorId: 1,
       columnSportId: 6,
     };
+    Map<String, dynamic> vendorSport5 = {
+      columnVendorId: 2,
+      columnSportId: 1,
+    };
     await db.insert(tableVendorSport, vendorSport1);
     await db.insert(tableVendorSport, vendorSport2);
     await db.insert(tableVendorSport, vendorSport3);
     await db.insert(tableVendorSport, vendorSport4);
+    await db.insert(tableVendorSport, vendorSport5);
     print("Fine Inserimento dati tabella $tableVendorSport");
 
     /*TABELLA COLOR*/
@@ -561,7 +589,7 @@ class DatabaseHelper {
       columnTypologyId: 1,
       columnColorId: 4,
       columnSizeId: 1,
-      columnQuantity: 100,
+      columnQuantity: 0,
     };
     Map<String, dynamic> good6 = {
       columnId: 6,
@@ -752,6 +780,146 @@ class DatabaseHelper {
       columnSizeId: 4,
       columnQuantity: 100,
     };
+    Map<String, dynamic> good33 = {
+      columnId: 33,
+      columnTypologyId: 1,
+      columnColorId: 1,
+      columnSizeId: 1,
+      columnQuantity: 0,
+    };
+    Map<String, dynamic> good34 = {
+      columnId: 34,
+      columnTypologyId: 1,
+      columnColorId: 1,
+      columnSizeId: 2,
+      columnQuantity: 0,
+    };
+    Map<String, dynamic> good35 = {
+      columnId: 35,
+      columnTypologyId: 1,
+      columnColorId: 1,
+      columnSizeId: 3,
+      columnQuantity: 0,
+    };
+    Map<String, dynamic> good36 = {
+      columnId: 36,
+      columnTypologyId: 1,
+      columnColorId: 1,
+      columnSizeId: 4,
+      columnQuantity: 0,
+    };
+    Map<String, dynamic> good37 = {
+      columnId: 37,
+      columnTypologyId: 10,
+      columnColorId: 4,
+      columnSizeId: 1,
+      columnQuantity: 100,
+    };
+    Map<String, dynamic> good38 = {
+      columnId: 38,
+      columnTypologyId: 10,
+      columnColorId: 4,
+      columnSizeId: 2,
+      columnQuantity: 100,
+    };
+    Map<String, dynamic> good39 = {
+      columnId: 39,
+      columnTypologyId: 10,
+      columnColorId: 4,
+      columnSizeId: 3,
+      columnQuantity: 100,
+    };
+    Map<String, dynamic> good40 = {
+      columnId: 40,
+      columnTypologyId: 10,
+      columnColorId: 4,
+      columnSizeId: 4,
+      columnQuantity: 100,
+    };
+    Map<String, dynamic> good41 = {
+      columnId: 41,
+      columnTypologyId: 10,
+      columnColorId: 5,
+      columnSizeId: 1,
+      columnQuantity: 100,
+    };
+    Map<String, dynamic> good42 = {
+      columnId: 42,
+      columnTypologyId: 10,
+      columnColorId: 5,
+      columnSizeId: 2,
+      columnQuantity: 100,
+    };
+    Map<String, dynamic> good43 = {
+      columnId: 43,
+      columnTypologyId: 10,
+      columnColorId: 5,
+      columnSizeId: 3,
+      columnQuantity: 100,
+    };
+    Map<String, dynamic> good44 = {
+      columnId: 44,
+      columnTypologyId: 10,
+      columnColorId: 5,
+      columnSizeId: 4,
+      columnQuantity: 100,
+    };
+    Map<String, dynamic> good45 = {
+      columnId: 45,
+      columnTypologyId: 11,
+      columnColorId: 4,
+      columnSizeId: 1,
+      columnQuantity: 100,
+    };
+    Map<String, dynamic> good46 = {
+      columnId: 46,
+      columnTypologyId: 11,
+      columnColorId: 4,
+      columnSizeId: 2,
+      columnQuantity: 100,
+    };
+    Map<String, dynamic> good47 = {
+      columnId: 47,
+      columnTypologyId: 11,
+      columnColorId: 4,
+      columnSizeId: 3,
+      columnQuantity: 100,
+    };
+    Map<String, dynamic> good48 = {
+      columnId: 48,
+      columnTypologyId: 11,
+      columnColorId: 4,
+      columnSizeId: 4,
+      columnQuantity: 100,
+    };
+    Map<String, dynamic> good49 = {
+      columnId: 49,
+      columnTypologyId: 11,
+      columnColorId: 5,
+      columnSizeId: 1,
+      columnQuantity: 100,
+    };
+    Map<String, dynamic> good50 = {
+      columnId: 50,
+      columnTypologyId: 11,
+      columnColorId: 5,
+      columnSizeId: 2,
+      columnQuantity: 100,
+    };
+    Map<String, dynamic> good51 = {
+      columnId: 51,
+      columnTypologyId: 11,
+      columnColorId: 5,
+      columnSizeId: 3,
+      columnQuantity: 100,
+    };
+    Map<String, dynamic> good52 = {
+      columnId: 52,
+      columnTypologyId: 11,
+      columnColorId: 5,
+      columnSizeId: 4,
+      columnQuantity: 100,
+    };
 
     await db.insert(tableGood, good1);
     await db.insert(tableGood, good2);
@@ -785,6 +953,26 @@ class DatabaseHelper {
     await db.insert(tableGood, good30);
     await db.insert(tableGood, good31);
     await db.insert(tableGood, good32);
+    await db.insert(tableGood, good33);
+    await db.insert(tableGood, good34);
+    await db.insert(tableGood, good35);
+    await db.insert(tableGood, good36);
+    await db.insert(tableGood, good37);
+    await db.insert(tableGood, good38);
+    await db.insert(tableGood, good39);
+    await db.insert(tableGood, good40);
+    await db.insert(tableGood, good41);
+    await db.insert(tableGood, good42);
+    await db.insert(tableGood, good43);
+    await db.insert(tableGood, good44);
+    await db.insert(tableGood, good45);
+    await db.insert(tableGood, good46);
+    await db.insert(tableGood, good47);
+    await db.insert(tableGood, good48);
+    await db.insert(tableGood, good49);
+    await db.insert(tableGood, good50);
+    await db.insert(tableGood, good51);
+    await db.insert(tableGood, good52);
     print("Fine Inserimento dati tabella $tableGood");
 
     /*TABELLA GOODIMAGE*/
@@ -843,6 +1031,96 @@ class DatabaseHelper {
       columnColorId: 1,
       columnImage: 'FelpaWICBlack4.jpg',
     };
+    Map<String, dynamic> goodImage10 = {
+      columnId: 10,
+      columnTypologyId: 1,
+      columnColorId: 1,
+      columnImage: 'MagliettaBlack1.jpg',
+    };
+    Map<String, dynamic> goodImage11 = {
+      columnId: 11,
+      columnTypologyId: 1,
+      columnColorId: 1,
+      columnImage: 'MagliettaBlack2.jpg',
+    };
+    Map<String, dynamic> goodImage12 = {
+      columnId: 12,
+      columnTypologyId: 1,
+      columnColorId: 1,
+      columnImage: 'MagliettaBlack3.jpg',
+    };
+    Map<String, dynamic> goodImage13 = {
+      columnId: 13,
+      columnTypologyId: 1,
+      columnColorId: 1,
+      columnImage: 'MagliettaBlack4.jpg',
+    };
+    Map<String, dynamic> goodImage14 = {
+      columnId: 14,
+      columnTypologyId: 1,
+      columnColorId: 1,
+      columnImage: 'MagliettaBlack5.jpg',
+    };
+    Map<String, dynamic> goodImage15 = {
+      columnId: 15,
+      columnTypologyId: 1,
+      columnColorId: 3,
+      columnImage: 'MagliettaRoyalBlue1.jpg',
+    };
+    Map<String, dynamic> goodImage16 = {
+      columnId: 16,
+      columnTypologyId: 1,
+      columnColorId: 3,
+      columnImage: 'MagliettaRoyalBlue2.jpg',
+    };
+    Map<String, dynamic> goodImage17 = {
+      columnId: 17,
+      columnTypologyId: 1,
+      columnColorId: 3,
+      columnImage: 'MagliettaRoyalBlue3.jpg',
+    };
+    Map<String, dynamic> goodImage18 = {
+      columnId: 18,
+      columnTypologyId: 1,
+      columnColorId: 3,
+      columnImage: 'MagliettaRoyalBlue4.jpg',
+    };
+    Map<String, dynamic> goodImage19 = {
+      columnId: 19,
+      columnTypologyId: 1,
+      columnColorId: 3,
+      columnImage: 'MagliettaRoyalBlue5.jpg',
+    };
+    Map<String, dynamic> goodImage20 = {
+      columnId: 20,
+      columnTypologyId: 1,
+      columnColorId: 4,
+      columnImage: 'MagliettaBurgundy1.jpg',
+    };
+    Map<String, dynamic> goodImage21 = {
+      columnId: 21,
+      columnTypologyId: 1,
+      columnColorId: 4,
+      columnImage: 'MagliettaBurgundy2.jpg',
+    };
+    Map<String, dynamic> goodImage22 = {
+      columnId: 22,
+      columnTypologyId: 1,
+      columnColorId: 4,
+      columnImage: 'MagliettaBurgundy3.jpg',
+    };
+    Map<String, dynamic> goodImage23 = {
+      columnId: 23,
+      columnTypologyId: 1,
+      columnColorId: 4,
+      columnImage: 'MagliettaBurgundy4.jpg',
+    };
+    Map<String, dynamic> goodImage24 = {
+      columnId: 24,
+      columnTypologyId: 1,
+      columnColorId: 4,
+      columnImage: 'MagliettaBurgundy5.jpg',
+    };
 
     await db.insert(tableGoodImage, goodImage1);
     await db.insert(tableGoodImage, goodImage2);
@@ -853,6 +1131,21 @@ class DatabaseHelper {
     await db.insert(tableGoodImage, goodImage7);
     await db.insert(tableGoodImage, goodImage8);
     await db.insert(tableGoodImage, goodImage9);
+    await db.insert(tableGoodImage, goodImage10);
+    await db.insert(tableGoodImage, goodImage11);
+    await db.insert(tableGoodImage, goodImage12);
+    await db.insert(tableGoodImage, goodImage13);
+    await db.insert(tableGoodImage, goodImage14);
+    await db.insert(tableGoodImage, goodImage15);
+    await db.insert(tableGoodImage, goodImage16);
+    await db.insert(tableGoodImage, goodImage17);
+    await db.insert(tableGoodImage, goodImage18);
+    await db.insert(tableGoodImage, goodImage19);
+    await db.insert(tableGoodImage, goodImage20);
+    await db.insert(tableGoodImage, goodImage21);
+    await db.insert(tableGoodImage, goodImage22);
+    await db.insert(tableGoodImage, goodImage23);
+    await db.insert(tableGoodImage, goodImage24);
 
     print("Fine Inserimento dati tabella $tableGoodImage");
   }
@@ -867,7 +1160,7 @@ class DatabaseHelper {
 
     if (categories.length > 0) {
       query =
-      "SELECT DISTINCT $tableVendor.* FROM  $tableVendor, $tableVendorCategory WHERE $tableVendor.$columnName LIKE '%$name%' AND (";
+          "SELECT DISTINCT $tableVendor.* FROM  $tableVendor, $tableVendorCategory WHERE $tableVendor.$columnName LIKE '%$name%' AND (";
       categories.forEach((element) {
         query += "$tableVendorCategory.$columnCategoryId = $element OR";
       });
@@ -909,10 +1202,10 @@ class DatabaseHelper {
     var query =
         "SELECT $tableTypology.$columnId, $tableTypology.$columnCategoryId, $tableTypology.$columnGender,";
     query +=
-    "$tableTypology.$columnImage, $tableTypology.$columnName, $tableTypology.$columnDescription, $tableTypology.$columnPrice,";
+        "$tableTypology.$columnImage, $tableTypology.$columnName, $tableTypology.$columnDescription, $tableTypology.$columnPrice,";
     query += "$tableCategory.$columnName AS categoryName ";
     query +=
-    "FROM $tableTypology INNER JOIN $tableCategory ON $tableTypology.$columnCategoryId = $tableCategory.$columnId";
+        "FROM $tableTypology INNER JOIN $tableCategory ON $tableTypology.$columnCategoryId = $tableCategory.$columnId";
 
     List<Map> result;
 
@@ -949,10 +1242,10 @@ class DatabaseHelper {
     var query =
         "SELECT $tableTypology.$columnId, $tableTypology.$columnCategoryId, $tableTypology.$columnGender,$tableTypology.$columnVendorId,";
     query +=
-    "$tableTypology.$columnImage, $tableTypology.$columnName, $tableTypology.$columnDescription, $tableTypology.$columnPrice,";
+        "$tableTypology.$columnImage, $tableTypology.$columnName, $tableTypology.$columnDescription, $tableTypology.$columnPrice,";
     query += "$tableCategory.$columnName AS categoryName ";
     query +=
-    "FROM $tableTypology INNER JOIN $tableCategory ON $tableTypology.$columnCategoryId = $tableCategory.$columnId";
+        "FROM $tableTypology INNER JOIN $tableCategory ON $tableTypology.$columnCategoryId = $tableCategory.$columnId";
 
     List<Map> result;
 
@@ -1018,7 +1311,7 @@ class DatabaseHelper {
     if (categories.length > 0) {
       fromClause += ", $tableVendorCategory";
       whereClause +=
-      "AND $tableVendor.$columnId = $tableVendorCategory.$columnVendorId AND (";
+          "AND $tableVendor.$columnId = $tableVendorCategory.$columnVendorId AND (";
       categories.forEach((element) {
         whereClause += " $tableVendorCategory.$columnCategoryId = $element OR";
       });
@@ -1029,7 +1322,7 @@ class DatabaseHelper {
     if (sports.length > 0) {
       fromClause += ", $tableVendorSport";
       whereClause +=
-      "AND $tableVendor.$columnId = $tableVendorSport.$columnVendorId AND (";
+          "AND $tableVendor.$columnId = $tableVendorSport.$columnVendorId AND (";
       sports.forEach((element) {
         whereClause += " $tableVendorSport.$columnSportId = $element OR";
       });
@@ -1048,7 +1341,7 @@ class DatabaseHelper {
     Database db = await instance.database;
 
     var sql =
-    '''SELECT DISTINCT $tableSize.* FROM $tableSize INNER JOIN $tableGood ON $tableSize.$columnId = $tableGood.$columnSizeId WHERE $tableGood.$columnTypologyId = $typologyId AND $tableGood.$columnColorId = $colorId ''';
+        '''SELECT DISTINCT $tableSize.* FROM $tableSize INNER JOIN $tableGood ON $tableSize.$columnId = $tableGood.$columnSizeId WHERE $tableGood.$columnTypologyId = $typologyId AND $tableGood.$columnColorId = $colorId AND $tableGood.$columnQuantity > 0 ''';
     List<Map> result = await db.rawQuery(sql);
     return result;
   }
@@ -1082,5 +1375,4 @@ class DatabaseHelper {
     );
     return result;
   }
-
 }

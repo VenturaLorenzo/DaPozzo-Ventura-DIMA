@@ -1,3 +1,4 @@
+import 'package:dapozzo_ventura_app/ui/user_profile_icon.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -13,54 +14,55 @@ class EquipNavigatorMenu extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Column(
-            children:<Widget>[
-              UserAccountsDrawerHeader(
-                decoration: BoxDecoration(color: Colors.black54),
-                accountName: Text("Account Name"),
-                accountEmail: Text("Account Email"),
-                currentAccountPicture: CircleAvatar(
-                  backgroundImage: NetworkImage(
-                      "https://media.gqitalia.it/photos/5ec3ca47a63ee8cb452d9ce4/master/pass/Avatar.jpg"),
+            children: <Widget>[
+                  UserProfileIcon(),
+                ] +
+                navigationTiles,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Text(
+                  "Crea il tuo shop",
+                  style: TextStyle(fontSize: 16),
                 ),
               ),
-
-
-        ]+ navigationTiles,
-          ),
-        ]+[    Column(
-          children: [
-            ListTile(
-              title: Text("Crea il tuo shop"),
-              onTap: () {
-                Navigator.pop(context);
-                //Navigator.pushNamed(context, "/profile");
-              },
-            ),
-              ListTile(
-                title: Text("Collabora con noi"),
-                onTap: () {
-                  Navigator.pop(context);
-                  // Navigator.pushNamed(context, "/profile");
-                },
+              Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Text(
+                  "Collabora con noi",
+                  style: TextStyle(fontSize: 16),
+                ),
               ),
-              ListTile(
-                title: Text("Chi siamo"),
-                onTap: () {
-                  Navigator.pop(context);
-                  //  Navigator.pushNamed(context, "/profile");
-                },
+              Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Text(
+                  "Chi siamo",
+                  style: TextStyle(fontSize: 16),
+                ),
               ),
-              Divider(color: Colors.black87,height: 5,),
-              ListTile(
-                title: Text("Impostazioni"),leading:Icon(Icons.settings) ,
-                onTap: () {
+              FlatButton(
+                padding: EdgeInsets.all(5),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Icon(Icons.settings),
+                    Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: Text("Impostazioni"),
+                    )
+                  ],
+                ),
+                onPressed: () {
                   Navigator.pop(context);
                   Navigator.pushNamed(context, "/settings");
                 },
               ),
-              Divider(color: Colors.black87,height: 5,),
-          ],
-        ),],
+            ],
+          ),
+        ],
       ),
     );
   }
