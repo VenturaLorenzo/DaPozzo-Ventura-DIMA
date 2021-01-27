@@ -36,7 +36,6 @@ class _HomeState extends State<Home> {
     categories = widget.categoriesAndSports.allCategories;
     sports = widget.categoriesAndSports.allSports;
     _marketPlaceCubit = BlocProvider.of<MarketPlaceCubit>(context);
-    //_cartBloc = BlocProvider.of<CartBloc>(context);
 
     _marketPlaceCubit.initialize();
   }
@@ -72,7 +71,7 @@ class _HomeState extends State<Home> {
           BlocBuilder<MarketPlaceCubit, MarketPlaceState>(
               builder: (context, state) {
             List<Vendor> vendors;
-            if (state is MarketPlaceLoadingState) {
+            if (state is MarketPlaceLoadingState || state is MarketPlaceInitial) {
               return SliverFillRemaining(
                 child: Center(
                   child: CircularProgressIndicator(
@@ -81,11 +80,7 @@ class _HomeState extends State<Home> {
                 ),
               );
             }
-            if (state is MarketPlaceInitial) {
-              vendors = state.initialResult;
-              return VendorList(vendors, state.categories);
-
-            } else {
+            else {
               if (state is MarketPlaceSearched) {
                 vendors = state.result;
                 return VendorList(vendors, state.categories);

@@ -2,7 +2,7 @@ import 'package:dapozzo_ventura_app/data/models/good_typology_model.dart';
 import 'package:dapozzo_ventura_app/data/providers/database_helper.dart';
 
 class GoodsTypologyRepository {
-  static Future<List<GoodTypologyModel>> getGoodsTypologies(
+   Future<List<GoodTypologyModel>> getGoodsTypologies(
       List<int> categoryIds, int genderFilter, int vendorId) async {
     var db = DatabaseHelper.instance;
     List<Map> rawGoodsTypologies = await db.getGoodsTypologiesByVendor(

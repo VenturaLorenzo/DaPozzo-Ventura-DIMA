@@ -1,8 +1,18 @@
-abstract class QuantityState {}
+import 'package:equatable/equatable.dart';
 
-class QuantityStateUninitialized extends QuantityState {}
+abstract class QuantityState  extends Equatable{}
+
+class QuantityStateUninitialized extends QuantityState {
+  @override
+  // TODO: implement props
+  List<Object> get props => [];
+}
 
 class  QuantityStateCurrent extends QuantityState {
   int currentQuantity;
   QuantityStateCurrent(this.currentQuantity);
+
+  @override
+  // TODO: implement props
+  List<Object> get props => [currentQuantity];
 }

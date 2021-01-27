@@ -6,14 +6,14 @@ import 'package:dapozzo_ventura_app/states/vendor_state.dart';
 
 class VendorCubit extends Cubit<VendorState>{
 
+  GoodsTypologyRepository _goodsTypologyRepository;
 
-
-  VendorCubit():super(VendorStateLoading());
+  VendorCubit(this._goodsTypologyRepository):super(VendorStateInitial());
 
   Future<void> initialize(List<int> categoryIds,Vendor vendor ) async {
     emit(VendorStateLoading());
     final List<GoodTypologyModel> allGoodTypologies =
-    await GoodsTypologyRepository.getGoodsTypologies(categoryIds, -1, vendor.id);
+    await _goodsTypologyRepository.getGoodsTypologies(categoryIds, -1, vendor.id);
     // allGoodTypologies.forEach((element) {print(element);});
     emit(VendorStateSearched(allGoodTypologies));
   }
@@ -21,19 +21,15 @@ class VendorCubit extends Cubit<VendorState>{
     emit(VendorStateLoading());
 
     final List<GoodTypologyModel> allGoodTypologies =
-    await GoodsTypologyRepository.getGoodsTypologies(categoryIds, genderFilter, vendorId);
+    await _goodsTypologyRepository.getGoodsTypologies(categoryIds, genderFilter, vendorId);
 
     emit(VendorStateSearched(allGoodTypologies));
 
   }
-  Future<void> reset(Vendor vendor) async {
-    emit(VendorStateLoading());
+  Future<void> restore() async {
+    emit(VendorStateInitial());
 
-    final List<GoodTypologyModel> allGoodTypologies =
-    await GoodsTypologyRepository.getGoodsTypologies(
-        [], -1, vendor.id);
 
-    emit(VendorStateSearched(allGoodTypologies));
 
   }
 

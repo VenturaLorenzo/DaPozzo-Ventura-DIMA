@@ -4,54 +4,64 @@ import 'package:dapozzo_ventura_app/data/models/vendor_model.dart';
 import 'package:dapozzo_ventura_app/data/repositories/vendor_repository.dart';
 import 'package:dapozzo_ventura_app/states/market_place_state.dart';
 
-class MarketPlaceCubit extends Cubit<MarketPlaceState>{
-
-  List<Vendor> currentVendorsSearch = [];
+class MarketPlaceCubit extends Cubit<MarketPlaceState> {
   List<int> currentCategorySearch = [];
   List<int> currentSportSearch = [];
   String currentTextSearch = "";
+  VendorRepository _vendorRepository;
 
-  MarketPlaceCubit():super(MarketPlaceLoadingState());
+  MarketPlaceCubit(this._vendorRepository) : super(MarketPlaceInitial());
 
+  MarketPlaceState get initialState => MarketPlaceInitial();
+
+  Future<void> restore() async{
+    currentCategorySearch=[];
+    currentSportSearch=[];
+    currentTextSearch="";
+    emit(MarketPlaceInitial());
+  }
   Future<void> initialize() async {
+   // _vendorRepository = VendorRepository();
+    Future.delayed(Duration(milliseconds:  2000));
+    emit(MarketPlaceLoadingState());
+
     final List<Vendor> initialResult =
-        await VendorRepository.getVendorsByFiters([], "", []);
+        await _vendorRepository.getVendorsByFiters([], "", []);
 
     emit(MarketPlaceSearched(initialResult, currentCategorySearch));
   }
 
   Future<void> searchCategory(int categoryId) async {
     emit(MarketPlaceLoadingState());
-      await Future.delayed(Duration(milliseconds: 500));
-      _updateCategories(categoryId);
+    await Future.delayed(Duration(milliseconds: 500));
+    _updateCategories(categoryId);
 
-      final List<Vendor> result = await VendorRepository.getVendorsByFiters(
-          currentCategorySearch, currentTextSearch, currentSportSearch);
+    final List<Vendor> result = await _vendorRepository.getVendorsByFiters(
+        currentCategorySearch, currentTextSearch, currentSportSearch);
     emit(MarketPlaceSearched(result, currentCategorySearch));
-
-
   }
+
   Future<void> searchSport(SportModel sport) async {
     emit(MarketPlaceLoadingState());
     await Future.delayed(Duration(milliseconds: 500));
     _updateSport(sport);
 
     emit(MarketPlaceSearched(
-        await VendorRepository.getVendorsByFiters(
-        currentCategorySearch, currentTextSearch, currentSportSearch),
-    currentCategorySearch));
+        await _vendorRepository.getVendorsByFiters(
+            currentCategorySearch, currentTextSearch, currentSportSearch),
+        currentCategorySearch));
   }
+
   Future<void> searchText(String text) async {
-    emit( MarketPlaceLoadingState());
+    emit(MarketPlaceLoadingState());
     await Future.delayed(Duration(milliseconds: 500));
     _updateText(text);
 
     emit(MarketPlaceSearched(
-        await VendorRepository.getVendorsByFiters(currentCategorySearch,
-            currentTextSearch, currentSportSearch),
+        await _vendorRepository.getVendorsByFiters(
+            currentCategorySearch, currentTextSearch, currentSportSearch),
         currentCategorySearch));
   }
-
 
   void _updateCategories(int categoryId) {
     if (currentCategorySearch.contains(categoryId)) {

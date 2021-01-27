@@ -30,8 +30,8 @@ dependencies:
   sqflite:
   path:
   badges: ^1.1.4
-
-
+  bloc_test: ^7.1.0
+  mockito: ^4.1.4
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

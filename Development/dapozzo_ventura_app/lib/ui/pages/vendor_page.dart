@@ -203,13 +203,9 @@ class _VendorPageState extends State<VendorPage> {
                     goodsTypologies: state.goodTypologies,
                   );
                 }
-                if (state is VendorStateInitial) {
-                  return GoodTypologyList(
-                    goodsTypologies: state.goodTypologies,
-                  );
-                }
 
-                if (state is VendorStateLoading) {
+
+                if (state is VendorStateLoading || state is VendorStateInitial) {
                   return Center(
                     child: CircularProgressIndicator(
                       valueColor: AlwaysStoppedAnimation<Color>(Colors.black54),

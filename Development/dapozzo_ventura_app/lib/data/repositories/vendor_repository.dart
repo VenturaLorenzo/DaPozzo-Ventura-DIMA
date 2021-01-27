@@ -4,7 +4,7 @@ import 'package:dapozzo_ventura_app/data/repositories/category_repository.dart';
 import 'package:dapozzo_ventura_app/data/repositories/front_image_repository.dart';
 
 class VendorRepository {
-  static Future<List<Vendor>> getVendorsByFiters(
+  Future<List<Vendor>> getVendorsByFiters(
       List<int> categories, String text, List<int> sports) async {
     var dbHelper = DatabaseHelper.instance;
 

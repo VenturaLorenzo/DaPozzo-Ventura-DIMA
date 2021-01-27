@@ -3,6 +3,8 @@ import 'package:dapozzo_ventura_app/business_logic/cubit/good_window_cubit.dart'
 import 'package:dapozzo_ventura_app/business_logic/cubit/quantity_cubit.dart';
 import 'package:dapozzo_ventura_app/business_logic/cubit/size_cubit.dart';
 import 'package:dapozzo_ventura_app/business_logic/cubit/vendor_cubit.dart';
+import 'package:dapozzo_ventura_app/data/repositories/goods_typology_repository.dart';
+import 'package:dapozzo_ventura_app/data/repositories/vendor_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'business_logic/cubit/market_place_cubit.dart';
 import 'data/providers/route_generator.dart';
@@ -20,13 +22,13 @@ void main() {
     MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (BuildContext context) => MarketPlaceCubit(),
+            create: (BuildContext context) => MarketPlaceCubit(VendorRepository()),
           ),
      BlocProvider(
             create: (BuildContext context) => CartCubit(),
           ),
           BlocProvider(
-            create: (BuildContext context) => VendorCubit(),
+            create: (BuildContext context) => VendorCubit(GoodsTypologyRepository()),
           ),
           BlocProvider(
             create: (BuildContext context) => GoodWindwCubit(),
@@ -35,7 +37,7 @@ void main() {
             create: (BuildContext context) => QuantityCubit(),
           ),
           BlocProvider(
-            create: (BuildContext context) => SizeCubit(),
+            create: (BuildContext context) => SizeCubit() ,
           ),
         ],
         child: MaterialApp(
