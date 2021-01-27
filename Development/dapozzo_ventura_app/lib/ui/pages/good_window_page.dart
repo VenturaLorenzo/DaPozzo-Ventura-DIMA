@@ -104,10 +104,10 @@ class _GoodWindowPageState extends State<GoodWindowPage> {
                       colors: state.colors,
                       current: state.currentColor,
                     ),
+                    QuantitySelector(),
                     SizeSelector(
                       sizes: state.sizes,
                     ),
-                    QuantitySelector(),
                   ],
                 ),
                 Row(
@@ -164,11 +164,11 @@ class _GoodWindowPageState extends State<GoodWindowPage> {
                       colors: state.colors,
                       current: state.currentColor,
                     ),
+                    QuantitySelector(),
                     SizeSelector(
                       sizes: state.sizes,
                       // current: state.currentSize,
                     ),
-                    QuantitySelector()
                   ],
                 ),
                 Row(
@@ -197,22 +197,27 @@ class _GoodWindowPageState extends State<GoodWindowPage> {
                             child: Text("ADD TO CART",
                                 style: TextStyle(
                                     fontWeight: FontWeight.w600,
-                                    color: (sizeState is SizeStateCurrent)?  (sizeState.currentSize!= "none")?Colors.white: Colors.white70:Colors.white,
+                                    color: (sizeState is SizeStateCurrent)
+                                        ? (sizeState.currentSize != "none")
+                                            ? Colors.white
+                                            : Colors.white70
+                                        : Colors.white,
                                     fontSize: 16,
                                     fontStyle: FontStyle.normal)),
                             onPressed: () {
                               if (quantityState is QuantityStateCurrent &&
                                   sizeState is SizeStateCurrent) {
-                                if(sizeState.currentSize!= "none"){
-                                BlocProvider.of<CartCubit>(context).addGood(
-                                    GoodModel(
-                                        color: state.currentColor,
-                                        images: state.goodImages,
-                                        quantity: quantityState.currentQuantity,
-                                        type: goodTypology,
-                                        size: sizeState.currentSize));
-                                _showSuccesPopup();
-
+                                if (sizeState.currentSize != "none") {
+                                  BlocProvider.of<CartCubit>(context)
+                                      .addGood(GoodModel(
+                                    color: state.currentColor,
+                                    images: state.goodImages,
+                                    quantity: quantityState.currentQuantity,
+                                    type: goodTypology,
+                                    size: sizeState.currentSize,
+                                    vendorName: state.vendor,
+                                  ));
+                                  _showSuccesPopup();
                                 }
                               } else {
                                 throw ("QUANTITY NOT SETTED");

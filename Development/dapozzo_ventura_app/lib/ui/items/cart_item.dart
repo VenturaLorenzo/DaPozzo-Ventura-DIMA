@@ -58,7 +58,7 @@ class CartItem extends StatelessWidget {
                             Center(
                               child: SizedBox(
                                   child: Text(
-                                cartGood.type.vendorId.toString(),
+                                cartGood.vendorName.name.toString(),
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
@@ -81,12 +81,16 @@ class CartItem extends StatelessWidget {
                                     MainAxisAlignment.spaceAround,
                                 children: [
                                   Container(
-                                    child: Column(
-                                        children: [Text("Q.ty"), Text(cartGood.getQuantity().toString())]),
+                                    child: Column(children: [
+                                      Text("Q.ty"),
+                                      Text(cartGood.getQuantity().toString())
+                                    ]),
                                   ),
                                   Container(
-                                    child: Column(
-                                        children: [Text("Size"), Text(cartGood.size)]),
+                                    child: Column(children: [
+                                      Text("Size"),
+                                      Text(cartGood.size)
+                                    ]),
                                   ),
                                 ]),
                           ]))),
@@ -113,7 +117,10 @@ class CartItem extends StatelessWidget {
                       Icons.delete,
                       color: Colors.red[400],
                       size: 30,
-                    )),onTap:(){ BlocProvider.of<CartCubit>(context).removeGood(cartGood);},
+                    )),
+                    onTap: () {
+                      BlocProvider.of<CartCubit>(context).removeGood(cartGood);
+                    },
                   )
                 ],
               ),

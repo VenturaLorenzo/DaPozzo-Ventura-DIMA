@@ -58,12 +58,12 @@ class _SizeSelectorState extends State<SizeSelector> {
                 ],
                 borderRadius: BorderRadius.circular(5)),
             child: Padding(
-              padding: const EdgeInsets.all(5),
+              padding: const EdgeInsets.all(2.5),
               child: Column(
                 children: [
                   Text("Sizes"),
                   Container(
-                      width: 65,
+                      width: 80,
                       child: Center(
                           child: DropDownSizeWidget(
                               sizes: getSizesNames(widget.sizes),

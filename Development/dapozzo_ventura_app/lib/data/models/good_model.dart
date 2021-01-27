@@ -1,7 +1,6 @@
 import 'dart:math';
 import 'package:dapozzo_ventura_app/data/models/good_image_model.dart';
-import 'package:dapozzo_ventura_app/ui/lists/good_images_list.dart';
-
+import 'package:dapozzo_ventura_app/data/models/vendor_model.dart';
 import 'color_model.dart';
 import 'good_typology_model.dart';
 
@@ -10,6 +9,7 @@ class GoodModel {
   final ColorModel color;
   final List<GoodImageModel> images;
   final String size;
+  final Vendor vendorName;
   int _quantity;
 
   static GoodModel createFake(String name, String size, int quantity) {
@@ -19,11 +19,17 @@ class GoodModel {
         quantity: quantity,
         size: size,
         color: ColorModel(name: "green"));
-     //   images: ["fake.jpg"]);
+    //   images: ["fake.jpg"]);
   }
 
-  GoodModel({this.size, this.color, this.images, this.type, int quantity}) {
-    if (images == [] || images== null) {
+  GoodModel(
+      {this.size,
+      this.color,
+      this.images,
+      this.type,
+      this.vendorName,
+      int quantity}) {
+    if (images == [] || images == null) {
       throw ("IMMAGINI NON CONFORMI, LISTA VUOTA");
     }
     String formatedSize = size.toLowerCase();
@@ -58,7 +64,6 @@ class GoodModel {
 
   @override
   String toString() {
-    // TODO: implement toString
     return "GOOD ->  color : $color, images : $images, size: $size, quantity: $_quantity";
   }
 

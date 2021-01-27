@@ -5,7 +5,7 @@ class Vendor {
   final String name;
   final String desc;
   final String image;
-   List<String> frontImages;
+  List<String> frontImages;
   final double rating;
   List<CategoryModel> categories;
 

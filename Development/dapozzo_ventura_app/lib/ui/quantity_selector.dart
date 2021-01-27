@@ -1,4 +1,3 @@
-
 import 'package:dapozzo_ventura_app/business_logic/cubit/quantity_cubit.dart';
 import 'package:dapozzo_ventura_app/states/quantity_state.dart';
 import 'package:flutter/cupertino.dart';
@@ -6,9 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class QuantitySelector extends StatefulWidget {
-
-
-
   @override
   _QuantitySelectorState createState() => _QuantitySelectorState();
 }
@@ -19,10 +15,10 @@ class _QuantitySelectorState extends State<QuantitySelector> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _quantityCubit= BlocProvider.of<QuantityCubit>(context);
+    _quantityCubit = BlocProvider.of<QuantityCubit>(context);
     _quantityCubit.setQuantity(1);
-
   }
+
   @override
   void dispose() {
     _quantityCubit.reset();
@@ -32,12 +28,11 @@ class _QuantitySelectorState extends State<QuantitySelector> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<QuantityCubit,QuantityState>(
-      builder: (context, state) {
-        if(state is QuantityStateUninitialized){
-          return CircularProgressIndicator();
-        }else{
-        if(state is QuantityStateCurrent) {
+    return BlocBuilder<QuantityCubit, QuantityState>(builder: (context, state) {
+      if (state is QuantityStateUninitialized) {
+        return CircularProgressIndicator();
+      } else {
+        if (state is QuantityStateCurrent) {
           return Padding(
             padding: const EdgeInsets.all(5),
             child: Container(
@@ -58,9 +53,11 @@ class _QuantitySelectorState extends State<QuantitySelector> {
                   children: [
                     Text("Quantity"),
                     Container(
-                      width: 65,
+                      width: 80,
                       child: Center(
-                        child: DropDownQuantityWidget(currentQuantity: state.currentQuantity,),
+                        child: DropDownQuantityWidget(
+                          currentQuantity: state.currentQuantity,
+                        ),
                       ),
                     ),
                   ],
@@ -68,21 +65,18 @@ class _QuantitySelectorState extends State<QuantitySelector> {
               ),
             ),
           );
-        }
-        else{
+        } else {
           return Text("ERRORE");
         }
-      }}
-    );
+      }
+    });
   }
 }
 
 //++++++++++++++++++++++++  DropDown Size   ++++++++++++++++++++++++
 
 class DropDownQuantityWidget extends StatelessWidget {
-
-
- final  List<int> quantity = [1,2,3,4,5,6];
+  final List<int> quantity = [1, 2, 3, 4, 5, 6];
   final int currentQuantity;
   DropDownQuantityWidget({this.currentQuantity});
 
@@ -111,4 +105,3 @@ class DropDownQuantityWidget extends StatelessWidget {
     );
   }
 }
-

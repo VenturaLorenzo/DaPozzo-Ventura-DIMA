@@ -1,6 +1,5 @@
 import 'package:dapozzo_ventura_app/business_logic/cubit/cart_cubit.dart';
 import 'package:dapozzo_ventura_app/states/cart_state.dart';
-import 'package:dapozzo_ventura_app/ui/items/cart_item.dart';
 import 'package:dapozzo_ventura_app/ui/lists/cart_items_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -38,25 +37,25 @@ class _CartPageState extends State<CartPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Column(
-                      children: <Widget>[
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  " Spesa Totale : " +
-                                      state.cart.getTotal().toString() +
-                                      "€",
-                                  style: TextStyle(
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.black54),
-                                ),
-                              ],
-                            ), CartItemList(items: state.cart.getProducts(),)
-                          ]
-
-                    ),
+                    Column(children: <Widget>[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            " Spesa Totale : " +
+                                state.cart.getTotal().toString() +
+                                "€",
+                            style: TextStyle(
+                                fontSize: 25,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.black54),
+                          ),
+                        ],
+                      ),
+                      CartItemList(
+                        items: state.cart.getProducts(),
+                      )
+                    ]),
                     Column(
                       children: [
                         FlatButton(

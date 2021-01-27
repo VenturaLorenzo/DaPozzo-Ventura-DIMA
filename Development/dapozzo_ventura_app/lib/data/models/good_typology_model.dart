@@ -18,17 +18,17 @@ class GoodTypologyModel {
         id: rnd.nextInt(20),
         price: rnd.nextInt(200),
         name: name,
-        gender:( rnd.nextInt(3) - 1),
+        gender: (rnd.nextInt(3) - 1),
         categoryId: rnd.nextInt(10),
         image: "fake.jpg",
         categoryName: "fakeCategory",
         description: "fake desc",
         vendorId: rnd.nextInt(10));
-
   }
 
   GoodTypologyModel(
-      {this.id,this.vendorName,
+      {this.id,
+      this.vendorName,
       this.categoryId,
       this.vendorId,
       this.gender,
@@ -46,7 +46,7 @@ class GoodTypologyModel {
     if (vendorId < 0) {
       throw ("vendorId NON CONFORME PER CREAZIONE GOOD TYPOLOGY : MINORE DI ZERO ");
     }
-    if (gender <-1 || gender > 1) {
+    if (gender < -1 || gender > 1) {
       throw ("gender $gender NON CONFORME PER CREAZIONE GOOD TYPOLOGY : DIVERSO DA -1 0 1 ");
     }
     if (description.length > 300) {
@@ -74,7 +74,6 @@ class GoodTypologyModel {
 
   @override
   String toString() {
-    // TODO: implement toString
     return "GOODTYPOLOGY -> id: $id , categoryId: $categoryId , vendorId: $vendorId, gender: $gender, name: $name, description : $description, price: $price, image : $image, categoryName: $categoryName";
   }
 }

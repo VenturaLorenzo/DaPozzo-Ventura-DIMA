@@ -16,7 +16,6 @@ class CartModel {
 
   @override
   String toString() {
-    // TODO: implement toString
     String cartToString = "";
     cartToString = cartToString + " Total : " + _total.toString() + "\n";
     cartToString = cartToString + " Items : " + "\n";
@@ -35,12 +34,13 @@ class CartModel {
       toChange.setQuantity(currentQuantity + newQuantity);
       _products[_products.indexOf(product)] = toChange;
     } else {
-        GoodModel newProduct = new GoodModel(
+      GoodModel newProduct = new GoodModel(
           color: product.color,
           quantity: product.getQuantity(),
           size: product.size,
           type: product.type,
-        images: product.images);
+          images: product.images,
+          vendorName: product.vendorName);
 
       _products.add(newProduct);
     }

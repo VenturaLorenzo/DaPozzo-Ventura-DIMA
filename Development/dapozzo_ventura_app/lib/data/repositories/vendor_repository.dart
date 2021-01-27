@@ -1,3 +1,4 @@
+import 'package:dapozzo_ventura_app/data/models/good_typology_model.dart';
 import 'package:dapozzo_ventura_app/data/models/vendor_model.dart';
 import 'package:dapozzo_ventura_app/data/providers/database_helper.dart';
 import 'package:dapozzo_ventura_app/data/repositories/category_repository.dart';
@@ -27,6 +28,20 @@ class VendorRepository {
       element.frontImages =
           await FrontImageRepository.getFrontTypologyImages(element.id);
     }));
+    return retVal;
+  }
+
+  static Future<List<Vendor>> getVendor(GoodTypologyModel typology) async {
+    var dbHelper = DatabaseHelper.instance;
+
+    List<Map> allVendorRows = await dbHelper.getVendor(typology.vendorId);
+    List<Vendor> retVal = [];
+
+    allVendorRows.forEach((row) {
+      retVal.add(Vendor(
+        name: row[DatabaseHelper.columnName],
+      ));
+    });
     return retVal;
   }
 }
