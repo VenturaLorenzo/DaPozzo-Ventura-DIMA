@@ -5,10 +5,12 @@ import 'package:dapozzo_ventura_app/business_logic/cubit/size_cubit.dart';
 import 'package:dapozzo_ventura_app/business_logic/cubit/vendor_cubit.dart';
 import 'package:dapozzo_ventura_app/data/repositories/goods_typology_repository.dart';
 import 'package:dapozzo_ventura_app/data/repositories/vendor_repository.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'business_logic/cubit/market_place_cubit.dart';
 import 'data/providers/route_generator.dart';
 import 'package:flutter/material.dart';
+
 /*
 
 void main() async{
@@ -19,7 +21,7 @@ print(images);
 final navigatorKey = GlobalKey<NavigatorState>();
 
 void main() {
-  // SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft,DeviceOrientation.portraitUp]);
+
   runApp(
     MultiBlocProvider(
         providers: [
@@ -47,4 +49,8 @@ void main() {
           onGenerateRoute: RouteGenerator.generateRoute,
         )),
   );
+
+
+  SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
+
 }

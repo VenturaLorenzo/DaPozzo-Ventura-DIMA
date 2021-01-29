@@ -4,7 +4,8 @@ import 'package:flutter/cupertino.dart';
 class GoodImagesList extends StatelessWidget {
   final List<String> images;
   final int price;
-  const GoodImagesList({Key key, this.images,this.price}) : super(key: key);
+  final height;
+  const GoodImagesList({Key key, this.images,this.price,this.height}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -12,6 +13,7 @@ class GoodImagesList extends StatelessWidget {
         itemCount: images.length,
         itemBuilder: (context, index) {
           return GoodItem(
+            height: height,
             image: images[index],price: price,
           );
         });

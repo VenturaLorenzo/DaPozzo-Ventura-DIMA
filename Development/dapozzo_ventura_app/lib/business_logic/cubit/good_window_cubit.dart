@@ -19,7 +19,6 @@ class GoodWindwCubit extends Cubit<GoodWindowState> {
 
   Future<void> initialize(GoodTypologyModel goodTypology) async {
     colors = await ColorRepository.getGoodTypologyColors(goodTypology);
-
     if (colors.isNotEmpty) {
       sizes = await SizeRepository.getAvailableSizes(goodTypology, colors[0]);
       vendor = await VendorRepository.getVendor(goodTypology);
@@ -33,11 +32,14 @@ class GoodWindwCubit extends Cubit<GoodWindowState> {
       GoodTypologyModel goodTypology, ColorModel selectedColor) async {
     emit(GoodWindowImageLoadingState(
         goodTypology, sizes, colors, selectedColor, vendor[0]));
+
     var goodImages =
         await GoodImageRepository.getImages(goodTypology, selectedColor);
     sizes = await SizeRepository.getAvailableSizes(goodTypology, selectedColor);
 
     if (goodImages.isNotEmpty) {
+      if(sizes.isEmpty){sizes.add(SizeModel(name: "none",id: 6));}
+
       emit(GoodWindowImageLoadedState(
           goodTypology, sizes, colors, selectedColor, vendor[0], goodImages));
     } else {

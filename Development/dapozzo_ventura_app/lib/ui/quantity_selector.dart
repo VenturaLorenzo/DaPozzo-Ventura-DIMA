@@ -14,6 +14,7 @@ class _QuantitySelectorState extends State<QuantitySelector> {
   @override
   void initState() {
     // TODO: implement initState
+    print("im initializing");
     super.initState();
     _quantityCubit = BlocProvider.of<QuantityCubit>(context);
     _quantityCubit.setQuantity(1);
@@ -21,9 +22,12 @@ class _QuantitySelectorState extends State<QuantitySelector> {
 
   @override
   void dispose() {
-    _quantityCubit.reset();
+    print("im disposing");
+
     // TODO: implement dispose
     super.dispose();
+    _quantityCubit.reset();
+
   }
 
   @override

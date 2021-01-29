@@ -14,7 +14,7 @@ class GoodTypologyList extends StatelessWidget {
       scrollDirection: Axis.vertical,
       itemCount: goodsTypologies.length,
       itemBuilder: (BuildContext ctxt, int index) {
-        return GoodsTypologyItem(
+        return GoodsTypologyItem(itemHeight: MediaQuery.of(context).size.height/5,
           goodsTypology: goodsTypologies[index],
         );
       },

@@ -28,12 +28,12 @@ class ColorSelector extends StatelessWidget {
               onTap: () {
                 BlocProvider.of<GoodWindwCubit>(context)
                     .filterChange(goodTypology, colorModel);
-                BlocProvider.of<SizeCubit>(context)
-                    .filterChange(goodTypology, colorModel);
+                //BlocProvider.of<SizeCubit>(context)
+                 //   .filterChange(goodTypology, colorModel);
               },
               child: Container(
-                width: 25.0,
-                height: 25.0,
+                width: MediaQuery.of(context).size.height/30,
+                height: MediaQuery.of(context).size.height/30,
                 decoration: new BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   color: new Color(
@@ -50,8 +50,8 @@ class ColorSelector extends StatelessWidget {
               onTap: () {
                 BlocProvider.of<GoodWindwCubit>(context)
                     .filterChange(goodTypology, colorModel);
-                BlocProvider.of<SizeCubit>(context)
-                    .filterChange(goodTypology, colorModel);
+               // BlocProvider.of<SizeCubit>(context)
+                //    .filterChange(goodTypology, colorModel);
               },
               child: Container(
                 width: 30.0,

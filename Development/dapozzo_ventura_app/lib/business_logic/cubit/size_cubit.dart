@@ -12,7 +12,7 @@ class SizeCubit extends Cubit<SizeState> {
   Future<void> setSize(String s) async {
     emit(SizeStateCurrent(s));
   }
-
+/*
   Future<void> filterChange(
       GoodTypologyModel goodTypology, ColorModel selectedColor) async {
     List<SizeModel> sizesModels =
@@ -25,7 +25,7 @@ class SizeCubit extends Cubit<SizeState> {
       emit(SizeStateCurrent("none"));
 
     }
-  }
+  }*/
 
   Future<void> reset() async {
     emit(SizeStateUninitialized());

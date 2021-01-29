@@ -35,7 +35,8 @@ class _GoodWindowPageState extends State<GoodWindowPage> {
   SizeCubit _sizeCubit;
   List<bool> isSelected;
   GoodTypologyModel goodTypology;
-
+double pageHeight;
+double imageListHeight;
   @override
   void initState() {
     super.initState();
@@ -58,6 +59,8 @@ class _GoodWindowPageState extends State<GoodWindowPage> {
 
   @override
   Widget build(BuildContext context) {
+    pageHeight= MediaQuery.of(context).size.height;
+    imageListHeight= pageHeight*2/3;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black87,
@@ -106,10 +109,9 @@ class _GoodWindowPageState extends State<GoodWindowPage> {
                       colors: state.colors,
                       current: state.currentColor,
                     ),
-                    QuantitySelector(),
-                    SizeSelector(
-                      sizes: state.sizes,
-                    ),
+                    CircularProgressIndicator(),
+              CircularProgressIndicator(),
+
                   ],
                 ),
                 Row(
@@ -152,27 +154,31 @@ class _GoodWindowPageState extends State<GoodWindowPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  height: 375,
+                  height: imageListHeight,
                   child: GoodImagesList(
+                      height:imageListHeight,
                     images: getNames(state.goodImages),
                     price: goodTypology.price,
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    ColorSelector(
-                      goodTypology: state.typology,
-                      colors: state.colors,
-                      current: state.currentColor,
+               Container(height: pageHeight/6,
+                 child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        ColorSelector(
+                          goodTypology: state.typology,
+                          colors: state.colors,
+                          current: state.currentColor,
+                        ),
+                        QuantitySelector(),
+                        SizeSelector(
+                          sizes: state.sizes,
+                          // current: state.currentSize,
+                        ),
+                      ],
                     ),
-                    QuantitySelector(),
-                    SizeSelector(
-                      sizes: state.sizes,
-                      // current: state.currentSize,
-                    ),
-                  ],
-                ),
+               ),
+                
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
