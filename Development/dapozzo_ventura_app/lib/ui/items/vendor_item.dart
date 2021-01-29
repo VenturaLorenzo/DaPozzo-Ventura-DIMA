@@ -15,7 +15,7 @@ class VendorItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(5, 0, 5, 20),
+      padding: EdgeInsets.fromLTRB(5, 10, 5, 10),
       child: Container(
           decoration: BoxDecoration(
               color: Colors.white,

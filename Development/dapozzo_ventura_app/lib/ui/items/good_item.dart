@@ -2,12 +2,18 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class GoodItem extends StatelessWidget {
+class GoodItem extends StatefulWidget {
   final String image;
 final int price;
   const GoodItem({Key key, this.image,this.price}) : super(key: key);
 
   @override
+  _GoodItemState createState() => _GoodItemState();
+}
+
+class _GoodItemState extends State<GoodItem> {
+bool favourited=false;
+@override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
@@ -33,7 +39,7 @@ final int price;
                         topLeft: Radius.circular(15),
                         topRight: Radius.circular(15)),
                     child: Image.network(
-                      'https://www.laccademiabjj.it/images/Shop/' + image,
+                      'https://www.laccademiabjj.it/images/Shop/' + widget.image,
                       fit: BoxFit.cover,
                       width: 325,
                     ))),
@@ -55,7 +61,7 @@ final int price;
                   width: 200,
                   child: Center(
                       child: Text(
-                    price.toString()+ '€',
+                    widget.price.toString()+ '€',
                     style: TextStyle(
                         fontWeight: FontWeight.w400,
                         color: Colors.green,
@@ -63,12 +69,13 @@ final int price;
                   )),
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {setState(() {
+
+favourited=!favourited;                  });},
                   tooltip: 'Increment',
                   icon: Icon(
-                    Icons.favorite,
-                  ),
-                  color: Colors.black54,
+                    (favourited)?Icons.favorite:Icons.favorite_border                 ),
+                  color: (favourited)?Colors.red:Colors.black54,
                   iconSize: 30,
                   padding: const EdgeInsets.all(0),
                 ),

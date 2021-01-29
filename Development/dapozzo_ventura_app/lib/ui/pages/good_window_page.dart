@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dapozzo_ventura_app/business_logic/cubit/cart_cubit.dart';
 import 'package:dapozzo_ventura_app/business_logic/cubit/good_window_cubit.dart';
 import 'package:dapozzo_ventura_app/business_logic/cubit/quantity_cubit.dart';
@@ -114,8 +116,8 @@ class _GoodWindowPageState extends State<GoodWindowPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      height: 50,
-                      width: 200,
+                      height: MediaQuery.of(context).size.height/12,
+                      width: MediaQuery.of(context).size.width/2,
                       decoration: BoxDecoration(
                           color: Color.fromARGB(255, 1, 136, 73),
                           shape: BoxShape.rectangle,
@@ -175,8 +177,8 @@ class _GoodWindowPageState extends State<GoodWindowPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      height: 50,
-                      width: 200,
+                      height: MediaQuery.of(context).size.height/12,
+                      width: MediaQuery.of(context).size.width/2,
                       decoration: BoxDecoration(
                           color: Color.fromARGB(255, 1, 136, 73),
                           shape: BoxShape.rectangle,
@@ -218,6 +220,8 @@ class _GoodWindowPageState extends State<GoodWindowPage> {
                                     vendorName: state.vendor,
                                   ));
                                   _showSuccesPopup();
+                                }else{
+                                  _showFailPopup();
                                 }
                               } else {
                                 throw ("QUANTITY NOT SETTED");
@@ -253,16 +257,18 @@ class _GoodWindowPageState extends State<GoodWindowPage> {
 // +++++++++++++++++++++++  PopUp Successo  ++++++++++++++++++++++++
 
   Future<void> _showSuccesPopup() async {
-    Future.delayed(Duration(milliseconds: 2000), () {
-      Navigator.pop(context);
+    Timer timer = Timer(Duration(milliseconds: 2000), (){
+      Navigator.of(context, rootNavigator: true).pop();
     });
     return showDialog<void>(
       barrierColor: Colors.lightGreen.withOpacity(0.02),
       context: context,
       barrierDismissible: true, // user must tap button!
       builder: (BuildContext context) {
+       
         return AlertDialog(
           elevation: 2,
+
           backgroundColor: Colors.grey[300].withOpacity(0.80),
           title: Column(children: [
             Text(
@@ -277,7 +283,39 @@ class _GoodWindowPageState extends State<GoodWindowPage> {
           ]),
         );
       },
-    );
+    ).then((value) {timer?.cancel();
+    timer=null;
+    });
+  }Future<void> _showFailPopup() async {
+    Timer timer = Timer(Duration(milliseconds: 2000), (){
+      Navigator.of(context, rootNavigator: true).pop();
+    });
+    return showDialog<void>(
+      barrierColor: Colors.lightGreen.withOpacity(0.02),
+      context: context,
+      barrierDismissible: true, // user must tap button!
+      builder: (BuildContext context) {
+
+        return AlertDialog(
+          elevation: 2,
+
+          backgroundColor: Colors.grey[300].withOpacity(0.80),
+          title: Column(children: [
+            Text(
+              "Not Available",
+              style: TextStyle(color: Colors.red[900]),
+            ),
+            Icon(
+              Icons.close,
+              color: Colors.red[900],
+              size: 50,
+            ),
+          ]),
+        );
+      },
+    ).then((value) {timer?.cancel();
+    timer=null;
+    });
   }
 
   getNames(List<GoodImageModel> goodImages) {

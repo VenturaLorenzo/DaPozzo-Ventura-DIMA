@@ -9,7 +9,7 @@ class CartIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
+      padding: const EdgeInsets.fromLTRB(0,10, 0, 0),
       child: Stack(children: [
         IconButton(
           onPressed: () {
@@ -17,7 +17,7 @@ class CartIcon extends StatelessWidget {
           },
           icon: Icon(
             Icons.shopping_cart,
-            size: MediaQuery.of(context).size.width / 18,
+            size: MediaQuery.of(context).size.width / 14,
           ),
         ),
         BlocBuilder<CartCubit, CartState>(builder: (context, state) {

@@ -46,7 +46,6 @@ class _VendorPageState extends State<VendorPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: EquipAppBar(
-        size: MediaQuery.of(context).size.height / 16,
         title: widget.vendor.name,
       ),
       drawer: EquipNavigatorMenu(
@@ -165,11 +164,8 @@ class _VendorPageState extends State<VendorPage> {
                 fillColor: Color.fromARGB(0, 0, 0, 0),
                 children: categories.map((category) {
                   return
-                      // SizedBox(
-                      //   child: new Image.asset(category.icon),
-                      //   height: 70,
-                      // );
-                      Icon(Icons.ac_unit, size: 70);
+
+                      Icon(Icons.ac_unit, size: MediaQuery.of(context).size.height/12);
                 }).toList(),
                 onPressed: (int index) {
                   //CAMBIO L?ICONA VISIVAMENTE

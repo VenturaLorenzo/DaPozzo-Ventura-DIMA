@@ -25,8 +25,7 @@ class _HomeState extends State<Home> {
   MarketPlaceCubit _marketPlaceCubit;
   List<CategoryModel> categories;
   List<SportModel> sports;
-
-  var _cartBloc;
+double filterBarHeight= 0;
 
   @override
   void initState() {
@@ -36,16 +35,15 @@ class _HomeState extends State<Home> {
     categories = widget.categoriesAndSports.allCategories;
     sports = widget.categoriesAndSports.allSports;
     _marketPlaceCubit = BlocProvider.of<MarketPlaceCubit>(context);
-
     _marketPlaceCubit.initialize();
   }
 
   @override
   Widget build(BuildContext context) {
+    filterBarHeight=MediaQuery.of(context).size.height / 3;
 
     return Scaffold(
       appBar: EquipAppBar(
-        size: MediaQuery.of(context).size.height / 16,
         title: "eQuip",
       ),
       drawer: EquipNavigatorMenu(navigationTiles: [
@@ -54,45 +52,48 @@ class _HomeState extends State<Home> {
           children: [],
         )
       ]),
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            backgroundColor: Colors.white,
-            leading: Container(),
-            floating: true,
-            expandedHeight: MediaQuery.of(context).size.height / 2.2,
-            pinned: false,
-            flexibleSpace: FilterBar(
-              marketPlaceCubit:  _marketPlaceCubit,
-              categories: categories,
-              sports: sports,
+      body: Container(color: Colors.white38,
+        child: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              backgroundColor: Colors.white,
+              leading: Container(),
+              floating: true,
+              expandedHeight: filterBarHeight,
+              pinned: false,
+              flexibleSpace: FilterBar(
+                maxHeight:filterBarHeight,
+                marketPlaceCubit:  _marketPlaceCubit,
+                categories: categories,
+                sports: sports,
+              ),
             ),
-          ),
-          BlocBuilder<MarketPlaceCubit, MarketPlaceState>(
-              builder: (context, state) {
-            List<Vendor> vendors;
-            if (state is MarketPlaceLoadingState || state is MarketPlaceInitial) {
-              return SliverFillRemaining(
-                child: Center(
-                  child: CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation<Color>(Colors.black54),
+            BlocBuilder<MarketPlaceCubit, MarketPlaceState>(
+                builder: (context, state) {
+              List<Vendor> vendors;
+              if (state is MarketPlaceLoadingState || state is MarketPlaceInitial) {
+                return SliverFillRemaining(
+                  child: Center(
+                    child: CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.black54),
+                    ),
                   ),
-                ),
-              );
-            }
-            else {
-              if (state is MarketPlaceSearched) {
-                vendors = state.result;
-                return VendorList(vendors, state.categories);
-              } else {
-                if (state is MarketPlaceGeneralError) {
-                  return Text(state.error.toString());
+                );
+              }
+              else {
+                if (state is MarketPlaceSearched) {
+                  vendors = state.result;
+                  return VendorList(vendors, state.categories);
+                } else {
+                  if (state is MarketPlaceGeneralError) {
+                    return Text(state.error.toString());
+                  }
                 }
               }
-            }
-            return Text("Error");
-          }),
-        ],
+              return Text("Error");
+            }),
+          ],
+        ),
       ),
     );
   }

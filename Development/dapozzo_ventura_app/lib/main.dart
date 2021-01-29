@@ -16,6 +16,8 @@ void main() async{
 print(images);
 
 }*/
+final navigatorKey = GlobalKey<NavigatorState>();
+
 void main() {
   // SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft,DeviceOrientation.portraitUp]);
   runApp(
@@ -40,7 +42,7 @@ void main() {
             create: (BuildContext context) => SizeCubit() ,
           ),
         ],
-        child: MaterialApp(
+        child: MaterialApp(navigatorKey: navigatorKey,
           initialRoute: '/launch',
           onGenerateRoute: RouteGenerator.generateRoute,
         )),
