@@ -7,24 +7,50 @@ import 'cart_icon.dart';
 class EquipAppBar extends StatelessWidget implements PreferredSize {
   final String title;
 
-  const EquipAppBar({Key key,@required this.title}) : super(key: key);
+  const EquipAppBar({Key key, @required this.title}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return  AppBar(
+    return AppBar(leading: new Container(),
+      flexibleSpace: Padding(
+        padding: const EdgeInsets.fromLTRB(8, 16, 8, 8),
+        child: Container(decoration: BoxDecoration(
+            border: Border.all(color: Colors.white)
+        ),
+          height: MediaQuery.of(context).size.height/10,
+          width: MediaQuery.of(context).size.width,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [Builder(builder: (BuildContext context) {
+              return Container(height: MediaQuery.of(context).size.height/11 , decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white)),
+                child: FittedBox(
+                  child: IconButton(
+                      onPressed: () {
+                        Scaffold.of(context).openDrawer();
+                      },
+                      icon: Icon(
+                        Icons.menu,
+                        color: Colors.white,
 
-        backgroundColor: Colors.black87,
-        centerTitle: true,
-        leading: Builder(builder: (BuildContext context){
+                      )),
+                ),
+              );
+            }),Text( title,style: TextStyle(fontSize: MediaQuery.of(context).size.height/20,color: Colors.white),),
+              Container(height: MediaQuery.of(context).size.height/11  , decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white)),
+                child: FittedBox(fit: BoxFit.fill,
+                  child: CartIcon(
+                  ),
+                ),
+              ),],
+          ),
+        ),
+      ),
+      backgroundColor: Colors.black87,
+      //centerTitle: true,
 
-          return  IconButton(onPressed:() {
-            Scaffold.of(context).openDrawer();
-          } ,icon: Icon(Icons.menu,size: MediaQuery.of(context).size.width/14,));
-        }),
-        actions: [
-          CartIcon(),
-        ],
-        title: Text(title),
-
+     // title: Text(title),
     );
   }
 
@@ -35,6 +61,7 @@ class EquipAppBar extends StatelessWidget implements PreferredSize {
   @override
   // TODO: implement preferredSize
   Size get preferredSize {
-    return Size.fromHeight(MediaQuery.of(navigatorKey.currentContext).size.width / 7);
+    return Size.fromHeight(
+        MediaQuery.of(navigatorKey.currentContext).size.width / 7);
   }
 }
