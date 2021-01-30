@@ -14,7 +14,6 @@ class _QuantitySelectorState extends State<QuantitySelector> {
   @override
   void initState() {
     // TODO: implement initState
-    print("im initializing");
     super.initState();
     _quantityCubit = BlocProvider.of<QuantityCubit>(context);
     _quantityCubit.setQuantity(1);
@@ -22,7 +21,6 @@ class _QuantitySelectorState extends State<QuantitySelector> {
 
   @override
   void dispose() {
-    print("im disposing");
 
     // TODO: implement dispose
     super.dispose();
@@ -34,7 +32,34 @@ class _QuantitySelectorState extends State<QuantitySelector> {
   Widget build(BuildContext context) {
     return BlocBuilder<QuantityCubit, QuantityState>(builder: (context, state) {
       if (state is QuantityStateUninitialized) {
-        return CircularProgressIndicator();
+        return Padding(
+          padding: const EdgeInsets.all(5),
+          child: Container(
+            decoration: BoxDecoration(
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey[300],
+                    offset: Offset(4.0, 4.0),
+                    blurRadius: 5.0,
+                    spreadRadius: 1,
+                  ),
+                ],
+                borderRadius: BorderRadius.circular(5)),
+            child: Padding(
+              padding: const EdgeInsets.all(2.5),
+              child: Column(
+                children: [
+                  Text("Quantity"),
+                  SizedBox(
+                    width: 80,
+
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
       } else {
         if (state is QuantityStateCurrent) {
           return Padding(

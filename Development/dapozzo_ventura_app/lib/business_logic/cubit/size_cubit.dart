@@ -10,6 +10,7 @@ class SizeCubit extends Cubit<SizeState> {
   SizeCubit() : super(SizeStateUninitialized());
 
   Future<void> setSize(String s) async {
+
     emit(SizeStateCurrent(s));
   }
 /*

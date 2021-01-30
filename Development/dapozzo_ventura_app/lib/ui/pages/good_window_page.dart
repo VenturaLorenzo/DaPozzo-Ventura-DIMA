@@ -94,25 +94,54 @@ double imageListHeight;
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                    height: 375,
+                    height: imageListHeight,
                     child: Center(
                       child: CircularProgressIndicator(
                         valueColor:
                             AlwaysStoppedAnimation<Color>(Colors.black54),
                       ),
                     )),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    ColorSelector(
-                      goodTypology: state.typology,
-                      colors: state.colors,
-                      current: state.currentColor,
-                    ),
-                    CircularProgressIndicator(),
-              CircularProgressIndicator(),
+                Container(height: pageHeight/6,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      ColorSelector(
+                        goodTypology: state.typology,
+                        colors: state.colors,
+                        current: state.currentColor,
+                      ),
+                  Padding(
+                    padding: const EdgeInsets.all(5),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey[300],
+                              offset: Offset(4.0, 4.0),
+                              blurRadius: 5.0,
+                              spreadRadius: 1,
+                            ),
+                          ],
+                          borderRadius: BorderRadius.circular(5)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(2.5),
+                        child: Column(
+                          children: [
+                            Text("Quantity"),
+                            SizedBox(
+                              width: 80,
 
-                  ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                      SizeSelector(sizes: state.sizes,),
+
+                    ],
+                  ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -135,6 +164,7 @@ double imageListHeight;
                       child: FlatButton(
                         child: Text("ADD TO CART",
                             style: TextStyle(
+                                fontSize: MediaQuery.of(context).size.height/40,
                                 fontWeight: FontWeight.w600,
                                 color: Colors.white70,
                                 fontStyle: FontStyle.normal)),
@@ -150,6 +180,7 @@ double imageListHeight;
           }
 
           if (state is GoodWindowImageLoadedState) {
+            BlocProvider.of<SizeCubit>(context).setSize(state.sizes[0].name);
             return Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -178,7 +209,7 @@ double imageListHeight;
                       ],
                     ),
                ),
-                
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -210,7 +241,8 @@ double imageListHeight;
                                             ? Colors.white
                                             : Colors.white70
                                         : Colors.white,
-                                    fontSize: 16,
+                                    fontSize: MediaQuery.of(context).size.height/40
+                                ,
                                     fontStyle: FontStyle.normal)),
                             onPressed: () {
                               if (quantityState is QuantityStateCurrent &&
@@ -271,7 +303,7 @@ double imageListHeight;
       context: context,
       barrierDismissible: true, // user must tap button!
       builder: (BuildContext context) {
-       
+
         return AlertDialog(
           elevation: 2,
 

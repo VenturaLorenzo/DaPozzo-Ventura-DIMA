@@ -21,13 +21,13 @@ class SizeSelector extends StatefulWidget {
 class _SizeSelectorState extends State<SizeSelector> {
   List<SizeModel> sizes;
   SizeCubit _sizeCubit;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    sizes = widget.sizes;
     _sizeCubit = BlocProvider.of<SizeCubit>(context);
-    _sizeCubit.setSize(sizes[0].name);
+    sizes = widget.sizes;
   }
 
   @override
@@ -39,47 +39,157 @@ class _SizeSelectorState extends State<SizeSelector> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.sizes);
     return BlocBuilder<SizeCubit, SizeState>(builder: (context, state) {
       if (state is SizeStateUninitialized) {
-        return CircularProgressIndicator();
+        return  Container(
+          decoration: BoxDecoration(
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey[300],
+                  offset: Offset(4.0, 4.0),
+                  blurRadius: 5.0,
+                  spreadRadius: 1,
+                ),
+              ],
+              borderRadius: BorderRadius.circular(5)),
+          child: Padding(
+            padding: const EdgeInsets.all(2.5),
+            child: Column(
+              children: [
+                Text("Sizes"),
+                SizedBox(
+                    height: 40,
+                    width: 80,
+                   ),
+              ],
+            ),
+          ),
+        );
       } else {
         if (state is SizeStateCurrent) {
-          return Container(
-            decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey[300],
-                    offset: Offset(4.0, 4.0),
-                    blurRadius: 5.0,
-                    spreadRadius: 1,
-                  ),
-                ],
-                borderRadius: BorderRadius.circular(5)),
-            child: Padding(
-              padding: const EdgeInsets.all(2.5),
-              child: Column(
-                children: [
-                  Text("Sizes"),
-                  Container(
-                      width: 80,
-                      child: Center(
-                          child: DropDownSizeWidget(
-                              sizes: getSizesNames(widget.sizes),
-                              dropdownValue: state.currentSize))),
-                ],
+          print(state.currentSize);
+          print(widget.sizes);
+          if (!getSizesNames(widget.sizes).contains(state.currentSize)) {
+            print("entro qui dio cane");
+            return  Container(
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey[300],
+                      offset: Offset(4.0, 4.0),
+                      blurRadius: 5.0,
+                      spreadRadius: 1,
+                    ),
+                  ],
+                  borderRadius: BorderRadius.circular(5)),
+              child: Padding(
+                padding: const EdgeInsets.all(2.5),
+                child: Column(
+                  children: [
+                    Text("Sizes"),
+                    SizedBox(
+                        height: 40,
+                        width: 80,
+                       ),
+                  ],
+                ),
               ),
-            ),
-          );
+            );
+          } else {
+            return Container(
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey[300],
+                      offset: Offset(4.0, 4.0),
+                      blurRadius: 5.0,
+                      spreadRadius: 1,
+                    ),
+                  ],
+                  borderRadius: BorderRadius.circular(5)),
+              child: Padding(
+                padding: const EdgeInsets.all(2.5),
+                child: Column(
+                  children: [
+                    Text("Sizes"),
+                    Container(
+                        height: 40,
+                        width: 80,
+                        child: Center(
+                            child: DropDownSizeWidget(
+                                sizes: getSizesNames(widget.sizes),
+                                dropdownValue: widget.sizes[0].name))),
+                  ],
+                ),
+              ),
+            );
+          }
         } else {
           return Text("ERRORE");
         }
       }
     });
   }
-}
 
+  Container dropDownBox(bool loaded) {
+    if (loaded) {
+      Container(
+        decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey[300],
+                offset: Offset(4.0, 4.0),
+                blurRadius: 5.0,
+                spreadRadius: 1,
+              ),
+            ],
+            borderRadius: BorderRadius.circular(5)),
+        child: Padding(
+          padding: const EdgeInsets.all(2.5),
+          child: Column(
+            children: [
+              Text("Sizes"),
+              Container(
+                  height: 40,
+                  width: 80,
+                  child: Center(
+                      child: DropDownSizeWidget(
+                          sizes: getSizesNames(widget.sizes),
+                          dropdownValue: widget.sizes[0].name))),
+            ],
+          ),
+        ),
+      );
+    } else {
+      Container(
+        decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey[300],
+                offset: Offset(4.0, 4.0),
+                blurRadius: 5.0,
+                spreadRadius: 1,
+              ),
+            ],
+            borderRadius: BorderRadius.circular(5)),
+        child: Padding(
+          padding: const EdgeInsets.all(2.5),
+          child: Column(
+            children: [
+              Text("Sizes"),
+
+            ],
+          ),
+        ),
+      );
+    }
+  }
+}
 //++++++++++++++++++++++++  DropDown Size   ++++++++++++++++++++++++
 
 class DropDownSizeWidget extends StatelessWidget {
@@ -114,7 +224,7 @@ class DropDownSizeWidget extends StatelessWidget {
   }
 }
 
-getSizesNames(List<SizeModel> goodSize) {
+List<String> getSizesNames(List<SizeModel> goodSize) {
   var retVal = new List<String>();
 
   goodSize.forEach((element) {

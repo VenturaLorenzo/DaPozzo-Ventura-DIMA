@@ -13,17 +13,15 @@ class EquipAppBar extends StatelessWidget implements PreferredSize {
   Widget build(BuildContext context) {
     return AppBar(leading: new Container(),
       flexibleSpace: Padding(
-        padding: const EdgeInsets.fromLTRB(8, 16, 8, 8),
-        child: Container(decoration: BoxDecoration(
-            border: Border.all(color: Colors.white)
-        ),
+        padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
+        child: Container(
+
           height: MediaQuery.of(context).size.height/10,
           width: MediaQuery.of(context).size.width,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [Builder(builder: (BuildContext context) {
-              return Container(height: MediaQuery.of(context).size.height/11 , decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white)),
+              return Container(height: MediaQuery.of(context).size.height/11 ,
                 child: FittedBox(
                   child: IconButton(
                       onPressed: () {
@@ -37,8 +35,7 @@ class EquipAppBar extends StatelessWidget implements PreferredSize {
                 ),
               );
             }),Text( title,style: TextStyle(fontSize: MediaQuery.of(context).size.height/20,color: Colors.white),),
-              Container(height: MediaQuery.of(context).size.height/11  , decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white)),
+              Container(height: MediaQuery.of(context).size.height/11  ,
                 child: FittedBox(fit: BoxFit.fill,
                   child: CartIcon(
                   ),

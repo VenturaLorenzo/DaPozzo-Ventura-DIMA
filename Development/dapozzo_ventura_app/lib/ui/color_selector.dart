@@ -25,11 +25,11 @@ class ColorSelector extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.all(5),
             child: GestureDetector(
-              onTap: () {
+              onTap: () {if(colorModel !=current) {
+                BlocProvider.of<SizeCubit>(context).reset();
                 BlocProvider.of<GoodWindwCubit>(context)
                     .filterChange(goodTypology, colorModel);
-                //BlocProvider.of<SizeCubit>(context)
-                 //   .filterChange(goodTypology, colorModel);
+              }
               },
               child: Container(
                 width: MediaQuery.of(context).size.height/30,

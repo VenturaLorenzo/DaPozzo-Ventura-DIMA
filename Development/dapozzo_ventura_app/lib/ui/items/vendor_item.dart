@@ -75,7 +75,7 @@ class VendorItem extends StatelessWidget {
                           vendor.name,
                           style: TextStyle(
                             color: Colors.black87,
-                            fontSize: 35,
+                            fontSize: MediaQuery.of(context).size.height/25,
                           ),
                         ),
                       ],
@@ -85,7 +85,7 @@ class VendorItem extends StatelessWidget {
                       children: [
                         RatingBar.builder(
                           initialRating: vendor.rating,
-                          itemSize: 18,
+                          itemSize: MediaQuery.of(context).size.height/45,
                           minRating: 1,
                           direction: Axis.horizontal,
                           allowHalfRating: true,
@@ -104,7 +104,7 @@ class VendorItem extends StatelessWidget {
                     ),
                     Container(
                       child: Padding(
-                        padding: EdgeInsets.all(10),
+                        padding: EdgeInsets.all(20),
                         child: GridView.count(
                             physics: ScrollPhysics(),
                             // Create a grid with 2 columns. If you change the scrollDirection to
