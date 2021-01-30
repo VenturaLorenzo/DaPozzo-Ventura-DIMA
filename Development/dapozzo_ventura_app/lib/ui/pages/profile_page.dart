@@ -10,6 +10,6 @@ class MyProfile extends StatefulWidget {
 class _MyProfileState extends State<MyProfile> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: EquipAppBar(title: "ciao",),);
+    return Scaffold(appBar: EquipAppBar(title: "ciao",withMenu: false,),);
   }
 }

@@ -27,8 +27,8 @@ class _VendorPageState extends State<VendorPage> {
   List<bool> isSelectedCategory;
   List<bool> isSelectedGender = [false, false];
   List<CategoryModel> categories = [];
-   double pageHeight = 0;
-   double genderSelectionRowHeight=0;
+  double pageHeight = 0;
+  double genderSelectionRowHeight = 0;
 
   @override
   void initState() {
@@ -45,9 +45,10 @@ class _VendorPageState extends State<VendorPage> {
   @override
   Widget build(BuildContext context) {
     pageHeight = MediaQuery.of(context).size.height;
-    genderSelectionRowHeight=pageHeight/10;
+    genderSelectionRowHeight = pageHeight / 10;
     return Scaffold(
       appBar: EquipAppBar(
+        withMenu: true,
         title: widget.vendor.name,
       ),
       drawer: EquipNavigatorMenu(
@@ -165,8 +166,7 @@ class _VendorPageState extends State<VendorPage> {
                 borderColor: Color.fromARGB(0, 0, 0, 0),
                 fillColor: Color.fromARGB(0, 0, 0, 0),
                 children: categories.map((category) {
-                  return Icon(Icons.ac_unit,
-                      size: pageHeight / 12);
+                  return Icon(Icons.ac_unit, size: pageHeight / 12);
                 }).toList(),
                 onPressed: (int index) {
                   //CAMBIO L?ICONA VISIVAMENTE
@@ -183,76 +183,82 @@ class _VendorPageState extends State<VendorPage> {
                 isSelected: isSelectedCategory,
               ),
             ),
-            Container(height: genderSelectionRowHeight,
-              child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text('Scroll our Item List',
-                        style: TextStyle(
-                          fontSize: genderSelectionRowHeight/3,
-                          fontWeight: FontWeight.w300,
-                        ))),
-                Padding(
-                    padding: EdgeInsets.all(8),
-                    child: Container(
-                        height: genderSelectionRowHeight/2,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            shape: BoxShape.rectangle,
-                            borderRadius: BorderRadius.circular(10),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey[300],
-                                offset: Offset(4.0, 4.0),
-                                blurRadius: 5.0,
-                                spreadRadius: 1,
-                              ),
-                            ]),
-                        child: Row(children: [
-                          ToggleButtons(
-                              children: [
-                                Padding(
-                                    padding: const EdgeInsets.all(5),
-                                    child: Text("Uomo",
-                                        style: TextStyle(
-                                          fontSize: genderSelectionRowHeight/3,
-                                          fontWeight: FontWeight.w300,
-                                        )))
-                              ],
-                              borderColor: Colors.grey[200],
-                              fillColor: Color.fromRGBO(33, 150, 243, 1),
-                              selectedBorderColor:
-                                  Color.fromRGBO(33, 150, 243, 1),
-                              selectedColor: Colors.white,
-                              onPressed: (int index) {
-                                setState(() {
-                                  swapGender(0);
-                                });
-                              },
-                              isSelected: [isSelectedGender[0]]),
-                          ToggleButtons(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(5),
-                                  child: Text("Donna",
-                                      style: TextStyle(
-                                        fontSize: genderSelectionRowHeight/3,
-                                        fontWeight: FontWeight.w300,
-                                      )),
-                                )
-                              ],
-                              borderColor: Colors.grey[200],
-                              fillColor: Color.fromRGBO(255, 45, 85, 1),
-                              selectedBorderColor: Color.fromRGBO(255, 45, 85, 1),
-                              selectedColor: Colors.white,
-                              onPressed: (int index) {
-                                setState(() {
-                                  swapGender(1);
-                                });
-                              },
-                              isSelected: [isSelectedGender[1]])
-                        ])))
-              ]),
+            Container(
+              height: genderSelectionRowHeight,
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text('Scroll our Item List',
+                            style: TextStyle(
+                              fontSize: genderSelectionRowHeight / 3,
+                              fontWeight: FontWeight.w300,
+                            ))),
+                    Padding(
+                        padding: EdgeInsets.all(8),
+                        child: Container(
+                            height: genderSelectionRowHeight / 2,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                shape: BoxShape.rectangle,
+                                borderRadius: BorderRadius.circular(10),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey[300],
+                                    offset: Offset(4.0, 4.0),
+                                    blurRadius: 5.0,
+                                    spreadRadius: 1,
+                                  ),
+                                ]),
+                            child: Row(children: [
+                              ToggleButtons(
+                                  children: [
+                                    Padding(
+                                        padding: const EdgeInsets.all(5),
+                                        child: Text("Uomo",
+                                            style: TextStyle(
+                                              fontSize:
+                                                  genderSelectionRowHeight / 3,
+                                              fontWeight: FontWeight.w300,
+                                            )))
+                                  ],
+                                  borderColor: Colors.grey[200],
+                                  fillColor: Color.fromRGBO(33, 150, 243, 1),
+                                  selectedBorderColor:
+                                      Color.fromRGBO(33, 150, 243, 1),
+                                  selectedColor: Colors.white,
+                                  onPressed: (int index) {
+                                    setState(() {
+                                      swapGender(0);
+                                    });
+                                  },
+                                  isSelected: [isSelectedGender[0]]),
+                              ToggleButtons(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(5),
+                                      child: Text("Donna",
+                                          style: TextStyle(
+                                            fontSize:
+                                                genderSelectionRowHeight / 3,
+                                            fontWeight: FontWeight.w300,
+                                          )),
+                                    )
+                                  ],
+                                  borderColor: Colors.grey[200],
+                                  fillColor: Color.fromRGBO(255, 45, 85, 1),
+                                  selectedBorderColor:
+                                      Color.fromRGBO(255, 45, 85, 1),
+                                  selectedColor: Colors.white,
+                                  onPressed: (int index) {
+                                    setState(() {
+                                      swapGender(1);
+                                    });
+                                  },
+                                  isSelected: [isSelectedGender[1]])
+                            ])))
+                  ]),
             ),
             BlocBuilder<VendorCubit, VendorState>(
               builder: (context, state) {

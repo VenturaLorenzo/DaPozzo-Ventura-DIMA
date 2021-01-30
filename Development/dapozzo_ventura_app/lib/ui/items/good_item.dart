@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@ class _GoodItemState extends State<GoodItem> {
   double pageWidth;
   double itemHeight;
   double itemWidth;
+  double pageHeight;
 
   @override
   void initState() {
@@ -30,6 +32,8 @@ class _GoodItemState extends State<GoodItem> {
   @override
   Widget build(BuildContext context) {
     pageWidth = MediaQuery.of(context).size.width;
+    pageHeight = MediaQuery.of(context).size.height;
+
     itemWidth = pageWidth * 3 / 4;
     return Padding(
       padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
@@ -95,13 +99,18 @@ class _GoodItemState extends State<GoodItem> {
                     padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                     child: IconButton(
                       onPressed: () {
+                        if (favourited == false) {
+                          _showPopup("Added to favourites", Colors.blueAccent,
+                              Icons.favorite, Colors.blueAccent);
+                        }
                         setState(() {
                           favourited = !favourited;
                         });
                       },
                       tooltip: 'Increment',
-                      icon: Icon(
-                          (favourited) ? Icons.favorite : Icons.favorite_border),
+                      icon: Icon((favourited)
+                          ? Icons.favorite
+                          : Icons.favorite_border),
                       color: (favourited) ? Colors.red : Colors.black54,
                       iconSize: itemHeight / 14,
                       padding: const EdgeInsets.all(0),
@@ -114,5 +123,37 @@ class _GoodItemState extends State<GoodItem> {
         ),
       ),
     );
+  }
+
+  Future<void> _showPopup(
+      String text, Color textColor, IconData icon, Color iconColor) async {
+    Timer timer = Timer(Duration(milliseconds: 2000), () {
+      Navigator.of(context, rootNavigator: true).pop();
+    });
+    return showDialog<void>(
+      barrierColor: Colors.lightGreen.withOpacity(0.02),
+      context: context,
+      barrierDismissible: true, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          elevation: 2,
+          backgroundColor: Colors.lightBlueAccent.withOpacity(0.80),
+          title: Column(children: [
+            Text(
+              text,
+              style: TextStyle(fontSize: pageHeight / 40, color: textColor),
+            ),
+            Icon(
+              icon,
+              color: iconColor,
+              size: pageHeight / 15,
+            ),
+          ]),
+        );
+      },
+    ).then((value) {
+      timer?.cancel();
+      timer = null;
+    });
   }
 }
