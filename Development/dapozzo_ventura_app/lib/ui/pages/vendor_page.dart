@@ -54,10 +54,10 @@ class _VendorPageState extends State<VendorPage> {
       drawer: EquipNavigatorMenu(
         navigationTiles: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
+            padding: EdgeInsets.fromLTRB(0, pageHeight / 80, 0, 0),
             child: FlatButton(
                 child: Container(
-                  height: 40,
+                  height: pageHeight / 20,
                   decoration: BoxDecoration(
                       color: Colors.white,
                       shape: BoxShape.rectangle,
@@ -74,7 +74,7 @@ class _VendorPageState extends State<VendorPage> {
                     child: Text(
                       "Torna a eQuip",
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: pageHeight / 40,
                         fontWeight: FontWeight.w300,
                       ),
                     ),
@@ -86,10 +86,10 @@ class _VendorPageState extends State<VendorPage> {
                 }),
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+            padding: EdgeInsets.fromLTRB(0, pageHeight / 80, 0, 0),
             child: FlatButton(
                 child: Container(
-                  height: 40,
+                  height: pageHeight / 20,
                   decoration: BoxDecoration(
                       color: Colors.white,
                       shape: BoxShape.rectangle,
@@ -106,7 +106,7 @@ class _VendorPageState extends State<VendorPage> {
                     child: Text(
                       "Vai al tuo profilo",
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: pageHeight / 40,
                         fontWeight: FontWeight.w300,
                       ),
                     ),
@@ -114,14 +114,14 @@ class _VendorPageState extends State<VendorPage> {
                 ),
                 onPressed: () {
                   Navigator.pop(context);
-                  Navigator.pushNamed(context, "/profile");
+                  Navigator.pushNamed(context, "/profile",arguments: "Mario Rossi");
                 }),
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+            padding: EdgeInsets.fromLTRB(0, pageHeight / 80, 0, 0),
             child: FlatButton(
                 child: Container(
-                  height: 40,
+                  height: pageHeight / 20,
                   decoration: BoxDecoration(
                       color: Colors.white,
                       shape: BoxShape.rectangle,
@@ -138,7 +138,7 @@ class _VendorPageState extends State<VendorPage> {
                     child: Text(
                       "Vai al profilo Shop",
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: pageHeight / 40,
                         fontWeight: FontWeight.w300,
                       ),
                     ),
@@ -147,7 +147,7 @@ class _VendorPageState extends State<VendorPage> {
                 onPressed: () {
                   Navigator.pop(context);
                   Navigator.pushNamed(context, "/vendor_profile",
-                      arguments: widget.vendor);
+                      arguments: widget.vendor.name);
                 }),
           )
         ],

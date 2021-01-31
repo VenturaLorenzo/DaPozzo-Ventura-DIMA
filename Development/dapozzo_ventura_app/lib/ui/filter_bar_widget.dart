@@ -33,14 +33,15 @@ class _FilterBarState extends State<FilterBar> {
     _textController = TextEditingController();
     isSelectedCat = List.generate(widget.categories.length, (index) => false);
     isSelectedSport = List.generate(widget.sports.length, (index) => false);
-    maxHeight = widget.maxHeight;
-    maxselectionFiltersHeight = maxHeight * 3 / 8;
-    maxTextFieldHeight = maxHeight / 4;
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    maxHeight = widget.maxHeight;
+    maxselectionFiltersHeight = maxHeight * 3 / 8;
+    maxTextFieldHeight = maxHeight / 4;
     return FlexibleSpaceBar(
       background: Container(
         height: maxHeight,
@@ -76,7 +77,7 @@ class _FilterBarState extends State<FilterBar> {
                         children: widget.sports.map((sport) {
                           return Icon(
                             Icons.favorite,
-                            size: maxselectionFiltersHeight * 3 / 4,
+                           size: maxselectionFiltersHeight * 3 / 4,
                           );
                         }).toList(),
                         onPressed: (int index) {
@@ -142,7 +143,7 @@ class _FilterBarState extends State<FilterBar> {
                 ],
               ),
             ),
-            Container( decoration: BoxDecoration(
+            Container( decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(30)),
                 border: Border.all(color: Colors.black54)
             ),
               height: maxTextFieldHeight,

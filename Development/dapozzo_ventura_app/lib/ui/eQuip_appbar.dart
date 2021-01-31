@@ -51,8 +51,7 @@ class EquipAppBar extends StatelessWidget implements PreferredSize {
                   color: Colors.white),
             ),
             Container(
-              decoration:
-                  BoxDecoration(border: Border.all(color: Colors.blueAccent)),
+
               height: MediaQuery.of(context).size.height / 11,
               child: FittedBox(
                 fit: BoxFit.fill,

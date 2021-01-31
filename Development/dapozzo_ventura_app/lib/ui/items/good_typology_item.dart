@@ -19,9 +19,9 @@ final itemHeight;
             boxShadow: [
               BoxShadow(
                 color: Colors.grey[300],
-                offset: Offset(4.0, 4.0),
+                offset: Offset(8.0, 8.0),
                 blurRadius: 5.0,
-                spreadRadius: 1,
+                spreadRadius: 2,
               ),
             ]),
         child: FlatButton(

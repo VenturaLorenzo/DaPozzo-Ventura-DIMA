@@ -36,9 +36,9 @@ class RouteGenerator {
       case '/cart':
         return MaterialPageRoute(builder: (context) => CartPage());
       case '/vendor_profile':
-        return MaterialPageRoute(builder: (context) => VendorProfilePage());
+        return MaterialPageRoute(builder: (context) => VendorProfilePage(vendorName: settings.arguments,));
       case '/profile':
-        return MaterialPageRoute(builder: (context) => MyProfile());
+        return MaterialPageRoute(builder: (context) => ProfilePage(userName: settings.arguments,));
       case '/settings':
         return MaterialPageRoute(builder: (context) => SettingsPage());
     }

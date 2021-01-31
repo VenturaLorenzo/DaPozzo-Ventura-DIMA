@@ -1,131 +1,151 @@
 import 'package:dapozzo_ventura_app/business_logic/cubit/cart_cubit.dart';
+import 'package:dapozzo_ventura_app/business_logic/cubit/good_window_cubit.dart';
 import 'package:dapozzo_ventura_app/data/models/good_model.dart';
+import 'package:dapozzo_ventura_app/ui/pages/good_window_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CartItem extends StatelessWidget {
+  final height;
   final GoodModel cartGood;
 
-  const CartItem({Key key, this.cartGood}) : super(key: key);
+  const CartItem({Key key, this.cartGood, this.height}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
-      child: Container(
-        height: 100,
-        decoration: BoxDecoration(
-            color: Colors.white,
-            shape: BoxShape.rectangle,
-            borderRadius: BorderRadius.circular(15),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey[300],
-                offset: Offset(4.0, 4.0),
-                blurRadius: 5.0,
-                spreadRadius: 1,
-              ),
-            ]),
-        child: FlatButton(
-          onPressed: () {
-            // print(goodsTypology);
-            // Navigator.pushNamed(context, "/goodtypology",
-            //     arguments: goodsTypology);
-          },
-          child: Row(children: [
-            SizedBox(
-                height: 100,
-                width: 120,
-                child: Padding(
-                    padding: EdgeInsets.fromLTRB(5, 2.5, 5, 2.5),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(2.5),
-                      child: Image.network(
-                        'https://www.laccademiabjj.it/images/Shop/' +
-                            cartGood.images[0].image,
-                        fit: BoxFit.cover,
-                      ),
-                    ))),
-            Expanded(
-              child: SizedBox(
-                  height: 100,
-                  child: Padding(
-                      padding: EdgeInsets.fromLTRB(2.5, 2.5, 2.5, 2.5),
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Center(
-                              child: SizedBox(
+      padding:  EdgeInsets.all(height/24),
+      child: Container(decoration: BoxDecoration(
+          color: Colors.white,
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.circular(15),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey[300],
+              offset: Offset(8.0, 8.0),
+              blurRadius: 5.0,
+              spreadRadius: 2,
+            ),
+          ]),
+        height: height,
+        child: Padding(
+          padding: EdgeInsets.all(height / 24),
+          child: FlatButton(
+            onPressed: () {
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => GoodWindowPage(goodTypology: cartGood.type)
+                  ),
+                  ModalRoute.withName("goodtypology")
+              );
+            //  Navigator.of(context).popUntil(ModalRoute.withName('/root'));
+              //Navigator.of(context)
+               //   .pushNamedAndRemoveUntil('/goodtypology', (Route<dynamic> route) => false,arguments: cartGood.type);
+            // BlocProvider.of<GoodWindwCubit>(context).filterChange(cartGood.type,   cartGood.color);
+
+            },
+            child: Row(children: [
+              SizedBox(
+                  height: height * 11 / 12,
+                  width: height,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(2.5),
+                    child: Image.network(
+                      'https://www.laccademiabjj.it/images/Shop/' +
+                          cartGood.images[0].image,
+                      fit: BoxFit.cover,
+                    ),
+                  )),
+              Expanded(
+                child: SizedBox(
+                    height: height * 11 / 12,
+                    child: Padding(
+                        padding: EdgeInsets.all(height / 24),
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Center(
+                                child: SizedBox(
+                                    height: height / 4,
+                                    child: Text(
+                                      cartGood.vendorName.name.toString(),
+                                      style: TextStyle(
+                                        fontSize: height / 6,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    )),
+                              ),
+                              Center(
+                                child: SizedBox(
+                                  height: height* 5 / 24,
                                   child: Text(
-                                cartGood.vendorName.name.toString(),
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              )),
-                            ),
-                            Center(
-                              child: SizedBox(
-                                child: Text(
-                                  cartGood.type.name,
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w300,
+                                    cartGood.type.name,
+                                    style: TextStyle(
+                                      fontSize: height * 5 / 48,
+                                   fontWeight: FontWeight.w300,
+                                    color: Colors.black,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Container(
-                                    child: Column(children: [
-                                      Text("Q.ty"),
-                                      Text(cartGood.getQuantity().toString())
+                              Container(
+                                height: height * 9 / 24,
+                                child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Container(height: height*8/24,
+                                        child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,children: [
+                                          Text("Q.ty",style: TextStyle(fontSize: height*6/48),),
+                                          Text(cartGood.getQuantity().toString(),style: TextStyle(fontSize: height*3/24),)
+                                        ]),
+                                      ),
+                                      Container(height: height*8/24,
+                                        child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,children: [
+                                          Text("Size",style: TextStyle(fontSize: height*6/48),),
+                                          Text(cartGood.size,style: TextStyle(fontSize: height*3/24),)
+                                        ]),
+                                      ),
                                     ]),
-                                  ),
-                                  Container(
-                                    child: Column(children: [
-                                      Text("Size"),
-                                      Text(cartGood.size)
-                                    ]),
-                                  ),
-                                ]),
-                          ]))),
-            ),
-            SizedBox(
-              height: 100,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  SizedBox(
-                    height: 40,
-                    child: Center(
-                        child: Text(
-                      cartGood.type.price.toString() + '€',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          color: Colors.green,
-                          fontSize: 20),
-                    )),
-                  ),
-                  InkWell(
-                    child: SizedBox(
-                        child: Icon(
-                      Icons.delete,
-                      color: Colors.red[400],
-                      size: 30,
-                    )),
-                    onTap: () {
-                      BlocProvider.of<CartCubit>(context).removeGood(cartGood);
-                    },
-                  )
-                ],
+                              ),
+                            ]))),
               ),
-            ),
-          ]),
+              SizedBox(
+                height: height,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    SizedBox(
+                      height: height*7/24,
+                      child: Center(
+                          child: Text(
+                        cartGood.type.price.toString() + '€',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            color: Colors.green,
+                            fontSize: height*7/48),
+                      )),
+                    ),
+                    InkWell(
+                      child: SizedBox(height: height*8/24 ,
+                          child: FittedBox(fit: BoxFit.fill,
+                            child: Icon(
+                        Icons.delete,
+                        color: Colors.red[400],
+                      ),
+                          )),
+                      onTap: () {
+                        BlocProvider.of<CartCubit>(context).removeGood(cartGood);
+                      },
+                    )
+                  ],
+                ),
+              ),
+            ]),
+          ),
         ),
       ),
     );
