@@ -19,6 +19,7 @@ class DatabaseHelper {
   static final tableColor = "Color";
   static final tableSize = "Size";
   static final tableGoodImage = "GoodImage";
+  static final tableUser = "User";
 
   static final columnId = 'id';
   static final columnName = 'name';
@@ -40,6 +41,10 @@ class DatabaseHelper {
   static final columnColorId = 'colorId';
   static final columnSizeId = 'sizeId';
   static final columnTypologyId = 'typologyId';
+  static final columnEmail = 'Email';
+  static final columnSurname = 'Surname';
+  static final columnPhone = 'PhoneNumber';
+  static final columnPassword = 'Password';
 
   // make this a singleton class
   DatabaseHelper._privateConstructor();
@@ -58,7 +63,7 @@ class DatabaseHelper {
 
   _initDatabase() async {
     WidgetsFlutterBinding.ensureInitialized();
-   // deleteDatabase("GoodsDatabase.db");
+    // deleteDatabase("GoodsDatabase.db");
 
     String path = join(await getDatabasesPath(), _databaseName);
     return await openDatabase(path,
@@ -175,6 +180,20 @@ class DatabaseHelper {
             PRIMARY KEY ($columnId)      
           )''');
     print("Creazione tabella $tableGoodImage TERMINATA");
+
+    // SQL code to create the database table USER
+    print("Creazione tabella $tableUser");
+    await db.execute(''' CREATE TABLE $tableUser (   
+            $columnId INTEGER NOT NULL,
+            $columnEmail STRING NOT NULL,              
+            $columnName STRING NOT NULL,
+            $columnSurname STRING NOT NULL,
+            $columnPhone INTEGER NOT NULL,
+            $columnImage TEXT NOT NULL,
+            $columnPassword STRING NOT NULL,
+            PRIMARY KEY ($columnId)      
+          )''');
+    print("Creazione tabella $tableUser TERMINATA");
 
     /*++++++++++++++++++++++++++++++++++    INSERIMENTO DATI IN TABELLE    +++++++++++++++++++++++++++++++++++++++++*/
 
