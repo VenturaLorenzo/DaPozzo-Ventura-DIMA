@@ -36,7 +36,7 @@ class GoodWindwCubit extends Cubit<GoodWindowState> {
     var goodImages =
         await GoodImageRepository.getImages(goodTypology, selectedColor);
     sizes = await SizeRepository.getAvailableSizes(goodTypology, selectedColor);
-//    await Future.delayed(Duration(milliseconds:  500));
+  await Future.delayed(Duration(milliseconds:  500));
 
     if (goodImages.isNotEmpty) {
       if(sizes.isEmpty){sizes.add(SizeModel(name: "none",id: 6));}

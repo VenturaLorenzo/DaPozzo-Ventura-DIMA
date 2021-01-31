@@ -6,8 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CartIcon extends StatelessWidget {
-
-
   @override
   Widget build(BuildContext context) {
     return Stack(children: [
@@ -24,10 +22,10 @@ class CartIcon extends StatelessWidget {
         if (state is CartCurrentState) {
           return Badge(
             toAnimate: false,
-            shape: BadgeShape.square,
+            shape: BadgeShape.circle,
             animationType: BadgeAnimationType.scale,
             badgeColor: Colors.red,
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(12),
             badgeContent: Text(state.cart.getProducts().length.toString(),
                 style: TextStyle(color: Colors.white)),
           );
@@ -36,6 +34,5 @@ class CartIcon extends StatelessWidget {
         }
       }),
     ]);
-
   }
 }

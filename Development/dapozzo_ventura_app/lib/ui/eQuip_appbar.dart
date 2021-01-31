@@ -6,48 +6,66 @@ import 'cart_icon.dart';
 
 class EquipAppBar extends StatelessWidget implements PreferredSize {
   final String title;
+  final bool withMenu;
 
-  const EquipAppBar({Key key, @required this.title}) : super(key: key);
+  const EquipAppBar({Key key, @required this.title, @required this.withMenu})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(leading: new Container(),
-      flexibleSpace: Padding(
-        padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
-        child: Container(
-
-          height: MediaQuery.of(context).size.height/10,
-          width: MediaQuery.of(context).size.width,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [Builder(builder: (BuildContext context) {
-              return Container(height: MediaQuery.of(context).size.height/11 ,
+    return AppBar(
+      leading: new Container(),
+      flexibleSpace: Container(
+        height: MediaQuery.of(context).size.height / 10,
+        width: MediaQuery.of(context).size.width,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Builder(builder: (BuildContext context) {
+              return Container(
+                height: MediaQuery.of(context).size.height / 11,
                 child: FittedBox(
-                  child: IconButton(
-                      onPressed: () {
-                        Scaffold.of(context).openDrawer();
-                      },
-                      icon: Icon(
-                        Icons.menu,
-                        color: Colors.white,
-
-                      )),
+                  child: (withMenu)
+                      ? IconButton(
+                          onPressed: () {
+                            Scaffold.of(context).openDrawer();
+                          },
+                          icon: Icon(
+                            Icons.menu,
+                            color: Colors.white,
+                          ))
+                      : IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon: Icon(Icons.arrow_back),
+                          color: Colors.white,
+                        ),
                 ),
               );
-            }),Text( title,style: TextStyle(fontSize: MediaQuery.of(context).size.height/20,color: Colors.white),),
-              Container(height: MediaQuery.of(context).size.height/11  ,
-                child: FittedBox(fit: BoxFit.fill,
-                  child: CartIcon(
-                  ),
-                ),
-              ),],
-          ),
+            }),
+            Text(
+              title,
+              style: TextStyle(
+                  fontSize: MediaQuery.of(context).size.height / 20,
+                  color: Colors.white),
+            ),
+            Container(
+              decoration:
+                  BoxDecoration(border: Border.all(color: Colors.blueAccent)),
+              height: MediaQuery.of(context).size.height / 11,
+              child: FittedBox(
+                fit: BoxFit.fill,
+                child: CartIcon(),
+              ),
+            ),
+          ],
         ),
       ),
       backgroundColor: Colors.black87,
       //centerTitle: true,
 
-     // title: Text(title),
+      // title: Text(title),
     );
   }
 

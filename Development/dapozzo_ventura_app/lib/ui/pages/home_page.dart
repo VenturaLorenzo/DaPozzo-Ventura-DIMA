@@ -25,7 +25,7 @@ class _HomeState extends State<Home> {
   MarketPlaceCubit _marketPlaceCubit;
   List<CategoryModel> categories;
   List<SportModel> sports;
-double filterBarHeight= 0;
+  double filterBarHeight = 0;
 
   @override
   void initState() {
@@ -40,10 +40,11 @@ double filterBarHeight= 0;
 
   @override
   Widget build(BuildContext context) {
-    filterBarHeight=MediaQuery.of(context).size.height / 3;
+    filterBarHeight = MediaQuery.of(context).size.height / 3;
 
     return Scaffold(
       appBar: EquipAppBar(
+        withMenu: true,
         title: "eQuip",
       ),
       drawer: EquipNavigatorMenu(navigationTiles: [
@@ -52,7 +53,8 @@ double filterBarHeight= 0;
           children: [],
         )
       ]),
-      body: Container(color: Colors.white38,
+      body: Container(
+        color: Colors.white38,
         child: CustomScrollView(
           slivers: [
             SliverAppBar(
@@ -62,8 +64,8 @@ double filterBarHeight= 0;
               expandedHeight: filterBarHeight,
               pinned: false,
               flexibleSpace: FilterBar(
-                maxHeight:filterBarHeight,
-                marketPlaceCubit:  _marketPlaceCubit,
+                maxHeight: filterBarHeight,
+                marketPlaceCubit: _marketPlaceCubit,
                 categories: categories,
                 sports: sports,
               ),
@@ -71,7 +73,8 @@ double filterBarHeight= 0;
             BlocBuilder<MarketPlaceCubit, MarketPlaceState>(
                 builder: (context, state) {
               List<Vendor> vendors;
-              if (state is MarketPlaceLoadingState || state is MarketPlaceInitial) {
+              if (state is MarketPlaceLoadingState ||
+                  state is MarketPlaceInitial) {
                 return SliverFillRemaining(
                   child: Center(
                     child: CircularProgressIndicator(
@@ -79,8 +82,7 @@ double filterBarHeight= 0;
                     ),
                   ),
                 );
-              }
-              else {
+              } else {
                 if (state is MarketPlaceSearched) {
                   vendors = state.result;
                   return VendorList(vendors, state.categories);

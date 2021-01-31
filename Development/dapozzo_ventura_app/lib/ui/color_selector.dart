@@ -1,4 +1,5 @@
 import 'package:dapozzo_ventura_app/business_logic/cubit/good_window_cubit.dart';
+import 'package:dapozzo_ventura_app/business_logic/cubit/quantity_cubit.dart';
 import 'package:dapozzo_ventura_app/business_logic/cubit/size_cubit.dart';
 import 'package:dapozzo_ventura_app/data/models/color_model.dart';
 import 'package:dapozzo_ventura_app/data/models/good_typology_model.dart';
@@ -25,15 +26,11 @@ class ColorSelector extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.all(5),
             child: GestureDetector(
-              onTap: () {if(colorModel !=current) {
-                BlocProvider.of<SizeCubit>(context).reset();
-                BlocProvider.of<GoodWindwCubit>(context)
-                    .filterChange(goodTypology, colorModel);
-              }
+              onTap: () {
               },
               child: Container(
-                width: MediaQuery.of(context).size.height/30,
-                height: MediaQuery.of(context).size.height/30,
+                width: MediaQuery.of(context).size.height/20,
+                height: MediaQuery.of(context).size.height/20,
                 decoration: new BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   color: new Color(
@@ -48,14 +45,15 @@ class ColorSelector extends StatelessWidget {
             padding: const EdgeInsets.all(5),
             child: GestureDetector(
               onTap: () {
+                BlocProvider.of<SizeCubit>(context).reset();
+                BlocProvider.of<QuantityCubit>(context).setQuantity(1);
+
                 BlocProvider.of<GoodWindwCubit>(context)
                     .filterChange(goodTypology, colorModel);
-               // BlocProvider.of<SizeCubit>(context)
-                //    .filterChange(goodTypology, colorModel);
               },
               child: Container(
-                width: 30.0,
-                height: 30.0,
+                width: MediaQuery.of(context).size.height/25,
+                height: MediaQuery.of(context).size.height/25,
                 decoration: new BoxDecoration(
                   color: color,
                   borderRadius: BorderRadius.circular(5),

@@ -8,10 +8,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SizeSelector extends StatefulWidget {
   final List<SizeModel> sizes;
+  final double height;
 
   const SizeSelector({
     Key key,
     this.sizes,
+    this.height,
   }) : super(key: key);
 
   @override
@@ -21,6 +23,10 @@ class SizeSelector extends StatefulWidget {
 class _SizeSelectorState extends State<SizeSelector> {
   List<SizeModel> sizes;
   SizeCubit _sizeCubit;
+  double pageHeight;
+  double pageWidth;
+  double selectorWidth;
+  double selectorHeight;
 
   @override
   void initState() {
@@ -39,155 +45,103 @@ class _SizeSelectorState extends State<SizeSelector> {
 
   @override
   Widget build(BuildContext context) {
+    pageHeight = MediaQuery.of(context).size.height;
+    pageWidth = MediaQuery.of(context).size.width;
+    selectorHeight = widget.height * 7 / 9;
+    selectorWidth = pageWidth / 5;
     return BlocBuilder<SizeCubit, SizeState>(builder: (context, state) {
-      if (state is SizeStateUninitialized) {
-        return  Container(
-          decoration: BoxDecoration(
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey[300],
-                  offset: Offset(4.0, 4.0),
-                  blurRadius: 5.0,
-                  spreadRadius: 1,
+      if (state is SizeStateCurrent &&
+          getSizesNames(widget.sizes).contains(state.currentSize)) {
+        return Padding(
+          padding: EdgeInsets.all(widget.height / 9),
+          child: Container(
+            height: widget.height * 7 / 9,
+            decoration: BoxDecoration(
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey[300],
+                    offset: Offset(4.0, 4.0),
+                    blurRadius: 5.0,
+                    spreadRadius: 1,
+                  ),
+                ],
+                borderRadius: BorderRadius.circular(5)),
+            child: Padding(
+              padding: EdgeInsets.all(selectorHeight / 9),
+              child: Container(
+                height: selectorHeight * 7 / 9,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      height: selectorHeight * 7 / 27,
+                      child: Text(
+                        "Sizes",
+                        style: TextStyle(
+                            //  fontWeight: FontWeight.bold,
+                            fontSize: selectorHeight * 6 / 27),
+                      ),
+                    ),
+                    Container(
+                        height: selectorHeight * 14 / 27,
+                        width: selectorWidth,
+                        child: Center(
+                            child: DropDownSizeWidget(
+                                width: selectorWidth,
+                                height: selectorHeight * 14 / 27,
+                                sizes: getSizesNames(widget.sizes),
+                                dropdownValue: state.currentSize))),
+                  ],
                 ),
-              ],
-              borderRadius: BorderRadius.circular(5)),
-          child: Padding(
-            padding: const EdgeInsets.all(2.5),
-            child: Column(
-              children: [
-                Text("Sizes"),
-                SizedBox(
-                    height: 40,
-                    width: 80,
-                   ),
-              ],
+              ),
             ),
           ),
         );
       } else {
-        if (state is SizeStateCurrent) {
-          print(state.currentSize);
-          print(widget.sizes);
-          if (!getSizesNames(widget.sizes).contains(state.currentSize)) {
-            print("entro qui dio cane");
-            return  Container(
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey[300],
-                      offset: Offset(4.0, 4.0),
-                      blurRadius: 5.0,
-                      spreadRadius: 1,
-                    ),
-                  ],
-                  borderRadius: BorderRadius.circular(5)),
-              child: Padding(
-                padding: const EdgeInsets.all(2.5),
+        return Padding(
+          padding: EdgeInsets.all(widget.height / 9),
+          child: Container(
+            height: widget.height * 7 / 9,
+            decoration: BoxDecoration(
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey[300],
+                    offset: Offset(4.0, 4.0),
+                    blurRadius: 5.0,
+                    spreadRadius: 1,
+                  ),
+                ],
+                borderRadius: BorderRadius.circular(5)),
+            child: Padding(
+              padding: EdgeInsets.all(selectorHeight / 9),
+              child: Container(
+                height: selectorHeight * 7 / 9,
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Sizes"),
-                    SizedBox(
-                        height: 40,
-                        width: 80,
-                       ),
-                  ],
-                ),
-              ),
-            );
-          } else {
-            return Container(
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey[300],
-                      offset: Offset(4.0, 4.0),
-                      blurRadius: 5.0,
-                      spreadRadius: 1,
-                    ),
-                  ],
-                  borderRadius: BorderRadius.circular(5)),
-              child: Padding(
-                padding: const EdgeInsets.all(2.5),
-                child: Column(
-                  children: [
-                    Text("Sizes"),
                     Container(
-                        height: 40,
-                        width: 80,
-                        child: Center(
-                            child: DropDownSizeWidget(
-                                sizes: getSizesNames(widget.sizes),
-                                dropdownValue: widget.sizes[0].name))),
+                      height: selectorHeight * 7 / 27,
+                      child: Text(
+                        "Sizes",
+                        style: TextStyle(
+                            //  fontWeight: FontWeight.bold,
+                            fontSize: selectorHeight * 6 / 27),
+                      ),
+                    ),
+                    SizedBox(
+                      height: selectorHeight * 14 / 27,
+                      width: selectorWidth,
+                    )
                   ],
                 ),
               ),
-            );
-          }
-        } else {
-          return Text("ERRORE");
-        }
+            ),
+          ),
+        );
       }
     });
-  }
-
-  Container dropDownBox(bool loaded) {
-    if (loaded) {
-      Container(
-        decoration: BoxDecoration(
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey[300],
-                offset: Offset(4.0, 4.0),
-                blurRadius: 5.0,
-                spreadRadius: 1,
-              ),
-            ],
-            borderRadius: BorderRadius.circular(5)),
-        child: Padding(
-          padding: const EdgeInsets.all(2.5),
-          child: Column(
-            children: [
-              Text("Sizes"),
-              Container(
-                  height: 40,
-                  width: 80,
-                  child: Center(
-                      child: DropDownSizeWidget(
-                          sizes: getSizesNames(widget.sizes),
-                          dropdownValue: widget.sizes[0].name))),
-            ],
-          ),
-        ),
-      );
-    } else {
-      Container(
-        decoration: BoxDecoration(
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey[300],
-                offset: Offset(4.0, 4.0),
-                blurRadius: 5.0,
-                spreadRadius: 1,
-              ),
-            ],
-            borderRadius: BorderRadius.circular(5)),
-        child: Padding(
-          padding: const EdgeInsets.all(2.5),
-          child: Column(
-            children: [
-              Text("Sizes"),
-
-            ],
-          ),
-        ),
-      );
-    }
   }
 }
 //++++++++++++++++++++++++  DropDown Size   ++++++++++++++++++++++++
@@ -195,20 +149,22 @@ class _SizeSelectorState extends State<SizeSelector> {
 class DropDownSizeWidget extends StatelessWidget {
   final List<String> sizes;
   final String dropdownValue;
+  final double width;
+  final double height;
 
-  DropDownSizeWidget({this.dropdownValue, this.sizes});
+  DropDownSizeWidget({this.height, this.width, this.dropdownValue, this.sizes});
 
   @override
   Widget build(BuildContext context) {
     return DropdownButton<String>(
       value: dropdownValue,
       icon: Icon(Icons.arrow_drop_down),
-      iconSize: 24,
+      iconSize: height / 2,
       elevation: 16,
       disabledHint: Text('none'),
       style: TextStyle(color: Colors.black54),
       underline: Container(
-        height: 1,
+        height: height / 20,
         color: Colors.black26,
       ),
       onChanged: (String newValue) {
@@ -217,7 +173,10 @@ class DropDownSizeWidget extends StatelessWidget {
       items: sizes.map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
-          child: Text(value),
+          child: Text(
+            value,
+            style: TextStyle(fontSize: height / 2),
+          ),
         );
       }).toList(),
     );
