@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:dapozzo_ventura_app/global.dart';
 
 class UserProfileIcon extends StatelessWidget {
   @override
@@ -34,14 +35,16 @@ class UserProfileIcon extends StatelessWidget {
               style: TextStyle(color: Colors.blue[200]),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(5),
+          TextButton(
             child: Text(
-              "LOGOUT",
+              "LOGIN",
               style: TextStyle(
-                  color: Colors.blue[200],
+                  color: Colors.blue[400],
                   decoration: TextDecoration.underline),
             ),
+            onPressed: () {
+              Navigator.pushNamed(context, "/login");
+            },
           ),
         ],
       ),

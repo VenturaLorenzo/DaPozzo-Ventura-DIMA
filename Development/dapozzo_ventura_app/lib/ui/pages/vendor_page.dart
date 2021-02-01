@@ -152,141 +152,127 @@ class _VendorPageState extends State<VendorPage> {
           )
         ],
       ),
-      body: Padding(
-        padding: EdgeInsets.all(0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: ToggleButtons(
-                color: Color.fromARGB(200, 0, 0, 0),
-                selectedColor: Color.fromARGB(100, 0, 0, 0),
-                selectedBorderColor: Color.fromARGB(0, 0, 0, 0),
-                borderColor: Color.fromARGB(0, 0, 0, 0),
-                fillColor: Color.fromARGB(0, 0, 0, 0),
-                children: categories.map((category) {
-                  return Icon(Icons.ac_unit, size: pageHeight / 12);
-                }).toList(),
-                onPressed: (int index) {
-                  //CAMBIO L?ICONA VISIVAMENTE
-                  setState(() {
-                    isSelectedCategory[index] = !isSelectedCategory[index];
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: ToggleButtons(
+              color: Color.fromARGB(200, 0, 0, 0),
+              selectedColor: Color.fromARGB(100, 0, 0, 0),
+              selectedBorderColor: Color.fromARGB(0, 0, 0, 0),
+              borderColor: Color.fromARGB(0, 0, 0, 0),
+              fillColor: Color.fromARGB(0, 0, 0, 0),
+              children: categories.map((category) {
+                return Icon(Icons.ac_unit, size: pageHeight / 12);
+              }).toList(),
+              onPressed: (int index) {
+                //CAMBIO L?ICONA VISIVAMENTE
+                setState(() {
+                  isSelectedCategory[index] = !isSelectedCategory[index];
 
-                    //MANDO L'EVENTO
-                    BlocProvider.of<VendorCubit>(context).search(
-                        getSelectedCategories(),
-                        getSelectedGender(),
-                        widget.vendor.id);
-                  });
-                },
-                isSelected: isSelectedCategory,
-              ),
-            ),
-            Container(
-              height: genderSelectionRowHeight,
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text('Scroll our Item List',
-                            style: TextStyle(
-                              fontSize: genderSelectionRowHeight / 3,
-                              fontWeight: FontWeight.w300,
-                            ))),
-                    Padding(
-                        padding: EdgeInsets.all(8),
-                        child: Container(
-                            height: genderSelectionRowHeight / 2,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                shape: BoxShape.rectangle,
-                                borderRadius: BorderRadius.circular(10),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey[300],
-                                    offset: Offset(4.0, 4.0),
-                                    blurRadius: 5.0,
-                                    spreadRadius: 1,
-                                  ),
-                                ]),
-                            child: Row(children: [
-                              ToggleButtons(
-                                  children: [
-                                    Padding(
-                                        padding: const EdgeInsets.all(5),
-                                        child: Text("Uomo",
-                                            style: TextStyle(
-                                              fontSize:
-                                                  genderSelectionRowHeight / 3,
-                                              fontWeight: FontWeight.w300,
-                                            )))
-                                  ],
-                                  borderColor: Colors.grey[200],
-                                  fillColor: Color.fromRGBO(33, 150, 243, 1),
-                                  selectedBorderColor:
-                                      Color.fromRGBO(33, 150, 243, 1),
-                                  selectedColor: Colors.white,
-                                  onPressed: (int index) {
-                                    setState(() {
-                                      swapGender(0);
-                                    });
-                                  },
-                                  isSelected: [isSelectedGender[0]]),
-                              ToggleButtons(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(5),
-                                      child: Text("Donna",
-                                          style: TextStyle(
-                                            fontSize:
-                                                genderSelectionRowHeight / 3,
-                                            fontWeight: FontWeight.w300,
-                                          )),
-                                    )
-                                  ],
-                                  borderColor: Colors.grey[200],
-                                  fillColor: Color.fromRGBO(255, 45, 85, 1),
-                                  selectedBorderColor:
-                                      Color.fromRGBO(255, 45, 85, 1),
-                                  selectedColor: Colors.white,
-                                  onPressed: (int index) {
-                                    setState(() {
-                                      swapGender(1);
-                                    });
-                                  },
-                                  isSelected: [isSelectedGender[1]])
-                            ])))
-                  ]),
-            ),
-            BlocBuilder<VendorCubit, VendorState>(
-              builder: (context, state) {
-                if (state is VendorStateGeneralError) {
-                  return Column();
-                }
-
-                if (state is VendorStateSearched) {
-                  return GoodTypologyList(
-                    goodsTypologies: state.goodTypologies,
-                  );
-                }
-
-                if (state is VendorStateLoading ||
-                    state is VendorStateInitial) {
-                  return Center(
-                    child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(Colors.black54),
-                    ),
-                  );
-                }
-
-                return Center(
-                    child: Text('Seleziona una categoria per iniziare'));
+                  //MANDO L'EVENTO
+                  BlocProvider.of<VendorCubit>(context).search(
+                      getSelectedCategories(),
+                      getSelectedGender(),
+                      widget.vendor.id);
+                });
               },
-            )
-          ],
-        ),
+              isSelected: isSelectedCategory,
+            ),
+          ),
+          Container(
+            height: genderSelectionRowHeight,
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                      padding: EdgeInsets.all(10),
+                      child: Text('Scroll our Item List',
+                          style: TextStyle(
+                            fontSize: genderSelectionRowHeight / 3,
+                            fontWeight: FontWeight.w300,
+                          ))),
+                  Container(
+                      height: genderSelectionRowHeight / 1.5,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey[300],
+                              offset: Offset(4.0, 4.0),
+                              blurRadius: 5.0,
+                              spreadRadius: 1,
+                            ),
+                          ]),
+                      child: Row(children: [
+                        ToggleButtons(
+                            children: [
+                              Text("Uomo",
+                                  style: TextStyle(
+                                    fontSize: genderSelectionRowHeight / 3,
+                                    fontWeight: FontWeight.w300,
+                                  ))
+                            ],
+                            borderColor: Color.fromARGB(0, 0, 0, 0),
+                            fillColor: Color.fromRGBO(33, 150, 243, 1),
+                            selectedBorderColor:
+                                Color.fromRGBO(33, 150, 243, 1),
+                            selectedColor: Colors.white,
+                            onPressed: (int index) {
+                              setState(() {
+                                swapGender(0);
+                              });
+                            },
+                            isSelected: [isSelectedGender[0]]),
+                        ToggleButtons(
+                            children: [
+                              Text("Donna",
+                                  style: TextStyle(
+                                    fontSize: genderSelectionRowHeight / 3,
+                                    fontWeight: FontWeight.w300,
+                                  ))
+                            ],
+                            borderColor: Color.fromARGB(0, 0, 0, 0),
+                            fillColor: Color.fromRGBO(255, 45, 85, 1),
+                            selectedBorderColor: Color.fromRGBO(255, 45, 85, 1),
+                            selectedColor: Colors.white,
+                            onPressed: (int index) {
+                              setState(() {
+                                swapGender(1);
+                              });
+                            },
+                            isSelected: [isSelectedGender[1]])
+                      ]))
+                ]),
+          ),
+          BlocBuilder<VendorCubit, VendorState>(
+            builder: (context, state) {
+              if (state is VendorStateGeneralError) {
+                return Column();
+              }
+
+              if (state is VendorStateSearched) {
+                return GoodTypologyList(
+                  goodsTypologies: state.goodTypologies,
+                );
+              }
+
+              if (state is VendorStateLoading || state is VendorStateInitial) {
+                return Center(
+                  child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.black54),
+                  ),
+                );
+              }
+
+              return Center(
+                  child: Text('Seleziona una categoria per iniziare'));
+            },
+          )
+        ],
       ),
     );
   }

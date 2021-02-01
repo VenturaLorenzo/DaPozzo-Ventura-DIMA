@@ -243,8 +243,8 @@ class _GoodWindowPageState extends State<GoodWindowPage> {
                                         Icons.check,
                                         Colors.green[900]);
                                   } else {
-                                    _showPopup("Not Available", Colors.red[900],
-                                        Icons.close, Colors.red[900]);
+                                    _showPopup("Not Available", Colors.red[700],
+                                        Icons.close, Colors.red[700]);
                                   }
                                 } else {
                                   throw ("QUANTITY NOT SETTED");
@@ -301,7 +301,7 @@ class _GoodWindowPageState extends State<GoodWindowPage> {
             Icon(
               icon,
               color: iconColor,
-              size: pageHeight / 15,
+              size: pageHeight / 10,
             ),
           ]),
         );

@@ -55,16 +55,21 @@ class _FilterBarState extends State<FilterBar> {
                 children: [
                   Container(
                     height: maxselectionFiltersHeight / 4,
-                    child: Padding(padding: const EdgeInsets.fromLTRB(10, 0, 0, 0) ,
-                      child: FittedBox(fit: BoxFit.fill,
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                      child: FittedBox(
+                        fit: BoxFit.fill,
                         child: Text(
                           "Sports",
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              color: Colors.black54,
+                              fontWeight: FontWeight.w400),
                         ),
                       ),
                     ),
                   ),
-                  Container(height:maxselectionFiltersHeight*3 / 4 ,
+                  Container(
+                    height: maxselectionFiltersHeight * 3 / 4,
                     child: SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: ToggleButtons(
@@ -94,7 +99,6 @@ class _FilterBarState extends State<FilterBar> {
               ),
             ),
             Container(
-
               height: maxselectionFiltersHeight,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,15 +107,19 @@ class _FilterBarState extends State<FilterBar> {
                     height: maxselectionFiltersHeight / 4,
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                      child: FittedBox(fit: BoxFit.fill ,
+                      child: FittedBox(
+                        fit: BoxFit.fill,
                         child: Text(
                           "Categories",
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              color: Colors.black54,
+                              fontWeight: FontWeight.w400),
                         ),
                       ),
                     ),
                   ),
-                  Container(height: maxselectionFiltersHeight *3/ 4,
+                  Container(
+                    height: maxselectionFiltersHeight * 3 / 4,
                     child: SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: ToggleButtons(
@@ -124,7 +132,7 @@ class _FilterBarState extends State<FilterBar> {
                           return Icon(
                             //cat.icon,
                             Icons.ac_unit,
-                            size: maxselectionFiltersHeight * 3/4,
+                            size: maxselectionFiltersHeight * 3 / 4,
                           );
                         }).toList(),
                         onPressed: (int index) {
@@ -142,11 +150,31 @@ class _FilterBarState extends State<FilterBar> {
                 ],
               ),
             ),
-            Container( decoration: BoxDecoration(
-                border: Border.all(color: Colors.black54)
-            ),
-              height: maxTextFieldHeight,
+            Container(
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  shape: BoxShape.rectangle,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey[300],
+                      offset: Offset(4.0, 4.0),
+                      blurRadius: 5.0,
+                      spreadRadius: 1,
+                    ),
+                  ]),
               child: TextField(
+                decoration: InputDecoration(
+                  hintText: "Ricerca il Negozio che vuoi",
+                  labelText: "Shops",
+                  labelStyle: TextStyle(
+                    fontSize: maxTextFieldHeight / 3,
+                    fontWeight: FontWeight.w400,
+                    letterSpacing: 1,
+                    color: Colors.black54,
+                  ),
+                  border: InputBorder.none,
+                  contentPadding: EdgeInsets.all(maxTextFieldHeight / 6),
+                ),
                 controller: _textController,
                 onSubmitted: (typedText) {
                   if (previousText != typedText) {
@@ -154,16 +182,6 @@ class _FilterBarState extends State<FilterBar> {
                     widget.marketPlaceCubit.searchText(typedText);
                   }
                 },
-                style: TextStyle(fontSize: maxTextFieldHeight/3,
-                  color: Colors.black87,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 1,
-                ),
-                decoration: InputDecoration(
-                isDense: true,
-             contentPadding: EdgeInsets.all( maxTextFieldHeight/6),
-                  labelText: "Search for a shop name",
-                ),
               ),
             ),
           ],

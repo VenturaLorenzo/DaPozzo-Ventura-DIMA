@@ -18,6 +18,7 @@ class _QuantitySelectorState extends State<QuantitySelector> {
   double pageWidth;
   double selectorWidth;
   double selectorHeight;
+  var borderRad = 7.5;
 
   @override
   void initState() {
@@ -55,7 +56,7 @@ class _QuantitySelectorState extends State<QuantitySelector> {
                     spreadRadius: 1,
                   ),
                 ],
-                borderRadius: BorderRadius.circular(5)),
+                borderRadius: BorderRadius.circular(borderRad)),
             child: Padding(
               padding: EdgeInsets.all(selectorHeight / 9),
               child: Container(
@@ -66,9 +67,7 @@ class _QuantitySelectorState extends State<QuantitySelector> {
                       height: selectorHeight * 7 / 27,
                       child: Text(
                         "Quantity",
-                        style: TextStyle(
-                            //  fontWeight: FontWeight.bold,
-                            fontSize: selectorHeight * 6 / 27),
+                        style: TextStyle(fontSize: selectorHeight * 6 / 27),
                       ),
                     ),
                     SizedBox(
@@ -98,7 +97,7 @@ class _QuantitySelectorState extends State<QuantitySelector> {
                       spreadRadius: 1,
                     ),
                   ],
-                  borderRadius: BorderRadius.circular(5)),
+                  borderRadius: BorderRadius.circular(borderRad)),
               child: Padding(
                 padding: EdgeInsets.all(selectorHeight / 9),
                 child: Container(
@@ -110,9 +109,7 @@ class _QuantitySelectorState extends State<QuantitySelector> {
                         height: selectorHeight * 7 / 27,
                         child: Text(
                           "Quantity",
-                          style: TextStyle(
-                              //  fontWeight: FontWeight.bold,
-                              fontSize: selectorHeight * 6 / 27),
+                          style: TextStyle(fontSize: selectorHeight * 6 / 27),
                         ),
                       ),
                       Container(

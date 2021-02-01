@@ -2,6 +2,7 @@ import 'package:dapozzo_ventura_app/ui/pages/cart_page.dart';
 import 'package:dapozzo_ventura_app/ui/pages/good_window_page.dart';
 import 'package:dapozzo_ventura_app/ui/pages/home_page.dart';
 import 'package:dapozzo_ventura_app/ui/pages/launch_page.dart';
+import 'package:dapozzo_ventura_app/ui/pages/login_page.dart';
 import 'package:dapozzo_ventura_app/ui/pages/profile_page.dart';
 import 'package:dapozzo_ventura_app/ui/pages/settings_page.dart';
 import 'package:dapozzo_ventura_app/ui/pages/vendor_page.dart';
@@ -41,6 +42,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (context) => MyProfile());
       case '/settings':
         return MaterialPageRoute(builder: (context) => SettingsPage());
+      case '/login':
+        return MaterialPageRoute(builder: (context) => LoginPage());
     }
   }
 }

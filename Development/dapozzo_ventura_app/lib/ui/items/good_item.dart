@@ -33,8 +33,9 @@ class _GoodItemState extends State<GoodItem> {
   Widget build(BuildContext context) {
     pageWidth = MediaQuery.of(context).size.width;
     pageHeight = MediaQuery.of(context).size.height;
+    var borderRad = 20.0;
 
-    itemWidth = pageWidth * 3 / 4;
+    itemWidth = pageWidth * 8 / 10;
     return Padding(
       padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
       child: Container(
@@ -48,7 +49,7 @@ class _GoodItemState extends State<GoodItem> {
                 spreadRadius: 1,
               ),
             ],
-            borderRadius: BorderRadius.circular(15)),
+            borderRadius: BorderRadius.circular(borderRad)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           mainAxisSize: MainAxisSize.max,
@@ -56,16 +57,16 @@ class _GoodItemState extends State<GoodItem> {
             Expanded(
                 child: ClipRRect(
                     borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(15),
-                        topRight: Radius.circular(15)),
+                        topLeft: Radius.circular(borderRad),
+                        topRight: Radius.circular(borderRad)),
                     child: Image.network(
                       'https://www.laccademiabjj.it/images/Shop/' +
                           widget.image,
                       fit: BoxFit.cover,
-                      width: pageWidth * 3 / 4,
+                      width: pageWidth * 9 / 10,
                     ))),
             Container(
-              height: itemHeight / 12,
+              height: itemHeight / 8,
               width: itemWidth,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -79,7 +80,7 @@ class _GoodItemState extends State<GoodItem> {
                         Icons.share,
                       ),
                       color: Colors.black54,
-                      iconSize: itemHeight / 14,
+                      iconSize: itemHeight / 12,
                       padding: const EdgeInsets.all(0),
                     ),
                   ),
@@ -112,7 +113,7 @@ class _GoodItemState extends State<GoodItem> {
                           ? Icons.favorite
                           : Icons.favorite_border),
                       color: (favourited) ? Colors.red : Colors.black54,
-                      iconSize: itemHeight / 14,
+                      iconSize: itemHeight / 12,
                       padding: const EdgeInsets.all(0),
                     ),
                   ),

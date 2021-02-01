@@ -197,6 +197,20 @@ class DatabaseHelper {
 
     /*++++++++++++++++++++++++++++++++++    INSERIMENTO DATI IN TABELLE    +++++++++++++++++++++++++++++++++++++++++*/
 
+    /*TABELLA USER*/
+    print("inserisco dati tabella $tableUser");
+    Map<String, dynamic> user1 = {
+      columnId: 1,
+      columnEmail: 'andrea.dapozzo3@gmail.com',
+      columnName: 'Andrea',
+      columnSurname: 'Da Pozzo',
+      columnPhone: '3347999757',
+      columnImage: 'Cappellino.jpg',
+      columnPassword: 'Andrea0409'
+    };
+    await db.insert(tableUser, user1);
+    print("inserimento dati tabella $tableUser TERMINATO");
+
     /*TABELLA VENDOR*/
     print("inserisco dati tabella $tableVendor");
     Map<String, dynamic> vendor1 = {
@@ -2234,8 +2248,6 @@ class DatabaseHelper {
     return result;
   }
 
-/*+++++++++++ da verificare +++++++++++++++++++  */
-
   Future<List<Map>> getGood(int typologyId, int colorId, int sizeId) async {
     Database db = await instance.database;
 
@@ -2251,6 +2263,27 @@ class DatabaseHelper {
     var sql =
         '''SELECT DISTINCT $tableVendor.$columnName FROM $tableVendor WHERE $tableVendor.$columnId = $vendorId''';
     List<Map> result = await db.rawQuery(sql);
+    return result;
+  }
+
+/*+++++++++++ da verificare +++++++++++++++++++  */
+
+  Future<bool> checkCredential(String insEmail, String insertedPassword) async {
+    Database db = await instance.database;
+
+    var sql =
+        '''SELECT $tableUser.$columnPassword FROM $tableUser WHERE $tableUser.$columnEmail = ?''';
+    List<Map> result = await db.rawQuery(sql, [insEmail]);
+
+    return result.isNotEmpty && result[0][0] == insertedPassword;
+  }
+
+  Future<List<Map>> getUser(String insEmail) async {
+    Database db = await instance.database;
+
+    List<Map> result = await db.rawQuery(
+        '''SELECT $tableUser.$columnId,$tableUser.$columnEmail,$tableUser.$columnName,$tableUser.$columnSurname,$tableUser.$columnPhone,$tableUser.$columnImage FROM $tableUser WHERE $tableUser.$columnEmail = ?''',
+        [insEmail]);
     return result;
   }
 }
