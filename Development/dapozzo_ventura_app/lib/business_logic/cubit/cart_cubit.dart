@@ -6,12 +6,9 @@ import 'package:dapozzo_ventura_app/states/cart_state.dart';
 class CartCubit extends Cubit<CartState> {
   CartModel cart = CartModel();
 
-
   CartCubit() : super(CartStateLoading()) {
-   getCart();
+    getCart();
   }
-
-
 
   Future<void> getCart() async {
     emit(CartCurrentState(cart));
@@ -29,4 +26,14 @@ class CartCubit extends Cubit<CartState> {
     emit(CartCurrentState(cart));
   }
 
+  // Future<void> removeAllGoods() async {
+  //   emit(CartStateLoading());
+
+  //   List<GoodModel> goods = cart.getProducts();
+  //   goods.forEach((element) {
+  //     cart.removeProduct(element);
+  //   });
+
+  //   emit(CartCurrentState(cart));
+  // }
 }

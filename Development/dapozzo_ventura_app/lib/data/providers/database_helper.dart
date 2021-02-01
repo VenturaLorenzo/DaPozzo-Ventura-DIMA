@@ -63,7 +63,7 @@ class DatabaseHelper {
 
   _initDatabase() async {
     WidgetsFlutterBinding.ensureInitialized();
-    // deleteDatabase("GoodsDatabase.db");
+    deleteDatabase("GoodsDatabase.db");
 
     String path = join(await getDatabasesPath(), _databaseName);
     return await openDatabase(path,
@@ -2274,8 +2274,9 @@ class DatabaseHelper {
     var sql =
         '''SELECT $tableUser.$columnPassword FROM $tableUser WHERE $tableUser.$columnEmail = ?''';
     List<Map> result = await db.rawQuery(sql, [insEmail]);
-
-    return result.isNotEmpty && result[0][0] == insertedPassword;
+    var retVal =
+        result.isNotEmpty && result[0][columnPassword] == insertedPassword;
+    return retVal;
   }
 
   Future<List<Map>> getUser(String insEmail) async {

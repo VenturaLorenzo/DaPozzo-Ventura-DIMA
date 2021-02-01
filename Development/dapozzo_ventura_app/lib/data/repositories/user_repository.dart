@@ -25,6 +25,7 @@ class UserRepository {
   static Future<bool> checkCredential(
       String insEmail, String insPassword) async {
     var dbHelper = DatabaseHelper.instance;
-    return await dbHelper.checkCredential(insEmail, insPassword);
+    var retVal = await dbHelper.checkCredential(insEmail, insPassword);
+    return retVal;
   }
 }
