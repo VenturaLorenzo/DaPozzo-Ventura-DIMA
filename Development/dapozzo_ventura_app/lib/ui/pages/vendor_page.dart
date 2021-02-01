@@ -155,6 +155,19 @@ class _VendorPageState extends State<VendorPage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(5),
+            child: FittedBox(
+              fit: BoxFit.fill,
+              child: Text(
+                "Categories",
+                style: TextStyle(
+                  fontSize: genderSelectionRowHeight / 4,
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
+            ),
+          ),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: ToggleButtons(
@@ -162,9 +175,17 @@ class _VendorPageState extends State<VendorPage> {
               selectedColor: Color.fromARGB(100, 0, 0, 0),
               selectedBorderColor: Color.fromARGB(0, 0, 0, 0),
               borderColor: Color.fromARGB(0, 0, 0, 0),
-              fillColor: Color.fromARGB(0, 0, 0, 0),
+              fillColor: Colors.grey[200],
               children: categories.map((category) {
-                return Icon(Icons.ac_unit, size: pageHeight / 12);
+                return Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: Image(
+                    image: AssetImage(
+                      "lib/assets/" + category.icon,
+                    ),
+                    height: pageHeight / 12,
+                  ),
+                );
               }).toList(),
               onPressed: (int index) {
                 //CAMBIO L?ICONA VISIVAMENTE

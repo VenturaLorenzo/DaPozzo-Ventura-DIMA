@@ -74,14 +74,17 @@ class _FilterBarState extends State<FilterBar> {
                       scrollDirection: Axis.horizontal,
                       child: ToggleButtons(
                         color: Color.fromARGB(200, 0, 0, 0),
-                        selectedColor: Color.fromARGB(100, 0, 0, 0),
+                        selectedColor: Colors.grey[50],
                         selectedBorderColor: Color.fromARGB(0, 0, 0, 0),
                         borderColor: Color.fromARGB(0, 0, 0, 0),
-                        fillColor: Color.fromARGB(0, 0, 0, 0),
+                        fillColor: Colors.grey[200],
                         children: widget.sports.map((sport) {
-                          return Icon(
-                            Icons.favorite,
-                            size: maxselectionFiltersHeight * 3 / 4,
+                          return Padding(
+                            padding: const EdgeInsets.all(5),
+                            child: Image(
+                              image: AssetImage("lib/assets/" + sport.icon),
+                              height: maxselectionFiltersHeight * 3 / 4,
+                            ),
                           );
                         }).toList(),
                         onPressed: (int index) {
@@ -124,15 +127,19 @@ class _FilterBarState extends State<FilterBar> {
                       scrollDirection: Axis.horizontal,
                       child: ToggleButtons(
                         color: Color.fromARGB(200, 0, 0, 0),
-                        selectedColor: Color.fromARGB(100, 0, 0, 0),
+                        selectedColor: Colors.grey[50],
                         selectedBorderColor: Color.fromARGB(0, 0, 0, 0),
                         borderColor: Color.fromARGB(0, 0, 0, 0),
-                        fillColor: Color.fromARGB(0, 0, 0, 0),
+                        fillColor: Colors.grey[200],
                         children: widget.categories.map((cat) {
-                          return Icon(
-                            //cat.icon,
-                            Icons.ac_unit,
-                            size: maxselectionFiltersHeight * 3 / 4,
+                          return Padding(
+                            padding: const EdgeInsets.all(5),
+                            child: Image(
+                              image: AssetImage(
+                                "lib/assets/" + cat.icon,
+                              ),
+                              height: maxselectionFiltersHeight * 3 / 4,
+                            ),
                           );
                         }).toList(),
                         onPressed: (int index) {

@@ -416,42 +416,42 @@ class DatabaseHelper {
     Map<String, dynamic> goodsCategory1 = {
       columnId: 1,
       columnName: 'Maglietta',
-      columnIcon: 'ac_unit.png'
+      columnIcon: 'tshirt.png'
     };
     Map<String, dynamic> goodsCategory2 = {
       columnId: 2,
       columnName: 'Pantaloncino',
-      columnIcon: 'pantaloncino.png'
+      columnIcon: 'shorts.png'
     };
     Map<String, dynamic> goodsCategory3 = {
       columnId: 3,
       columnName: 'Kimono',
-      columnIcon: 'kimono.png'
+      columnIcon: '024-kimono.png'
     };
     Map<String, dynamic> goodsCategory4 = {
       columnId: 4,
       columnName: 'Cintura',
-      columnIcon: 'cintura.png'
+      columnIcon: '004-blackbelt.png'
     };
     Map<String, dynamic> goodsCategory5 = {
       columnId: 5,
       columnName: 'Felpa',
-      columnIcon: 'felpa.png'
+      columnIcon: 'sweater.png'
     };
     Map<String, dynamic> goodsCategory6 = {
       columnId: 6,
       columnName: 'Tuta',
-      columnIcon: 'tuta.png'
+      columnIcon: 'joggerpants.png'
     };
     Map<String, dynamic> goodsCategory7 = {
       columnId: 7,
       columnName: 'Gloves',
-      columnIcon: 'gloves.png'
+      columnIcon: 'glove.png'
     };
     Map<String, dynamic> goodsCategory8 = {
       columnId: 8,
       columnName: 'Cappellino',
-      columnIcon: 'cappellino.png'
+      columnIcon: 'winterhat.png'
     };
 
     await db.insert(tableCategory, goodsCategory1);
@@ -519,32 +519,32 @@ class DatabaseHelper {
     Map<String, dynamic> sport1 = {
       columnId: 1,
       columnName: 'Bjj',
-      columnIcon: 'favorite'
+      columnIcon: '024-kimono.png'
     };
     Map<String, dynamic> sport2 = {
       columnId: 2,
       columnName: 'MMA',
-      columnIcon: 'favorite'
+      columnIcon: 'mma.png'
     };
     Map<String, dynamic> sport3 = {
       columnId: 3,
-      columnName: 'Arrampicata',
-      columnIcon: 'favorite'
+      columnName: 'skateboard',
+      columnIcon: '002-skateboard.png'
     };
     Map<String, dynamic> sport4 = {
       columnId: 4,
       columnName: 'Tennnis',
-      columnIcon: 'favorite'
+      columnIcon: '014-tennis.png'
     };
     Map<String, dynamic> sport5 = {
       columnId: 5,
       columnName: 'Montagna',
-      columnIcon: 'favorite'
+      columnIcon: 'montagna.png'
     };
     Map<String, dynamic> sport6 = {
       columnId: 6,
       columnName: 'Funzionale',
-      columnIcon: 'favorite'
+      columnIcon: '036-functional.png'
     };
 
     await db.insert(tableSport, sport1);
