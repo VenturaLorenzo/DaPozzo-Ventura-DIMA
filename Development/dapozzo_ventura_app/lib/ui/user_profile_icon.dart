@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:dapozzo_ventura_app/global.dart';
 
 class UserProfileIcon extends StatelessWidget {
+  final double height;
+
+  const UserProfileIcon({Key key, this.height}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     if (Globals.currentUser != null) {

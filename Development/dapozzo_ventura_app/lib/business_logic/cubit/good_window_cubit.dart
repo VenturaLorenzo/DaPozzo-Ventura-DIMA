@@ -18,6 +18,8 @@ class GoodWindwCubit extends Cubit<GoodWindowState> {
   GoodWindwCubit() : super(GoodWindowInitState());
 
   Future<void> initialize(GoodTypologyModel goodTypology) async {
+    if(state is GoodWindowInitState){
+      print("init");
     colors = await ColorRepository.getGoodTypologyColors(goodTypology);
     if (colors.isNotEmpty) {
       sizes = await SizeRepository.getAvailableSizes(goodTypology, colors[0]);
@@ -25,8 +27,8 @@ class GoodWindwCubit extends Cubit<GoodWindowState> {
       filterChange(goodTypology, colors[0]);
     } else {
       emit(GoodWindowColorsNotFoundState());
+    }}
     }
-  }
 
   Future<void> filterChange(
       GoodTypologyModel goodTypology, ColorModel selectedColor) async {
@@ -49,6 +51,7 @@ class GoodWindwCubit extends Cubit<GoodWindowState> {
   }
 
   Future<void> reset() {
+    print("rese");
     sizes = [];
     goodTypology = null;
     colors = [];
