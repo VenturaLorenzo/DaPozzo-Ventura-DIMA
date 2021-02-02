@@ -40,16 +40,15 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    filterBarHeight = MediaQuery.of(context).size.height / 4;
-    filterBarHeight = MediaQuery.of(context).size.height / 4;
+    filterBarHeight = MediaQuery.of(context).size.height / 3;
+    filterBarHeight = MediaQuery.of(context).size.height / 3;
 
     return Scaffold(
       appBar: EquipAppBar(
         withMenu: true,
         title: "eQuip",
       ),
-      drawer: EquipNavigatorMenu(
-          navigationTiles: [
+      drawer: EquipNavigatorMenu(navigationTiles: [
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [],

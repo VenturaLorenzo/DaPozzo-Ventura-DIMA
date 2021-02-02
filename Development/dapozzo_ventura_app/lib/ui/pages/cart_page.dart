@@ -69,52 +69,51 @@ class _CartPageState extends State<CartPage> {
                     ),
                   ),
                   Container(
-                    height: buttonsHeight,
-                    child: Row(crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          height: buttonsHeight*2/3,
-                          width: MediaQuery.of(context).size.width/3,
-                          decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 1, 136, 73),
-                              shape: BoxShape.rectangle,
-                              borderRadius: BorderRadius.circular(15),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey[300],
-                                  offset: Offset(8.0, 8.0),
-                                  blurRadius: 5.0,
-                                  spreadRadius: 1,
-                                ),
-                              ]),
-                          child: FlatButton(
-                            child: Text(
-                              "COMPRA",
-                              style: TextStyle(
-                                fontSize: buttonsHeight/4,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.white,
-                              ),
-                            ),
-
-
-                            onPressed: () {
-                              if (state.cart.getProducts().isNotEmpty) {
-                                if (Globals.currentUser == null) {
-                                  _showPopupLogin();
-                                } else {
-                                   BlocProvider.of<CartCubit>(context).clear();
-                                  _showPopupSuccesPayment();
-                                }
-                              } else {
-                                _showPopupNoItems();
-                              }
-                            })),
-                      ]))],
-                    );
-
-
+                      height: buttonsHeight,
+                      child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                                height: buttonsHeight * 2 / 3,
+                                width: MediaQuery.of(context).size.width / 1.5,
+                                decoration: BoxDecoration(
+                                    color: Color.fromARGB(255, 1, 136, 73),
+                                    shape: BoxShape.rectangle,
+                                    borderRadius: BorderRadius.circular(15),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey[300],
+                                        offset: Offset(8.0, 8.0),
+                                        blurRadius: 5.0,
+                                        spreadRadius: 1,
+                                      ),
+                                    ]),
+                                child: FlatButton(
+                                    child: Text(
+                                      "COMPRA",
+                                      style: TextStyle(
+                                        fontSize: buttonsHeight / 4,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      if (state.cart.getProducts().isNotEmpty) {
+                                        if (Globals.currentUser == null) {
+                                          _showPopupLogin();
+                                        } else {
+                                          BlocProvider.of<CartCubit>(context)
+                                              .clear();
+                                          _showPopupSuccesPayment();
+                                        }
+                                      } else {
+                                        _showPopupNoItems();
+                                      }
+                                    })),
+                          ]))
+                ],
+              );
             } else {
               return Text("ERROR RANDOM CART STATE");
             }

@@ -15,19 +15,20 @@ class CartItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:  EdgeInsets.all(height/24),
-      child: Container(decoration: BoxDecoration(
-          color: Colors.white,
-          shape: BoxShape.rectangle,
-          borderRadius: BorderRadius.circular(15),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey[300],
-              offset: Offset(8.0, 8.0),
-              blurRadius: 5.0,
-              spreadRadius: 2,
-            ),
-          ]),
+      padding: EdgeInsets.all(height / 24),
+      child: Container(
+        decoration: BoxDecoration(
+            color: Colors.white,
+            shape: BoxShape.rectangle,
+            borderRadius: BorderRadius.circular(15),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey[300],
+                offset: Offset(8.0, 8.0),
+                blurRadius: 5.0,
+                spreadRadius: 2,
+              ),
+            ]),
         height: height,
         child: Padding(
           padding: EdgeInsets.all(height / 24),
@@ -36,15 +37,13 @@ class CartItem extends StatelessWidget {
               Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => GoodWindowPage(goodTypology: cartGood.type)
-                  ),
-                  ModalRoute.withName("goodtypology")
-              );
-            //  Navigator.of(context).popUntil(ModalRoute.withName('/root'));
+                      builder: (context) =>
+                          GoodWindowPage(goodTypology: cartGood.type)),
+                  ModalRoute.withName("goodtypology"));
+              //  Navigator.of(context).popUntil(ModalRoute.withName('/root'));
               //Navigator.of(context)
-               //   .pushNamedAndRemoveUntil('/goodtypology', (Route<dynamic> route) => false,arguments: cartGood.type);
-            // BlocProvider.of<GoodWindwCubit>(context).filterChange(cartGood.type,   cartGood.color);
-
+              //   .pushNamedAndRemoveUntil('/goodtypology', (Route<dynamic> route) => false,arguments: cartGood.type);
+              // BlocProvider.of<GoodWindwCubit>(context).filterChange(cartGood.type,   cartGood.color);
             },
             child: Row(children: [
               SizedBox(
@@ -80,13 +79,13 @@ class CartItem extends StatelessWidget {
                               ),
                               Center(
                                 child: SizedBox(
-                                  height: height* 5 / 24,
+                                  height: height * 5 / 24,
                                   child: Text(
                                     cartGood.type.name,
                                     style: TextStyle(
-                                      fontSize: height * 5 / 48,
-                                   fontWeight: FontWeight.w300,
-                                    color: Colors.black,
+                                      fontSize: height * 8 / 48,
+                                      fontWeight: FontWeight.w300,
+                                      color: Colors.black,
                                     ),
                                   ),
                                 ),
@@ -97,17 +96,43 @@ class CartItem extends StatelessWidget {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceAround,
                                     children: [
-                                      Container(height: height*8/24,
-                                        child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,children: [
-                                          Text("Q.ty",style: TextStyle(fontSize: height*6/48),),
-                                          Text(cartGood.getQuantity().toString(),style: TextStyle(fontSize: height*3/24),)
-                                        ]),
+                                      Container(
+                                        height: height * 8 / 24,
+                                        child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              Text(
+                                                "Q.ty",
+                                                style: TextStyle(
+                                                    fontSize: height * 6 / 48),
+                                              ),
+                                              Text(
+                                                cartGood
+                                                    .getQuantity()
+                                                    .toString(),
+                                                style: TextStyle(
+                                                    fontSize: height * 3 / 24),
+                                              )
+                                            ]),
                                       ),
-                                      Container(height: height*8/24,
-                                        child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,children: [
-                                          Text("Size",style: TextStyle(fontSize: height*6/48),),
-                                          Text(cartGood.size,style: TextStyle(fontSize: height*3/24),)
-                                        ]),
+                                      Container(
+                                        height: height * 8 / 24,
+                                        child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              Text(
+                                                "Size",
+                                                style: TextStyle(
+                                                    fontSize: height * 6 / 48),
+                                              ),
+                                              Text(
+                                                cartGood.size,
+                                                style: TextStyle(
+                                                    fontSize: height * 3 / 24),
+                                              )
+                                            ]),
                                       ),
                                     ]),
                               ),
@@ -119,26 +144,29 @@ class CartItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     SizedBox(
-                      height: height*7/24,
+                      height: height * 7 / 24,
                       child: Center(
                           child: Text(
                         cartGood.type.price.toString() + '€',
                         style: TextStyle(
                             fontWeight: FontWeight.w400,
                             color: Colors.green,
-                            fontSize: height*7/48),
+                            fontSize: height * 7 / 48),
                       )),
                     ),
                     InkWell(
-                      child: SizedBox(height: height*8/24 ,
-                          child: FittedBox(fit: BoxFit.fill,
+                      child: SizedBox(
+                          height: height * 8 / 24,
+                          child: FittedBox(
+                            fit: BoxFit.fill,
                             child: Icon(
-                        Icons.delete,
-                        color: Colors.red[400],
-                      ),
+                              Icons.delete,
+                              color: Colors.red[400],
+                            ),
                           )),
                       onTap: () {
-                        BlocProvider.of<CartCubit>(context).removeGood(cartGood);
+                        BlocProvider.of<CartCubit>(context)
+                            .removeGood(cartGood);
                       },
                     )
                   ],
