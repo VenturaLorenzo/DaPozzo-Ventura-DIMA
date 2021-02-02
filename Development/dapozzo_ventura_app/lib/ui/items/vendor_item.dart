@@ -50,7 +50,7 @@ class VendorItem extends StatelessWidget {
                     child: ClipRRect(
                       child: Image.network(
                         'https://www.laccademiabjj.it/images/sfondi/${vendor.image}',
-                        fit: BoxFit.fill,
+                        fit: BoxFit.cover,
                       ),
                       borderRadius: BorderRadius.only(
                           topRight: Radius.circular(15),

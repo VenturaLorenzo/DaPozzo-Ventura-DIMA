@@ -14,7 +14,7 @@ class EquipNavigatorMenu extends StatelessWidget {
     pageheight= MediaQuery.of(context).size.height;
     bottomContainerHeight=pageheight/5;
     return Container(
-      width: MediaQuery.of(context).size.width / 2,
+      width: MediaQuery.of(context).size.width / 1.5,
       child: Drawer(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

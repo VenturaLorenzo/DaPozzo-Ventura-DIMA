@@ -30,17 +30,6 @@ class _CartPageState extends State<CartPage> {
       appBar: EquipAppBar(
         withMenu: false,
         title: "Cart",
-      appBar: AppBar(
-        backgroundColor: Colors.black87,
-        centerTitle: true,
-        leading: Builder(builder: (BuildContext context) {
-          return IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Icon(Icons.arrow_back));
-        }),
-        title: Text("Cart"),
       ),
       body: BlocBuilder<CartCubit, CartState>(
         builder: (context, state) {
@@ -83,35 +72,10 @@ class _CartPageState extends State<CartPage> {
                     height: buttonsHeight,
                     child: Row(crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
-              return Padding(
-                padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            " Spesa Totale : " +
-                                state.cart.getTotal().toString() +
-                                "€",
-                            style: TextStyle(
-                                fontSize: 25,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.black54),
-                          ),
-                        ],
-                      ),
-                      CartItemList(
-                        items: state.cart.getProducts(),
-                      )
-                    ]),
-                    Column(
                       children: [
                         Container(
                           height: buttonsHeight*2/3,
-                          width: MediaQuery.of(context).size.width/4,
+                          width: MediaQuery.of(context).size.width/3,
                           decoration: BoxDecoration(
                               color: Color.fromARGB(255, 1, 136, 73),
                               shape: BoxShape.rectangle,
@@ -133,8 +97,8 @@ class _CartPageState extends State<CartPage> {
                                 color: Colors.white,
                               ),
                             ),
-                          ),
-                        ),
+
+
                             onPressed: () {
                               if (state.cart.getProducts().isNotEmpty) {
                                 if (Globals.currentUser == null) {
@@ -147,15 +111,11 @@ class _CartPageState extends State<CartPage> {
                               } else {
                                 _showPopupNoItems();
                               }
-                            }),
-                      ],
-                    ),
-                  )
-                ],
-                    )
-                  ],
-                ),
-              );
+                            })),
+                      ]))],
+                    );
+
+
             } else {
               return Text("ERROR RANDOM CART STATE");
             }
