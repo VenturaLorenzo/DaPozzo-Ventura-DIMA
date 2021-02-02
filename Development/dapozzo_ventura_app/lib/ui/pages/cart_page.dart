@@ -219,7 +219,7 @@ class _CartPageState extends State<CartPage> {
         barrierDismissible: true, // user must tap button!
         builder: (BuildContext context) {
           return AlertDialog(
-            elevation: 2,
+            elevation: 4,
             backgroundColor: Colors.white.withOpacity(0.80),
             title: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -256,7 +256,7 @@ class _CartPageState extends State<CartPage> {
         barrierDismissible: true, // user must tap button!
         builder: (BuildContext context) {
           return AlertDialog(
-            elevation: 2,
+            elevation: 4,
             backgroundColor: Colors.white.withOpacity(0.80),
             title: Text("Attenzione"),
             content: Text("Non ci sono oggetti nel carrello"),

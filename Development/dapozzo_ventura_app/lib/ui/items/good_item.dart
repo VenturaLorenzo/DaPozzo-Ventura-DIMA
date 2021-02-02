@@ -101,8 +101,14 @@ class _GoodItemState extends State<GoodItem> {
                     child: IconButton(
                       onPressed: () {
                         if (favourited == false) {
-                          _showPopup("Added to favourites", Colors.blueAccent,
+                          _showPopup("ITEM ADDED TO WISHLIST", Colors.blue[700],
                               Icons.favorite, Colors.blueAccent);
+                        } else {
+                          _showPopup(
+                              "ITEM REMOVED FROM WISHLIST",
+                              Colors.blue[700],
+                              Icons.favorite_border,
+                              Colors.blueAccent);
                         }
                         setState(() {
                           favourited = !favourited;
@@ -132,13 +138,12 @@ class _GoodItemState extends State<GoodItem> {
       Navigator.of(context, rootNavigator: true).pop();
     });
     return showDialog<void>(
-      barrierColor: Colors.lightGreen.withOpacity(0.02),
       context: context,
       barrierDismissible: true, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
           elevation: 2,
-          backgroundColor: Colors.lightBlueAccent.withOpacity(0.80),
+          backgroundColor: Colors.grey[200].withOpacity(0.80),
           title: Column(children: [
             Text(
               text,

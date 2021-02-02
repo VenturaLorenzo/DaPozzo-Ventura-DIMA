@@ -238,13 +238,16 @@ class _GoodWindowPageState extends State<GoodWindowPage> {
                                       vendorName: state.vendor,
                                     ));
                                     _showPopup(
-                                        "Item added to cart",
+                                        "ITEM ADDED TO CART",
                                         Colors.green[900],
                                         Icons.check,
                                         Colors.green[900]);
                                   } else {
-                                    _showPopup("Not Available", Colors.red[700],
-                                        Icons.close, Colors.red[700]);
+                                    _showPopup(
+                                        "ITEM NOT AVAILABLE",
+                                        Colors.red[400],
+                                        Icons.close,
+                                        Colors.red[400]);
                                   }
                                 } else {
                                   throw ("QUANTITY NOT SETTED");
@@ -286,13 +289,12 @@ class _GoodWindowPageState extends State<GoodWindowPage> {
       Navigator.of(context, rootNavigator: true).pop();
     });
     return showDialog<void>(
-      barrierColor: Colors.lightGreen.withOpacity(0.02),
       context: context,
       barrierDismissible: true, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
           elevation: 2,
-          backgroundColor: Colors.grey[300].withOpacity(0.80),
+          backgroundColor: Colors.grey[200].withOpacity(0.80),
           title: Column(children: [
             Text(
               text,
