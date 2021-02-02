@@ -158,7 +158,7 @@ class _FilterBarState extends State<FilterBar> {
                 ],
               ),
             ),
-            Container(
+            Container(height: maxTextFieldHeight,
               decoration: BoxDecoration(
                   color: Colors.white,
                   shape: BoxShape.rectangle,

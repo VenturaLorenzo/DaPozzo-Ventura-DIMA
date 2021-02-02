@@ -16,15 +16,15 @@ class RouteGenerator {
 
     switch (settings.name) {
       case '/launch':
-        return MaterialPageRoute(builder: (context) => LaunchPage());
+        return MaterialPageRoute(settings: settings,builder: (context) => LaunchPage());
       case '/home':
-        return MaterialPageRoute(
+        return MaterialPageRoute(settings: settings,
             builder: (context) => Home(
                   categoriesAndSports: settings.arguments,
                 ));
       case '/vendor':
         final Map arguments = settings.arguments as Map;
-        return MaterialPageRoute(
+        return MaterialPageRoute(settings: settings,
             builder: (context) => VendorPage(
                   vendor: arguments["vendor"],
                   preselectedCategories: arguments["preselectedCategories"],
@@ -35,15 +35,15 @@ class RouteGenerator {
                   goodTypology: settings.arguments,
                 ));
       case '/cart':
-        return MaterialPageRoute(builder: (context) => CartPage());
+        return MaterialPageRoute( settings: settings,  builder: (context) => CartPage());
       case '/vendor_profile':
-        return MaterialPageRoute(builder: (context) => VendorProfilePage(vendorName: settings.arguments,));
+        return MaterialPageRoute(settings: settings,builder: (context) => VendorProfilePage(vendorName: settings.arguments,));
       case '/profile':
-        return MaterialPageRoute(builder: (context) => ProfilePage(userName: settings.arguments,));
+        return MaterialPageRoute(settings: settings,builder: (context) => ProfilePage(userName: settings.arguments,));
       case '/settings':
-        return MaterialPageRoute(builder: (context) => SettingsPage());
+        return MaterialPageRoute(settings: settings,builder: (context) => SettingsPage());
       case '/login':
-        return MaterialPageRoute(builder: (context) => LoginPage());
+        return MaterialPageRoute(settings: settings,builder: (context) => LoginPage());
     }
   }
 }

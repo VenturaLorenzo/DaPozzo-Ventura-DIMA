@@ -26,14 +26,9 @@ class CartCubit extends Cubit<CartState> {
     emit(CartCurrentState(cart));
   }
 
-  // Future<void> removeAllGoods() async {
-  //   emit(CartStateLoading());
-
-  //   List<GoodModel> goods = cart.getProducts();
-  //   goods.forEach((element) {
-  //     cart.removeProduct(element);
-  //   });
-
-  //   emit(CartCurrentState(cart));
-  // }
+  Future<void> clear() async {
+    emit(CartStateLoading());
+    cart.clearCart();
+    emit(CartCurrentState(cart));
+  }
 }

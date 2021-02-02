@@ -11,7 +11,8 @@ class CartIcon extends StatelessWidget {
     return Stack(children: [
       IconButton(
         onPressed: () {
-          Navigator.pushNamed(context, "/cart");
+          if(ModalRoute.of(context).settings.name!= "/cart"){
+          Navigator.pushNamed(context, "/cart");}
         },
         icon: Icon(
           Icons.shopping_cart,

@@ -62,6 +62,11 @@ class CartModel {
     }
     calculateTotal();
   }
+  void clearCart(){
+
+    _products=[];
+    _total=0;
+  }
 
   List<GoodModel> getProducts() {
     return _products;

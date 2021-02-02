@@ -104,8 +104,7 @@ class _CartPageState extends State<CartPage> {
                                 if (Globals.currentUser == null) {
                                   _showPopupLogin();
                                 } else {
-                                  // BlocProvider.of<CartCubit>(context)
-                                  //     .removeAllGoods();
+                                   BlocProvider.of<CartCubit>(context).clear();
                                   _showPopupSuccesPayment();
                                 }
                               } else {

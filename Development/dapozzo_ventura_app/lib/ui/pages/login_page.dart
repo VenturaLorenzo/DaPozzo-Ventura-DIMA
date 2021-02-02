@@ -14,11 +14,12 @@ class _LoginPageState extends State<LoginPage> {
   bool _secureText = true;
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
-
+double textFieldHeight;
   var myController;
 
   @override
   Widget build(BuildContext context) {
+    textFieldHeight=MediaQuery.of(context).size.height/10;
     return Scaffold(
         appBar: EquipAppBar(
           withMenu: false,
@@ -31,7 +32,7 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(5.0),
-                child: Container(
+                child: Container(height: textFieldHeight,
                   decoration: BoxDecoration(
                       color: Colors.white,
                       shape: BoxShape.rectangle,
@@ -51,6 +52,7 @@ class _LoginPageState extends State<LoginPage> {
                       labelText: "Email",
                       // errorText: null,
                       labelStyle: TextStyle(
+                        fontSize: textFieldHeight/3,
                         color: Colors.black54,
                       ),
                       border: InputBorder.none,
@@ -61,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               Padding(
                 padding: const EdgeInsets.all(5),
-                child: Container(
+                child: Container(height: textFieldHeight,
                   decoration: BoxDecoration(
                       color: Colors.white,
                       shape: BoxShape.rectangle,
@@ -81,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                       labelText: "Password",
                       // errorText: null,
                       labelStyle: TextStyle(
-                        color: Colors.black54,
+                        color: Colors.black54,fontSize: textFieldHeight/3
                       ),
                       border: InputBorder.none,
                       contentPadding: EdgeInsets.all(10),
@@ -92,7 +94,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               FlatButton(
                 child: Container(
-                  height: 40,
+                  height: textFieldHeight,
                   decoration: BoxDecoration(
                       color: Color.fromARGB(255, 1, 136, 73),
                       shape: BoxShape.rectangle,
@@ -109,7 +111,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: Text(
                       "LOGIN",
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: textFieldHeight/3,
                         fontWeight: FontWeight.w600,
                         color: Colors.white,
                       ),
