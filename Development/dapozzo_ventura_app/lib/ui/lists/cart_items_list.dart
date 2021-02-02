@@ -4,18 +4,19 @@ import 'package:flutter/cupertino.dart';
 
 class CartItemList extends StatelessWidget {
   final List<GoodModel> items;
-
-  const CartItemList({Key key, this.items}) : super(key: key);
+final double height;
+  const CartItemList({this.height,Key key, this.items}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 400,
+      height: height,
       child: ListView.builder(
           scrollDirection: Axis.vertical,
           itemCount: items.length,
           itemBuilder: (context, index) {
-            return CartItem(
+            print(items[index]);
+            return CartItem(height:height/4 ,
               cartGood: items[index],
             );
           }),

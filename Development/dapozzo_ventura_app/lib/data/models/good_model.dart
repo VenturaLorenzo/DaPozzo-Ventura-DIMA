@@ -32,21 +32,7 @@ class GoodModel {
     if (images == [] || images == null) {
       throw ("IMMAGINI NON CONFORMI, LISTA VUOTA");
     }
-    String formatedSize = size.toLowerCase();
-    List<String> possibleSizes = [
-      "medium",
-      "small",
-      "large",
-      "extralarge",
-      "l",
-      "s",
-      "m",
-      "xl",
-      "xxl"
-    ];
-    if (!possibleSizes.contains(formatedSize)) {
-      throw ("SIZE NON CONFORME O NON ESISTENTE: $formatedSize");
-    }
+
     if (quantity <= 0) {
       throw ("QUANTITY LESS THAN 0");
     } else {
@@ -64,7 +50,7 @@ class GoodModel {
 
   @override
   String toString() {
-    return "GOOD ->  color : $color, images : $images, size: $size, quantity: $_quantity";
+    return "[GOOD ->  color : $color, images : $images, size: $size, quantity: $_quantity, type: $type]";
   }
 
   int getQuantity() {

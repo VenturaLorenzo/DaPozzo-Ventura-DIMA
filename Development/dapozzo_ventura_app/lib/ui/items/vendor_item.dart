@@ -1,3 +1,5 @@
+
+
 import 'package:dapozzo_ventura_app/business_logic/cubit/vendor_cubit.dart';
 
 import 'package:dapozzo_ventura_app/data/models/vendor_model.dart';
@@ -9,13 +11,15 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 class VendorItem extends StatelessWidget {
   final Vendor vendor;
   final List<int> selectedCategories;
+  double itemHeight;
 
   VendorItem({Key key, this.vendor, this.selectedCategories});
 
   @override
   Widget build(BuildContext context) {
+    itemHeight= MediaQuery.of(context).size.height*2/3;
     return Padding(
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.fromLTRB(itemHeight/20,itemHeight/40,itemHeight/20,itemHeight/40,),
       child: Container(
           decoration: BoxDecoration(
               color: Colors.white,
@@ -24,9 +28,9 @@ class VendorItem extends StatelessWidget {
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey[300],
-                  offset: Offset(4.0, 4.0),
+                  offset: Offset(8.0, 8.0),
                   blurRadius: 5.0,
-                  spreadRadius: 1,
+                  spreadRadius: 2,
                 ),
               ]),
           child: Column(
@@ -41,11 +45,12 @@ class VendorItem extends StatelessWidget {
                   });
                 },
                 child: Container(
-                    height: MediaQuery.of(context).size.height / 2.8,
+                    height: itemHeight/ 1.8,
+                    width: MediaQuery.of(context).size.width,
                     child: ClipRRect(
                       child: Image.network(
                         'https://www.laccademiabjj.it/images/sfondi/${vendor.image}',
-                        fit: BoxFit.cover,
+                        fit: BoxFit.fill,
                       ),
                       borderRadius: BorderRadius.only(
                           topRight: Radius.circular(15),
@@ -53,7 +58,7 @@ class VendorItem extends StatelessWidget {
                     )),
               ),
               SizedBox(
-                height: 2.5,
+                height:itemHeight/120,
                 child: Container(
                   color: Colors.black87,
                 ),
@@ -115,7 +120,7 @@ class VendorItem extends StatelessWidget {
                             // Generate 100 widgets that display their index in the List.
                             children: vendor.frontImages.map((path) {
                               return Padding(
-                                padding: EdgeInsets.fromLTRB(3, 3, 3, 3),
+                                padding: EdgeInsets.fromLTRB(itemHeight/80,itemHeight/120, itemHeight/80,itemHeight/120),
                                 child: InkWell(
                                     onTap: () {
                                       BlocProvider.of<VendorCubit>(context)
