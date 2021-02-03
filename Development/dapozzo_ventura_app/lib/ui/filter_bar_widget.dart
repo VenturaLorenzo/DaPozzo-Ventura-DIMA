@@ -3,6 +3,7 @@ import 'package:dapozzo_ventura_app/data/models/category_model.dart';
 import 'package:dapozzo_ventura_app/data/models/sport_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class FilterBar extends StatefulWidget {
   final MarketPlaceCubit marketPlaceCubit;
@@ -128,14 +129,16 @@ class _FilterBarState extends State<FilterBar> {
                       scrollDirection: Axis.horizontal,
                       child: ToggleButtons(
                         color: Color.fromARGB(200, 0, 0, 0),
-                        selectedColor: Colors.grey[50],
+                        selectedColor: Colors.green[300],
                         selectedBorderColor: Color.fromARGB(0, 0, 0, 0),
                         borderColor: Color.fromARGB(0, 0, 0, 0),
                         fillColor: Colors.grey[200],
                         children: widget.categories.map((cat) {
                           return Padding(
                             padding: const EdgeInsets.all(5),
-                            child: Image(
+                            child:
+                                // SvgPicture.asset("lib/assets/" + cat.icon)
+                                Image(
                               image: AssetImage(
                                 "lib/assets/" + cat.icon,
                               ),
@@ -158,7 +161,8 @@ class _FilterBarState extends State<FilterBar> {
                 ],
               ),
             ),
-            Container(height: maxTextFieldHeight,
+            Container(
+              height: maxTextFieldHeight,
               decoration: BoxDecoration(
                   color: Colors.white,
                   shape: BoxShape.rectangle,

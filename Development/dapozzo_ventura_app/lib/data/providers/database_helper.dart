@@ -20,6 +20,8 @@ class DatabaseHelper {
   static final tableSize = "Size";
   static final tableGoodImage = "GoodImage";
   static final tableUser = "User";
+  static final tableShipAdd = "ShippingAddress";
+  static final tableUserShipping = "UserShippingAddress";
 
   static final columnId = 'id';
   static final columnName = 'name';
@@ -45,6 +47,15 @@ class DatabaseHelper {
   static final columnSurname = 'Surname';
   static final columnPhone = 'PhoneNumber';
   static final columnPassword = 'Password';
+  static final columnUserId = 'UserId';
+  static final columnAddress = 'Address';
+  static final columnAppartNum = 'AppartamentNumber';
+  static final columnAddrInfo = 'AddressInfo';
+  static final columnComune = 'Comune';
+  static final columnCountry = 'Country';
+  static final columnStreetAddr = 'StreetAddress';
+  static final columnDefaultAddr = 'DefaultAddress';
+  static final columnShippingId = 'ShippingId';
 
   // make this a singleton class
   DatabaseHelper._privateConstructor();
@@ -108,7 +119,7 @@ class DatabaseHelper {
     // SQL code to create the database table GOODSTYPOLOGIES
     print("Creazione tabella $tableTypology");
     await db.execute(''' CREATE TABLE $tableTypology (   
-            id INTEGER NOT NULL,  
+            $columnId INTEGER NOT NULL,  
             $columnVendorId INTEGER NOT NULL,
             $columnCategoryId INT NOT NULL,
             $columnGender INT NOT NULL,
@@ -194,6 +205,31 @@ class DatabaseHelper {
             PRIMARY KEY ($columnId)      
           )''');
     print("Creazione tabella $tableUser TERMINATA");
+
+    // SQL code to create the database table SHIPPING
+    print("Creazione tabella $tableShipAdd");
+    await db.execute(''' CREATE TABLE $tableShipAdd (   
+            $columnId INTEGER NOT NULL,
+            $columnUserId INTEGER NOT NULL,
+            $columnAddress STRING NOT NULL,
+            $columnAppartNum INTEGER NOT NULL,
+            $columnAddrInfo STRING,
+            $columnComune STRING NOT NULL,
+            $columnCountry STRING NOT NULL,
+            $columnStreetAddr STRING NOT NULL,
+            $columnDefaultAddr STRING NOT NULL,            
+            PRIMARY KEY ($columnId)      
+          )''');
+    print("Creazione tabella $tableShipAdd TERMINATA");
+
+    // SQL code to create the database table USERSHIPPING
+    print("Creazione tabella $tableUserShipping");
+    await db.execute(''' CREATE TABLE $tableUserShipping (   
+            $columnUserId INTEGER NOT NULL,              
+            $columnShippingId INTEGER NOT NULL,
+            PRIMARY KEY ($columnUserId,$columnShippingId)      
+          )''');
+    print("Creazione tabella $tableUserShipping TERMINATA");
 
     /*++++++++++++++++++++++++++++++++++    INSERIMENTO DATI IN TABELLE    +++++++++++++++++++++++++++++++++++++++++*/
 
@@ -377,7 +413,7 @@ class DatabaseHelper {
       columnId: 14,
       columnVendorId: 3,
       columnCategoryId: 8,
-      columnGender: 0,
+      columnGender: 1,
       columnImage: 'CappellinoRosso1.jpg',
       columnName: 'Kap',
       columnDescription: 'Perfetto per la montagna',
@@ -387,7 +423,7 @@ class DatabaseHelper {
       columnId: 15,
       columnVendorId: 3,
       columnCategoryId: 8,
-      columnGender: 1,
+      columnGender: 0,
       columnImage: 'CappellinoDarkGrey1.jpg',
       columnName: 'Kap',
       columnDescription: 'Perfetto per la montagna',
@@ -502,7 +538,6 @@ class DatabaseHelper {
       columnVendorId: 3,
       columnCategoryId: 8,
     };
-
     await db.insert(tableVendorCategory, vendorCategory1);
     await db.insert(tableVendorCategory, vendorCategory2);
     // await db.insert(tableVendorCategory, vendorCategory3);
@@ -546,7 +581,6 @@ class DatabaseHelper {
       columnName: 'Funzionale',
       columnIcon: '036-functional.png'
     };
-
     await db.insert(tableSport, sport1);
     await db.insert(tableSport, sport2);
     await db.insert(tableSport, sport3);
@@ -694,6 +728,10 @@ class DatabaseHelper {
       columnId: 17,
       columnName: 'Unica',
     };
+    Map<String, dynamic> size18 = {
+      columnId: 18,
+      columnName: 'XL/2XL',
+    };
 
     await db.insert(tableSize, size1);
     await db.insert(tableSize, size2);
@@ -712,6 +750,7 @@ class DatabaseHelper {
     await db.insert(tableSize, size15);
     await db.insert(tableSize, size16);
     await db.insert(tableSize, size17);
+    await db.insert(tableSize, size18);
     print("Fine Inserimento dati tabella $tableSize");
 
     /*TABELLA GOODS*/
@@ -1098,7 +1137,7 @@ class DatabaseHelper {
       columnId: 55,
       columnTypologyId: 3,
       columnColorId: 1,
-      columnSizeId: 7,
+      columnSizeId: 18,
       columnQuantity: 100,
     };
     Map<String, dynamic> good56 = {
@@ -1925,27 +1964,27 @@ class DatabaseHelper {
     };
     Map<String, dynamic> goodImage72 = {
       columnId: 72,
-      columnTypologyId: 11,
+      columnTypologyId: 10,
       columnColorId: 5,
       columnImage: 'FelpaLeggeraGrigio1.jpg',
     };
     Map<String, dynamic> goodImage73 = {
       columnId: 73,
-      columnTypologyId: 11,
+      columnTypologyId: 10,
       columnColorId: 5,
       columnImage: 'FelpaLeggeraGrigio2.jpg',
     };
     Map<String, dynamic> goodImage74 = {
       columnId: 74,
-      columnTypologyId: 11,
+      columnTypologyId: 10,
       columnColorId: 5,
-      columnImage: 'FelpaLeggeraGrigio3.jpg',
+      columnImage: 'FelpaLeggeraGrigio4.jpg',
     };
     Map<String, dynamic> goodImage75 = {
       columnId: 75,
       columnTypologyId: 11,
       columnColorId: 5,
-      columnImage: 'FelpaLeggeraGrigio4.jpg',
+      columnImage: 'FelpaLeggeraGrigio3.jpg',
     };
     Map<String, dynamic> goodImage76 = {
       columnId: 76,
