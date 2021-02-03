@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "785738388416",
+    "project_id": "dima-dapozzo-ventura-82cac",
+    "storage_bucket": "dima-dapozzo-ventura-82cac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:785738388416:android:87bc145e66b8771c866e25",
+        "android_client_info": {
+          "package_name": "com.dapozzo_ventura_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "785738388416-2inslm1m5c4k1aaobqlnkt9mqac4hrc4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dapozzo_ventura_app",
+            "certificate_hash": "3b278c3b675a9cf8db8483d3b6bf1d1f1daaa036"
+          }
+        },
+        {
+          "client_id": "785738388416-ppjknrgutl95t9eps2i80mnu7nq94e6q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAC0YkiMSujVTG3tRxV90aQ3Fv9SF4M7dI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "785738388416-ppjknrgutl95t9eps2i80mnu7nq94e6q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

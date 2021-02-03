@@ -1,6 +1,8 @@
+import 'package:dapozzo_ventura_app/data/models/user_model.dart';
 import 'package:dapozzo_ventura_app/data/repositories/user_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../global.dart';
 import '../eQuip_appbar.dart';
@@ -108,6 +110,39 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ),
+                  Container(
+                    height: textFieldHeight,
+                    child: TextButton(
+                      onPressed: () async {
+                        _login();
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width / 10,
+                          ),
+                          Text(
+                            "Accedi con Google",
+                            style: TextStyle(
+                                fontSize: textFieldHeight / 4,
+                                color: Colors.lightBlueAccent,
+                                decoration: TextDecoration.underline),
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width / 20,
+                          ),
+                          Container(
+                            height: textFieldHeight / 2,
+                            width: textFieldHeight / 2,
+                            child: Image.network(
+                                'http://pngimg.com/uploads/google/google_PNG19635.png',
+                                fit: BoxFit.cover),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
                 ],
               ),
               FlatButton(
@@ -172,5 +207,18 @@ class _LoginPageState extends State<LoginPage> {
             ],
           ),
         ));
+  }
+
+  Future<void> _login() async {
+    var _googleSignIn=Globals.googleSignIn;
+    await _googleSignIn.signIn();
+    if (_googleSignIn.currentUser != null) {
+      Navigator.pop(context);
+      Globals.currentUser = UserModel(
+          name: _googleSignIn.currentUser.displayName,
+          image: _googleSignIn.currentUser.photoUrl,
+          email: _googleSignIn.currentUser.email);
+      Globals.isLogged=true;
+    }
   }
 }

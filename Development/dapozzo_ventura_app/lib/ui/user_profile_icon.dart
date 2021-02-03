@@ -20,7 +20,6 @@ class UserProfileIcon extends StatelessWidget {
                     padding: EdgeInsets.all(5),
                     child: ClipOval(
                       child: Image.network(
-                        'https://www.laccademiabjj.it/images/Shop/' +
                             Globals.currentUser.image,
                         fit: BoxFit.cover,
                       ),
@@ -50,6 +49,10 @@ class UserProfileIcon extends StatelessWidget {
               ),
               onPressed: () {
                 Globals.currentUser = null;
+                Globals.isLogged=false;
+                if(Globals.googleSignIn.currentUser!= null){
+                  Globals.googleSignIn.signOut();
+                }
                 Navigator.of(context, rootNavigator: true).pop();
               },
             ),
@@ -77,7 +80,7 @@ class UserProfileIcon extends StatelessWidget {
               Container(
                 height: height / 10,
                 child: Text(
-                  "Mario Rossi",
+                  "Not logged yet",
                   style: TextStyle(
                     fontSize: height / 17,
                     color: Colors.blue[300],
@@ -87,7 +90,7 @@ class UserProfileIcon extends StatelessWidget {
               Container(
                 height: height / 10,
                 child: Text(
-                  "mario.rossi@gmail.com",
+                  "example@gmail.com",
                   style:
                       TextStyle(fontSize: height / 17, color: Colors.blue[200]),
                 ),
@@ -95,7 +98,7 @@ class UserProfileIcon extends StatelessWidget {
               Container(
                 height: height / 10,
                 child: Text(
-                  "LOGOUT",
+                  "",
                   style: TextStyle(
                       fontSize: height / 17,
                       color: Colors.blue[200],

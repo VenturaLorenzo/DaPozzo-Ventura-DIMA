@@ -74,7 +74,7 @@ class DatabaseHelper {
 
   _initDatabase() async {
     WidgetsFlutterBinding.ensureInitialized();
-    deleteDatabase("GoodsDatabase.db");
+    //deleteDatabase("GoodsDatabase.db");
 
     String path = join(await getDatabasesPath(), _databaseName);
     return await openDatabase(path,
@@ -241,7 +241,7 @@ class DatabaseHelper {
       columnName: 'Andrea',
       columnSurname: 'Da Pozzo',
       columnPhone: '3347999757',
-      columnImage: 'Cappellino.jpg',
+      columnImage: 'https://www.laccademiabjj.it/images/Shop/Cappellino.jpg',
       columnPassword: 'Andrea0409'
     };
     await db.insert(tableUser, user1);
