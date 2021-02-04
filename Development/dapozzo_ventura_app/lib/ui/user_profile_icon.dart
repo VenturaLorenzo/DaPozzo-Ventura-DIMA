@@ -50,6 +50,10 @@ class UserProfileIcon extends StatelessWidget {
               ),
               onPressed: () {
                 Globals.currentUser = null;
+                Globals.isLogged=false;
+                if(Globals.googleSignIn.currentUser!= null){
+                  Globals.googleSignIn.signOut();
+                }
                 Navigator.of(context, rootNavigator: true).pop();
               },
             ),
