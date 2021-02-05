@@ -210,7 +210,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future<void> _login() async {
-    var _googleSignIn=Globals.googleSignIn;
+    var _googleSignIn = Globals.googleSignIn;
     await _googleSignIn.signIn();
     if (_googleSignIn.currentUser != null) {
       Navigator.pop(context);
@@ -218,7 +218,7 @@ class _LoginPageState extends State<LoginPage> {
           name: _googleSignIn.currentUser.displayName,
           image: _googleSignIn.currentUser.photoUrl,
           email: _googleSignIn.currentUser.email);
-      Globals.isLogged=true;
+      Globals.isLogged = true;
     }
   }
 }
