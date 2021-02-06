@@ -14,7 +14,6 @@ class VendorCubit extends Cubit<VendorState>{
     emit(VendorStateLoading());
     final List<GoodTypologyModel> allGoodTypologies =
     await _goodsTypologyRepository.getGoodsTypologies(categoryIds, -1, vendor.id);
-    // allGoodTypologies.forEach((element) {print(element);});
     emit(VendorStateSearched(allGoodTypologies));
   }
   Future<void> search(List<int> categoryIds,int genderFilter,int vendorId) async {

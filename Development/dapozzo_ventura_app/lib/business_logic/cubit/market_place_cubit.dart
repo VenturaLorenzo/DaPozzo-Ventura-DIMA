@@ -21,7 +21,6 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
     emit(MarketPlaceInitial());
   }
   Future<void> initialize() async {
-   // _vendorRepository = VendorRepository();
     emit(MarketPlaceLoadingState());
 
     final List<Vendor> initialResult =
