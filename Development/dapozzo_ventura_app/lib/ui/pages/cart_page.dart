@@ -1,10 +1,15 @@
 import 'dart:async';
 
 import 'package:dapozzo_ventura_app/business_logic/cubit/cart_cubit.dart';
+import 'package:dapozzo_ventura_app/business_logic/payment_server.dart';
+import 'package:dapozzo_ventura_app/data/models/shippingAddr_model.dart';
+import 'package:dapozzo_ventura_app/data/repositories/shippingAddr_repository.dart';
 import 'package:dapozzo_ventura_app/global.dart';
 import 'package:dapozzo_ventura_app/states/cart_state.dart';
 import 'package:dapozzo_ventura_app/ui/eQuip_appbar.dart';
+import 'package:dapozzo_ventura_app/ui/lists/address_selection.dart';
 import 'package:dapozzo_ventura_app/ui/lists/cart_items_list.dart';
+import 'package:dapozzo_ventura_app/ui/pages/stripe_checkout_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -103,9 +108,28 @@ class _CartPageState extends State<CartPage> {
                                         if (Globals.currentUser == null) {
                                           _showPopupLogin();
                                         } else {
-                                          BlocProvider.of<CartCubit>(context)
-                                              .clear();
-                                          _showPopupSuccesPayment();
+                                          // ShippingAddrRepository.getAddrByUser(
+                                          //         Globals.currentUser.id)
+                                          //     .then((addresses) =>
+                                          //         _showAddressChoice(
+                                          //             addresses));
+                                          // Navigator.pushNamed(
+                                          //   context,
+                                          //   "/payment",
+                                          // );
+
+                                          Server()
+                                              .createCheckout(
+                                                  state.cart.getTotal(),
+                                                  "Pagamento eQuip")
+                                              .then((value) => {
+                                                    Navigator.of(context)
+                                                        .push(MaterialPageRoute(
+                                                      builder: (_) =>
+                                                          CheckoutPage(
+                                                              sessionId: value),
+                                                    ))
+                                                  });
                                         }
                                       } else {
                                         _showPopupNoItems();
@@ -221,42 +245,92 @@ class _CartPageState extends State<CartPage> {
     ).then((value) {});
   }
 
-  Future<void> _showPopupSuccesPayment() async {
-    return showDialog<void>(
-        barrierColor: Colors.lightGreen.withOpacity(0.02),
-        context: context,
-        barrierDismissible: true, // user must tap button!
-        builder: (BuildContext context) {
-          return AlertDialog(
-            elevation: 4,
-            backgroundColor: Colors.white.withOpacity(0.80),
-            title: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text("Grazie per aver acquistato su",
-                      style: TextStyle(fontSize: 20, color: Colors.green[400])),
-                  Text("Equip",
-                      style: TextStyle(fontSize: 20, color: Colors.green[400])),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Icon(
-                    Icons.done,
-                    color: Colors.green[400],
-                    size: 50,
-                  )
-                ]),
-            actions: [
-              FlatButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text("Continua lo Shopping"))
-            ],
-          );
-        });
-  }
+  // Future<void> _showAddressChoice(List<ShippingAddrModel> addresses) async {
+  //   return showDialog<void>(
+  //       barrierColor: Colors.lightGreen.withOpacity(0.02),
+  //       context: context,
+  //       barrierDismissible: true, // user must tap button!
+  //       builder: (BuildContext context) {
+  //         return AlertDialog(
+  //           elevation: 4,
+  //           backgroundColor: Colors.white.withOpacity(0.80),
+  //           title: Column(
+  //             children: [
+  //               FlatButton(
+  //                 onPressed: () {
+  //                   //Chiudo popup
+  //                   Navigator.of(context, rootNavigator: true).pop();
+  //                   // Navigator.pushNamed(context, "/login");
+  //                 },
+  //                 child: Container(
+  //                   height: 40,
+  //                   decoration: BoxDecoration(
+  //                       color: Colors.orange[400],
+  //                       shape: BoxShape.rectangle,
+  //                       borderRadius: BorderRadius.circular(15),
+  //                       boxShadow: [
+  //                         BoxShadow(
+  //                           color: Colors.grey[300],
+  //                           offset: Offset(4.0, 4.0),
+  //                           blurRadius: 5.0,
+  //                           spreadRadius: 1,
+  //                         ),
+  //                       ]),
+  //                   child: Center(
+  //                     child: Text(
+  //                       "USE DEFAULT ADDRESS",
+  //                       style: TextStyle(
+  //                         fontSize: 14,
+  //                         fontWeight: FontWeight.w600,
+  //                         color: Colors.white,
+  //                       ),
+  //                     ),
+  //                   ),
+  //                 ),
+  //               ),
+  //               AddressSelection(
+  //                 addresses: addresses,
+  //               ),
+  //               FlatButton(
+  //                 onPressed: () {},
+  //                 child: Container(
+  //                   height: 40,
+  //                   decoration: BoxDecoration(
+  //                       color: Colors.orange[300],
+  //                       shape: BoxShape.rectangle,
+  //                       borderRadius: BorderRadius.circular(15),
+  //                       boxShadow: [
+  //                         BoxShadow(
+  //                           color: Colors.grey[300],
+  //                           offset: Offset(4.0, 4.0),
+  //                           blurRadius: 5.0,
+  //                           spreadRadius: 1,
+  //                         ),
+  //                       ]),
+  //                   child: Center(
+  //                     child: Text(
+  //                       "ADD NEW ADDRESS",
+  //                       style: TextStyle(
+  //                         fontSize: 14,
+  //                         fontWeight: FontWeight.w600,
+  //                         color: Colors.white,
+  //                       ),
+  //                     ),
+  //                   ),
+  //                 ),
+  //               ),
+  //             ],
+  //           ),
+  //           actions: [
+  //             FlatButton(
+  //                 onPressed: () {
+  //                   Navigator.pop(context);
+  //                 },
+  //                 child: Text("Continua lo Shopping"))
+  //           ],
+  //         );
+  //       });
+  // }
 
   Future<void> _showPopupNoItems() async {
     return showDialog<void>(

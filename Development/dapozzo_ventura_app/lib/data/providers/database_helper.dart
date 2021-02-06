@@ -74,7 +74,7 @@ class DatabaseHelper {
 
   _initDatabase() async {
     WidgetsFlutterBinding.ensureInitialized();
-    //deleteDatabase("GoodsDatabase.db");
+    deleteDatabase("GoodsDatabase.db");
 
     String path = join(await getDatabasesPath(), _databaseName);
     return await openDatabase(path,
@@ -212,24 +212,14 @@ class DatabaseHelper {
             $columnId INTEGER NOT NULL,
             $columnUserId INTEGER NOT NULL,
             $columnAddress STRING NOT NULL,
-            $columnAppartNum INTEGER NOT NULL,
-            $columnAddrInfo STRING,
+            $columnAppartNum STRING NOT NULL,
+            $columnAddrInfo STRING NOT NULL,
             $columnComune STRING NOT NULL,
             $columnCountry STRING NOT NULL,
-            $columnStreetAddr STRING NOT NULL,
-            $columnDefaultAddr STRING NOT NULL,            
+            $columnStreetAddr INTEGER NOT NULL,          
             PRIMARY KEY ($columnId)      
           )''');
     print("Creazione tabella $tableShipAdd TERMINATA");
-
-    // SQL code to create the database table USERSHIPPING
-    print("Creazione tabella $tableUserShipping");
-    await db.execute(''' CREATE TABLE $tableUserShipping (   
-            $columnUserId INTEGER NOT NULL,              
-            $columnShippingId INTEGER NOT NULL,
-            PRIMARY KEY ($columnUserId,$columnShippingId)      
-          )''');
-    print("Creazione tabella $tableUserShipping TERMINATA");
 
     /*++++++++++++++++++++++++++++++++++    INSERIMENTO DATI IN TABELLE    +++++++++++++++++++++++++++++++++++++++++*/
 
@@ -246,6 +236,32 @@ class DatabaseHelper {
     };
     await db.insert(tableUser, user1);
     print("inserimento dati tabella $tableUser TERMINATO");
+
+    /*TABELLA SHIPPING*/
+    print("inserisco dati tabella $tableShipAdd");
+    Map<String, dynamic> add1 = {
+      columnId: 1,
+      columnUserId: 1,
+      columnAddress: 'residenza TreFili',
+      columnAppartNum: 'A502',
+      columnAddrInfo: 'piano terra, prima porta a destra',
+      columnComune: 'Segrate',
+      columnCountry: 'Italy',
+      columnStreetAddr: '20054',
+    };
+    Map<String, dynamic> add2 = {
+      columnId: 2,
+      columnUserId: 1,
+      columnAddress: 'via Olona 8',
+      columnAppartNum: 'D82',
+      columnAddrInfo: 'niente',
+      columnComune: 'San Donato',
+      columnCountry: 'Italy',
+      columnStreetAddr: '20090',
+    };
+    await db.insert(tableShipAdd, add1);
+    await db.insert(tableShipAdd, add2);
+    print("inserimento dati tabella $tableShipAdd TERMINATO");
 
     /*TABELLA VENDOR*/
     print("inserisco dati tabella $tableVendor");
@@ -2305,8 +2321,6 @@ class DatabaseHelper {
     return result;
   }
 
-/*+++++++++++ da verificare +++++++++++++++++++  */
-
   Future<bool> checkCredential(String insEmail, String insertedPassword) async {
     Database db = await instance.database;
 
@@ -2325,5 +2339,16 @@ class DatabaseHelper {
         '''SELECT $tableUser.$columnId,$tableUser.$columnEmail,$tableUser.$columnName,$tableUser.$columnSurname,$tableUser.$columnPhone,$tableUser.$columnImage FROM $tableUser WHERE $tableUser.$columnEmail = ?''',
         [insEmail]);
     return result;
+  }
+
+/*+++++++++++ da verificare +++++++++++++++++++  */
+
+  Future<List<Map>> getAddrByUser(int userId) async {
+    Database db = await instance.database;
+    var sql =
+        '''SELECT $tableShipAdd.* FROM $tableShipAdd WHERE $tableShipAdd.$columnUserId = ?''';
+    List<Map> result = await db.rawQuery(sql, [userId]);
+    var retVal = result;
+    return retVal;
   }
 }

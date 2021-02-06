@@ -9,6 +9,10 @@ import 'package:dapozzo_ventura_app/ui/pages/vendor_page.dart';
 import 'package:dapozzo_ventura_app/ui/pages/vendor_profile_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:dapozzo_ventura_app/ui/pages/paymet_success_page.dart';
+
+import 'cubit/cart_cubit.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -16,15 +20,18 @@ class RouteGenerator {
 
     switch (settings.name) {
       case '/launch':
-        return MaterialPageRoute(settings: settings,builder: (context) => LaunchPage());
+        return MaterialPageRoute(
+            settings: settings, builder: (context) => LaunchPage());
       case '/home':
-        return MaterialPageRoute(settings: settings,
+        return MaterialPageRoute(
+            settings: settings,
             builder: (context) => Home(
                   categoriesAndSports: settings.arguments,
                 ));
       case '/vendor':
         final Map arguments = settings.arguments as Map;
-        return MaterialPageRoute(settings: settings,
+        return MaterialPageRoute(
+            settings: settings,
             builder: (context) => VendorPage(
                   vendor: arguments["vendor"],
                   preselectedCategories: arguments["preselectedCategories"],
@@ -35,15 +42,29 @@ class RouteGenerator {
                   goodTypology: settings.arguments,
                 ));
       case '/cart':
-        return MaterialPageRoute( settings: settings,  builder: (context) => CartPage());
+        return MaterialPageRoute(
+            settings: settings, builder: (context) => CartPage());
       case '/vendor_profile':
-        return MaterialPageRoute(settings: settings,builder: (context) => VendorProfilePage(vendorName: settings.arguments,));
+        return MaterialPageRoute(
+            settings: settings,
+            builder: (context) => VendorProfilePage(
+                  vendorName: settings.arguments,
+                ));
       case '/profile':
-        return MaterialPageRoute(settings: settings,builder: (context) => ProfilePage(userName: settings.arguments,));
+        return MaterialPageRoute(
+            settings: settings,
+            builder: (context) => ProfilePage(
+                  userName: settings.arguments,
+                ));
       case '/settings':
-        return MaterialPageRoute(settings: settings,builder: (context) => SettingsPage());
+        return MaterialPageRoute(
+            settings: settings, builder: (context) => SettingsPage());
       case '/login':
-        return MaterialPageRoute(settings: settings,builder: (context) => LoginPage());
+        return MaterialPageRoute(
+            settings: settings, builder: (context) => LoginPage());
+      case '/success':
+        return MaterialPageRoute(
+            settings: settings, builder: (context) => PaymentSuccessPage());
     }
   }
 }

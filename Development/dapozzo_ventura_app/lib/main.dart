@@ -8,7 +8,7 @@ import 'package:dapozzo_ventura_app/data/repositories/vendor_repository.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'business_logic/cubit/market_place_cubit.dart';
-import 'data/providers/route_generator.dart';
+import 'business_logic/route_generator.dart';
 import 'package:flutter/material.dart';
 
 /*
@@ -21,18 +21,19 @@ print(images);
 final navigatorKey = GlobalKey<NavigatorState>();
 
 void main() {
-
   runApp(
     MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (BuildContext context) => MarketPlaceCubit(VendorRepository()),
+            create: (BuildContext context) =>
+                MarketPlaceCubit(VendorRepository()),
           ),
-     BlocProvider(
+          BlocProvider(
             create: (BuildContext context) => CartCubit(),
           ),
           BlocProvider(
-            create: (BuildContext context) => VendorCubit(GoodsTypologyRepository()),
+            create: (BuildContext context) =>
+                VendorCubit(GoodsTypologyRepository()),
           ),
           BlocProvider(
             create: (BuildContext context) => GoodWindwCubit(),
@@ -41,16 +42,15 @@ void main() {
             create: (BuildContext context) => QuantityCubit(),
           ),
           BlocProvider(
-            create: (BuildContext context) => SizeCubit() ,
+            create: (BuildContext context) => SizeCubit(),
           ),
         ],
-        child: MaterialApp(navigatorKey: navigatorKey,
+        child: MaterialApp(
+          navigatorKey: navigatorKey,
           initialRoute: '/launch',
           onGenerateRoute: RouteGenerator.generateRoute,
         )),
   );
 
-
   SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
-
 }

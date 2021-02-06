@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:dapozzo_ventura_app/business_logic/cubit/cart_cubit.dart';
 import 'package:dapozzo_ventura_app/business_logic/cubit/good_window_cubit.dart';
 import 'package:dapozzo_ventura_app/business_logic/cubit/quantity_cubit.dart';
@@ -16,7 +15,6 @@ import 'package:dapozzo_ventura_app/ui/lists/good_images_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../cart_icon.dart';
 import '../quantity_selector.dart';
 import '../size_selector.dart';
 
