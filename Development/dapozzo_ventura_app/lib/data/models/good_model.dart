@@ -29,9 +29,6 @@ class GoodModel {
       this.type,
       this.vendorName,
       int quantity}) {
-    if (images == [] || images == null) {
-      throw ("IMMAGINI NON CONFORMI, LISTA VUOTA");
-    }
 
     if (quantity <= 0) {
       throw ("QUANTITY LESS THAN 0");

@@ -20,8 +20,8 @@ class UserProfileIcon extends StatelessWidget {
                     padding: EdgeInsets.all(5),
                     child: ClipOval(
                       child: Image.network(
-                        'https://www.laccademiabjj.it/images/Shop/' +
-                            Globals.currentUser.image,
+
+                        (Globals.currentUser.image!= null)? Globals.currentUser.image: "https://media.gqitalia.it/photos/5ec3ca47a63ee8cb452d9ce4/master/pass/Avatar.jpg",
                         fit: BoxFit.cover,
                       ),
                     ))),
@@ -100,6 +100,7 @@ class UserProfileIcon extends StatelessWidget {
                     decoration: TextDecoration.underline),
               ),
               onPressed: () {
+                Navigator.pop(context);
                 Navigator.pushNamed(context, "/login");
               },
             ),

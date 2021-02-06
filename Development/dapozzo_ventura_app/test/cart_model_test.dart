@@ -9,14 +9,12 @@ void main() {
       expect(cart.getTotal(), 0);
       expect(cart.getProducts(), []);
     });
-
     test("Cart total should be the good price * quantity ", () {
       final good = GoodModel.createFake("felpa", "m", 4);
       final cart = CartModel.fromProducts(products: [good]);
 
       expect(cart.getTotal(), good.type.price * good.getQuantity());
     });
-
     test("Good should be added to cart", () {
       final cart = CartModel();
       final good = GoodModel.createFake("felpa", "m", 4);

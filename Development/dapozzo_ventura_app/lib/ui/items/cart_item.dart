@@ -34,16 +34,7 @@ class CartItem extends StatelessWidget {
           padding: EdgeInsets.all(height / 24),
           child: FlatButton(
             onPressed: () {
-              Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          GoodWindowPage(goodTypology: cartGood.type)),
-                  ModalRoute.withName("goodtypology"));
-              //  Navigator.of(context).popUntil(ModalRoute.withName('/root'));
-              //Navigator.of(context)
-              //   .pushNamedAndRemoveUntil('/goodtypology', (Route<dynamic> route) => false,arguments: cartGood.type);
-              // BlocProvider.of<GoodWindwCubit>(context).filterChange(cartGood.type,   cartGood.color);
+
             },
             child: Row(children: [
               SizedBox(

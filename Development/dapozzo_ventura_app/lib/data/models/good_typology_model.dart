@@ -37,7 +37,7 @@ class GoodTypologyModel {
       this.image,
       this.price,
       this.categoryName}) {
-    if (id <= 0) {
+    if (id < 0) {
       throw ("ID NON CONFORME PER CREAZIONE GOOD TYPOLOGY : MINORE DI ZERO ");
     }
     if (categoryId < 0) {
