@@ -41,11 +41,13 @@ class _LoginPageState extends State<LoginPage> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(20),
-                      child: Text('Inserisci le Credenziali',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w400,
-                          )),
+                      child: Container(height: textFieldHeight/2,
+                        child: Text('Inserisci le Credenziali',
+                            style: TextStyle(
+                              fontSize: textFieldHeight/3,
+                              fontWeight: FontWeight.w400,
+                            )),
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(10),

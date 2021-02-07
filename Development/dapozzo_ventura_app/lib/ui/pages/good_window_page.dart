@@ -160,6 +160,7 @@ class _GoodWindowPageState extends State<GoodWindowPage> {
               Container(
                 height: imageListHeight,
                 child: GoodImagesList(
+                  good: goodTypology,
                   height: imageListHeight,
                   images: getNames(state.goodImages),
                   price: goodTypology.price,

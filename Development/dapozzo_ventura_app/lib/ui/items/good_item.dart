@@ -1,14 +1,18 @@
 import 'dart:async';
 import 'dart:ui';
+import 'package:dapozzo_ventura_app/data/models/good_typology_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:share/share.dart';
+import 'package:social_share_plugin/social_share_plugin.dart';
 
 class GoodItem extends StatefulWidget {
   final String image;
   final int price;
   final double height;
+  final GoodTypologyModel good;
 
-  const GoodItem({Key key, this.image, this.price, this.height})
+  const GoodItem({Key key, this.image, this.price, this.height, this.good})
       : super(key: key);
 
   @override
@@ -74,8 +78,10 @@ class _GoodItemState extends State<GoodItem> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
                     child: IconButton(
-                      onPressed: () {},
-                      tooltip: 'Increment',
+                      onPressed: () async {
+                         _onShare(context, widget.good);
+                      },
+                      tooltip: 'Share',
                       icon: Icon(
                         Icons.share,
                       ),
@@ -161,5 +167,14 @@ class _GoodItemState extends State<GoodItem> {
       timer?.cancel();
       timer = null;
     });
+  }
+
+  void _onShare(BuildContext context, GoodTypologyModel good) {
+    final RenderBox box = context.findRenderObject();
+    final String text =
+        "I'm going to buy ${good.name} , look how wonderful it is!";
+    Share.share(text,
+        subject: good.description,
+        sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size);
   }
 }
