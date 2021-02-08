@@ -276,14 +276,14 @@ class DatabaseHelper {
       columnId: 2,
       columnName: 'Kano',
       columnDescription: 'ciao',
-      columnImage: 'EQKano.jpeg',
+      columnImage: 'EQKano.jpg',
       columnRating: '4.2'
     };
     Map<String, dynamic> vendor3 = {
       columnId: 3,
       columnName: 'Patagonia',
       columnDescription: 'Be Natural',
-      columnImage: 'EQPatagonia.jpeg',
+      columnImage: 'EQPatagonia.jpg',
       columnRating: '4.8'
     };
 
@@ -369,7 +369,7 @@ class DatabaseHelper {
       columnVendorId: 3,
       columnCategoryId: 7,
       columnGender: 0,
-      columnImage: 'PatGloves.jpeg',
+      columnImage: 'PatGloves.png',
       columnName: 'Liner',
       columnDescription: 'con tessuto riciclato',
       columnPrice: '45'
