@@ -276,14 +276,14 @@ class DatabaseHelper {
       columnId: 2,
       columnName: 'Kano',
       columnDescription: 'ciao',
-      columnImage: 'SfondoNicola002.jpg',
+      columnImage: 'EQKano.jpeg',
       columnRating: '4.2'
     };
     Map<String, dynamic> vendor3 = {
       columnId: 3,
       columnName: 'Patagonia',
       columnDescription: 'Be Natural',
-      columnImage: 'SfondoMauro003.jpg',
+      columnImage: 'EQPatagonia.jpeg',
       columnRating: '4.8'
     };
 
@@ -369,8 +369,7 @@ class DatabaseHelper {
       columnVendorId: 3,
       columnCategoryId: 7,
       columnGender: 0,
-      columnImage:
-          'https://www.patagonia.com/dw/image/v2/BDJB_PRD/on/demandware.static/-/Sites-patagonia-master/default/dw3b35cee4/images/hi-res/34540_FGE.jpg?sw=500&sh=500&sfrm=png&q=95&bgcolor=f6f6f6',
+      columnImage: 'PatGloves.jpeg',
       columnName: 'Liner',
       columnDescription: 'con tessuto riciclato',
       columnPrice: '45'
