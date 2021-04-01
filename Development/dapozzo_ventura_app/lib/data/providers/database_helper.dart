@@ -283,7 +283,7 @@ class DatabaseHelper {
       columnId: 3,
       columnName: 'Patagonia',
       columnDescription: 'Be Natural',
-      columnImage: 'EQPatagonia.jpg',
+      columnImage: 'EQPatagonia.png',
       columnRating: '4.8'
     };
 
@@ -369,7 +369,7 @@ class DatabaseHelper {
       columnVendorId: 3,
       columnCategoryId: 7,
       columnGender: 0,
-      columnImage: 'PatGloves.png',
+      columnImage: 'PatGloves.jpg',
       columnName: 'Liner',
       columnDescription: 'con tessuto riciclato',
       columnPrice: '45'

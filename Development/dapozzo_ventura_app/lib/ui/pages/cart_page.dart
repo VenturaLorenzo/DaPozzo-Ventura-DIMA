@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:dapozzo_ventura_app/business_logic/cubit/cart_cubit.dart';
+import 'package:dapozzo_ventura_app/business_logic/cubit/shipping_cubit.dart';
 import 'package:dapozzo_ventura_app/business_logic/payment_server.dart';
 import 'package:dapozzo_ventura_app/data/models/shippingAddr_model.dart';
 import 'package:dapozzo_ventura_app/data/repositories/shippingAddr_repository.dart';
@@ -80,11 +81,11 @@ class _CartPageState extends State<CartPage> {
                           children: [
                             Container(
                                 height: buttonsHeight * 2 / 3,
-                                width: MediaQuery.of(context).size.width / 1.5,
+                                width: MediaQuery.of(context).size.width * 0.9,
                                 decoration: BoxDecoration(
                                     color: Color.fromARGB(255, 1, 136, 73),
                                     shape: BoxShape.rectangle,
-                                    borderRadius: BorderRadius.circular(15),
+                                    borderRadius: BorderRadius.circular(30),
                                     boxShadow: [
                                       BoxShadow(
                                         color: Colors.grey[300],
@@ -117,18 +118,24 @@ class _CartPageState extends State<CartPage> {
                                           //   "/payment",
                                           // );
 
-                                          Server()
-                                              .createCheckout(
-                                                  state.cart.getTotal(),
-                                                  "Pagamento eQuip")
-                                              .then((value) => {
-                                                    Navigator.of(context)
-                                                        .push(MaterialPageRoute(
-                                                      builder: (_) =>
-                                                          CheckoutPage(
-                                                              sessionId: value),
-                                                    ))
-                                                  });
+                                          // Server()
+                                          //     .createCheckout(
+                                          //         state.cart.getTotal(),
+                                          //         "Pagamento eQuip")
+                                          //     .then((value) => {
+                                          //           Navigator.of(context)
+                                          //               .push(MaterialPageRoute(
+                                          //             builder: (_) =>
+                                          //                 CheckoutPage(
+                                          //                     sessionId: value),
+                                          //           ))
+                                          //         });
+                                          BlocProvider.of<ShippingCubit>(
+                                                  context)
+                                              .initialize();
+                                          Navigator.pushNamed(
+                                              context, "/shipping",
+                                              arguments: state.cart.getTotal());
                                         }
                                       } else {
                                         _showPopupNoItems();

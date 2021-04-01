@@ -11,10 +11,13 @@ class ShippingCubit extends Cubit<ShippingState> {
   ShippingCubit() : super(ShippingInitState());
 
   Future<void> initialize() async {
-    if (state is ShippingInitState) {
-      print("init");
-      adresses =
-          await ShippingAddrRepository.getAddrByUser(Globals.currentUser.id);
+    emit(ShippingLoadingState());
+    final adresses =
+        await ShippingAddrRepository.getAddrByUser(Globals.currentUser.id);
+    if (adresses.isNotEmpty) {
+      emit(ShippingLoadedState(adresses));
+    } else {
+      emit(ShippingNoAddressState());
     }
   }
 }

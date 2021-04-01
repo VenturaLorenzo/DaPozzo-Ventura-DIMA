@@ -114,7 +114,8 @@ class _VendorPageState extends State<VendorPage> {
                 ),
                 onPressed: () {
                   Navigator.pop(context);
-                  Navigator.pushNamed(context, "/profile",arguments: "Mario Rossi");
+                  Navigator.pushNamed(context, "/profile",
+                      arguments: "Mario Rossi");
                 }),
           ),
           Padding(
@@ -160,7 +161,7 @@ class _VendorPageState extends State<VendorPage> {
             child: FittedBox(
               fit: BoxFit.fill,
               child: Text(
-                "Categories",
+                "Categorie",
                 style: TextStyle(
                   fontSize: genderSelectionRowHeight / 4,
                   fontWeight: FontWeight.w300,

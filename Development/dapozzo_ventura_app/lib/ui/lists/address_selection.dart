@@ -1,46 +1,41 @@
+import 'dart:ffi';
+
 import 'package:dapozzo_ventura_app/data/models/shippingAddr_model.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import '../items/adress_item.dart';
 
-class AddressSelection extends StatefulWidget {
-  final List<ShippingAddrModel> addresses;
+class AddressSelection extends StatelessWidget {
+  final List<ShippingAddrModel> adresses;
+  final double import;
 
-  const AddressSelection({Key key, this.addresses}) : super(key: key);
-
-  @override
-  _AddressSelectionState createState() => _AddressSelectionState();
-}
-
-class _AddressSelectionState extends State<AddressSelection> {
-  ShippingAddrModel selectedValue;
-
-  @override
-  void initState() {
-    super.initState();
-
-    selectedValue = widget.addresses[0];
-  }
-
+  AddressSelection({this.adresses, this.import});
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: widget.addresses.length,
-        itemBuilder: (context, index) {
-          return Container(
-            height: 30,
-            child: Row(
-              children: [
-                Radio(
-                    value: widget.addresses[index],
-                    groupValue: selectedValue,
-                    onChanged: (s) {
-                      selectedValue = s;
-                      setState(() {});
-                    }),
-                Text(widget.addresses[index].address)
-              ],
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(10, 10, 10, 20),
+          child: Text(
+            'Scegli indirizzo di spedizione',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w300,
             ),
-          );
-        });
+          ),
+        ),
+        Expanded(
+            child: ListView.builder(
+          scrollDirection: Axis.vertical,
+          itemCount: adresses.length,
+          itemBuilder: (BuildContext ctxt, int index) {
+            return AdressItem(
+              adress: adresses[index],
+              import: import,
+            );
+          },
+        )),
+      ],
+    );
   }
 }

@@ -43,6 +43,7 @@ class _GoodItemState extends State<GoodItem> {
     return Padding(
       padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
       child: Container(
+        width: itemWidth,
         decoration: BoxDecoration(
             color: Colors.white,
             boxShadow: [
@@ -59,16 +60,20 @@ class _GoodItemState extends State<GoodItem> {
           mainAxisSize: MainAxisSize.max,
           children: [
             Expanded(
-                child: ClipRRect(
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(borderRad),
-                        topRight: Radius.circular(borderRad)),
-                    child: Image.network(
-                      'https://www.laccademiabjj.it/images/Shop/' +
-                          widget.image,
-                      fit: BoxFit.cover,
-                      width: pageWidth * 9 / 10,
-                    ))),
+                child: GestureDetector(
+              onTap: () {
+                _informations();
+              },
+              child: ClipRRect(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(borderRad),
+                      topRight: Radius.circular(borderRad)),
+                  child: Image.network(
+                    'https://www.laccademiabjj.it/images/Shop/' + widget.image,
+                    fit: BoxFit.cover,
+                    width: pageWidth * 9 / 10,
+                  )),
+            )),
             Container(
               height: itemHeight / 8,
               width: itemWidth,
@@ -79,7 +84,7 @@ class _GoodItemState extends State<GoodItem> {
                     padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
                     child: IconButton(
                       onPressed: () async {
-                         _onShare(context, widget.good);
+                        _onShare(context, widget.good);
                       },
                       tooltip: 'Share',
                       icon: Icon(
@@ -167,6 +172,171 @@ class _GoodItemState extends State<GoodItem> {
       timer?.cancel();
       timer = null;
     });
+  }
+
+  Future<void> _informations() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: true, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          elevation: 2,
+          backgroundColor: Colors.white,
+          title:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(5, 0, 5, 5),
+              child: Text(
+                'Materiale',
+                style: TextStyle(
+                    fontSize: pageHeight / 28, fontWeight: FontWeight.w300),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 2, 5, 2),
+              child: Text(
+                'Cotone 80%',
+                style: TextStyle(
+                  fontSize: pageHeight / 33,
+                  color: Colors.grey[700],
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 2, 5, 2),
+              child: Text(
+                'Poliestere 20%',
+                style: TextStyle(
+                  fontSize: pageHeight / 33,
+                  color: Colors.grey[700],
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Text(
+                'Provenienza',
+                style: TextStyle(
+                  fontSize: pageHeight / 28,
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 2, 5, 2),
+              child: Text(
+                'Made In Italy',
+                style: TextStyle(
+                  fontSize: pageHeight / 33,
+                  color: Colors.grey[700],
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Text(
+                'Vestibilità',
+                style: TextStyle(
+                    fontSize: pageHeight / 28, fontWeight: FontWeight.w300),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 2, 5, 2),
+              child: Text(
+                'SlimFit',
+                style: TextStyle(
+                  fontSize: pageHeight / 33,
+                  color: Colors.grey[700],
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Text(
+                'Colori disponibili',
+                style: TextStyle(
+                    fontSize: pageHeight / 28, fontWeight: FontWeight.w300),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 2, 5, 2),
+              child: Text(
+                'Colore 1',
+                style: TextStyle(
+                  fontSize: pageHeight / 33,
+                  color: Colors.grey[700],
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 2, 5, 2),
+              child: Text(
+                'Colore 2',
+                style: TextStyle(
+                  fontSize: pageHeight / 33,
+                  color: Colors.grey[700],
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Text(
+                'Cura',
+                style: TextStyle(
+                    fontSize: pageHeight / 28, fontWeight: FontWeight.w300),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 2, 5, 2),
+              child: Text(
+                'Lavaggio 40 gradi',
+                style: TextStyle(
+                  fontSize: pageHeight / 33,
+                  color: Colors.grey[700],
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Text(
+                'Stagione',
+                style: TextStyle(
+                    fontSize: pageHeight / 28, fontWeight: FontWeight.w300),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 2, 5, 2),
+              child: Text(
+                'Invernale',
+                style: TextStyle(
+                  fontSize: pageHeight / 33,
+                  color: Colors.grey[700],
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
+            ),
+          ]),
+          content: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              IconButton(
+                icon: Icon(Icons.close_rounded),
+                onPressed: () {
+                  Navigator.of(context, rootNavigator: true).pop();
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   void _onShare(BuildContext context, GoodTypologyModel good) {

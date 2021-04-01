@@ -1,6 +1,7 @@
 import 'package:dapozzo_ventura_app/business_logic/cubit/cart_cubit.dart';
 import 'package:dapozzo_ventura_app/business_logic/cubit/good_window_cubit.dart';
 import 'package:dapozzo_ventura_app/business_logic/cubit/quantity_cubit.dart';
+import 'package:dapozzo_ventura_app/business_logic/cubit/shipping_cubit.dart';
 import 'package:dapozzo_ventura_app/business_logic/cubit/size_cubit.dart';
 import 'package:dapozzo_ventura_app/business_logic/cubit/vendor_cubit.dart';
 import 'package:dapozzo_ventura_app/data/repositories/goods_typology_repository.dart';
@@ -44,6 +45,7 @@ void main() {
           BlocProvider(
             create: (BuildContext context) => SizeCubit(),
           ),
+          BlocProvider(create: (BuildContext context) => ShippingCubit()),
         ],
         child: MaterialApp(
           navigatorKey: navigatorKey,
