@@ -54,70 +54,74 @@ class _HomeState extends State<Home> {
           children: [],
         )
       ]),
-      body: Container(
-        color: Colors.white38,
-        child: CustomScrollView(
-          slivers: [
-            SliverAppBar(
-              backgroundColor: Colors.white,
-              leading: Container(),
-              floating: true,
-              expandedHeight: filterBarHeight,
-              pinned: false,
-              flexibleSpace: FilterBar(
-                maxHeight: filterBarHeight,
-                marketPlaceCubit: _marketPlaceCubit,
-                categories: categories,
-                sports: sports,
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+        child: Container(
+          color: Colors.white38,
+          child: CustomScrollView(
+            slivers: [
+              SliverAppBar(
+                backgroundColor: Colors.white,
+                leading: Container(),
+                floating: true,
+                expandedHeight: filterBarHeight,
+                pinned: false,
+                flexibleSpace: FilterBar(
+                  maxHeight: filterBarHeight,
+                  marketPlaceCubit: _marketPlaceCubit,
+                  categories: categories,
+                  sports: sports,
+                ),
               ),
-            ),
-            BlocBuilder<MarketPlaceCubit, MarketPlaceState>(
-                builder: (context, state) {
-              List<Vendor> vendors;
-              if (state is MarketPlaceLoadingState ||
-                  state is MarketPlaceInitial) {
-                return SliverFillRemaining(
-                  child: Center(
-                    child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(Colors.black54),
+              BlocBuilder<MarketPlaceCubit, MarketPlaceState>(
+                  builder: (context, state) {
+                List<Vendor> vendors;
+                if (state is MarketPlaceLoadingState ||
+                    state is MarketPlaceInitial) {
+                  return SliverFillRemaining(
+                    child: Center(
+                      child: CircularProgressIndicator(
+                        valueColor:
+                            AlwaysStoppedAnimation<Color>(Colors.black54),
+                      ),
                     ),
-                  ),
-                );
-              } else {
-                if (state is MarketPlaceSearched) {
-                  vendors = state.result;
-                  if (vendors.isNotEmpty) {
-                    return VendorList(vendors, state.categories);
-                  } else {
-                    return SliverList(delegate: SliverChildBuilderDelegate(
-                        (BuildContext context, int index) {
-                      if (index < 1) {
-                        return Center(
-                            child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                              child: Text(
-                            'Nessun Negozio Trovato',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w300,
-                            ),
-                          )),
-                        ));
-                      } else {
-                        return null;
-                      }
-                    }));
-                  }
+                  );
                 } else {
-                  if (state is MarketPlaceGeneralError) {
-                    return Text(state.error.toString());
+                  if (state is MarketPlaceSearched) {
+                    vendors = state.result;
+                    if (vendors.isNotEmpty) {
+                      return VendorList(vendors, state.categories);
+                    } else {
+                      return SliverList(delegate: SliverChildBuilderDelegate(
+                          (BuildContext context, int index) {
+                        if (index < 1) {
+                          return Center(
+                              child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                                child: Text(
+                              'Nessun Negozio Trovato',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w300,
+                              ),
+                            )),
+                          ));
+                        } else {
+                          return null;
+                        }
+                      }));
+                    }
+                  } else {
+                    if (state is MarketPlaceGeneralError) {
+                      return Text(state.error.toString());
+                    }
                   }
                 }
-              }
-              return Text("Error");
-            }),
-          ],
+                return Text("Error");
+              }),
+            ],
+          ),
         ),
       ),
     );

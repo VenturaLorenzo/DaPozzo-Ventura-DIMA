@@ -62,59 +62,6 @@ class _FilterBarState extends State<FilterBar> {
                       child: FittedBox(
                         fit: BoxFit.fill,
                         child: Text(
-                          "Sport",
-                          style: TextStyle(
-                              color: Colors.black54,
-                              fontWeight: FontWeight.w400),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    height: maxselectionFiltersHeight * 3 / 4,
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: ToggleButtons(
-                        color: Color.fromARGB(200, 0, 0, 0),
-                        selectedColor: Colors.grey[50],
-                        selectedBorderColor: Color.fromARGB(0, 0, 0, 0),
-                        borderColor: Color.fromARGB(0, 0, 0, 0),
-                        fillColor: Colors.grey[200],
-                        children: widget.sports.map((sport) {
-                          return Padding(
-                            padding: const EdgeInsets.all(5),
-                            child: Image(
-                              image: AssetImage("lib/assets/" + sport.icon),
-                              height: maxselectionFiltersHeight * 3 / 4,
-                            ),
-                          );
-                        }).toList(),
-                        onPressed: (int index) {
-                          setState(() {
-                            isSelectedSport[index] = !isSelectedSport[index];
-                          });
-                          widget.marketPlaceCubit
-                              .searchSport(widget.sports[index]);
-                        },
-                        isSelected: isSelectedSport,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              height: maxselectionFiltersHeight,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    height: maxselectionFiltersHeight / 4,
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                      child: FittedBox(
-                        fit: BoxFit.fill,
-                        child: Text(
                           "Categorie",
                           style: TextStyle(
                               color: Colors.black54,
@@ -155,6 +102,59 @@ class _FilterBarState extends State<FilterBar> {
                               .searchCategory(widget.categories[index].id);
                         },
                         isSelected: isSelectedCat,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              height: maxselectionFiltersHeight,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    height: maxselectionFiltersHeight / 4,
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                      child: FittedBox(
+                        fit: BoxFit.fill,
+                        child: Text(
+                          "Sport",
+                          style: TextStyle(
+                              color: Colors.black54,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    height: maxselectionFiltersHeight * 3 / 4,
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: ToggleButtons(
+                        color: Color.fromARGB(200, 0, 0, 0),
+                        selectedColor: Colors.grey[50],
+                        selectedBorderColor: Color.fromARGB(0, 0, 0, 0),
+                        borderColor: Color.fromARGB(0, 0, 0, 0),
+                        fillColor: Colors.grey[200],
+                        children: widget.sports.map((sport) {
+                          return Padding(
+                            padding: const EdgeInsets.all(5),
+                            child: Image(
+                              image: AssetImage("lib/assets/" + sport.icon),
+                              height: maxselectionFiltersHeight * 3 / 4,
+                            ),
+                          );
+                        }).toList(),
+                        onPressed: (int index) {
+                          setState(() {
+                            isSelectedSport[index] = !isSelectedSport[index];
+                          });
+                          widget.marketPlaceCubit
+                              .searchSport(widget.sports[index]);
+                        },
+                        isSelected: isSelectedSport,
                       ),
                     ),
                   ),
