@@ -4,10 +4,11 @@ import 'package:flutter/cupertino.dart';
 
 class GoodImagesList extends StatelessWidget {
   final List<String> images;
-  final int price;
+  final double price;
   final height;
-final GoodTypologyModel good;
-  const GoodImagesList({Key key, this.images, this.price, this.height, this.good})
+  final GoodTypologyModel good;
+  const GoodImagesList(
+      {Key key, this.images, this.price, this.height, this.good})
       : super(key: key);
 
   @override

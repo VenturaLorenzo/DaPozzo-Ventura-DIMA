@@ -1,4 +1,4 @@
-import 'package:dapozzo_ventura_app/data/models/good_model.dart';
+import 'good_model.dart';
 
 class CartModel {
   List<GoodModel> _products;

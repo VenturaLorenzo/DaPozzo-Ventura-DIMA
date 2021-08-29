@@ -1,8 +1,7 @@
-
-
 import 'package:dapozzo_ventura_app/business_logic/cubit/vendor_cubit.dart';
 
 import 'package:dapozzo_ventura_app/data/models/vendor_model.dart';
+import 'package:dapozzo_ventura_app/global.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,9 +16,14 @@ class VendorItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    itemHeight= MediaQuery.of(context).size.height*2/3;
+    itemHeight = MediaQuery.of(context).size.height * 2 / 3;
     return Padding(
-      padding: EdgeInsets.fromLTRB(itemHeight/20,itemHeight/40,itemHeight/20,itemHeight/40,),
+      padding: EdgeInsets.fromLTRB(
+        itemHeight / 20,
+        itemHeight / 40,
+        itemHeight / 20,
+        itemHeight / 40,
+      ),
       child: Container(
           decoration: BoxDecoration(
               color: Colors.white,
@@ -45,11 +49,11 @@ class VendorItem extends StatelessWidget {
                   });
                 },
                 child: Container(
-                    height: itemHeight/ 1.8,
+                    height: itemHeight / 1.8,
                     width: MediaQuery.of(context).size.width,
                     child: ClipRRect(
                       child: Image.network(
-                        'https://www.laccademiabjj.it/images/sfondi/${vendor.image}',
+                        Globals.baseUrlImages + '${vendor.image}',
                         fit: BoxFit.cover,
                       ),
                       borderRadius: BorderRadius.only(
@@ -58,7 +62,7 @@ class VendorItem extends StatelessWidget {
                     )),
               ),
               SizedBox(
-                height:itemHeight/120,
+                height: itemHeight / 120,
                 child: Container(
                   color: Colors.black87,
                 ),
@@ -120,7 +124,11 @@ class VendorItem extends StatelessWidget {
                             // Generate 100 widgets that display their index in the List.
                             children: vendor.frontImages.map((path) {
                               return Padding(
-                                padding: EdgeInsets.fromLTRB(itemHeight/80,itemHeight/120, itemHeight/80,itemHeight/120),
+                                padding: EdgeInsets.fromLTRB(
+                                    itemHeight / 80,
+                                    itemHeight / 120,
+                                    itemHeight / 80,
+                                    itemHeight / 120),
                                 child: InkWell(
                                     onTap: () {
                                       BlocProvider.of<VendorCubit>(context)
@@ -135,7 +143,7 @@ class VendorItem extends StatelessWidget {
                                     },
                                     child: ClipRRect(
                                       child: Image.network(
-                                        'https://www.laccademiabjj.it/images/Shop/$path',
+                                        Globals.baseUrlImages + path,
                                         fit: BoxFit.cover,
                                       ),
                                       borderRadius: BorderRadius.circular(5),

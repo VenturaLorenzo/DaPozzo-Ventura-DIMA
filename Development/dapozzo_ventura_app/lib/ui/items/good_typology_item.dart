@@ -1,4 +1,5 @@
 import 'package:dapozzo_ventura_app/data/models/good_typology_model.dart';
+import 'package:dapozzo_ventura_app/global.dart';
 import 'package:flutter/material.dart';
 
 class GoodsTypologyItem extends StatelessWidget {
@@ -39,8 +40,7 @@ class GoodsTypologyItem extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(2.5),
                       child: Image.network(
-                        'https://www.laccademiabjj.it/images/Shop/' +
-                            '${goodsTypology.image}',
+                        Globals.baseUrlImages + '${goodsTypology.image}',
                         fit: BoxFit.cover,
                       ),
                     ))),

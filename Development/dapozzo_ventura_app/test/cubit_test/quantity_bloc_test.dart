@@ -1,7 +1,8 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:dapozzo_ventura_app/business_logic/cubit/quantity_cubit.dart';
-import 'package:dapozzo_ventura_app/states/quantity_state.dart';
 import 'package:flutter_test/flutter_test.dart';
+
+import '../../lib/business_logic/cubit/quantity_cubit.dart';
+import '../../lib/states/quantity_state.dart';
 
 // Mock Bloc
 

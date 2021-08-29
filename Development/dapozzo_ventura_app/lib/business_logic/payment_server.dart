@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:dapozzo_ventura_app/global.dart';
 import 'package:dio/dio.dart';
 

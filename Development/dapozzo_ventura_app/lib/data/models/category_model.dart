@@ -9,4 +9,12 @@ class CategoryModel {
   String toString() {
     return name;
   }
+
+  factory CategoryModel.fromJson(Map<String, dynamic> json) {
+    return CategoryModel(
+      icon: json["Icon"],
+      id: json["Id"],
+      name: json["Name"],
+    );
+  }
 }

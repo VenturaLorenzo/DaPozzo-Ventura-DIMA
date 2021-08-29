@@ -1,7 +1,5 @@
-import 'dart:ffi';
 import 'package:dapozzo_ventura_app/business_logic/payment_server.dart';
 import 'package:dapozzo_ventura_app/data/models/shippingAddr_model.dart';
-import 'package:dapozzo_ventura_app/states/shipping_state.dart';
 import 'package:dapozzo_ventura_app/ui/pages/stripe_checkout_page.dart';
 import 'package:flutter/material.dart';
 

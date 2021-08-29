@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:dapozzo_ventura_app/states/quantity_state.dart';
+
+import '../../states/quantity_state.dart';
 
 class QuantityCubit extends Cubit<QuantityState> {
   QuantityCubit() : super(QuantityStateUninitialized());

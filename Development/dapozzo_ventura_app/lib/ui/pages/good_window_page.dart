@@ -237,19 +237,19 @@ class _GoodWindowPageState extends State<GoodWindowPage> {
                                       vendorName: state.vendor,
                                     ));
                                     _showPopup(
-                                        "ITEM ADDED TO CART",
+                                        "ITEM AGGIUNTO",
                                         Colors.green[900],
                                         Icons.check,
                                         Colors.green[900]);
                                   } else {
                                     _showPopup(
-                                        "ITEM NOT AVAILABLE",
+                                        "ITEM NON DISPONIBILE",
                                         Colors.red[400],
                                         Icons.close,
                                         Colors.red[400]);
                                   }
                                 } else {
-                                  throw ("QUANTITY NOT SETTED");
+                                  throw ("QUANTITà NON INSERITA");
                                 }
                               },
                             );

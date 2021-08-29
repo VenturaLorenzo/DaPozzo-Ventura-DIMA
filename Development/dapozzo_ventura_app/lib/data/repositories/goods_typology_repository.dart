@@ -1,10 +1,12 @@
-import 'package:dapozzo_ventura_app/data/models/good_typology_model.dart';
-import 'package:dapozzo_ventura_app/data/providers/database_helper.dart';
+import 'package:dapozzo_ventura_app/data/repositories/goods_typology_api.dart';
+
+import '../models/good_typology_model.dart';
+import '../providers/database_helper.dart';
 
 class GoodsTypologyRepository {
-   Future<List<GoodTypologyModel>> getGoodsTypologies(
+  Future<List<GoodTypologyModel>> getGoodsTypologies(
       List<int> categoryIds, int genderFilter, int vendorId) async {
-    var db = DatabaseHelper.instance;
+    /*var db = DatabaseHelper.instance;
     List<Map> rawGoodsTypologies = await db.getGoodsTypologiesByVendor(
         categoryIds, genderFilter, vendorId);
 
@@ -21,6 +23,8 @@ class GoodsTypologyRepository {
         price: row[DatabaseHelper.columnPrice],
         categoryName: row["categoryName"])));
 
-    return retVal;
+    return retVal;*/
+    return GoodTypologyApi.getGoodsTypologies(
+        categoryIds, genderFilter, vendorId);
   }
 }

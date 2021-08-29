@@ -6,7 +6,7 @@ class ShippingAddrModel {
   final String otherInfo;
   final String comune;
   final String country;
-  final int cap;
+  final String streetAddr;
 
   ShippingAddrModel({
     this.id,
@@ -16,6 +16,19 @@ class ShippingAddrModel {
     this.otherInfo,
     this.comune,
     this.country,
-    this.cap,
+    this.streetAddr,
   });
+
+  factory ShippingAddrModel.fromJson(json) {
+    return ShippingAddrModel(
+      id: json["Id"],
+      address: json["Address"],
+      appartNum: json["AppartamentNumber"],
+      streetAddr: json["StreetAddr"],
+      comune: json["Comune"],
+      country: json["Country"],
+      otherInfo: json["AddressInfo"],
+      userId: json["UserId"],
+    );
+  }
 }

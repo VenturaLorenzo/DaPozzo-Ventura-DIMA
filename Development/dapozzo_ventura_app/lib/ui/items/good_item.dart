@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:ui';
 import 'package:dapozzo_ventura_app/data/models/good_typology_model.dart';
+import 'package:dapozzo_ventura_app/global.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
@@ -8,7 +9,7 @@ import 'package:social_share_plugin/social_share_plugin.dart';
 
 class GoodItem extends StatefulWidget {
   final String image;
-  final int price;
+  final double price;
   final double height;
   final GoodTypologyModel good;
 
@@ -69,7 +70,7 @@ class _GoodItemState extends State<GoodItem> {
                       topLeft: Radius.circular(borderRad),
                       topRight: Radius.circular(borderRad)),
                   child: Image.network(
-                    'https://www.laccademiabjj.it/images/Shop/' + widget.image,
+                    Globals.baseUrlImages + '${widget.image}',
                     fit: BoxFit.cover,
                     width: pageWidth * 9 / 10,
                   )),

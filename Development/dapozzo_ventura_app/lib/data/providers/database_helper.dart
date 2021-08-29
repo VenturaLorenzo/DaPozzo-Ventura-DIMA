@@ -594,7 +594,7 @@ class DatabaseHelper {
     };
     Map<String, dynamic> sport4 = {
       columnId: 4,
-      columnName: 'Tennnis',
+      columnName: 'Tennis',
       columnIcon: '014-tennis.png'
     };
     Map<String, dynamic> sport5 = {

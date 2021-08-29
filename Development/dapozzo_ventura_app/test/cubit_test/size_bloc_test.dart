@@ -1,7 +1,10 @@
-import 'package:bloc_test/bloc_test.dart';
+/* import 'package:bloc_test/bloc_test.dart';
 import 'package:dapozzo_ventura_app/business_logic/cubit/size_cubit.dart';
 import 'package:dapozzo_ventura_app/states/size_state.dart';
 import 'package:flutter_test/flutter_test.dart';
+
+import '../../lib/business_logic/cubit/size_cubit.dart';
+import '../../lib/states/size_state.dart';
 
 
 // Mock Bloc
@@ -46,3 +49,4 @@ void mainCubit() {
 
   });
 }
+ */

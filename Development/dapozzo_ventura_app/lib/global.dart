@@ -12,6 +12,8 @@ class Globals {
   static GoogleSignIn googleSignIn = GoogleSignIn(scopes: ['email']);
   static String stripePk =
       "pk_test_51H4SAHJvSqshfhLpmubpWCKQjTGwmHTar5rgB5L6aUNuxQx9QwdjDDTTeTztkaviBs8wk1yqriQOo8A55Ni2bfqA00keNsEllU";
+  static String baseUrl = "https://www.tannervancruz.com/Api/";
+  static String baseUrlImages = "https://www.tannervancruz.com/images/";
 
   // make this a singleton class
   Globals._privateConstructor();

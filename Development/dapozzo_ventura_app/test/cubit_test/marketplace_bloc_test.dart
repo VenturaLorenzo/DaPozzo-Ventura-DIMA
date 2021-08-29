@@ -1,12 +1,13 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:dapozzo_ventura_app/business_logic/cubit/market_place_cubit.dart';
-import 'package:dapozzo_ventura_app/data/models/sport_model.dart';
-import 'package:dapozzo_ventura_app/data/models/vendor_model.dart';
-import 'package:dapozzo_ventura_app/data/providers/database_helper.dart';
-import 'package:dapozzo_ventura_app/data/repositories/vendor_repository.dart';
-import 'package:dapozzo_ventura_app/states/market_place_state.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+
+import '../../lib/business_logic/cubit/market_place_cubit.dart';
+import '../../lib/data/models/sport_model.dart';
+import '../../lib/data/models/vendor_model.dart';
+import '../../lib/data/providers/database_helper.dart';
+import '../../lib/data/repositories/vendor_repository.dart';
+import '../../lib/states/market_place_state.dart';
 
 class MockVendorRepository extends Mock implements VendorRepository {}
 

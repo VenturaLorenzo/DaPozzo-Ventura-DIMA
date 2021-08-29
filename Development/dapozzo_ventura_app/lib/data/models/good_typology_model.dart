@@ -9,14 +9,14 @@ class GoodTypologyModel {
   final String name;
   final String description;
   final String image;
-  final int price;
+  final double price;
   final String categoryName;
 
   static GoodTypologyModel createFake(String name) {
     Random rnd = Random();
     return GoodTypologyModel(
         id: rnd.nextInt(20),
-        price: rnd.nextInt(200),
+        price: 200,
         name: name,
         gender: (rnd.nextInt(3) - 1),
         categoryId: rnd.nextInt(10),
@@ -75,5 +75,19 @@ class GoodTypologyModel {
   @override
   String toString() {
     return "GOODTYPOLOGY -> id: $id , categoryId: $categoryId , vendorId: $vendorId, gender: $gender, name: $name, description : $description, price: $price, image : $image, categoryName: $categoryName";
+  }
+
+  factory GoodTypologyModel.fromJson(json) {
+    return GoodTypologyModel(
+      id: json["Id"],
+      name: json["Name"],
+      categoryId: json["CategoryId"],
+      description: json["Description"],
+      gender: json["Gender"],
+      image: json["Image"],
+      price: json["Price"],
+      vendorId: json["VendorId"],
+      categoryName: json["CategoryName"],
+    );
   }
 }

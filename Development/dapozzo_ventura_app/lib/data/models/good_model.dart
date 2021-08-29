@@ -1,8 +1,8 @@
 import 'dart:math';
-import 'package:dapozzo_ventura_app/data/models/good_image_model.dart';
-import 'package:dapozzo_ventura_app/data/models/vendor_model.dart';
 import 'color_model.dart';
+import 'good_image_model.dart';
 import 'good_typology_model.dart';
+import 'vendor_model.dart';
 
 class GoodModel {
   final GoodTypologyModel type;

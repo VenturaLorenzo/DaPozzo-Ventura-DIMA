@@ -49,7 +49,7 @@ class _SizeSelectorState extends State<SizeSelector> {
     pageHeight = MediaQuery.of(context).size.height;
     pageWidth = MediaQuery.of(context).size.width;
     selectorHeight = widget.height * 7 / 9;
-    selectorWidth = pageWidth / 5;
+    selectorWidth = pageWidth / 6;
     return BlocBuilder<SizeCubit, SizeState>(builder: (context, state) {
       if (state is SizeStateCurrent &&
           getSizesNames(widget.sizes).contains(state.currentSize)) {
@@ -78,7 +78,7 @@ class _SizeSelectorState extends State<SizeSelector> {
                     Container(
                       height: selectorHeight * 7 / 27,
                       child: Text(
-                        "Sizes",
+                        "Taglie",
                         style: TextStyle(fontSize: selectorHeight * 6 / 27),
                       ),
                     ),

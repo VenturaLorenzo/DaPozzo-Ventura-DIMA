@@ -1,4 +1,4 @@
-import 'package:dapozzo_ventura_app/data/models/cart_model.dart';
+import '../data/models/cart_model.dart';
 
 abstract class CartState {}
 

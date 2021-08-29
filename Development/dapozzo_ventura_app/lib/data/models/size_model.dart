@@ -8,4 +8,11 @@ class SizeModel {
   String toString() {
     return name;
   }
+
+  factory SizeModel.fromJson(Map<String, dynamic> json) {
+    return SizeModel(
+      id: json["id"],
+      name: json["Name"],
+    );
+  }
 }

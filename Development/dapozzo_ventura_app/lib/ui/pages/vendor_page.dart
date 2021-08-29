@@ -210,9 +210,9 @@ class _VendorPageState extends State<VendorPage> {
                 children: [
                   Padding(
                       padding: EdgeInsets.all(10),
-                      child: Text('Scroll our Item List',
+                      child: Text('Seleziona cosa ti piace',
                           style: TextStyle(
-                            fontSize: genderSelectionRowHeight / 3,
+                            fontSize: genderSelectionRowHeight / 4,
                             fontWeight: FontWeight.w300,
                           ))),
                   Container(

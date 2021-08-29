@@ -8,4 +8,12 @@ class SportModel {
   String toString() {
     return name;
   }
+
+  factory SportModel.fromJson(Map<String, dynamic> json) {
+    return SportModel(
+      icon: json["Icon"],
+      id: json["Id"],
+      name: json["Name"],
+    );
+  }
 }

@@ -2,6 +2,7 @@ import 'dart:ffi';
 
 import 'package:dapozzo_ventura_app/data/models/shippingAddr_model.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import '../items/adress_item.dart';
 
 class AddressSelection extends StatelessWidget {
@@ -35,6 +36,14 @@ class AddressSelection extends StatelessWidget {
             );
           },
         )),
+        /*TextButton(
+          onPressed: () {},
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [Text("Modifica Indirizzi"), Icon(Icons.edit)],
+          ),
+        )*/
       ],
     );
   }

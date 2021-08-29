@@ -62,7 +62,7 @@ class _FilterBarState extends State<FilterBar> {
                       child: FittedBox(
                         fit: BoxFit.fill,
                         child: Text(
-                          "Sports",
+                          "Sport",
                           style: TextStyle(
                               color: Colors.black54,
                               fontWeight: FontWeight.w400),
@@ -115,7 +115,7 @@ class _FilterBarState extends State<FilterBar> {
                       child: FittedBox(
                         fit: BoxFit.fill,
                         child: Text(
-                          "Categories",
+                          "Categorie",
                           style: TextStyle(
                               color: Colors.black54,
                               fontWeight: FontWeight.w400),
@@ -176,8 +176,8 @@ class _FilterBarState extends State<FilterBar> {
                   ]),
               child: TextField(
                 decoration: InputDecoration(
-                  hintText: "Ricerca il Negozio che vuoi",
-                  labelText: "Shops",
+                  hintText: "Inserisci il nome del Negozio che stai cercando",
+                  labelText: "Negozi",
                   labelStyle: TextStyle(
                     fontSize: maxTextFieldHeight / 3,
                     fontWeight: FontWeight.w400,
@@ -185,7 +185,8 @@ class _FilterBarState extends State<FilterBar> {
                     color: Colors.black54,
                   ),
                   border: InputBorder.none,
-                  contentPadding: EdgeInsets.all(maxTextFieldHeight / 6),
+                  contentPadding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                  //EdgeInsets.all(maxTextFieldHeight / 6),
                 ),
                 controller: _textController,
                 onSubmitted: (typedText) {

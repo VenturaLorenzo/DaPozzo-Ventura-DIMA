@@ -1,8 +1,9 @@
 import 'package:bloc/bloc.dart';
-import 'package:dapozzo_ventura_app/data/models/sport_model.dart';
-import 'package:dapozzo_ventura_app/data/models/vendor_model.dart';
-import 'package:dapozzo_ventura_app/data/repositories/vendor_repository.dart';
-import 'package:dapozzo_ventura_app/states/market_place_state.dart';
+
+import '../../data/models/sport_model.dart';
+import '../../data/models/vendor_model.dart';
+import '../../data/repositories/vendor_repository.dart';
+import '../../states/market_place_state.dart';
 
 class MarketPlaceCubit extends Cubit<MarketPlaceState> {
   List<int> currentCategorySearch = [];

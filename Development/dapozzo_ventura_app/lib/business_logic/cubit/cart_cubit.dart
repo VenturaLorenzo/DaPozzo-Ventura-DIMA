@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'package:dapozzo_ventura_app/data/models/cart_model.dart';
-import 'package:dapozzo_ventura_app/data/models/good_model.dart';
-import 'package:dapozzo_ventura_app/states/cart_state.dart';
+import '../../data/models/cart_model.dart';
+import '../../data/models/good_model.dart';
+import '../../states/cart_state.dart';
 
 class CartCubit extends Cubit<CartState> {
   CartModel cart = CartModel();

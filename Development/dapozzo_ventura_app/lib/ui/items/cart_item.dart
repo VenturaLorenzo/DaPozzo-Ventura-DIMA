@@ -1,6 +1,7 @@
 import 'package:dapozzo_ventura_app/business_logic/cubit/cart_cubit.dart';
 import 'package:dapozzo_ventura_app/business_logic/cubit/good_window_cubit.dart';
 import 'package:dapozzo_ventura_app/data/models/good_model.dart';
+import 'package:dapozzo_ventura_app/global.dart';
 import 'package:dapozzo_ventura_app/ui/pages/good_window_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -33,9 +34,7 @@ class CartItem extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.all(height / 24),
           child: FlatButton(
-            onPressed: () {
-
-            },
+            onPressed: () {},
             child: Row(children: [
               SizedBox(
                   height: height * 11 / 12,
@@ -43,8 +42,7 @@ class CartItem extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(2.5),
                     child: Image.network(
-                      'https://www.laccademiabjj.it/images/Shop/' +
-                          cartGood.images[0].image,
+                      Globals.baseUrlImages + cartGood.images[0].image,
                       fit: BoxFit.cover,
                     ),
                   )),

@@ -39,7 +39,7 @@ class _QuantitySelectorState extends State<QuantitySelector> {
   Widget build(BuildContext context) {
     pageWidth = MediaQuery.of(context).size.width;
     selectorHeight = widget.height * 7 / 9;
-    selectorWidth = pageWidth / 5;
+    selectorWidth = pageWidth / 6;
     return BlocBuilder<QuantityCubit, QuantityState>(builder: (context, state) {
       if (state is QuantityStateUninitialized) {
         return Padding(
@@ -66,7 +66,7 @@ class _QuantitySelectorState extends State<QuantitySelector> {
                     Container(
                       height: selectorHeight * 7 / 27,
                       child: Text(
-                        "Quantity",
+                        "Quantità",
                         style: TextStyle(fontSize: selectorHeight * 6 / 27),
                       ),
                     ),
@@ -108,7 +108,7 @@ class _QuantitySelectorState extends State<QuantitySelector> {
                       Container(
                         height: selectorHeight * 7 / 27,
                         child: Text(
-                          "Quantity",
+                          "Quantità",
                           style: TextStyle(fontSize: selectorHeight * 6 / 27),
                         ),
                       ),

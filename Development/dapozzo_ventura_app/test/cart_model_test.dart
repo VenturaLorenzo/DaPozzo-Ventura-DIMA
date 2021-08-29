@@ -1,6 +1,7 @@
-import 'package:dapozzo_ventura_app/data/models/cart_model.dart';
-import 'package:dapozzo_ventura_app/data/models/good_model.dart';
 import 'package:test/test.dart';
+
+import '../lib/data/models/cart_model.dart';
+import '../lib/data/models/good_model.dart';
 
 void main() {
   group("CART", () {

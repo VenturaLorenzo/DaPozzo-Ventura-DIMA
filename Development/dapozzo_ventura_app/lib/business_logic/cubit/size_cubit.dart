@@ -3,8 +3,9 @@ import 'package:dapozzo_ventura_app/data/models/color_model.dart';
 import 'package:dapozzo_ventura_app/data/models/good_typology_model.dart';
 import 'package:dapozzo_ventura_app/data/models/size_model.dart';
 import 'package:dapozzo_ventura_app/data/repositories/size_repository.dart';
-import 'package:dapozzo_ventura_app/states/size_state.dart';
 import 'package:dapozzo_ventura_app/ui/size_selector.dart';
+
+import '../../states/size_state.dart';
 
 class SizeCubit extends Cubit<SizeState> {
   SizeCubit() : super(SizeStateUninitialized());

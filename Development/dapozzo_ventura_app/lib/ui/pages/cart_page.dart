@@ -234,12 +234,20 @@ class _CartPageState extends State<CartPage> {
                           ),
                         ]),
                     child: Center(
-                      child: Text(
-                        "REGISTRATI",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.pushNamed(
+                            context,
+                            "/registration",
+                          );
+                        },
+                        child: Text(
+                          "REGISTRATI",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),

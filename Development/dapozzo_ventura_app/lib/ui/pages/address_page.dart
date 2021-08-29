@@ -56,7 +56,16 @@ class _AddressPageState extends State<AddressPage> {
                   if (state is ShippingNoAddressState) {
                     return Container(
                         height: adressListHeight,
-                        child: Text('Non ci sono indirizzi salvati'));
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('Non ci sono indirizzi salvati',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w400,
+                                )),
+                          ],
+                        ));
                   }
 
                   if (state is ShippingLoadingState ||
@@ -109,7 +118,12 @@ class _AddressPageState extends State<AddressPage> {
                               color: Colors.white,
                               fontSize: 16,
                               fontStyle: FontStyle.normal)),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(
+                          context,
+                          "/address",
+                        );
+                      },
                     )),
               ),
             ],

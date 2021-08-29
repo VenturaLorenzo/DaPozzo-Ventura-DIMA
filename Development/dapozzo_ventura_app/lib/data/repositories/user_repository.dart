@@ -1,5 +1,7 @@
-import 'package:dapozzo_ventura_app/data/models/user_model.dart';
-import 'package:dapozzo_ventura_app/data/providers/database_helper.dart';
+import 'package:dapozzo_ventura_app/data/repositories/user_api.dart';
+
+import '../models/user_model.dart';
+import '../providers/database_helper.dart';
 
 class UserRepository {
   static Future<UserModel> getUserByMail(String insEmail) async {
@@ -22,10 +24,23 @@ class UserRepository {
     return users[0];
   }
 
-  static Future<bool> checkCredential(
+  /*static Future<bool> checkCredential(
       String insEmail, String insPassword) async {
     var dbHelper = DatabaseHelper.instance;
     var retVal = await dbHelper.checkCredential(insEmail, insPassword);
+    return retVal;
+  }*/
+
+  static Future<UserModel> checkCredential(
+      String insEmail, String insPassword) async {
+    var retVal = UserApi.login(insEmail, insPassword);
+    return retVal;
+  }
+
+  static Future<UserModel> newUser(String insEmail, String insPassword,
+      String insName, String insSurname, String insPhone) async {
+    var retVal =
+        UserApi.newUser(insEmail, insPassword, insName, insSurname, insPhone);
     return retVal;
   }
 }

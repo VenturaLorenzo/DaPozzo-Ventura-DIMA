@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
-import 'package:dapozzo_ventura_app/data/models/shippingAddr_model.dart';
-import 'package:dapozzo_ventura_app/data/repositories/shippingAddr_repository.dart';
-import 'package:dapozzo_ventura_app/states/shipping_state.dart';
 
+import '../../data/models/shippingAddr_model.dart';
+import '../../data/repositories/shippingAddr_repository.dart';
 import '../../global.dart';
+import '../../states/shipping_state.dart';
 
 class ShippingCubit extends Cubit<ShippingState> {
   List<ShippingAddrModel> adresses;

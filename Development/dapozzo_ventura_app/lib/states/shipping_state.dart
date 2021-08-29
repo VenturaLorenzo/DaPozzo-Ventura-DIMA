@@ -1,4 +1,4 @@
-import 'package:dapozzo_ventura_app/data/models/shippingAddr_model.dart';
+import '../data/models/shippingAddr_model.dart';
 
 abstract class ShippingState {}
 

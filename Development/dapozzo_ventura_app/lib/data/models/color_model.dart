@@ -10,8 +10,11 @@ class ColorModel {
   }
 
   @override
-  bool operator ==(other) {
-    // TODO: implement ==
+  bool operator ==(dynamic other) {
     return (other is ColorModel) && other.name == name;
+  }
+
+  factory ColorModel.fromJson(Map<String, dynamic> json) {
+    return ColorModel(id: json["Id"], name: json["Name"], code: json["Code"]);
   }
 }

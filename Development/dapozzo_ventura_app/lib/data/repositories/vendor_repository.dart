@@ -1,13 +1,14 @@
-import 'package:dapozzo_ventura_app/data/models/good_typology_model.dart';
-import 'package:dapozzo_ventura_app/data/models/vendor_model.dart';
-import 'package:dapozzo_ventura_app/data/providers/database_helper.dart';
-import 'package:dapozzo_ventura_app/data/repositories/category_repository.dart';
-import 'package:dapozzo_ventura_app/data/repositories/front_image_repository.dart';
+import 'package:dapozzo_ventura_app/data/repositories/vendor_api.dart';
+
+import '../models/good_typology_model.dart';
+import '../models/vendor_model.dart';
+import '../providers/database_helper.dart';
+import 'category_repository.dart';
 
 class VendorRepository {
   Future<List<Vendor>> getVendorsByFiters(
       List<int> categories, String text, List<int> sports) async {
-    var dbHelper = DatabaseHelper.instance;
+    /*var dbHelper = DatabaseHelper.instance;
 
     List<Map> allVendorRows =
         await dbHelper.getVendorsByCategorySportText(text, categories, sports);
@@ -28,11 +29,12 @@ class VendorRepository {
       element.frontImages =
           await FrontImageRepository.getFrontTypologyImages(element.id);
     }));
-    return retVal;
+    return retVal;*/
+    return VendorApi.getVendorsByFiters(categories, text, sports);
   }
 
   static Future<List<Vendor>> getVendor(GoodTypologyModel typology) async {
-    var dbHelper = DatabaseHelper.instance;
+    /*var dbHelper = DatabaseHelper.instance;
 
     List<Map> allVendorRows = await dbHelper.getVendor(typology.vendorId);
     List<Vendor> retVal = [];
@@ -42,6 +44,7 @@ class VendorRepository {
         name: row[DatabaseHelper.columnName],
       ));
     });
-    return retVal;
+    return retVal;*/
+    return VendorApi.getVendor(typology);
   }
 }

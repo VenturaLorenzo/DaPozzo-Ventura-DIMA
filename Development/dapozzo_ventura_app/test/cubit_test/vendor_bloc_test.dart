@@ -1,11 +1,12 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:dapozzo_ventura_app/business_logic/cubit/vendor_cubit.dart';
-import 'package:dapozzo_ventura_app/data/models/good_typology_model.dart';
-import 'package:dapozzo_ventura_app/data/models/vendor_model.dart';
-import 'package:dapozzo_ventura_app/data/repositories/goods_typology_repository.dart';
-import 'package:dapozzo_ventura_app/states/vendor_state.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+
+import '../../lib/business_logic/cubit/vendor_cubit.dart';
+import '../../lib/data/models/good_typology_model.dart';
+import '../../lib/data/models/vendor_model.dart';
+import '../../lib/data/repositories/goods_typology_repository.dart';
+import '../../lib/states/vendor_state.dart';
 
 class MockGoodTypologyRepository extends Mock
     implements GoodsTypologyRepository {}

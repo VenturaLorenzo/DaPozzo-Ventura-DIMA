@@ -86,7 +86,29 @@ class _HomeState extends State<Home> {
               } else {
                 if (state is MarketPlaceSearched) {
                   vendors = state.result;
-                  return VendorList(vendors, state.categories);
+                  if (vendors.isNotEmpty) {
+                    return VendorList(vendors, state.categories);
+                  } else {
+                    return SliverList(delegate: SliverChildBuilderDelegate(
+                        (BuildContext context, int index) {
+                      if (index < 1) {
+                        return Center(
+                            child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                              child: Text(
+                            'Nessun Negozio Trovato',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w300,
+                            ),
+                          )),
+                        ));
+                      } else {
+                        return null;
+                      }
+                    }));
+                  }
                 } else {
                   if (state is MarketPlaceGeneralError) {
                     return Text(state.error.toString());

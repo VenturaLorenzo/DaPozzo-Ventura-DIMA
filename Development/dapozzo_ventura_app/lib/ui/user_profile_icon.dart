@@ -8,7 +8,7 @@ class UserProfileIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (Globals.currentUser != null) {
+    if (Globals.currentUser != null && Globals.currentUser.image != null) {
       return Container(
         height: height,
         child: Padding(
@@ -22,7 +22,7 @@ class UserProfileIcon extends StatelessWidget {
                       padding: EdgeInsets.all(height / 20),
                       child: ClipOval(
                         child: Image.network(
-                          Globals.currentUser.image,
+                          Globals.baseUrlImages + Globals.currentUser.image,
                           fit: BoxFit.cover,
                         ),
                       ))),
@@ -45,7 +45,7 @@ class UserProfileIcon extends StatelessWidget {
                 ),
               ),
               Container(
-                height: height *2/ 10,
+                height: height * 2 / 10,
                 child: TextButton(
                   child: Text(
                     "LOGOUT",
@@ -64,7 +64,9 @@ class UserProfileIcon extends StatelessWidget {
           ),
         ),
       );
-    } else {
+    }
+
+    if (Globals.currentUser != null && Globals.currentUser.image == null) {
       return Container(
         height: height,
         child: Padding(
@@ -78,7 +80,64 @@ class UserProfileIcon extends StatelessWidget {
                       padding: EdgeInsets.all(height / 20),
                       child: ClipOval(
                         child: Image.network(
-                          "https://media.gqitalia.it/photos/5ec3ca47a63ee8cb452d9ce4/master/pass/Avatar.jpg",
+                          Globals.baseUrlImages + 'ProfiloIniziale.png',
+                          fit: BoxFit.cover,
+                        ),
+                      ))),
+              Container(
+                height: height / 10,
+                child: Text(
+                  Globals.currentUser.name,
+                  style: TextStyle(
+                    fontSize: height / 17,
+                    color: Colors.blue[300],
+                  ),
+                ),
+              ),
+              Container(
+                height: height / 10,
+                child: Text(
+                  Globals.currentUser.email,
+                  style:
+                      TextStyle(fontSize: height / 17, color: Colors.blue[200]),
+                ),
+              ),
+              Container(
+                height: height * 2 / 10,
+                child: TextButton(
+                  child: Text(
+                    "LOGOUT",
+                    style: TextStyle(
+                        fontSize: height / 17,
+                        color: Colors.blue[400],
+                        decoration: TextDecoration.underline),
+                  ),
+                  onPressed: () {
+                    Globals.currentUser = null;
+                    Navigator.of(context, rootNavigator: true).pop();
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+    if (Globals.currentUser == null) {
+      return Container(
+        height: height,
+        child: Padding(
+          padding: EdgeInsets.all(height / 20),
+          child: Column(
+            children: [
+              SizedBox(
+                  height: height / 2,
+                  width: height / 2,
+                  child: Padding(
+                      padding: EdgeInsets.all(height / 20),
+                      child: ClipOval(
+                        child: Image.network(
+                          Globals.baseUrlImages + 'ProfiloIniziale.png',
                           fit: BoxFit.cover,
                         ),
                       ))),
@@ -93,7 +152,6 @@ class UserProfileIcon extends StatelessWidget {
                 ),
               ),
               Container(
-
                 height: height / 10,
                 child: Text(
                   "mario.rossi@gmail.com",
@@ -102,12 +160,12 @@ class UserProfileIcon extends StatelessWidget {
                 ),
               ),
               Container(
-                height: height *2/ 10,
+                height: height * 2 / 10,
                 child: TextButton(
                   child: Text(
                     "LOGIN",
                     style: TextStyle(
-                        fontSize: height /17,
+                        fontSize: height / 17,
                         color: Colors.blue[400],
                         decoration: TextDecoration.underline),
                   ),

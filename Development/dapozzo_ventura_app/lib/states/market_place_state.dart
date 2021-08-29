@@ -1,5 +1,6 @@
-import 'package:dapozzo_ventura_app/data/models/vendor_model.dart';
 import 'package:equatable/equatable.dart';
+
+import '../data/models/vendor_model.dart';
 
 abstract class MarketPlaceState extends Equatable {}
 

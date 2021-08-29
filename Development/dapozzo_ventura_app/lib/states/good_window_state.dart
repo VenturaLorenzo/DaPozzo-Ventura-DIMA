@@ -1,8 +1,8 @@
-import 'package:dapozzo_ventura_app/data/models/color_model.dart';
-import 'package:dapozzo_ventura_app/data/models/good_image_model.dart';
-import 'package:dapozzo_ventura_app/data/models/good_typology_model.dart';
-import 'package:dapozzo_ventura_app/data/models/size_model.dart';
-import 'package:dapozzo_ventura_app/data/models/vendor_model.dart';
+import '../data/models/color_model.dart';
+import '../data/models/good_image_model.dart';
+import '../data/models/good_typology_model.dart';
+import '../data/models/size_model.dart';
+import '../data/models/vendor_model.dart';
 
 abstract class GoodWindowState {}
 

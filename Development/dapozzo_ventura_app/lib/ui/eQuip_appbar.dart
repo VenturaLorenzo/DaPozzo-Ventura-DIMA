@@ -47,11 +47,10 @@ class EquipAppBar extends StatelessWidget implements PreferredSize {
             Text(
               title,
               style: TextStyle(
-                  fontSize: MediaQuery.of(context).size.height / 20,
+                  fontSize: MediaQuery.of(context).size.height / 30,
                   color: Colors.white),
             ),
             Container(
-
               height: MediaQuery.of(context).size.height / 11,
               child: FittedBox(
                 fit: BoxFit.fill,

@@ -17,11 +17,14 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
   double textFieldHeight;
+  double paddingHeight;
   var myController;
 
   @override
   Widget build(BuildContext context) {
     textFieldHeight = MediaQuery.of(context).size.height / 10;
+    paddingHeight = MediaQuery.of(context).size.height / 3;
+
     return Scaffold(
         appBar: EquipAppBar(
           withMenu: false,
@@ -41,10 +44,11 @@ class _LoginPageState extends State<LoginPage> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(20),
-                      child: Container(height: textFieldHeight/2,
+                      child: Container(
+                        height: textFieldHeight / 2,
                         child: Text('Inserisci le Credenziali',
                             style: TextStyle(
-                              fontSize: textFieldHeight/3,
+                              fontSize: textFieldHeight / 3,
                               fontWeight: FontWeight.w400,
                             )),
                       ),
@@ -112,7 +116,7 @@ class _LoginPageState extends State<LoginPage> {
                           obscureText: _secureText,
                         ),
                       ),
-                    ),
+                    ), /*
                     Container(
                       height: textFieldHeight,
                       child: TextButton(
@@ -146,67 +150,108 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                     )
+                  */
                   ],
                 ),
-                FlatButton(
-                  child: Container(
-                    height: textFieldHeight / 1.5,
-                    decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 1, 136, 73),
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(15),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey[300],
-                            offset: Offset(4.0, 4.0),
-                            blurRadius: 5.0,
-                            spreadRadius: 1,
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 50, 0, 0),
+                  child: FlatButton(
+                    child: Container(
+                      height: textFieldHeight / 1.5,
+                      decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 1, 136, 73),
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(15),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey[300],
+                              offset: Offset(4.0, 4.0),
+                              blurRadius: 5.0,
+                              spreadRadius: 1,
+                            ),
+                          ]),
+                      child: Center(
+                        child: Text(
+                          "LOGIN",
+                          style: TextStyle(
+                            fontSize: textFieldHeight / 3,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
                           ),
-                        ]),
-                    child: Center(
-                      child: Text(
-                        "LOGIN",
-                        style: TextStyle(
-                          fontSize: textFieldHeight / 3,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
                         ),
                       ),
                     ),
+                    onPressed: () {
+                      UserRepository.checkCredential(
+                              _emailController.text, _passwordController.text)
+                          .then((value) => {
+                                if (value.id > 0)
+                                  {
+                                    Globals.currentUser = value,
+                                    Globals.isLogged = true,
+                                    Navigator.pop(context)
+                                  }
+                                else
+                                  {
+                                    showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            title: Text("Errore"),
+                                            content: Text(
+                                                "Username/Password errate"),
+                                            actions: [
+                                              FlatButton(
+                                                  onPressed: () {
+                                                    Navigator.pop(context);
+                                                  },
+                                                  child: Text("Chiudi"))
+                                            ],
+                                          );
+                                        })
+                                  }
+                              })
+                          .catchError((e) {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: Text("Errore"),
+                                content: Text(e.message),
+                                actions: [
+                                  FlatButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text("Chiudi"))
+                                ],
+                              );
+                            }); // Future completes with 42.
+                      });
+                    },
                   ),
-                  onPressed: () {
-                    UserRepository.checkCredential(
-                            _emailController.text, _passwordController.text)
-                        .then((value) => {
-                              if (value)
-                                {
-                                  UserRepository.getUserByMail(
-                                          _emailController.text)
-                                      .then((value2) => {
-                                            Globals.currentUser = value2,
-                                            Globals.isLogged = true,
-                                            Navigator.pop(context)
-                                          }),
-                                }
-                              else
-                                {
-                                  showDialog(
-                                      context: context,
-                                      child: AlertDialog(
-                                        title: Text("Errore"),
-                                        content:
-                                            Text("Username/Password errate"),
-                                        actions: [
-                                          FlatButton(
-                                              onPressed: () {
-                                                Navigator.pop(context);
-                                              },
-                                              child: Text("Chiudi"))
-                                        ],
-                                      ))
-                                }
-                            });
-                  },
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                  child: TextButton(
+                    child: Center(
+                      child: Text(
+                        "Registrati",
+                        style: TextStyle(
+                          fontSize: textFieldHeight / 4,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.blueAccent,
+                          fontStyle: FontStyle.italic,
+                        ),
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.pushNamed(
+                        context,
+                        "/registration",
+                      );
+                    },
+                  ),
                 ),
               ],
             ),

@@ -1,8 +1,9 @@
 import 'package:bloc/bloc.dart';
-import 'package:dapozzo_ventura_app/data/models/good_typology_model.dart';
-import 'package:dapozzo_ventura_app/data/models/vendor_model.dart';
-import 'package:dapozzo_ventura_app/data/repositories/goods_typology_repository.dart';
-import 'package:dapozzo_ventura_app/states/vendor_state.dart';
+
+import '../../data/models/good_typology_model.dart';
+import '../../data/models/vendor_model.dart';
+import '../../data/repositories/goods_typology_repository.dart';
+import '../../states/vendor_state.dart';
 
 class VendorCubit extends Cubit<VendorState>{
 

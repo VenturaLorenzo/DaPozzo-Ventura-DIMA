@@ -1,5 +1,6 @@
-import 'package:dapozzo_ventura_app/data/models/good_typology_model.dart';
 import 'package:equatable/equatable.dart';
+
+import '../data/models/good_typology_model.dart';
 
 abstract class VendorState extends Equatable {}
 
