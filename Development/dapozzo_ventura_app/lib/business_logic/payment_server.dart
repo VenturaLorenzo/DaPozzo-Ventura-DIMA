@@ -1,10 +1,11 @@
 import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'dart:io';
 import 'package:dapozzo_ventura_app/global.dart';
 import 'package:dio/dio.dart';
 
 class Server {
-  Future<String> createCheckout(double amount, String title) async {
+  /*Future<String> createCheckout(double amount, String title) async {
     final auth = 'Basic ' + base64Encode(utf8.encode('$secretKey:'));
     final body = {
       'payment_method_types': ['card'],
@@ -33,6 +34,22 @@ class Server {
       return result.data['id'];
     } on DioError catch (e, s) {
       print(e.response);
+      throw e;
+    }
+  }*/
+
+  Future<String> createCheckout(double amount, String title) async {
+    try {
+      final url = Globals.baseUrl +
+          "Payments/CreateSession?amount=" +
+          amount.toString() +
+          "&title=" +
+          title;
+      final response = await http.get(url);
+      final retVal = response.body.substring(1, response.body.length - 1);
+      return retVal;
+    } on Error catch (e) {
+      print(e);
       throw e;
     }
   }
