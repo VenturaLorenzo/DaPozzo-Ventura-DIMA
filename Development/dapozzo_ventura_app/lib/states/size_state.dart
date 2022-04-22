@@ -1,3 +1,4 @@
+import 'package:dapozzo_ventura_app/data/models/size_model.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class SizeState extends Equatable {}
@@ -9,7 +10,7 @@ class SizeStateUninitialized extends SizeState {
 }
 
 class SizeStateCurrent extends SizeState {
-  final String currentSize;
+  final SizeModel currentSize;
   SizeStateCurrent(this.currentSize);
 
   @override

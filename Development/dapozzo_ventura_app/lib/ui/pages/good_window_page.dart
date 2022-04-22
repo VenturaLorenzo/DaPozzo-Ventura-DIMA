@@ -93,6 +93,7 @@ class _GoodWindowPageState extends State<GoodWindowPage> {
                   )),
               Container(
                 height: pageHeight / 9,
+                width: MediaQuery.of(context).size.width,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -153,7 +154,7 @@ class _GoodWindowPageState extends State<GoodWindowPage> {
         }
 
         if (state is GoodWindowImageLoadedState) {
-          BlocProvider.of<SizeCubit>(context).setSize(state.sizes[0].name);
+          BlocProvider.of<SizeCubit>(context).setSize(state.sizes[0]);
           return Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

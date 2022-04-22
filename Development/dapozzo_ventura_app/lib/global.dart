@@ -2,9 +2,9 @@ import 'package:dapozzo_ventura_app/data/models/user_model.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 const apiKey =
-    'pk_test_51H4SAHJvSqshfhLpmubpWCKQjTGwmHTar5rgB5L6aUNuxQx9QwdjDDTTeTztkaviBs8wk1yqriQOo8A55Ni2bfqA00keNsEllU';
+    'pk_live_51H4SAHJvSqshfhLpSdxYcWDhCwXU9BI7L9cQgqiVsBONcxbmIti9dvuw0SZ1ymB7oZZf71XLHLcni3KkI21ezkxv00gX03Ghjo';
 const secretKey =
-    'sk_test_51H4SAHJvSqshfhLpxOLFKvB5ByvMHbtrmYw8dDFCjlhGMWlDsTJ9GxYYowN23iY6G2VFzwyqkYSIEXi4KGgEfVAK00v88p3Naw';
+    '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';
 
 class Globals {
   static UserModel currentUser;

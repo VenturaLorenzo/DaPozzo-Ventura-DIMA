@@ -117,7 +117,7 @@ class CartItem extends StatelessWidget {
                                                     fontSize: height * 6 / 48),
                                               ),
                                               Text(
-                                                cartGood.size,
+                                                cartGood.size.name,
                                                 style: TextStyle(
                                                     fontSize: height * 3 / 24),
                                               )

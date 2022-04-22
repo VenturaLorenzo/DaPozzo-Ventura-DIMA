@@ -1,5 +1,6 @@
 import 'dart:ffi';
 
+import 'package:dapozzo_ventura_app/data/models/order_model.dart';
 import 'package:dapozzo_ventura_app/data/models/shippingAddr_model.dart';
 import 'package:dapozzo_ventura_app/states/shipping_state.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,8 +10,9 @@ import '../../data/models/shippingAddr_model.dart';
 class AdressItem extends StatelessWidget {
   final ShippingAddrModel adress;
   final double import;
+  final OrderModel order;
 
-  const AdressItem({this.adress, this.import});
+  const AdressItem({this.adress, this.import, this.order});
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +36,7 @@ class AdressItem extends StatelessWidget {
             Navigator.pushNamed(context, "/remindPage", arguments: {
               "import": import,
               "adress": adress,
+              "order": order,
             });
           },
           child: Column(

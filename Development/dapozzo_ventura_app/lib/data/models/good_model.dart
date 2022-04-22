@@ -1,4 +1,6 @@
 import 'dart:math';
+import 'package:dapozzo_ventura_app/data/models/size_model.dart';
+
 import 'color_model.dart';
 import 'good_image_model.dart';
 import 'good_typology_model.dart';
@@ -8,19 +10,9 @@ class GoodModel {
   final GoodTypologyModel type;
   final ColorModel color;
   final List<GoodImageModel> images;
-  final String size;
+  final SizeModel size;
   final Vendor vendorName;
   int _quantity;
-
-  static GoodModel createFake(String name, String size, int quantity) {
-    Random rnd = Random();
-    return GoodModel(
-        type: GoodTypologyModel.createFake(name),
-        quantity: quantity,
-        size: size,
-        color: ColorModel(name: "green"));
-    //   images: ["fake.jpg"]);
-  }
 
   GoodModel(
       {this.size,
@@ -29,7 +21,6 @@ class GoodModel {
       this.type,
       this.vendorName,
       int quantity}) {
-
     if (quantity <= 0) {
       throw ("QUANTITY LESS THAN 0");
     } else {
@@ -48,6 +39,15 @@ class GoodModel {
   @override
   String toString() {
     return "[GOOD ->  color : $color, images : $images, size: $size, quantity: $_quantity, type: $type]";
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "Quantity": this._quantity,
+      "GoodTypologyId": this.type.id,
+      "SizeId": this.size.id,
+      "ColorId": this.color.id
+    };
   }
 
   int getQuantity() {

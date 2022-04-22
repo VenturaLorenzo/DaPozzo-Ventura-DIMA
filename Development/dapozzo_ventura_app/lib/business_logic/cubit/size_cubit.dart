@@ -10,8 +10,7 @@ import '../../states/size_state.dart';
 class SizeCubit extends Cubit<SizeState> {
   SizeCubit() : super(SizeStateUninitialized());
 
-  Future<void> setSize(String s) async {
-
+  Future<void> setSize(SizeModel s) async {
     emit(SizeStateCurrent(s));
   }
 /*

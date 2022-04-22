@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:dapozzo_ventura_app/business_logic/cubit/cart_cubit.dart';
 import 'package:dapozzo_ventura_app/business_logic/cubit/shipping_cubit.dart';
 import 'package:dapozzo_ventura_app/business_logic/payment_server.dart';
+import 'package:dapozzo_ventura_app/data/models/order_model.dart';
 import 'package:dapozzo_ventura_app/data/models/shippingAddr_model.dart';
 import 'package:dapozzo_ventura_app/data/repositories/shippingAddr_repository.dart';
 import 'package:dapozzo_ventura_app/global.dart';
@@ -24,6 +25,7 @@ class _CartPageState extends State<CartPage> {
   double totalHeight;
   double itemListHeight;
   double buttonsHeight;
+  OrderModel order;
 
   @override
   Widget build(BuildContext context) {
@@ -130,12 +132,19 @@ class _CartPageState extends State<CartPage> {
                                           //                     sessionId: value),
                                           //           ))
                                           //         });
+                                          order = new OrderModel();
+                                          order.userId = Globals.currentUser.id;
+                                          order.orderItems =
+                                              state.cart.getProducts();
                                           BlocProvider.of<ShippingCubit>(
                                                   context)
                                               .initialize();
                                           Navigator.pushNamed(
                                               context, "/shipping",
-                                              arguments: state.cart.getTotal());
+                                              arguments: {
+                                                "import": state.cart.getTotal(),
+                                                "order": order,
+                                              });
                                         }
                                       } else {
                                         _showPopupNoItems();

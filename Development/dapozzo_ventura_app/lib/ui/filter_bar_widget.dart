@@ -177,7 +177,7 @@ class _FilterBarState extends State<FilterBar> {
               child: TextField(
                 decoration: InputDecoration(
                   hintText: "Inserisci il nome del Negozio che stai cercando",
-                  labelText: "Negozi",
+                  labelText: "Cerca Negozio",
                   labelStyle: TextStyle(
                     fontSize: maxTextFieldHeight / 3,
                     fontWeight: FontWeight.w400,

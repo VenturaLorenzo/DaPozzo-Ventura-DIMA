@@ -1,5 +1,8 @@
 import 'package:dapozzo_ventura_app/business_logic/payment_server.dart';
+import 'package:dapozzo_ventura_app/data/models/order_model.dart';
 import 'package:dapozzo_ventura_app/data/models/shippingAddr_model.dart';
+import 'package:dapozzo_ventura_app/data/repositories/order_repository.dart';
+import 'package:dapozzo_ventura_app/global.dart';
 import 'package:dapozzo_ventura_app/ui/pages/stripe_checkout_page.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +12,9 @@ import '../eQuip_navigator_menu.dart';
 class RemindPage extends StatefulWidget {
   final ShippingAddrModel adress;
   final double import;
-  const RemindPage({Key key, @required this.adress, @required this.import})
+  final OrderModel order;
+  const RemindPage(
+      {Key key, @required this.adress, @required this.import, this.order})
       : super(key: key);
 
   @override
@@ -152,16 +157,63 @@ class _RemindPageState extends State<RemindPage> {
                                     fontSize: 16,
                                     fontStyle: FontStyle.normal)),
                             onPressed: () {
-                              Server()
-                                  .createCheckout(
-                                      widget.import, "Pagamento eQuip")
+                              OrderRepository.sendOrder(widget.order)
                                   .then((value) => {
-                                        Navigator.of(context)
-                                            .push(MaterialPageRoute(
-                                          builder: (_) =>
-                                              CheckoutPage(sessionId: value),
-                                        ))
-                                      });
+                                        if (value)
+                                          {
+                                            Server()
+                                                .createCheckout(widget.import,
+                                                    "Pagamento eQuip")
+                                                .then((value) => {
+                                                      Navigator.of(context)
+                                                          .push(
+                                                              MaterialPageRoute(
+                                                        builder: (_) =>
+                                                            CheckoutPage(
+                                                                sessionId:
+                                                                    value),
+                                                      ))
+                                                    })
+                                          }
+                                        else
+                                          {
+                                            showDialog(
+                                                context: context,
+                                                builder:
+                                                    (BuildContext context) {
+                                                  return AlertDialog(
+                                                    title: Text("Errore"),
+                                                    content: Text(
+                                                        "impossibile inviare l'ordine, prego riprovare"),
+                                                    actions: [
+                                                      FlatButton(
+                                                          onPressed: () {
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          child: Text("Chiudi"))
+                                                    ],
+                                                  );
+                                                }) // Future completes with 42.
+                                          }
+                                      })
+                                  .catchError((e) {
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title: Text("Errore"),
+                                        content: Text(e.message),
+                                        actions: [
+                                          FlatButton(
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                              child: Text("Chiudi"))
+                                        ],
+                                      );
+                                    }); // Future completes with 42.
+                              });
                             },
                           )),
                     ),

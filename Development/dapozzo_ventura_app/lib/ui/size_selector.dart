@@ -51,8 +51,10 @@ class _SizeSelectorState extends State<SizeSelector> {
     selectorHeight = widget.height * 7 / 9;
     selectorWidth = pageWidth / 6;
     return BlocBuilder<SizeCubit, SizeState>(builder: (context, state) {
-      if (state is SizeStateCurrent &&
-          getSizesNames(widget.sizes).contains(state.currentSize)) {
+      if (state
+              is SizeStateCurrent /*&&
+          getSizesNames(widget.sizes).contains(state.currentSize)*/
+          ) {
         return Padding(
           padding: EdgeInsets.all(widget.height / 9),
           child: Container(
@@ -89,7 +91,7 @@ class _SizeSelectorState extends State<SizeSelector> {
                             child: DropDownSizeWidget(
                                 width: selectorWidth,
                                 height: selectorHeight * 14 / 27,
-                                sizes: getSizesNames(widget.sizes),
+                                sizes: widget.sizes,
                                 dropdownValue: state.currentSize))),
                   ],
                 ),
@@ -127,10 +129,15 @@ class _SizeSelectorState extends State<SizeSelector> {
                         style: TextStyle(fontSize: selectorHeight * 6 / 27),
                       ),
                     ),
-                    SizedBox(
-                      height: selectorHeight * 14 / 27,
-                      width: selectorWidth,
-                    )
+                    Container(
+                        height: selectorHeight * 14 / 27,
+                        width: selectorWidth,
+                        child: Center(
+                            child: DropDownSizeWidget(
+                                width: selectorWidth,
+                                height: selectorHeight * 14 / 27,
+                                sizes: widget.sizes,
+                                dropdownValue: widget.sizes[0]))),
                   ],
                 ),
               ),
@@ -144,8 +151,8 @@ class _SizeSelectorState extends State<SizeSelector> {
 //++++++++++++++++++++++++  DropDown Size   ++++++++++++++++++++++++
 
 class DropDownSizeWidget extends StatelessWidget {
-  final List<String> sizes;
-  final String dropdownValue;
+  final List<SizeModel> sizes;
+  final SizeModel dropdownValue;
   final double width;
   final double height;
 
@@ -153,7 +160,7 @@ class DropDownSizeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DropdownButton<String>(
+    return DropdownButton<SizeModel>(
       value: dropdownValue,
       icon: Icon(Icons.arrow_drop_down),
       iconSize: height / 2,
@@ -164,14 +171,14 @@ class DropDownSizeWidget extends StatelessWidget {
         height: height / 20,
         color: Colors.black26,
       ),
-      onChanged: (String newValue) {
+      onChanged: (SizeModel newValue) {
         BlocProvider.of<SizeCubit>(context).setSize(newValue);
       },
-      items: sizes.map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
+      items: sizes.map<DropdownMenuItem<SizeModel>>((SizeModel value) {
+        return DropdownMenuItem<SizeModel>(
           value: value,
           child: Text(
-            value,
+            value.name,
             style: TextStyle(fontSize: height / 2),
           ),
         );

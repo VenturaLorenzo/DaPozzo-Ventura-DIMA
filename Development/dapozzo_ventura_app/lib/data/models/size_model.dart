@@ -11,7 +11,7 @@ class SizeModel {
 
   factory SizeModel.fromJson(Map<String, dynamic> json) {
     return SizeModel(
-      id: json["id"],
+      id: json["Id"],
       name: json["Name"],
     );
   }

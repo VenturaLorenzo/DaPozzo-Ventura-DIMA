@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:dapozzo_ventura_app/business_logic/cubit/shipping_cubit.dart';
+import 'package:dapozzo_ventura_app/data/models/order_model.dart';
 import 'package:dapozzo_ventura_app/data/models/shippingAddr_model.dart';
 import 'package:dapozzo_ventura_app/states/shipping_state.dart';
 import 'package:dapozzo_ventura_app/ui/lists/address_selection.dart';
@@ -13,7 +14,8 @@ import '../eQuip_navigator_menu.dart';
 
 class AddressPage extends StatefulWidget {
   final double import;
-  const AddressPage({Key key, this.import}) : super(key: key);
+  final OrderModel order;
+  const AddressPage({Key key, this.import, this.order}) : super(key: key);
 
   @override
   _AddressPageState createState() => _AddressPageState();
@@ -87,6 +89,7 @@ class _AddressPageState extends State<AddressPage> {
                       child: AddressSelection(
                         adresses: state.adresses,
                         import: widget.import,
+                        order: widget.order,
                       ),
                     );
                   }

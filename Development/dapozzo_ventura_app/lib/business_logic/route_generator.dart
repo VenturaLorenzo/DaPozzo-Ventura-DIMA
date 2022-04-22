@@ -1,6 +1,7 @@
 import 'package:dapozzo_ventura_app/states/shipping_state.dart';
 import 'package:dapozzo_ventura_app/ui/pages/address_registration_page.dart';
 import 'package:dapozzo_ventura_app/ui/pages/registration_page.dart';
+import 'package:dapozzo_ventura_app/ui/pages/sendOrder_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -73,19 +74,21 @@ class RouteGenerator {
         return MaterialPageRoute(
             settings: settings, builder: (context) => PaymentSuccessPage());
       case '/shipping':
+        final Map arguments = settings.arguments as Map;
         return MaterialPageRoute(
             settings: settings,
             builder: (context) => AddressPage(
-                  import: settings.arguments,
+                  import: arguments["import"],
+                  order: arguments["order"],
                 ));
       case '/remindPage':
         final Map arguments = settings.arguments as Map;
         return MaterialPageRoute(
             settings: settings,
             builder: (context) => RemindPage(
-                  import: arguments["import"],
-                  adress: arguments["adress"],
-                ));
+                import: arguments["import"],
+                adress: arguments["adress"],
+                order: arguments["order"]));
       case '/registration':
         return MaterialPageRoute(
             settings: settings, builder: (context) => RegistrationPage());
@@ -93,6 +96,9 @@ class RouteGenerator {
         return MaterialPageRoute(
             settings: settings,
             builder: (context) => AddressRegistrationPage());
+      /*case '/sendOrder':
+        return MaterialPageRoute(
+            settings: settings, builder: (context) => SendOrderPage());*/
     }
   }
 }
